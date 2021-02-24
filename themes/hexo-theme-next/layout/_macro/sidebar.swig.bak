@@ -44,6 +44,7 @@
         </div>
       {%- endif %}
 
+	{% include '../clock.swig' %}
     </div>
   </aside>
   <div id="sidebar-dimmer"></div>
