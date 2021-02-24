@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"pyhsecurity.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="攻击思路Redis是一种使用ANSIC语言编写的开源Key-Value型数据库。Redis为了保证效率，将数据缓存在内存中，周期性地把更新的数据写入磁盘或者把修改操作写入追加的记录文件中，在此基础上实现了master-slave(主从)同步。 对Redis配置不当将会导致未授权访问漏洞，从而被攻击者恶意利用。如果Redis以root身份运行，攻击者可以用root权限写入SSH公钥文件，通过SSH登">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis未授权访问漏洞">
+<meta property="og:url" content="https://pyhsecurity.cn/2021/02/24/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/index.html">
+<meta property="og:site_name" content="Security&#39;s Blog">
+<meta property="og:description" content="攻击思路Redis是一种使用ANSIC语言编写的开源Key-Value型数据库。Redis为了保证效率，将数据缓存在内存中，周期性地把更新的数据写入磁盘或者把修改操作写入追加的记录文件中，在此基础上实现了master-slave(主从)同步。 对Redis配置不当将会导致未授权访问漏洞，从而被攻击者恶意利用。如果Redis以root身份运行，攻击者可以用root权限写入SSH公钥文件，通过SSH登">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210214204941377.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2021021420510262.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210214205318550.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210214205411588.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2021021420553631.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210214205628977.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210214220350642.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2021-02-24T06:58:54.496Z">
+<meta property="article:modified_time" content="2021-02-24T07:58:58.070Z">
+<meta property="article:author" content="PYH">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210214204941377.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70">
+
+<link rel="canonical" href="https://pyhsecurity.cn/2021/02/24/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Redis未授权访问漏洞 | Security's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Security's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Security's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">越努力，越幸运</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links" rel="section"><i class="fa fa-link fa-fw"></i>友情链接</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://pyhsecurity.cn/2021/02/24/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/hacker.jpeg">
+      <meta itemprop="name" content="PYH">
+      <meta itemprop="description" content="成就更好的自己">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Security's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Redis未授权访问漏洞
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-02-24 14:58:54 / 修改时间：15:58:58" itemprop="dateCreated datePublished" datetime="2021-02-24T14:58:54+08:00">2021-02-24</time>
+            </span>
+
+          
+            <span id="/2021/02/24/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/" class="post-meta-item leancloud_visitors" data-flag-title="Redis未授权访问漏洞" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/02/24/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/02/24/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="攻击思路"><a href="#攻击思路" class="headerlink" title="攻击思路"></a>攻击思路</h2><p>Redis是一种使用ANSIC语言编写的开源Key-Value型数据库。Redis为了保证效率，将数据缓存在内存中，周期性地把更新的数据写入磁盘或者把修改操作写入追加的记录文件中，在此基础上实现了master-slave(主从)同步。</p>
+<p>对Redis配置不当将会导致未授权访问漏洞，从而被攻击者恶意利用。如果Redis以root身份运行，攻击者可以用root权限写入SSH公钥文件，通过SSH登录目标服务器，进而导致服务器权限被获取、泄露或发生加密勒索事件，为正常服务带来严重危害。</p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p><strong>漏洞利用的方式有很多，这里我们介绍其中的一种——<code>利用公私钥认证获取ROOT权限</code></strong><br>首先我们先在靶机上以root身份启动redis服务，命令为<code>redis-server /etc/redis.conf</code>，安装redis请读者上网查阅资料，这里只讲述攻击方法<br><img src="https://img-blog.csdnimg.cn/20210214204941377.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><span id="more"></span><br>然后我们在kali上生成一个ssh空密钥<br><img src="https://img-blog.csdnimg.cn/2021021420510262.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>进入/root/.ssh目录下查看生成结果，并将公钥导入到txt文件中<br><img src="https://img-blog.csdnimg.cn/20210214205318550.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>将txt文件中的公钥导入Redis缓存中<br><img src="https://img-blog.csdnimg.cn/20210214205411588.png" alt="在这里插入图片描述"><br>连接目标主机，更改配置文件路径为/root/.ssh，设定文件名称为authorized-keys<br><img src="https://img-blog.csdnimg.cn/2021021420553631.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>通过SSH协议连接到远程目标主机<br><img src="https://img-blog.csdnimg.cn/20210214205628977.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="检测方法"><a href="#检测方法" class="headerlink" title="检测方法"></a>检测方法</h2><p>先编写程序的起始部分</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#程序起始部分</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        start(sys.argv[<span class="number">1</span>:])</span><br><span class="line">    <span class="keyword">except</span> KeyboardInterrupt:</span><br><span class="line">        print(<span class="string">&quot;interrupted by user, killing all threads...&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>然后编写命令行参数处理功能，<code>opts</code>为一个两元组列表，如果没有附加参数则为空串</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#编写命令行参数处理功能</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">start</span>(<span class="params">argv</span>):</span></span><br><span class="line">    <span class="built_in">dict</span> = &#123;&#125;</span><br><span class="line">    url = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="built_in">type</span> = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(sys.argv) &lt; <span class="number">2</span>:</span><br><span class="line">        print(<span class="string">&quot;-h 帮助信息; \n&quot;</span>)</span><br><span class="line">        sys.exit()</span><br><span class="line">    <span class="comment">#定义异常处理</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        banner()</span><br><span class="line">        opts,args = getopt.getopt(argv, <span class="string">&quot;-u:-p:-s:-h&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> getopt.GetoptError:</span><br><span class="line">        print(<span class="string">&#x27;Error an argument!&#x27;</span>)</span><br><span class="line">        sys.exit()</span><br><span class="line">    <span class="keyword">for</span> opt,arg <span class="keyword">in</span> opts:</span><br><span class="line">        <span class="keyword">if</span> opt == <span class="string">&quot;-u&quot;</span>:</span><br><span class="line">            url = arg</span><br><span class="line">        <span class="keyword">elif</span> opt == <span class="string">&quot;-s&quot;</span>:</span><br><span class="line">            <span class="built_in">type</span> = arg</span><br><span class="line">        <span class="keyword">elif</span> opt == <span class="string">&quot;-p&quot;</span>:</span><br><span class="line">            port = arg</span><br><span class="line">        <span class="keyword">elif</span> opt == <span class="string">&quot;-h&quot;</span>:</span><br><span class="line">            print(usage())</span><br><span class="line">    launcher(url,<span class="built_in">type</span>,port)</span><br></pre></td></tr></table></figure>
+<p>编写帮助信息</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#banner信息</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">banner</span>():</span></span><br><span class="line">    print(<span class="string">&#x27;\033[1;34m########################################################################################\033[0m\n&#x27;</span></span><br><span class="line">          <span class="string">&#x27;\033[1;34m######################################\033[1;32mRedis未授权访问漏洞\033[1;34m####################################\033[0m\n&#x27;</span></span><br><span class="line">          <span class="string">&#x27;\033[1;34m########################################################################################\033[0m\n&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>接下来是Redis漏洞检测的核心代码，此处通过<code>socket函数</code>尝试连接远程主机的IP及端口号，发送payload字符串。利用<code>recvdata函数</code>接收目标主机返回的数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#未授权函数检测</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">redis_unauthored</span>(<span class="params">url,port</span>):</span></span><br><span class="line">    result = []</span><br><span class="line">    s = socket.socket()</span><br><span class="line">    payload = <span class="string">&quot;\x2a\x31\x0d\x0a\x24\x34\x0d\x0a\x69\x6e\x66\x6f\x0d\x0a&quot;</span></span><br><span class="line">    socket.setdefaulttimeout(<span class="number">10</span>)</span><br><span class="line">    <span class="keyword">for</span> ip <span class="keyword">in</span> url:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            s.connect((ip, <span class="built_in">int</span>(port)))</span><br><span class="line">            s.sendall(payload.encode())</span><br><span class="line">            recvdata = s.recv(<span class="number">1024</span>).decode()</span><br><span class="line">            <span class="keyword">if</span> recvdata <span class="keyword">and</span> <span class="string">&#x27;redis_version&#x27;</span> <span class="keyword">in</span> recvdata:</span><br><span class="line">                result.append(<span class="built_in">str</span>(ip)+<span class="string">&#x27;:&#x27;</span>+<span class="built_in">str</span>(port)+<span class="string">&#x27;:&#x27;</span>+<span class="string">&#x27;\033[1;32;34msuccess\033[0m&#x27;</span>)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">            result.append(<span class="built_in">str</span>(ip) + <span class="string">&#x27;:&#x27;</span> + <span class="built_in">str</span>(port) + <span class="string">&#x27;:&#x27;</span> + <span class="string">&#x27;\033[1:31;34mfailed \033[0m&#x27;</span>)</span><br><span class="line">        s.close()</span><br><span class="line">    <span class="keyword">return</span>(result)</span><br></pre></td></tr></table></figure>
+<p>然后针对该IP段进行网络主机检测。该部分代码主要以特殊字符”-“为目标进行分隔，将分隔后的字符进行for循环存入列表中，以便被<code>函数redis_unauthored</code>调用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#执行URL</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">url_exec</span>(<span class="params">url</span>):</span></span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    zi = []</span><br><span class="line">    group = []</span><br><span class="line">    group1 = []</span><br><span class="line">    group2 = []</span><br><span class="line">    li = url.split(<span class="string">&quot;.&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span>(url.find(<span class="string">&#x27;-&#x27;</span>)==-<span class="number">1</span>):</span><br><span class="line">        group.append(url)</span><br><span class="line">        zi = group</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> s <span class="keyword">in</span> li:</span><br><span class="line">            a = s.find(<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> a != -<span class="number">1</span>:</span><br><span class="line">                i = i+<span class="number">1</span></span><br><span class="line">        zi = url_list(li)</span><br><span class="line">        <span class="keyword">if</span> i &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">for</span> li <span class="keyword">in</span> zi:</span><br><span class="line">                zz = url_list(li.split(<span class="string">&quot;.&quot;</span>))</span><br><span class="line">                <span class="keyword">for</span> ki <span class="keyword">in</span> zz:</span><br><span class="line">                    group.append(ki)</span><br><span class="line">            zi = group</span><br><span class="line">            i = i-<span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> i &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">for</span> li <span class="keyword">in</span> zi:</span><br><span class="line">                zzz = url_list(li.split(<span class="string">&quot;.&quot;</span>))</span><br><span class="line">                <span class="keyword">for</span> ki <span class="keyword">in</span> zzz:</span><br><span class="line">                    group1.append(ki)</span><br><span class="line">            zi = group1</span><br><span class="line">            i = i-<span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> i &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">for</span> li <span class="keyword">in</span> zi:</span><br><span class="line">                zzzz = url_list(li.split(<span class="string">&quot;.&quot;</span>))</span><br><span class="line">                <span class="keyword">for</span> ki <span class="keyword">in</span> zzzz:</span><br><span class="line">                    group2.append(ki)</span><br><span class="line">            zi = group2</span><br><span class="line">    <span class="keyword">return</span> zi</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">url_list</span>(<span class="params">li</span>):</span></span><br><span class="line">    ss = []</span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    zi = []</span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> li:</span><br><span class="line">        a = s.find(<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">        i = i + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> a != -<span class="number">1</span>:</span><br><span class="line">            ss = s.rsplit(<span class="string">&quot;-&quot;</span>)</span><br><span class="line">            j = i</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(ss[<span class="number">0</span>]), <span class="built_in">int</span>(ss[<span class="number">1</span>]) + <span class="number">1</span>):</span><br><span class="line">        li[j - <span class="number">1</span>] = <span class="built_in">str</span>(s)</span><br><span class="line">        aa = <span class="string">&quot;.&quot;</span>.join(li)</span><br><span class="line">        zi.append(aa)</span><br><span class="line">    <span class="keyword">return</span> zi</span><br></pre></td></tr></table></figure>
+<p>最后是添加一些帮助信息和结果格式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#使用规则</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">usage</span>():</span></span><br><span class="line">    print(<span class="string">&#x27;-h: --help 帮助;&#x27;</span>)</span><br><span class="line">    print(<span class="string">&#x27;-p: --port 端口;&#x27;</span>)</span><br><span class="line">    print(<span class="string">&#x27;-u: --url 域名;&#x27;</span>)</span><br><span class="line">    print(<span class="string">&#x27;-s: --type Redis&#x27;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment">#输出结果格式设计</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">output_exec</span>(<span class="params">output,<span class="built_in">type</span></span>):</span></span><br><span class="line">    print(<span class="string">&quot;\033[1;32;40m&quot;</span>+<span class="built_in">type</span>+<span class="string">&quot;......\033[0m&quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;++++++++++++++++++++++++++++++++++++++++++++++++&quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;|         ip         |    port   |     status  |&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> li <span class="keyword">in</span> output:</span><br><span class="line">        print(<span class="string">&quot;+-----------------+-----------+--------------+&quot;</span>)</span><br><span class="line">        print(<span class="string">&quot;|   &quot;</span>+li.replace(<span class="string">&quot;:&quot;</span>,<span class="string">&quot;   |    &quot;</span>)+<span class="string">&quot;  | &quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;+----------------+------------+---------------+\n&quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;[*] shutting down....&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>最后设置一个漏洞回调函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#漏洞回调函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">launcher</span>(<span class="params">url,<span class="built_in">type</span>,port</span>):</span></span><br><span class="line">    <span class="comment">#未授权访问类型</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">type</span> == <span class="string">&quot;Redis&quot;</span>:</span><br><span class="line">        output=redis_unauthored(url_exec(url),port)</span><br><span class="line">        output_exec(output,<span class="built_in">type</span>)</span><br></pre></td></tr></table></figure>
+<p>附上完整代码以免疏漏</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> getopt</span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line"><span class="comment">#编写命令行参数处理功能</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">start</span>(<span class="params">argv</span>):</span></span><br><span class="line">    <span class="built_in">dict</span> = &#123;&#125;</span><br><span class="line">    url = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="built_in">type</span> = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(sys.argv) &lt; <span class="number">2</span>:</span><br><span class="line">        print(<span class="string">&quot;-h 帮助信息; \n&quot;</span>)</span><br><span class="line">        sys.exit()</span><br><span class="line">    <span class="comment">#定义异常处理</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        banner()</span><br><span class="line">        opts,args = getopt.getopt(argv, <span class="string">&quot;-u:-p:-s:-h&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> getopt.GetoptError:</span><br><span class="line">        print(<span class="string">&#x27;Error an argument!&#x27;</span>)</span><br><span class="line">        sys.exit()</span><br><span class="line">    <span class="keyword">for</span> opt,arg <span class="keyword">in</span> opts:</span><br><span class="line">        <span class="keyword">if</span> opt == <span class="string">&quot;-u&quot;</span>:</span><br><span class="line">            url = arg</span><br><span class="line">        <span class="keyword">elif</span> opt == <span class="string">&quot;-s&quot;</span>:</span><br><span class="line">            <span class="built_in">type</span> = arg</span><br><span class="line">        <span class="keyword">elif</span> opt == <span class="string">&quot;-p&quot;</span>:</span><br><span class="line">            port = arg</span><br><span class="line">        <span class="keyword">elif</span> opt == <span class="string">&quot;-h&quot;</span>:</span><br><span class="line">            print(usage())</span><br><span class="line">    launcher(url,<span class="built_in">type</span>,port)</span><br><span class="line"></span><br><span class="line"><span class="comment">#banner信息</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">banner</span>():</span></span><br><span class="line">    print(<span class="string">&#x27;\033[1;34m########################################################################################\033[0m\n&#x27;</span></span><br><span class="line">          <span class="string">&#x27;\033[1;34m######################################\033[1;32mRedis未授权访问漏洞\033[1;34m####################################\033[0m\n&#x27;</span></span><br><span class="line">          <span class="string">&#x27;\033[1;34m########################################################################################\033[0m\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#使用规则</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">usage</span>():</span></span><br><span class="line">    print(<span class="string">&#x27;-h: --help 帮助;&#x27;</span>)</span><br><span class="line">    print(<span class="string">&#x27;-p: --port 端口;&#x27;</span>)</span><br><span class="line">    print(<span class="string">&#x27;-u: --url 域名;&#x27;</span>)</span><br><span class="line">    print(<span class="string">&#x27;-s: --type Redis&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#未授权函数检测</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">redis_unauthored</span>(<span class="params">url,port</span>):</span></span><br><span class="line">    result = []</span><br><span class="line">    s = socket.socket()</span><br><span class="line">    payload = <span class="string">&quot;\x2a\x31\x0d\x0a\x24\x34\x0d\x0a\x69\x6e\x66\x6f\x0d\x0a&quot;</span></span><br><span class="line">    socket.setdefaulttimeout(<span class="number">10</span>)</span><br><span class="line">    <span class="keyword">for</span> ip <span class="keyword">in</span> url:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            s.connect((ip, <span class="built_in">int</span>(port)))</span><br><span class="line">            s.sendall(payload.encode())</span><br><span class="line">            recvdata = s.recv(<span class="number">1024</span>).decode()</span><br><span class="line">            <span class="keyword">if</span> recvdata <span class="keyword">and</span> <span class="string">&#x27;redis_version&#x27;</span> <span class="keyword">in</span> recvdata:</span><br><span class="line">                result.append(<span class="built_in">str</span>(ip)+<span class="string">&#x27;:&#x27;</span>+<span class="built_in">str</span>(port)+<span class="string">&#x27;:&#x27;</span>+<span class="string">&#x27;\033[1;32;34msuccess\033[0m&#x27;</span>)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">            result.append(<span class="built_in">str</span>(ip) + <span class="string">&#x27;:&#x27;</span> + <span class="built_in">str</span>(port) + <span class="string">&#x27;:&#x27;</span> + <span class="string">&#x27;\033[1:31;34mfailed \033[0m&#x27;</span>)</span><br><span class="line">        s.close()</span><br><span class="line">    <span class="keyword">return</span>(result)</span><br><span class="line"></span><br><span class="line"><span class="comment">#执行URL</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">url_exec</span>(<span class="params">url</span>):</span></span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    zi = []</span><br><span class="line">    group = []</span><br><span class="line">    group1 = []</span><br><span class="line">    group2 = []</span><br><span class="line">    li = url.split(<span class="string">&quot;.&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span>(url.find(<span class="string">&#x27;-&#x27;</span>)==-<span class="number">1</span>):</span><br><span class="line">        group.append(url)</span><br><span class="line">        zi = group</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> s <span class="keyword">in</span> li:</span><br><span class="line">            a = s.find(<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> a != -<span class="number">1</span>:</span><br><span class="line">                i = i+<span class="number">1</span></span><br><span class="line">        zi = url_list(li)</span><br><span class="line">        <span class="keyword">if</span> i &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">for</span> li <span class="keyword">in</span> zi:</span><br><span class="line">                zz = url_list(li.split(<span class="string">&quot;.&quot;</span>))</span><br><span class="line">                <span class="keyword">for</span> ki <span class="keyword">in</span> zz:</span><br><span class="line">                    group.append(ki)</span><br><span class="line">            zi = group</span><br><span class="line">            i = i-<span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> i &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">for</span> li <span class="keyword">in</span> zi:</span><br><span class="line">                zzz = url_list(li.split(<span class="string">&quot;.&quot;</span>))</span><br><span class="line">                <span class="keyword">for</span> ki <span class="keyword">in</span> zzz:</span><br><span class="line">                    group1.append(ki)</span><br><span class="line">            zi = group1</span><br><span class="line">            i = i-<span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> i &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">for</span> li <span class="keyword">in</span> zi:</span><br><span class="line">                zzzz = url_list(li.split(<span class="string">&quot;.&quot;</span>))</span><br><span class="line">                <span class="keyword">for</span> ki <span class="keyword">in</span> zzzz:</span><br><span class="line">                    group2.append(ki)</span><br><span class="line">            zi = group2</span><br><span class="line">    <span class="keyword">return</span> zi</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">url_list</span>(<span class="params">li</span>):</span></span><br><span class="line">    ss = []</span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    zi = []</span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> li:</span><br><span class="line">        a = s.find(<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">        i = i + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> a != -<span class="number">1</span>:</span><br><span class="line">            ss = s.rsplit(<span class="string">&quot;-&quot;</span>)</span><br><span class="line">            j = i</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(ss[<span class="number">0</span>]), <span class="built_in">int</span>(ss[<span class="number">1</span>]) + <span class="number">1</span>):</span><br><span class="line">        li[j - <span class="number">1</span>] = <span class="built_in">str</span>(s)</span><br><span class="line">        aa = <span class="string">&quot;.&quot;</span>.join(li)</span><br><span class="line">        zi.append(aa)</span><br><span class="line">    <span class="keyword">return</span> zi</span><br><span class="line"></span><br><span class="line"><span class="comment">#输出结果格式设计</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">output_exec</span>(<span class="params">output,<span class="built_in">type</span></span>):</span></span><br><span class="line">    print(<span class="string">&quot;\033[1;32;40m&quot;</span>+<span class="built_in">type</span>+<span class="string">&quot;......\033[0m&quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;++++++++++++++++++++++++++++++++++++++++++++++++&quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;|         ip         |    port   |     status  |&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> li <span class="keyword">in</span> output:</span><br><span class="line">        print(<span class="string">&quot;+-----------------+-----------+--------------+&quot;</span>)</span><br><span class="line">        print(<span class="string">&quot;|   &quot;</span>+li.replace(<span class="string">&quot;:&quot;</span>,<span class="string">&quot;   |    &quot;</span>)+<span class="string">&quot;  | &quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;+----------------+------------+---------------+\n&quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;[*] shutting down....&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#漏洞回调函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">launcher</span>(<span class="params">url,<span class="built_in">type</span>,port</span>):</span></span><br><span class="line">    <span class="comment">#未授权访问类型</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">type</span> == <span class="string">&quot;Redis&quot;</span>:</span><br><span class="line">        output=redis_unauthored(url_exec(url),port)</span><br><span class="line">        output_exec(output,<span class="built_in">type</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#程序起始部分</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        start(sys.argv[<span class="number">1</span>:])</span><br><span class="line">    <span class="keyword">except</span> KeyboardInterrupt:</span><br><span class="line">        print(<span class="string">&quot;interrupted by user, killing all threads...&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>实现效果如下图所示<br><img src="https://img-blog.csdnimg.cn/20210214220350642.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="防御策略"><a href="#防御策略" class="headerlink" title="防御策略"></a>防御策略</h2><ul>
+<li><strong>禁止远程使用高危命令</strong></li>
+<li><strong>低权限运行Redis服务</strong></li>
+<li><strong>禁止外网访问Redis</strong></li>
+<li><strong>阻止其他用户添加新的公钥，将authorized_keys的权限设置为对拥有者只读</strong></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/02/24/hello-world/" rel="prev" title="Hello World">
+      <i class="fa fa-chevron-left"></i> Hello World
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%80%9D%E8%B7%AF"><span class="nav-number">1.</span> <span class="nav-text">攻击思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">漏洞利用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E6%B5%8B%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">检测方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B2%E5%BE%A1%E7%AD%96%E7%95%A5"><span class="nav-number">4.</span> <span class="nav-text">防御策略</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="PYH"
+      src="/images/hacker.jpeg">
+  <p class="site-author-name" itemprop="name">PYH</p>
+  <div class="site-description" itemprop="description">成就更好的自己</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ScriptKiddlePYH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ScriptKiddlePYH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1246578220@qq.com" title="E-Mail → mailto:1246578220@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+	
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">SECURITY</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">8k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">7 分钟</span>
+</div><div class="translate-style">
+繁/简：<a id="translateLink" href="javascript:translatePage();">繁体
+</a>
+</div>
+<script type="text/javascript" src="/js/tw_cn.js"></script>
+<script type="text/javascript">
+var defaultEncoding = 2; //网站编写字体是否繁体，1-繁体，2-简体
+var translateDelay = 0; //延迟时间,若不在前, 要设定延迟翻译时间, 如100表示100ms,默认为0
+var cookieDomain = "https://tding.top/"; //Cookie地址, 一定要设定, 通常为你的网址
+var msgToTraditionalChinese = "繁体"; //此处可以更改为你想要显示的文字
+var msgToSimplifiedChinese = "简体"; //同上，但两处均不建议更改
+var translateButtonId = "translateLink"; //默认互换id
+translateInitilization();
+</script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'c06VR6Rl6k3L33B5NqWq83Ww-gzGzoHsz',
+      appKey     : 'X1118T3bTIXlajib01vN2XrW',
+      placeholder: "Let's study with each other",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+
+
+  <script src="/js/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="/js/fold_action.js"></script>
+</body>
+</html>
