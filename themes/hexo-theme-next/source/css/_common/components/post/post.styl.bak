@@ -21,10 +21,10 @@
   }
 
   a:not(.btn){
-  color: #0593d3;
+  color: #f89fa0;
   border-bottom: none;
   &:hover {
-	color: #0477ab;
+	color: #ff7a7a;
 	font-weight: bold;
 	text-decoration: underline;
   		  }

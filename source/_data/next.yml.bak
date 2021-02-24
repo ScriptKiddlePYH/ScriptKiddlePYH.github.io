@@ -369,11 +369,11 @@ codeblock:
     style: mac
 
 back2top:
-  enable: true
+  enable: false
   # Back to top in sidebar.
   sidebar: false
   # Scroll percent label in b2t button.
-  scrollpercent: true
+  scrollpercent: false
 
 # Reading progress bar
 reading_progress:
@@ -1015,12 +1015,4 @@ typing_effect:
 diy_time:
   runtime: true 
   clock: true # 粒子时钟
-
-#链接颜色
-custom_css:
-  # the style of post body link
-  post_body_a:
-    enable: true
-    normal_color: "#0593d3"
-    hover_color: "#0477ab"
 

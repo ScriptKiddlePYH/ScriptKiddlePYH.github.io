@@ -40,8 +40,8 @@ custom_file_path:
 # ---------------------------------------------------------------
 
 favicon:
-  small: /images/favicon-16x16-next.png
-  medium: /images/favicon-32x32-next.png
+  small: /images/favicon-16x16-hacker.png
+  medium: /images/favicon-32x32-hacker.png
   apple_touch_icon: /images/apple-touch-icon-next.png
   safari_pinned_tab: /images/logo.svg
   #android_manifest: /images/manifest.json
@@ -1015,12 +1015,4 @@ typing_effect:
 diy_time:
   runtime: true 
   clock: true # 粒子时钟
-
-#链接颜色
-custom_css:
-  # the style of post body link
-  post_body_a:
-    enable: true
-    normal_color: "#0593d3"
-    hover_color: "#0477ab"
 
