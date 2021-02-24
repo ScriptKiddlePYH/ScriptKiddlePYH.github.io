@@ -180,6 +180,7 @@ site_state: true
 social:
   GitHub: https://github.com/ScriptKiddlePYH || fab fa-github
   E-Mail: mailto:1246578220@qq.com || fa fa-envelope
+  CSDN: https://blog.csdn.net/weixin_45007073 || fa fa-code
   RSS: /atom.xml || fa fa-rss
   #Weibo: https://weibo.com/yourname || fab fa-weibo
   #Google: https://plus.google.com/yourname || fab fa-google
@@ -370,9 +371,9 @@ codeblock:
 back2top:
   enable: true
   # Back to top in sidebar.
-  sidebar: true
+  sidebar: false
   # Scroll percent label in b2t button.
-  scrollpercent: false
+  scrollpercent: true
 
 # Reading progress bar
 reading_progress:
@@ -1009,3 +1010,17 @@ cursor_effect: fireworks
 typing_effect:
   colorful: true  # 礼花特效
   shake: false    # 震动特效
+
+# 侧栏粒子时钟
+diy_time:
+  runtime: true 
+  clock: true # 粒子时钟
+
+#链接颜色
+custom_css:
+  # the style of post body link
+  post_body_a:
+    enable: true
+    normal_color: "#0593d3"
+    hover_color: "#0477ab"
+

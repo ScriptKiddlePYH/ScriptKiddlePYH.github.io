@@ -167,3 +167,16 @@ live2d:
     height: 300      #模型高度
   mobile:
     show: false      #是否在手机端显示
+
+#bt2标签
+moon_menu:
+  back2top:
+    enable: true
+    icon: fa fa-chevron-up
+    func: back2top
+    order: -1
+  back2bottom:
+    enable: true
+    icon: fa fa-chevron-down
+    func: back2bottom
+    order: -2
