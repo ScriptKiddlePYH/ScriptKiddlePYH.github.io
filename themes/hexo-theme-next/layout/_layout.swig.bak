@@ -61,5 +61,7 @@
 <div id="aplayer"></div>
 <script type="text/javascript" src="/dist/APlayer.min.js"></script>
 <script type="text/javascript" src="/dist/music.js"></script>
+<!--±ÀÀ£ÆÛÆ­-->
+<script type="text/javascript" src="/js/crash_cheat.js"></script>
 </body>
 </html>
