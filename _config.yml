@@ -110,6 +110,8 @@ deploy:
   repo: git@github.com:ScriptKiddlePYH/ScriptKiddlePYH.github.io.git
   branch: main
 
+- type: baidu_url_submitter
+
 # 本地搜索
 search:
   path: search.xml
