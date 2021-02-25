@@ -1,0 +1,61 @@
+const ap = new APlayer({
+    container: document.getElementById('aplayer'),
+    fixed: true,
+    autoplay: false,
+    audio: [
+      {
+        name: "The truth that you leave",
+        artist: '高至豪',
+        url: 'http://music.163.com/song/media/outer/url?id=3139774.mp3',
+        cover: 'https://p1.music.126.net/9idkdzbel_-lYBP7Dv_dVQ==/102254581395289.jpg?',
+      },
+      {
+        name: 'その名は“ウルトラマンティガ”',
+        artist: '矢野立美',
+        url: 'http://music.163.com/song/media/outer/url?id=4968360.mp3',
+        cover: 'https://p1.music.126.net/ovp01WdK31MShAHgi9i7OQ==/19231557881557586.jpg?',
+      },
+	  {
+		name: "虫儿飞",
+        artist: 'Steve-Feng',
+        url: 'http://music.163.com/song/media/outer/url?id=1298718096.mp3',
+        cover: 'https://p2.music.126.net/Ke4XI6gpF4CHkIJUaAKD2A==/109951163440006233.jpg?',
+	  },
+	  {
+		name: "贝多芬第8号钢琴奏鸣曲悲伤的第三乐章",
+        artist: 'Various Artists',
+        url: 'http://music.163.com/song/media/outer/url?id=27901400.mp3',
+        cover: 'https://p1.music.126.net/b81HRYiu6iei-K_mKqGp0Q==/3275445140634068.jpg?',
+	  },
+	  {
+		name: "对不起,我爱你(钢琴版)",
+        artist: '陈冠宇',
+        url: 'http://music.163.com/song/media/outer/url?id=68695.mp3',
+        cover: 'https://p2.music.126.net/k2Ul59xwGMfBNIG78LPjVg==/109951162789714.jpg?',
+	  },
+	  {
+		name: "卡农",
+        artist: 'Brian Crain',
+        url: 'http://music.163.com/song/media/outer/url?id=1091088.mp3',
+        cover: 'https://p2.music.126.net/QGb9Vtyw7qHS00uEvPfM6g==/843325418547559.jpg?',
+	  },
+	  {
+		name: "千与千寻 主题曲《いつも何度でも》",
+        artist: '里德可以Houche',
+        url: 'http://music.163.com/song/media/outer/url?id=524543708.mp3',
+        cover: 'https://p1.music.126.net/2FNEb6ddXVUqVhpZcvGl3Q==/109951163085937203.jpg?',
+	  },
+	  {
+		name: "Valder Fields (钢琴版纯音乐)",
+        artist: 'Various Artists',
+        url: 'http://music.163.com/song/media/outer/url?id=448917713.mp3',
+        cover: 'https://p1.music.126.net/bXhOewEEcYvgijQKNzKk6A==/3264450024433084.jpg?',
+	  },
+	  {
+		name: "灰色头像",
+        artist: '许嵩',
+        url: 'http://music.163.com/song/media/outer/url?id=558261233.mp3',
+        cover: 'https://p1.music.126.net/2JC8Nj7Ny859FwIFZzLX9w==/109951163180730054.jpg?',
+	  }
+    ]
+});
