@@ -13,7 +13,7 @@ timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://pyhsecurity.cn
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -145,3 +145,38 @@ feed:
   icon: icon.png
   autodiscovery: true
   template:
+
+#备份
+backup:
+  type: git
+  theme: next
+  message: Back up my www.pyhsecurity.com blog
+  repository:
+    github: git@github.com:ScriptKiddlePYH/ScriptKiddlePYH.github.io.git,backup
+    coding: git@e.coding.net:scriptkiddlepyh/scriptkiddlepyh/ScriptKiddlePYH.git,backup
+
+#模型
+live2d:
+  enable: true
+  scriptFrom: local
+  model:
+    use: live2d-widget-model-koharu #模型选择
+  display:
+    position: left  #模型位置
+    width: 150       #模型宽度
+    height: 300      #模型高度
+  mobile:
+    show: false      #是否在手机端显示
+
+#bt2标签
+moon_menu:
+  back2top:
+    enable: true
+    icon: fa fa-chevron-up
+    func: back2top
+    order: -1
+  back2bottom:
+    enable: true
+    icon: fa fa-chevron-down
+    func: back2bottom
+    order: -2

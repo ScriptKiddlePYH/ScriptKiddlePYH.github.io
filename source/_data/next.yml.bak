@@ -88,7 +88,7 @@ footer:
 creative_commons:
   license: by-nc-sa
   sidebar: false
-  post: false
+  post: true
   language:
 
 
@@ -281,7 +281,7 @@ reward:
 follow_me:
   #Twitter: https://twitter.com/username || fab fa-twitter
   #Telegram: https://t.me/channel_name || fab fa-telegram
-  #WeChat: /images/wechat_channel.jpg || fab fa-weixin
+  WeChat: /images/wechat.jpg || fa fa-weixin
   #RSS: /atom.xml || fa fa-rss
 
 # Related popular posts
@@ -468,7 +468,7 @@ exturl: false
 
 # Google Webmaster tools verification.
 # See: https://www.google.com/webmasters
-google_site_verification:
+google_site_verification: RZnIlUpu--z9OLwxJuaOax3ZbiBsxiRNgoQ9ScrnMCo
 
 # Bing Webmaster tools verification.
 # See: https://www.bing.com/webmaster
@@ -483,7 +483,7 @@ yandex_site_verification:
 baidu_site_verification:
 
 # Enable baidu push so that the blog will push the url to baidu automatically which is very helpful for SEO.
-baidu_push: false
+baidu_push: true
 
 
 # ---------------------------------------------------------------
@@ -1015,4 +1015,3 @@ typing_effect:
 diy_time:
   runtime: true 
   clock: true # 粒子时钟
-

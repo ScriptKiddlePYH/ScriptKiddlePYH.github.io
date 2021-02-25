@@ -180,3 +180,9 @@ moon_menu:
     icon: fa fa-chevron-down
     func: back2bottom
     order: -2
+
+# 自动生成sitemap
+sitemap:
+  path: sitemap.xml
+baidusitemap:
+  path: baidusitemap.xml
