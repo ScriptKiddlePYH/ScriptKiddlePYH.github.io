@@ -21,10 +21,10 @@
   }
 
   a:not(.btn){
-  color: #f89fa0;
+  color: #0593d3;
   border-bottom: none;
   &:hover {
-	color: #ff7a7a;
+	color: #0477ab;
 	font-weight: bold;
 	text-decoration: underline;
   		  }
@@ -46,6 +46,11 @@
   if (hexo-config('motion.transition.post_block')) {
     .post-block, .pagination, .comments {
       opacity: 0;
+      margin-top: 60px;
+      margin-bottom: 60px;
+      padding: 20px;
+      -webkit-box-shadow: 0 0 5px rgba(202, 203, 203, .5);
+      -moz-box-shadow: 0 0 5px rgba(202, 203, 204, .5);
     }
   }
 

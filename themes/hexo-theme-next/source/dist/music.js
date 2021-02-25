@@ -1,0 +1,157 @@
+const ap = new APlayer({
+    container: document.getElementById('aplayer'),
+    fixed: true,
+    autoplay: false,
+    audio: [
+      {
+        name: "The truth that you leave",
+        artist: '高至豪',
+        url: 'http://music.163.com/song/media/outer/url?id=3139774.mp3',
+        cover: 'https://p1.music.126.net/9idkdzbel_-lYBP7Dv_dVQ==/102254581395289.jpg?',
+      },
+      {
+        name: 'その名は“ウルトラマンティガ”',
+        artist: '矢野立美',
+        url: 'http://music.163.com/song/media/outer/url?id=4968360.mp3',
+        cover: 'https://p1.music.126.net/ovp01WdK31MShAHgi9i7OQ==/19231557881557586.jpg?',
+      },
+	  {
+		name: "虫儿飞",
+        artist: 'Steve-Feng',
+        url: 'http://music.163.com/song/media/outer/url?id=1298718096.mp3',
+        cover: 'https://p2.music.126.net/Ke4XI6gpF4CHkIJUaAKD2A==/109951163440006233.jpg?',
+	  },
+	  {
+		name: "贝多芬第8号钢琴奏鸣曲悲伤的第三乐章",
+        artist: 'Various Artists',
+        url: 'http://music.163.com/song/media/outer/url?id=27901400.mp3',
+        cover: 'https://p1.music.126.net/b81HRYiu6iei-K_mKqGp0Q==/3275445140634068.jpg?',
+	  },
+	  {
+		name: "对不起,我爱你(钢琴版)",
+        artist: '陈冠宇',
+        url: 'http://music.163.com/song/media/outer/url?id=68695.mp3',
+        cover: 'https://p2.music.126.net/k2Ul59xwGMfBNIG78LPjVg==/109951162789714.jpg?',
+	  },
+	  {
+		name: "卡农",
+        artist: 'Brian Crain',
+        url: 'http://music.163.com/song/media/outer/url?id=1091088.mp3',
+        cover: 'https://p2.music.126.net/QGb9Vtyw7qHS00uEvPfM6g==/843325418547559.jpg?',
+	  },
+	  {
+		name: "千与千寻 主题曲《いつも何度でも》",
+        artist: '里德可以Houche',
+        url: 'http://music.163.com/song/media/outer/url?id=524543708.mp3',
+        cover: 'https://p1.music.126.net/2FNEb6ddXVUqVhpZcvGl3Q==/109951163085937203.jpg?',
+	  },
+	  {
+		name: "Valder Fields (钢琴版纯音乐)",
+        artist: 'Various Artists',
+        url: 'http://music.163.com/song/media/outer/url?id=448917713.mp3',
+        cover: 'https://p1.music.126.net/bXhOewEEcYvgijQKNzKk6A==/3264450024433084.jpg?',
+	  },
+	  {
+		name: "夜的钢琴曲五",
+        artist: '邓壬鑫',
+        url: 'http://music.163.com/song/media/outer/url?id=558261233.mp3',
+        cover: 'https://p1.music.126.net/2JC8Nj7Ny859FwIFZzLX9w==/109951163180730054.jpg?',
+	  },
+	  {
+		name: "Sakura Tears",
+        artist: 'Snigellin',
+        url: 'http://music.163.com/song/media/outer/url?id=509313150.mp3',
+        cover: 'https://p2.music.126.net/p-7pKS_S86OJo8cHcDNKFw==/109951163922821064.jpg?',
+	  },
+	  {
+		name: "My Soul",
+        artist: 'July',
+        url: 'http://music.163.com/song/media/outer/url?id=5308028.mp3',
+        cover: 'https://p2.music.126.net/NFl1s5Hl3E37dCaFIDHfNw==/727876697598920.jpg?',
+	  },
+	  {
+		name: "【钢琴】What are words",
+        artist: '昼夜',
+        url: 'http://music.163.com/song/media/outer/url?id=466652781.mp3',
+        cover: 'https://p2.music.126.net/lavt0S6ARxrC3pqHa_ZL_Q==/109951162827917480.jpg?',
+	  },
+	  {
+		name: "ひとりじゃない",
+        artist: '徳永暁人',
+        url: 'http://music.163.com/song/media/outer/url?id=477331766.mp3',
+        cover: 'https://p2.music.126.net/x-OMZS1xidJkNHEDE_qG4g==/19054536509481786.jpg?',
+	  },
+	  {
+		name: "莫扎特：土耳其进行曲",
+        artist: '群星',
+        url: 'http://music.163.com/song/media/outer/url?id=27511298.mp3',
+        cover: 'https://p2.music.126.net/CzXg1dOY-aGb5ZV6IvN_BA==/109951164077784060.jpg?',
+	  },
+	  {
+		name: "城南花已开",
+        artist: '三亩地',
+        url: 'http://music.163.com/song/media/outer/url?id=468176711.mp3',
+        cover: 'https://p1.music.126.net/i-7ktILRPImJ0NwiH8DABg==/109951162885959979.jpg?',
+	  },
+	  {
+		name: "天ノ弱",
+        artist: 'Akie秋绘',
+        url: 'http://music.163.com/song/media/outer/url?id=442016694.mp3',
+        cover: 'https://p1.music.126.net/uwdmJf5_YTFeTviEEesP-Q==/109951162812015408.jpg?',
+	  },
+	  {
+		name: "secret base ~君がくれたもの~",
+        artist: '茅野愛衣 / 戸松遥 / 早見沙織',
+        url: 'http://music.163.com/song/media/outer/url?id=33911781.mp3',
+        cover: 'https://p2.music.126.net/daZcHVIJicL3wXJWMIjAng==/7926379325753633.jpg?',
+	  },
+	  {
+		name: "PLANET",
+        artist: 'ラムジ',
+        url: 'http://music.163.com/song/media/outer/url?id=812400.mp3',
+        cover: 'https://p1.music.126.net/cCyPSxi-BE2h-SmpLBztbA==/18635622580993683.jpg?',
+	  },
+	  {
+		name: "Lemon",
+        artist: '米津玄師',
+        url: 'http://music.163.com/song/media/outer/url?id=536622304.mp3',
+        cover: 'https://p2.music.126.net/6IeZ9MiSSDXifj74nzH6ww==/109951163561494000.jpg?',
+	  },
+	  {
+		name: "素颜",
+        artist: '许嵩 / 何曼婷',
+        url: 'http://music.163.com/song/media/outer/url?id=167827.mp3',
+        cover: 'https://p1.music.126.net/LMyITvYRS7NsgA9lYUKpqg==/109951164179134667.jpg?',
+	  },
+	  {
+		name: "清明雨上",
+        artist: '许嵩',
+        url: 'http://music.163.com/song/media/outer/url?id=167882.mp3',
+        cover: 'https://p2.music.126.net/Md3RLH0fe2a_3dMDnfqoQg==/18590542604286213.jpg?',
+	  },
+	  {
+		name: "断桥残雪",
+        artist: '许嵩',
+        url: 'http://music.163.com/song/media/outer/url?id=167937.mp3',
+        cover: 'https://p2.music.126.net/PEQ69_EwVpuaBmmSkAY0SQ==/58274116284456.jpg?',
+	  },
+	  {
+		name: "爱与痛的边缘",
+        artist: '谭咏麟',
+        url: 'http://music.163.com/song/media/outer/url?id=113031.mp3',
+        cover: 'https://p1.music.126.net/LBWEQ6ib0qah58bm0OMMFA==/109951163416481965.jpg?',
+	  },
+	  {
+		name: "认错",
+        artist: '许嵩',
+        url: 'http://music.163.com/song/media/outer/url?id=167888.mp3',
+        cover: 'https://p1.music.126.net/2JC8Nj7Ny859FwIFZzLX9w==/109951163180730054.jpg?',
+	  },
+	  {
+		name: "罪人",
+        artist: '李克勤',
+        url: 'http://music.163.com/song/media/outer/url?id=111536.mp3',
+        cover: 'https://p1.music.126.net/LevsHSmG6l6N6uYL3KcI-w==/46179488371973.jpg?',
+	  }
+    ]
+});
