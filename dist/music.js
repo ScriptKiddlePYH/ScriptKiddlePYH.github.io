@@ -6,7 +6,7 @@ const ap = new APlayer({
       {
         name: "The truth that you leave",
         artist: '高至豪',
-        url: 'http://music.163.com/song/media/outer/url?id=3139774.mp3',
+        url: 'http://music.163.com/song/media/outer/url?id=139774.mp3',
         cover: 'https://p1.music.126.net/9idkdzbel_-lYBP7Dv_dVQ==/102254581395289.jpg?',
       },
       {
