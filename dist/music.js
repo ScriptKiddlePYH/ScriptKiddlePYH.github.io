@@ -152,6 +152,12 @@ const ap = new APlayer({
         artist: '李克勤',
         url: 'http://music.163.com/song/media/outer/url?id=111536.mp3',
         cover: 'https://p1.music.126.net/LevsHSmG6l6N6uYL3KcI-w==/46179488371973.jpg?',
+	  },
+	  {
+		name: "沙龙",
+        artist: '陈奕迅',
+        url: 'http://music.163.com/song/media/outer/url?id=64833.mp3',
+        cover: 'https://p2.music.126.net/RmdCYKF2ZQiAlgFmcsIOeQ==/18958878997954526.jpg?',
 	  }
     ]
 });
