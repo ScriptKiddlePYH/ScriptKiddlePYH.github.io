@@ -283,6 +283,7 @@ follow_me:
   #Telegram: https://t.me/channel_name || fab fa-telegram
   WeChat: /images/wechat.jpg || fa fa-weixin
   #RSS: /atom.xml || fa fa-rss
+  QQ: /images/QQ.jpg || fa fa-qq
 
 # Related popular posts
 # Dependencies: https://github.com/tea3/hexo-related-popular-posts
