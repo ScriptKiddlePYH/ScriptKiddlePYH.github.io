@@ -1,6 +1,7 @@
 ---
 title: 基因突变的模糊测试(GET参数)
 tags: 模糊测试
+categories: C#灰帽子
 ---
 
 ## 基础要求

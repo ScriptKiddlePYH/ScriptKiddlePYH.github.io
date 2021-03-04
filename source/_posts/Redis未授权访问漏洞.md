@@ -1,6 +1,7 @@
 ---
 title: Redis未授权访问漏洞
 tags: 漏洞检测与防御
+categories: python安全攻防
 ---
 
 ## 攻击思路
