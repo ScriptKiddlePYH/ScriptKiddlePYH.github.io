@@ -34,12 +34,10 @@ namespace 突变模糊测试
     }
 }
 ```
-
 > **污染参数和测试漏洞**
-<!--more-->
 
 如果服务器不容易受到XSS或SQL注入的攻击，那么服务器会恰当地检查这些数据。向污染数据添加`<xss>`，并且测试SQL注入的数据将具有单引号。
-
+<!--more-->
 ```csharp
 foreach (string parm in parms)
 {
@@ -49,7 +47,6 @@ foreach (string parm in parms)
 	Console.WriteLine(sqlUrl);
 }
 ```
-
 > **构造HTTP请求**
 
 接下来，使用HttpWebRequest类编程构建HTTP请求，然后我们使用带有污染HTTP参数发起HTTP请求，看看是否有任何错误返回。
