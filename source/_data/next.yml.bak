@@ -469,7 +469,7 @@ exturl: false
 
 # Google Webmaster tools verification.
 # See: https://www.google.com/webmasters
-google_site_verification: RZnIlUpu--z9OLwxJuaOax3ZbiBsxiRNgoQ9ScrnMCo
+google_site_verification:
 
 # Bing Webmaster tools verification.
 # See: https://www.bing.com/webmaster
@@ -937,7 +937,7 @@ vendors:
 
   # Quicklink
   # quicklink: //cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js
-  quicklink:
+  quicklink: https://cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js
 
   # DisqusJS
   # disqusjs_js: //cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js
