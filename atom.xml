@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2021-03-04T15:01:13.027Z</updated>
+  <updated>2021-03-04T15:05:57.970Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://pyhsecurity.cn/2021/03/04/%E5%9F%BA%E5%9B%A0%E7%AA%81%E5%8F%98%E7%9A%84%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95(GET%E5%8F%82%E6%95%B0)/"/>
     <id>https://pyhsecurity.cn/2021/03/04/%E5%9F%BA%E5%9B%A0%E7%AA%81%E5%8F%98%E7%9A%84%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95(GET%E5%8F%82%E6%95%B0)/</id>
     <published>2021-03-04T03:50:03.495Z</published>
-    <updated>2021-03-04T15:01:13.027Z</updated>
+    <updated>2021-03-04T15:05:57.970Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;基础要求&quot;&gt;&lt;a href=&quot;#基础要求&quot; class=&quot;headerlink&quot; title=&quot;基础要求&quot;&gt;&lt;/a&gt;基础要求&lt;/h2&gt;&lt;p&gt;首先我们得具备最基础的SQL注入和XSS漏洞的基本知识，不懂的读者可以自行百度先学习，然后我们再学习下面的内容。下面我们将使用C#这门编程语言编写模糊测试工具测试是否存在漏洞。&lt;/p&gt;
@@ -41,6 +41,8 @@
     
     
     
+    <category term="C#灰帽子" scheme="https://pyhsecurity.cn/categories/C-%E7%81%B0%E5%B8%BD%E5%AD%90/"/>
+    
     
     <category term="模糊测试" scheme="https://pyhsecurity.cn/tags/%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95/"/>
     
@@ -51,13 +53,15 @@
     <link href="https://pyhsecurity.cn/2021/02/24/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/"/>
     <id>https://pyhsecurity.cn/2021/02/24/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/</id>
     <published>2021-02-24T06:58:54.496Z</published>
-    <updated>2021-02-26T05:12:52.052Z</updated>
+    <updated>2021-03-04T15:06:35.845Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;攻击思路&quot;&gt;&lt;a href=&quot;#攻击思路&quot; class=&quot;headerlink&quot; title=&quot;攻击思路&quot;&gt;&lt;/a&gt;攻击思路&lt;/h2&gt;&lt;p&gt;Redis是一种使用ANSIC语言编写的开源Key-Value型数据库。Redis为了保证效率，将数据缓存在内存中，周期性地把更新的数据写入磁盘或者把修改操作写入追加的记录文件中，在此基础上实现了master-slave(主从)同步。&lt;/p&gt;
 &lt;p&gt;对Redis配置不当将会导致未授权访问漏洞，从而被攻击者恶意利用。如果Redis以root身份运行，攻击者可以用root权限写入SSH公钥文件，通过SSH登录目标服务器，进而导致服务器权限被获取、泄露或发生加密勒索事件，为正常服务带来严重危害。&lt;/p&gt;</summary>
     
     
+    
+    <category term="python安全攻防" scheme="https://pyhsecurity.cn/categories/python%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2/"/>
     
     
     <category term="漏洞检测与防御" scheme="https://pyhsecurity.cn/tags/%E6%BC%8F%E6%B4%9E%E6%A3%80%E6%B5%8B%E4%B8%8E%E9%98%B2%E5%BE%A1/"/>
