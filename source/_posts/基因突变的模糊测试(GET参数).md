@@ -2,6 +2,7 @@
 title: 基因突变的模糊测试(GET参数)
 tags: 模糊测试
 categories: C#灰帽子
+top: true
 ---
 
 ## 基础要求
@@ -35,10 +36,11 @@ namespace 突变模糊测试
     }
 }
 ```
+<!--more-->
 > **污染参数和测试漏洞**
 
 如果服务器不容易受到XSS或SQL注入的攻击，那么服务器会恰当地检查这些数据。向污染数据添加`<xss>`，并且测试SQL注入的数据将具有单引号。
-<!--more-->
+
 ```csharp
 foreach (string parm in parms)
 {

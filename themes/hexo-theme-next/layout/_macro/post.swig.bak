@@ -48,11 +48,6 @@
 
           {%- if theme.post_meta.created_at %}
             <span class="post-meta-item">
-	    {% if post.top %}
-	<i class="fa fa-thumb-tack"></i>
-	<font color=7D26CD>÷√∂•</font>
-	<span class="post-meta-divider">|</span>
-	{% endif %}
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
@@ -198,7 +193,7 @@
           <!--noindex-->
           {%- if theme.read_more_btn %}
             <div class="post-button">
-              <a class="btn" href="{{ url_for(post.path) }}#more" rel="contents">
+              <a class="btn" href="{{ url_for(post.path) }}" rel="contents">
                 {{ __('post.read_more') }} &raquo;
               </a>
             </div>
