@@ -1,6 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Powershell收集域内信息</title>
+    <url>/2021/03/06/Powershell%E6%94%B6%E9%9B%86%E5%9F%9F%E5%86%85%E4%BF%A1%E6%81%AF/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Powershell作为微软官方推出的脚本语言，在Windows操作系统中的强大功能总所周知：系统管理员可以利用它提高Windows管理工作的自动化程度；渗透测试人员可以利用它更好地进行系统安全测试。因为powershell命令比较安全，减少了触发IDS或IPS的风险，因此大多数的作用是用于绕过策略。</p>
+<blockquote>
+<p><strong>Powershell的常用执行权限共有四种</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Restricted</td>
+<td>默认设置，不允许执行任何脚本</td>
+</tr>
+<tr>
+<td>Allsigned</td>
+<td>只能运行经过证书验证的脚本</td>
+</tr>
+<tr>
+<td>Unrestricted</td>
+<td>权限最高，可以执行任意脚本</td>
+</tr>
+<tr>
+<td>RemoteSigned</td>
+<td>对本地脚本不进行限制；对来自网络的脚本必须验证其签名</td>
+</tr>
+</tbody></table>
+<span id="more"></span>
+<h2 id="各脚本命令展示"><a href="#各脚本命令展示" class="headerlink" title="各脚本命令展示"></a>各脚本命令展示</h2><p>这里我们将策略设置为Unrestricted，能运行所有的脚本权限<br><img src="https://img-blog.csdnimg.cn/20210306133134774.png" alt="在这里插入图片描述"><br>然后我们进入PowerSploit的Recon文件夹将PowerView.ps1这个脚本导入进去(只有导入这个脚本才能执行以下命令)，这个是PowerSploit的下载地址</p>
+<p><a href="https://github.com/PowerShellMafia/PowerSploit">https://github.com/PowerShellMafia/PowerSploit</a><br><img src="https://img-blog.csdnimg.cn/20210306133704948.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-NetDomain：获取当前用户所在域的名称</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210306133824783.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-NetUser：获取所有用户的详细信息</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210306134143467.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-NetDomainController：获取所有域控制器的信息</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210306134253861.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-NetComputer：获取域内所有机器的详细信息</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/2021030613443370.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-NetOU：获取域中的OU信息</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210306134535643.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2021030613454718.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-NetGroup：获取所有域内组和组成员的信息</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/2021030613464591.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-NetShare：获取当前域内所有的网络共享信息</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210306134857127.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-NetSession：获取指定服务器的对话</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210306135028467.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-NetRDPSession：获取指定服务器的远程连接</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210306135144213.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-NetProcess：获取远程主机的进程</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210306135251953.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-UserEvent：获取指定用户的日志</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210306135349272.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-ADObject：获取活动目录的对象</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/2021030613552975.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-NetGPO：获取域内所有的组策略对象</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210306135710375.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-DomainPolicy：获取域默认策略或域控制器策略</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210306135819950.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Invoke-UserHunter：获取域用户登录的计算机信息及该用户是否有本地管理员权限</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210306140014762.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Invoke-ProcessHunter：通过查询域内所有的机器进程找到特定用户</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/2021030614015675.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="Powershell脚本绕过策略实例"><a href="#Powershell脚本绕过策略实例" class="headerlink" title="Powershell脚本绕过策略实例"></a>Powershell脚本绕过策略实例</h2><p>首先我们先将策略更改为Restricted，默认不能执行任何脚本<br><img src="https://img-blog.csdnimg.cn/20210306140851647.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>执行绕过后，命令成功执行，<code>powershell -exec bypass &quot;import-module&quot; 脚本路径；执行的命令</code><br><img src="https://img-blog.csdnimg.cn/20210306140929449.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+]]></content>
+      <categories>
+        <category>内网安全攻防</category>
+      </categories>
+      <tags>
+        <tag>内网渗透</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>基因突变的模糊测试(GET参数)</title>
     <url>/2021/03/04/%E5%9F%BA%E5%9B%A0%E7%AA%81%E5%8F%98%E7%9A%84%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95(GET%E5%8F%82%E6%95%B0)/</url>
     <content><![CDATA[<h2 id="基础要求"><a href="#基础要求" class="headerlink" title="基础要求"></a>基础要求</h2><p>首先我们得具备最基础的SQL注入和XSS漏洞的基本知识，不懂的读者可以自行百度先学习，然后我们再学习下面的内容。下面我们将使用C#这门编程语言编写模糊测试工具测试是否存在漏洞。</p>

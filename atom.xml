@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2021-03-05T04:18:35.492Z</updated>
+  <updated>2021-03-06T06:13:20.684Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -15,6 +15,59 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Powershell收集域内信息</title>
+    <link href="https://pyhsecurity.cn/2021/03/06/Powershell%E6%94%B6%E9%9B%86%E5%9F%9F%E5%86%85%E4%BF%A1%E6%81%AF/"/>
+    <id>https://pyhsecurity.cn/2021/03/06/Powershell%E6%94%B6%E9%9B%86%E5%9F%9F%E5%86%85%E4%BF%A1%E6%81%AF/</id>
+    <published>2021-03-06T06:10:26.889Z</published>
+    <updated>2021-03-06T06:13:20.684Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;Powershell作为微软官方推出的脚本语言，在Windows操作系统中的强大功能总所周知：系统管理员可以利用它提高Windows管理工作的自动化程度；渗透测试人员可以利用它更好地进行系统安全测试。因为powershell命令比较安全，减少了触发IDS或IPS的风险，因此大多数的作用是用于绕过策略。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Powershell的常用执行权限共有四种&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;参数&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;Restricted&lt;/td&gt;
+&lt;td&gt;默认设置，不允许执行任何脚本&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Allsigned&lt;/td&gt;
+&lt;td&gt;只能运行经过证书验证的脚本&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Unrestricted&lt;/td&gt;
+&lt;td&gt;权限最高，可以执行任意脚本&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RemoteSigned&lt;/td&gt;
+&lt;td&gt;对本地脚本不进行限制；对来自网络的脚本必须验证其签名&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+&lt;h2 id=&quot;各脚本命令展示&quot;&gt;&lt;a href=&quot;#各脚本命令展示&quot; class=&quot;headerlink&quot; title=&quot;各脚本命令展示&quot;&gt;&lt;/a&gt;各脚本命令展示&lt;/h2&gt;&lt;p&gt;这里我们将策略设置为Unrestricted，能运行所有的脚本权限&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210306133134774.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;然后我们进入PowerSploit的Recon文件夹将PowerView.ps1这个脚本导入进去(只有导入这个脚本才能执行以下命令)，这个是PowerSploit的下载地址&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/PowerShellMafia/PowerSploit&quot;&gt;https://github.com/PowerShellMafia/PowerSploit&lt;/a&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210306133704948.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Get-NetDomain：获取当前用户所在域的名称&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210306133824783.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="内网安全攻防" scheme="https://pyhsecurity.cn/categories/%E5%86%85%E7%BD%91%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2/"/>
+    
+    
+    <category term="内网渗透" scheme="https://pyhsecurity.cn/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>基因突变的模糊测试(GET参数)</title>
