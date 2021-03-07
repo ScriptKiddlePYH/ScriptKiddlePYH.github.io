@@ -1,8 +1,8 @@
 ---
 title: Powershell收集域内信息
 tags: 内网渗透
-categories: 内网安全攻防
-top: true
+categories: 红队对抗
+top: 1
 ---
 
 ## 前言
