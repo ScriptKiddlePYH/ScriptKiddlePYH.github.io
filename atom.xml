@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2021-03-07T04:46:04.494Z</updated>
+  <updated>2021-03-07T13:40:26.115Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Powershell收集域内信息</title>
+    <link href="https://pyhsecurity.cn/2021/03/07/%E6%9F%A5%E6%89%BE%E5%9F%9F%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B/"/>
+    <id>https://pyhsecurity.cn/2021/03/07/%E6%9F%A5%E6%89%BE%E5%9F%9F%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B/</id>
+    <published>2021-03-07T13:39:14.825Z</published>
+    <updated>2021-03-07T13:40:26.115Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在渗透测试中，一个典型的域权限提升过程，通常围绕着收集明文凭据或通过mimikatz提权等方法，在获取了管理员权限的系统中寻找域管理员登录进程，进而收集域管理员的凭据。如果内网环境非常复杂，渗透测试人员无法立即在拥有权限的系统中获得域管理员进程，那么通常采用的方法是：在跳板机之间跳转，直至获得域管理员权限，同时进行一些分析工作，进而找到渗透测试的路径。&lt;/p&gt;
+&lt;p&gt;现在我们来假设一种情况：渗透测试人员在某个内网环境中获得一个域普通用户的权限，首先通过各种方法获得当前服务器的本地管理员权限，然后分析当前服务器的用户登录列表及会话信息，知道哪些用户登录了这台服务器。如果渗透测试人员通过分析发现，可以获取权限的登录用户都不是域管理员账户，同时没有域管理员组中的用户登录这台服务器，就可以使用另一个账户并寻找账户在内网的哪台机器上具有管理权限，再枚举这台机器上的用户，然后继续进行渗透测试，直至找到一个可以获取域管理员权限的有效路径为止。&lt;/p&gt;
+&lt;h2 id=&quot;思路&quot;&gt;&lt;a href=&quot;#思路&quot; class=&quot;headerlink&quot; title=&quot;思路&quot;&gt;&lt;/a&gt;思路&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;net group “Domain Admins” /domain：获取域管理员列表&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210307211234765.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;tasklist /v：列出本机的所有进程及进程用户&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210307211423315.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;从这里可以看到域管理员都有哪些进程，如果能找到，这将对后面窃取令牌有很大的帮助。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;net group “Domain Controllers” /domain：查询域控制器列表&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210307211639715.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="红队对抗" scheme="https://pyhsecurity.cn/categories/%E7%BA%A2%E9%98%9F%E5%AF%B9%E6%8A%97/"/>
+    
+    
+    <category term="内网渗透" scheme="https://pyhsecurity.cn/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>工作组信息收集</title>
