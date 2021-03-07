@@ -2,6 +2,107 @@
 <search>
   <entry>
     <title>Powershell收集域内信息</title>
+    <url>/2021/03/07/%E6%9F%A5%E6%89%BE%E5%9F%9F%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在渗透测试中，一个典型的域权限提升过程，通常围绕着收集明文凭据或通过mimikatz提权等方法，在获取了管理员权限的系统中寻找域管理员登录进程，进而收集域管理员的凭据。如果内网环境非常复杂，渗透测试人员无法立即在拥有权限的系统中获得域管理员进程，那么通常采用的方法是：在跳板机之间跳转，直至获得域管理员权限，同时进行一些分析工作，进而找到渗透测试的路径。</p>
+<p>现在我们来假设一种情况：渗透测试人员在某个内网环境中获得一个域普通用户的权限，首先通过各种方法获得当前服务器的本地管理员权限，然后分析当前服务器的用户登录列表及会话信息，知道哪些用户登录了这台服务器。如果渗透测试人员通过分析发现，可以获取权限的登录用户都不是域管理员账户，同时没有域管理员组中的用户登录这台服务器，就可以使用另一个账户并寻找账户在内网的哪台机器上具有管理权限，再枚举这台机器上的用户，然后继续进行渗透测试，直至找到一个可以获取域管理员权限的有效路径为止。</p>
+<span id="more"></span>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><blockquote>
+<p><strong>net group “Domain Admins” /domain：获取域管理员列表</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210307211234765.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>tasklist /v：列出本机的所有进程及进程用户</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210307211423315.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>从这里可以看到域管理员都有哪些进程，如果能找到，这将对后面窃取令牌有很大的帮助。</p>
+<blockquote>
+<p><strong>net group “Domain Controllers” /domain：查询域控制器列表</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210307211639715.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>交叉引用域管理员列表与活动会话列表</strong></p>
+</blockquote>
+<p>对域管理员列表和活动会话列表进行交叉引用，可以确定哪些IP地址有活动域令牌。</p>
+<p>首先我们先在域控上连接其中一台远程主机<br><img src="https://img-blog.csdnimg.cn/20210307212138384.png" alt="在这里插入图片描述"><br>在远程目标机器上用powershell能看到连接的主机目标IP(一定要是管理员权限)<br><img src="https://img-blog.csdnimg.cn/20210307212637526.png" alt="在这里插入图片描述"><br>然后我们将域控制器列表添加到dcs.txt中，将域管理员列表添加到admins.txt中<br><img src="https://img-blog.csdnimg.cn/20210307212828102.png" alt="在这里插入图片描述"><br>然后运行一下脚本，会在当前目录下生成一个文本文件sessions.txt</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FOR</span> /F %i <span class="keyword">in</span> (dcs.txt) <span class="keyword">do</span> @<span class="built_in">echo</span> [+] Querying DC %i &amp;&amp; @netsess <span class="literal">-h</span> %i <span class="number">2</span>&gt;null &gt;sessions.txt &amp;&amp; <span class="keyword">FOR</span> /F %a <span class="keyword">in</span> (admins.txt) <span class="keyword">DO</span> @<span class="built_in">type</span> sessions.txt | @findstr /I %a</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20210307213025308.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>查询远程系统中运行的任务</strong></p>
+</blockquote>
+<p>如果目标机器在域系统中是通过共享的本地管理员账户运行的，就可以使用下列脚本来查询系统中的管理任务。</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FOR</span> /F %i <span class="keyword">in</span> (dcs.txt) <span class="keyword">DO</span> @<span class="built_in">echo</span> [+] %i &amp;&amp; @tasklist /V /S %i /U user /P password <span class="number">2</span>&gt;NUL &gt; output.txt &amp;&amp; <span class="keyword">FOR</span> /F %n <span class="keyword">in</span> (admins.txt) <span class="keyword">DO</span> @<span class="built_in">type</span> output.txt | findstr %n &gt; NUL &amp;&amp; <span class="built_in">echo</span> [!] %n was found running a <span class="keyword">process</span> on %i &amp;&amp; pause</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20210307213500148.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>扫描远程系统的NetBIOS信息</p>
+</blockquote>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> /F %i <span class="keyword">in</span> (dcs.txt) <span class="keyword">do</span> @<span class="built_in">echo</span> [+] Checking %i &amp;&amp; nbtstat <span class="literal">-A</span> %i <span class="number">2</span>&gt;NUL &gt;nbsessions.txt &amp;&amp; <span class="keyword">FOR</span> /F %n <span class="keyword">in</span> (admins.txt) <span class="keyword">DO</span> @<span class="built_in">type</span> nbsessions.txt | findstr /I %n &gt; NUL &amp;&amp; <span class="built_in">echo</span> [!] %n was found logged into %i</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20210307213755137.png" alt="在这里插入图片描述"><br>以下脚本作用类似于nbtscan工具</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> /F %i <span class="keyword">in</span> (dcs.txt) <span class="keyword">do</span> @<span class="built_in">echo</span> [+] Checking %i &amp;&amp; nbtscan <span class="operator">-f</span> %i <span class="number">2</span>&gt;NUL &gt;nbsessions.txt &amp;&amp; <span class="keyword">FOR</span> /F %n <span class="keyword">in</span> (admins.txt) <span class="keyword">DO</span> @<span class="built_in">type</span> nbsessions.txt | findstr /I %n &gt; NUL &amp;&amp; <span class="built_in">echo</span> [!] %n was found logged into %i</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20210307213858148.png" alt="在这里插入图片描述"></p>
+]]></content>
+      <categories>
+        <category>内网渗透</category>
+      </categories>
+      <tags>
+        <tag>红队对抗</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>工作组信息收集</title>
+    <url>/2021/03/07/%E5%B7%A5%E4%BD%9C%E7%BB%84%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</url>
+    <content><![CDATA[<h2 id="收集本机信息"><a href="#收集本机信息" class="headerlink" title="收集本机信息"></a>收集本机信息</h2><p>不管是在外网还是内网中，信息收集都是重要的第一步。收集信息的方式又分为手动信息收集和自动信息收集。这里我们就先讲述怎样通过cmd命令手动收集内网中的主机信息。</p>
+<h2 id="命令及演示效果"><a href="#命令及演示效果" class="headerlink" title="命令及演示效果"></a>命令及演示效果</h2><blockquote>
+<p><strong>systeminfo | findstr /B /C:”OS 名称” /C:”OS 版本”</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210307114353404.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>wmic product get name,version：利用wmic命令，将结果输出到文本文件中</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210307121744649.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<span id="more"></span>
+
+<blockquote>
+<p><strong>wmic process list brief：查看进程信息</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210307121856592.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>query user || qwinsta：查看当前在线用户</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210307122040536.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>wmic qfe get Caption,Description,HotFixID,InstalledOn：查看补丁的名称、描述、ID、安装时间等信息</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210307122228363.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>wmic share get name,path,status：查找共享列表</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210307122530905.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>netsh advfirewall set allprofiles state off：关闭防火墙，2003之后的版本使用</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210307122932307.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210307122950503.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210307123003264.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>reg query “HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStation\RDP-Tcp” /V PortNumber：连接的端口是0xd3d，转换后为3389</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210307123456171.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>wmic /namespace:\root\cimv2\terminalservices path win32_terminalservicesetting where (__CLASS !=””) call setallowtsconnections 1：开启3389端口</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210307123806716.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210307123840191.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210307123852661.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>whoami /all：查询域信息及域SID，SID是指域内用户的唯一身份，也叫令牌</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210307124248556.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>其实我们在日常的信息收集时，可以多点使用<code>vmic</code>这个命令，因为这个命令在往后的横向渗透中会经常使用，所以推荐优先使用这个命令。</p>
+]]></content>
+      <categories>
+        <category>内网渗透</category>
+      </categories>
+      <tags>
+        <tag>红队对抗</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Powershell收集域内信息</title>
     <url>/2021/03/06/Powershell%E6%94%B6%E9%9B%86%E5%9F%9F%E5%86%85%E4%BF%A1%E6%81%AF/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Powershell作为微软官方推出的脚本语言，在Windows操作系统中的强大功能总所周知：系统管理员可以利用它提高Windows管理工作的自动化程度；渗透测试人员可以利用它更好地进行系统安全测试。因为powershell命令比较安全，减少了触发IDS或IPS的风险，因此大多数的作用是用于绕过策略。</p>
 <blockquote>
@@ -108,6 +209,38 @@
       </tags>
   </entry>
   <entry>
+    <title>基因突变的模糊测试(GET参数)</title>
+    <url>/2021/03/04/%E5%9F%BA%E5%9B%A0%E7%AA%81%E5%8F%98%E7%9A%84%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95(GET%E5%8F%82%E6%95%B0)/</url>
+    <content><![CDATA[<h2 id="基础要求"><a href="#基础要求" class="headerlink" title="基础要求"></a>基础要求</h2><p>首先我们得具备最基础的SQL注入和XSS漏洞的基本知识，不懂的读者可以自行百度先学习，然后我们再学习下面的内容。下面我们将使用C#这门编程语言编写模糊测试工具测试是否存在漏洞。</p>
+<h2 id="代码展示"><a href="#代码展示" class="headerlink" title="代码展示"></a>代码展示</h2><blockquote>
+<p><strong>一个小的分解给定URL中的查询字符串参数Main()方法</strong></p>
+</blockquote>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.IO;</span><br><span class="line"><span class="keyword">using</span> System.Net;</span><br><span class="line"></span><br><span class="line">namespace 突变模糊测试</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title">Program</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="built_in">string</span> url = args[<span class="number">0</span>];</span><br><span class="line">            <span class="comment">//确定第一个问号的位置，标志URL已经结束，后面是我们要查询的参数</span></span><br><span class="line">            <span class="built_in">int</span> index = url.IndexOf(<span class="string">&quot;?&quot;</span>);</span><br><span class="line">            <span class="comment">// 返回一个仅包含URL参数的字符串</span></span><br><span class="line">            <span class="built_in">string</span>[] parms = url.Remove(<span class="number">0</span>, index + <span class="number">1</span>).Split(<span class="string">&#x27;&amp;&#x27;</span>);</span><br><span class="line">            <span class="keyword">foreach</span> (<span class="built_in">string</span> parm <span class="keyword">in</span> parms)</span><br><span class="line">            &#123;</span><br><span class="line">                Console.WriteLine(parm);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<blockquote>
+<p><strong>污染参数和测试漏洞</strong></p>
+</blockquote>
+<p>如果服务器不容易受到XSS或SQL注入的攻击，那么服务器会恰当地检查这些数据。向污染数据添加<code>&lt;xss&gt;</code>，并且测试SQL注入的数据将具有单引号。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">foreach</span> (<span class="built_in">string</span> parm <span class="keyword">in</span> parms)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">string</span> xssUrl = url.Replace(parm, parm + <span class="string">&quot;fd&lt;xss&gt;sa&quot;</span>);</span><br><span class="line">	<span class="built_in">string</span> sqlUrl = url.Replace(parm, parm + <span class="string">&quot;fd&#x27;sa&quot;</span>);</span><br><span class="line">	Console.WriteLine(xssUrl);</span><br><span class="line">	Console.WriteLine(sqlUrl);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>构造HTTP请求</strong></p>
+</blockquote>
+<p>接下来，使用HttpWebRequest类编程构建HTTP请求，然后我们使用带有污染HTTP参数发起HTTP请求，看看是否有任何错误返回。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">foreach</span> (<span class="built_in">string</span> parm <span class="keyword">in</span> parms)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//使用污染的数据替换掉旧的参数</span></span><br><span class="line">                <span class="built_in">string</span> xssUrl = url.Replace(parm, parm + <span class="string">&quot;fd&lt;xss&gt;sa&quot;</span>);</span><br><span class="line">                <span class="built_in">string</span> sqlUrl = url.Replace(parm, parm + <span class="string">&quot;fd&#x27;sa&quot;</span>);</span><br><span class="line">                <span class="comment">//静态Create()方法基于传递的URL使用工厂模式来创建新的对象</span></span><br><span class="line">                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(sqlUrl);</span><br><span class="line">                request.Method = <span class="string">&quot;GET&quot;</span>;</span><br><span class="line"></span><br><span class="line">                <span class="built_in">string</span> sqlresp = <span class="built_in">string</span>.Empty;</span><br><span class="line">                <span class="keyword">using</span> (StreamReader rdr = <span class="keyword">new</span></span><br><span class="line">                    StreamReader(request.GetResponse().GetResponseStream()))</span><br><span class="line">                sqlresp = rdr.ReadToEnd();</span><br><span class="line">                request = (HttpWebRequest)WebRequest.Create(xssUrl);</span><br><span class="line">                request.Method = <span class="string">&quot;GET&quot;</span>;</span><br><span class="line">                <span class="built_in">string</span> xssresp = <span class="built_in">string</span>.Empty;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">using</span> (StreamReader rdr = <span class="keyword">new</span></span><br><span class="line">                    StreamReader(request.GetResponse().GetResponseStream()))</span><br><span class="line">                    xssresp = rdr.ReadToEnd();</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (xssresp.Contains(<span class="string">&quot;&lt;xss&gt;&quot;</span>))</span><br><span class="line">                    Console.WriteLine(<span class="string">&quot;Possible XSS point found in parameter: &quot;</span> + parm);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (sqlresp.Contains(<span class="string">&quot;error in your SQL syntax&quot;</span>))</span><br><span class="line">                    Console.WriteLine(<span class="string">&quot;SQL injection point found in parameter: &quot;</span> + parm);</span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>测试模糊测试的代码</strong></p>
+</blockquote>
+<p>tips：这里先要安装badstore环境才能进行测试，这是一个具有漏洞的靶机环境。<br><img src="https://img-blog.csdnimg.cn/20210304114933562.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>演示效果如下<br><img src="https://img-blog.csdnimg.cn/20210304114955435.png" alt="在这里插入图片描述"></p>
+]]></content>
+      <categories>
+        <category>C#灰帽子</category>
+      </categories>
+      <tags>
+        <tag>模糊测试</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Redis未授权访问漏洞</title>
     <url>/2021/02/24/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/</url>
     <content><![CDATA[<h2 id="攻击思路"><a href="#攻击思路" class="headerlink" title="攻击思路"></a>攻击思路</h2><p>Redis是一种使用ANSIC语言编写的开源Key-Value型数据库。Redis为了保证效率，将数据缓存在内存中，周期性地把更新的数据写入磁盘或者把修改操作写入追加的记录文件中，在此基础上实现了master-slave(主从)同步。</p>
@@ -143,139 +276,6 @@
       </categories>
       <tags>
         <tag>漏洞检测与防御</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基因突变的模糊测试(GET参数)</title>
-    <url>/2021/03/04/%E5%9F%BA%E5%9B%A0%E7%AA%81%E5%8F%98%E7%9A%84%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95(GET%E5%8F%82%E6%95%B0)/</url>
-    <content><![CDATA[<h2 id="基础要求"><a href="#基础要求" class="headerlink" title="基础要求"></a>基础要求</h2><p>首先我们得具备最基础的SQL注入和XSS漏洞的基本知识，不懂的读者可以自行百度先学习，然后我们再学习下面的内容。下面我们将使用C#这门编程语言编写模糊测试工具测试是否存在漏洞。</p>
-<h2 id="代码展示"><a href="#代码展示" class="headerlink" title="代码展示"></a>代码展示</h2><blockquote>
-<p><strong>一个小的分解给定URL中的查询字符串参数Main()方法</strong></p>
-</blockquote>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.IO;</span><br><span class="line"><span class="keyword">using</span> System.Net;</span><br><span class="line"></span><br><span class="line">namespace 突变模糊测试</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title">Program</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="built_in">string</span> url = args[<span class="number">0</span>];</span><br><span class="line">            <span class="comment">//确定第一个问号的位置，标志URL已经结束，后面是我们要查询的参数</span></span><br><span class="line">            <span class="built_in">int</span> index = url.IndexOf(<span class="string">&quot;?&quot;</span>);</span><br><span class="line">            <span class="comment">// 返回一个仅包含URL参数的字符串</span></span><br><span class="line">            <span class="built_in">string</span>[] parms = url.Remove(<span class="number">0</span>, index + <span class="number">1</span>).Split(<span class="string">&#x27;&amp;&#x27;</span>);</span><br><span class="line">            <span class="keyword">foreach</span> (<span class="built_in">string</span> parm <span class="keyword">in</span> parms)</span><br><span class="line">            &#123;</span><br><span class="line">                Console.WriteLine(parm);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<blockquote>
-<p><strong>污染参数和测试漏洞</strong></p>
-</blockquote>
-<p>如果服务器不容易受到XSS或SQL注入的攻击，那么服务器会恰当地检查这些数据。向污染数据添加<code>&lt;xss&gt;</code>，并且测试SQL注入的数据将具有单引号。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">foreach</span> (<span class="built_in">string</span> parm <span class="keyword">in</span> parms)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">string</span> xssUrl = url.Replace(parm, parm + <span class="string">&quot;fd&lt;xss&gt;sa&quot;</span>);</span><br><span class="line">	<span class="built_in">string</span> sqlUrl = url.Replace(parm, parm + <span class="string">&quot;fd&#x27;sa&quot;</span>);</span><br><span class="line">	Console.WriteLine(xssUrl);</span><br><span class="line">	Console.WriteLine(sqlUrl);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>构造HTTP请求</strong></p>
-</blockquote>
-<p>接下来，使用HttpWebRequest类编程构建HTTP请求，然后我们使用带有污染HTTP参数发起HTTP请求，看看是否有任何错误返回。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">foreach</span> (<span class="built_in">string</span> parm <span class="keyword">in</span> parms)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//使用污染的数据替换掉旧的参数</span></span><br><span class="line">                <span class="built_in">string</span> xssUrl = url.Replace(parm, parm + <span class="string">&quot;fd&lt;xss&gt;sa&quot;</span>);</span><br><span class="line">                <span class="built_in">string</span> sqlUrl = url.Replace(parm, parm + <span class="string">&quot;fd&#x27;sa&quot;</span>);</span><br><span class="line">                <span class="comment">//静态Create()方法基于传递的URL使用工厂模式来创建新的对象</span></span><br><span class="line">                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(sqlUrl);</span><br><span class="line">                request.Method = <span class="string">&quot;GET&quot;</span>;</span><br><span class="line"></span><br><span class="line">                <span class="built_in">string</span> sqlresp = <span class="built_in">string</span>.Empty;</span><br><span class="line">                <span class="keyword">using</span> (StreamReader rdr = <span class="keyword">new</span></span><br><span class="line">                    StreamReader(request.GetResponse().GetResponseStream()))</span><br><span class="line">                sqlresp = rdr.ReadToEnd();</span><br><span class="line">                request = (HttpWebRequest)WebRequest.Create(xssUrl);</span><br><span class="line">                request.Method = <span class="string">&quot;GET&quot;</span>;</span><br><span class="line">                <span class="built_in">string</span> xssresp = <span class="built_in">string</span>.Empty;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">using</span> (StreamReader rdr = <span class="keyword">new</span></span><br><span class="line">                    StreamReader(request.GetResponse().GetResponseStream()))</span><br><span class="line">                    xssresp = rdr.ReadToEnd();</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (xssresp.Contains(<span class="string">&quot;&lt;xss&gt;&quot;</span>))</span><br><span class="line">                    Console.WriteLine(<span class="string">&quot;Possible XSS point found in parameter: &quot;</span> + parm);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (sqlresp.Contains(<span class="string">&quot;error in your SQL syntax&quot;</span>))</span><br><span class="line">                    Console.WriteLine(<span class="string">&quot;SQL injection point found in parameter: &quot;</span> + parm);</span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><strong>测试模糊测试的代码</strong></p>
-</blockquote>
-<p>tips：这里先要安装badstore环境才能进行测试，这是一个具有漏洞的靶机环境。<br><img src="https://img-blog.csdnimg.cn/20210304114933562.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>演示效果如下<br><img src="https://img-blog.csdnimg.cn/20210304114955435.png" alt="在这里插入图片描述"></p>
-]]></content>
-      <categories>
-        <category>C#灰帽子</category>
-      </categories>
-      <tags>
-        <tag>模糊测试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Powershell收集域内信息</title>
-    <url>/2021/03/07/%E6%9F%A5%E6%89%BE%E5%9F%9F%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在渗透测试中，一个典型的域权限提升过程，通常围绕着收集明文凭据或通过mimikatz提权等方法，在获取了管理员权限的系统中寻找域管理员登录进程，进而收集域管理员的凭据。如果内网环境非常复杂，渗透测试人员无法立即在拥有权限的系统中获得域管理员进程，那么通常采用的方法是：在跳板机之间跳转，直至获得域管理员权限，同时进行一些分析工作，进而找到渗透测试的路径。</p>
-<p>现在我们来假设一种情况：渗透测试人员在某个内网环境中获得一个域普通用户的权限，首先通过各种方法获得当前服务器的本地管理员权限，然后分析当前服务器的用户登录列表及会话信息，知道哪些用户登录了这台服务器。如果渗透测试人员通过分析发现，可以获取权限的登录用户都不是域管理员账户，同时没有域管理员组中的用户登录这台服务器，就可以使用另一个账户并寻找账户在内网的哪台机器上具有管理权限，再枚举这台机器上的用户，然后继续进行渗透测试，直至找到一个可以获取域管理员权限的有效路径为止。</p>
-<span id="more"></span>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><blockquote>
-<p><strong>net group “Domain Admins” /domain：获取域管理员列表</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210307211234765.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>tasklist /v：列出本机的所有进程及进程用户</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210307211423315.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>从这里可以看到域管理员都有哪些进程，如果能找到，这将对后面窃取令牌有很大的帮助。</p>
-<blockquote>
-<p><strong>net group “Domain Controllers” /domain：查询域控制器列表</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210307211639715.png" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>交叉引用域管理员列表与活动会话列表</strong></p>
-</blockquote>
-<p>对域管理员列表和活动会话列表进行交叉引用，可以确定哪些IP地址有活动域令牌。</p>
-<p>首先我们先在域控上连接其中一台远程主机<br><img src="https://img-blog.csdnimg.cn/20210307212138384.png" alt="在这里插入图片描述"><br>在远程目标机器上用powershell能看到连接的主机目标IP(一定要是管理员权限)<br><img src="https://img-blog.csdnimg.cn/20210307212637526.png" alt="在这里插入图片描述"><br>然后我们将域控制器列表添加到dcs.txt中，将域管理员列表添加到admins.txt中<br><img src="https://img-blog.csdnimg.cn/20210307212828102.png" alt="在这里插入图片描述"><br>然后运行一下脚本，会在当前目录下生成一个文本文件sessions.txt</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FOR</span> /F %i <span class="keyword">in</span> (dcs.txt) <span class="keyword">do</span> @<span class="built_in">echo</span> [+] Querying DC %i &amp;&amp; @netsess <span class="literal">-h</span> %i <span class="number">2</span>&gt;null &gt;sessions.txt &amp;&amp; <span class="keyword">FOR</span> /F %a <span class="keyword">in</span> (admins.txt) <span class="keyword">DO</span> @<span class="built_in">type</span> sessions.txt | @findstr /I %a</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20210307213025308.png" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>查询远程系统中运行的任务</strong></p>
-</blockquote>
-<p>如果目标机器在域系统中是通过共享的本地管理员账户运行的，就可以使用下列脚本来查询系统中的管理任务。</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FOR</span> /F %i <span class="keyword">in</span> (dcs.txt) <span class="keyword">DO</span> @<span class="built_in">echo</span> [+] %i &amp;&amp; @tasklist /V /S %i /U user /P password <span class="number">2</span>&gt;NUL &gt; output.txt &amp;&amp; <span class="keyword">FOR</span> /F %n <span class="keyword">in</span> (admins.txt) <span class="keyword">DO</span> @<span class="built_in">type</span> output.txt | findstr %n &gt; NUL &amp;&amp; <span class="built_in">echo</span> [!] %n was found running a <span class="keyword">process</span> on %i &amp;&amp; pause</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20210307213500148.png" alt="在这里插入图片描述"></p>
-<blockquote>
-<p>扫描远程系统的NetBIOS信息</p>
-</blockquote>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> /F %i <span class="keyword">in</span> (dcs.txt) <span class="keyword">do</span> @<span class="built_in">echo</span> [+] Checking %i &amp;&amp; nbtstat <span class="literal">-A</span> %i <span class="number">2</span>&gt;NUL &gt;nbsessions.txt &amp;&amp; <span class="keyword">FOR</span> /F %n <span class="keyword">in</span> (admins.txt) <span class="keyword">DO</span> @<span class="built_in">type</span> nbsessions.txt | findstr /I %n &gt; NUL &amp;&amp; <span class="built_in">echo</span> [!] %n was found logged into %i</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20210307213755137.png" alt="在这里插入图片描述"><br>以下脚本作用类似于nbtscan工具</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> /F %i <span class="keyword">in</span> (dcs.txt) <span class="keyword">do</span> @<span class="built_in">echo</span> [+] Checking %i &amp;&amp; nbtscan <span class="operator">-f</span> %i <span class="number">2</span>&gt;NUL &gt;nbsessions.txt &amp;&amp; <span class="keyword">FOR</span> /F %n <span class="keyword">in</span> (admins.txt) <span class="keyword">DO</span> @<span class="built_in">type</span> nbsessions.txt | findstr /I %n &gt; NUL &amp;&amp; <span class="built_in">echo</span> [!] %n was found logged into %i</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20210307213858148.png" alt="在这里插入图片描述"></p>
-]]></content>
-      <categories>
-        <category>内网渗透</category>
-      </categories>
-      <tags>
-        <tag>红队对抗</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>工作组信息收集</title>
-    <url>/2021/03/07/%E5%B7%A5%E4%BD%9C%E7%BB%84%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</url>
-    <content><![CDATA[<h2 id="收集本机信息"><a href="#收集本机信息" class="headerlink" title="收集本机信息"></a>收集本机信息</h2><p>不管是在外网还是内网中，信息收集都是重要的第一步。收集信息的方式又分为手动信息收集和自动信息收集。这里我们就先讲述怎样通过cmd命令手动收集内网中的主机信息。</p>
-<h2 id="命令及演示效果"><a href="#命令及演示效果" class="headerlink" title="命令及演示效果"></a>命令及演示效果</h2><blockquote>
-<p><strong>systeminfo | findstr /B /C:”OS 名称” /C:”OS 版本”</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210307114353404.png" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>wmic product get name,version：利用wmic命令，将结果输出到文本文件中</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210307121744649.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<span id="more"></span>
-
-<blockquote>
-<p><strong>wmic process list brief：查看进程信息</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210307121856592.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>query user || qwinsta：查看当前在线用户</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210307122040536.png" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>wmic qfe get Caption,Description,HotFixID,InstalledOn：查看补丁的名称、描述、ID、安装时间等信息</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210307122228363.png" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>wmic share get name,path,status：查找共享列表</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210307122530905.png" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>netsh advfirewall set allprofiles state off：关闭防火墙，2003之后的版本使用</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210307122932307.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210307122950503.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210307123003264.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>reg query “HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStation\RDP-Tcp” /V PortNumber：连接的端口是0xd3d，转换后为3389</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210307123456171.png" alt="在这里插入图片描述"></p>
-<blockquote>
-<p>wmic /namespace:\root\cimv2\terminalservices path win32_terminalservicesetting where (__CLASS !=””) call setallowtsconnections 1：开启3389端口</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210307123806716.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210307123840191.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210307123852661.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p>whoami /all：查询域信息及域SID，SID是指域内用户的唯一身份，也叫令牌</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210307124248556.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>其实我们在日常的信息收集时，可以多点使用<code>vmic</code>这个命令，因为这个命令在往后的横向渗透中会经常使用，所以推荐优先使用这个命令。</p>
-]]></content>
-      <categories>
-        <category>内网渗透</category>
-      </categories>
-      <tags>
-        <tag>红队对抗</tag>
       </tags>
   </entry>
 </search>
