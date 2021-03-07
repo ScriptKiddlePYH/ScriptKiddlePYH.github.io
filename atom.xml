@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2021-03-06T06:13:20.684Z</updated>
+  <updated>2021-03-07T04:46:04.494Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -17,11 +17,44 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>工作组信息收集</title>
+    <link href="https://pyhsecurity.cn/2021/03/07/%E5%B7%A5%E4%BD%9C%E7%BB%84%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
+    <id>https://pyhsecurity.cn/2021/03/07/%E5%B7%A5%E4%BD%9C%E7%BB%84%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</id>
+    <published>2021-03-07T04:44:26.040Z</published>
+    <updated>2021-03-07T04:46:04.494Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;收集本机信息&quot;&gt;&lt;a href=&quot;#收集本机信息&quot; class=&quot;headerlink&quot; title=&quot;收集本机信息&quot;&gt;&lt;/a&gt;收集本机信息&lt;/h2&gt;&lt;p&gt;不管是在外网还是内网中，信息收集都是重要的第一步。收集信息的方式又分为手动信息收集和自动信息收集。这里我们就先讲述怎样通过cmd命令手动收集内网中的主机信息。&lt;/p&gt;
+&lt;h2 id=&quot;命令及演示效果&quot;&gt;&lt;a href=&quot;#命令及演示效果&quot; class=&quot;headerlink&quot; title=&quot;命令及演示效果&quot;&gt;&lt;/a&gt;命令及演示效果&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;systeminfo | findstr /B /C:”OS 名称” /C:”OS 版本”&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210307114353404.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;wmic product get name,version：利用wmic命令，将结果输出到文本文件中&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210307121744649.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;wmic process list brief：查看进程信息&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210307121856592.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="红队对抗" scheme="https://pyhsecurity.cn/categories/%E7%BA%A2%E9%98%9F%E5%AF%B9%E6%8A%97/"/>
+    
+    
+    <category term="内网渗透" scheme="https://pyhsecurity.cn/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Powershell收集域内信息</title>
     <link href="https://pyhsecurity.cn/2021/03/06/Powershell%E6%94%B6%E9%9B%86%E5%9F%9F%E5%86%85%E4%BF%A1%E6%81%AF/"/>
     <id>https://pyhsecurity.cn/2021/03/06/Powershell%E6%94%B6%E9%9B%86%E5%9F%9F%E5%86%85%E4%BF%A1%E6%81%AF/</id>
     <published>2021-03-06T06:10:26.889Z</published>
-    <updated>2021-03-06T06:13:20.684Z</updated>
+    <updated>2021-03-07T04:45:40.180Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;Powershell作为微软官方推出的脚本语言，在Windows操作系统中的强大功能总所周知：系统管理员可以利用它提高Windows管理工作的自动化程度；渗透测试人员可以利用它更好地进行系统安全测试。因为powershell命令比较安全，减少了触发IDS或IPS的风险，因此大多数的作用是用于绕过策略。&lt;/p&gt;
@@ -62,7 +95,7 @@
     
     
     
-    <category term="内网安全攻防" scheme="https://pyhsecurity.cn/categories/%E5%86%85%E7%BD%91%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2/"/>
+    <category term="红队对抗" scheme="https://pyhsecurity.cn/categories/%E7%BA%A2%E9%98%9F%E5%AF%B9%E6%8A%97/"/>
     
     
     <category term="内网渗透" scheme="https://pyhsecurity.cn/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
