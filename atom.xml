@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2021-03-08T11:53:29.250Z</updated>
+  <updated>2021-03-08T13:04:49.767Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>汇编基本语句总结</title>
+    <link href="https://pyhsecurity.cn/2021/03/08/%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80/"/>
+    <id>https://pyhsecurity.cn/2021/03/08/%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80/</id>
+    <published>2021-03-08T13:04:13.883Z</published>
+    <updated>2021-03-08T13:04:49.767Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;进制的定义&quot;&gt;&lt;a href=&quot;#进制的定义&quot; class=&quot;headerlink&quot; title=&quot;进制的定义&quot;&gt;&lt;/a&gt;进制的定义&lt;/h2&gt;&lt;p&gt;进制是由符号组成，可以自己定义，进位是指向后数一位。&lt;/p&gt;
+&lt;p&gt;二进制：由两个符号组成，分别是0 、1 逢二进一&lt;/p&gt;
+&lt;p&gt;八进制：由八个符号组成，分别是0、1、2、3、4、5、6、7 、逢八进一&lt;/p&gt;
+&lt;p&gt;十进制：由十个符号组成，分别是0、1、2、3、4、5、6、7、8、9、逢十进一&lt;/p&gt;
+&lt;p&gt;十六进制：由十六个符号组成，分别是0、1、2、3、4、5、6、7、8、9、A、B、C、D、E、F、逢十六进一&lt;/p&gt;
+&lt;p&gt;当然，除了常规的，还有3进制、4进制….n进制，进制的符号不一定是常规的123顺序排列的。&lt;/p&gt;
+&lt;p&gt;主要作用可以用于加密。进制运算结果本质是通过查表得到的。&lt;/p&gt;
+&lt;p&gt;16位汇编：实模式，16位处理器内的内部，最多可以处理存储的长度为16位。&lt;/p&gt;
+&lt;p&gt;32位汇编：保护模式，32位处理器内的内部，最多可以处理存储的长度为32位。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="汇编语言" scheme="https://pyhsecurity.cn/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/"/>
+    
+    
+    <category term="汇编语言" scheme="https://pyhsecurity.cn/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/"/>
+    
+  </entry>
   
   <entry>
     <title>汇编基本语句总结</title>

@@ -1,6 +1,238 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Powershell收集域内信息</title>
+    <url>/2021/03/06/Powershell%E6%94%B6%E9%9B%86%E5%9F%9F%E5%86%85%E4%BF%A1%E6%81%AF/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Powershell作为微软官方推出的脚本语言，在Windows操作系统中的强大功能总所周知：系统管理员可以利用它提高Windows管理工作的自动化程度；渗透测试人员可以利用它更好地进行系统安全测试。因为powershell命令比较安全，减少了触发IDS或IPS的风险，因此大多数的作用是用于绕过策略。</p>
+<blockquote>
+<p><strong>Powershell的常用执行权限共有四种</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Restricted</td>
+<td>默认设置，不允许执行任何脚本</td>
+</tr>
+<tr>
+<td>Allsigned</td>
+<td>只能运行经过证书验证的脚本</td>
+</tr>
+<tr>
+<td>Unrestricted</td>
+<td>权限最高，可以执行任意脚本</td>
+</tr>
+<tr>
+<td>RemoteSigned</td>
+<td>对本地脚本不进行限制；对来自网络的脚本必须验证其签名</td>
+</tr>
+</tbody></table>
+<span id="more"></span>
+<h2 id="各脚本命令展示"><a href="#各脚本命令展示" class="headerlink" title="各脚本命令展示"></a>各脚本命令展示</h2><p>这里我们将策略设置为Unrestricted，能运行所有的脚本权限<br><img src="https://img-blog.csdnimg.cn/20210306133134774.png" alt="在这里插入图片描述"><br>然后我们进入PowerSploit的Recon文件夹将PowerView.ps1这个脚本导入进去(只有导入这个脚本才能执行以下命令)，这个是PowerSploit的下载地址</p>
+<p><a href="https://github.com/PowerShellMafia/PowerSploit">https://github.com/PowerShellMafia/PowerSploit</a><br><img src="https://img-blog.csdnimg.cn/20210306133704948.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-NetDomain：获取当前用户所在域的名称</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210306133824783.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-NetUser：获取所有用户的详细信息</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210306134143467.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-NetDomainController：获取所有域控制器的信息</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210306134253861.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-NetComputer：获取域内所有机器的详细信息</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/2021030613443370.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-NetOU：获取域中的OU信息</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210306134535643.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2021030613454718.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-NetGroup：获取所有域内组和组成员的信息</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/2021030613464591.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-NetShare：获取当前域内所有的网络共享信息</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210306134857127.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-NetSession：获取指定服务器的对话</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210306135028467.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-NetRDPSession：获取指定服务器的远程连接</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210306135144213.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-NetProcess：获取远程主机的进程</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210306135251953.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-UserEvent：获取指定用户的日志</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210306135349272.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-ADObject：获取活动目录的对象</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/2021030613552975.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-NetGPO：获取域内所有的组策略对象</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210306135710375.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Get-DomainPolicy：获取域默认策略或域控制器策略</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210306135819950.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Invoke-UserHunter：获取域用户登录的计算机信息及该用户是否有本地管理员权限</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210306140014762.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>Invoke-ProcessHunter：通过查询域内所有的机器进程找到特定用户</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/2021030614015675.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="Powershell脚本绕过策略实例"><a href="#Powershell脚本绕过策略实例" class="headerlink" title="Powershell脚本绕过策略实例"></a>Powershell脚本绕过策略实例</h2><p>首先我们先将策略更改为Restricted，默认不能执行任何脚本<br><img src="https://img-blog.csdnimg.cn/20210306140851647.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>执行绕过后，命令成功执行，<code>powershell -exec bypass &quot;import-module&quot; 脚本路径；执行的命令</code><br><img src="https://img-blog.csdnimg.cn/20210306140929449.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+]]></content>
+      <categories>
+        <category>内网渗透</category>
+      </categories>
+      <tags>
+        <tag>红队对抗</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>工作组信息收集</title>
+    <url>/2021/03/07/%E5%B7%A5%E4%BD%9C%E7%BB%84%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</url>
+    <content><![CDATA[<h2 id="收集本机信息"><a href="#收集本机信息" class="headerlink" title="收集本机信息"></a>收集本机信息</h2><p>不管是在外网还是内网中，信息收集都是重要的第一步。收集信息的方式又分为手动信息收集和自动信息收集。这里我们就先讲述怎样通过cmd命令手动收集内网中的主机信息。</p>
+<h2 id="命令及演示效果"><a href="#命令及演示效果" class="headerlink" title="命令及演示效果"></a>命令及演示效果</h2><blockquote>
+<p><strong>systeminfo | findstr /B /C:”OS 名称” /C:”OS 版本”</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210307114353404.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>wmic product get name,version：利用wmic命令，将结果输出到文本文件中</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210307121744649.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<span id="more"></span>
+
+<blockquote>
+<p><strong>wmic process list brief：查看进程信息</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210307121856592.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>query user || qwinsta：查看当前在线用户</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210307122040536.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>wmic qfe get Caption,Description,HotFixID,InstalledOn：查看补丁的名称、描述、ID、安装时间等信息</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210307122228363.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>wmic share get name,path,status：查找共享列表</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210307122530905.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>netsh advfirewall set allprofiles state off：关闭防火墙，2003之后的版本使用</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210307122932307.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210307122950503.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210307123003264.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>reg query “HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStation\RDP-Tcp” /V PortNumber：连接的端口是0xd3d，转换后为3389</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210307123456171.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>wmic /namespace:\root\cimv2\terminalservices path win32_terminalservicesetting where (__CLASS !=””) call setallowtsconnections 1：开启3389端口</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210307123806716.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210307123840191.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210307123852661.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>whoami /all：查询域信息及域SID，SID是指域内用户的唯一身份，也叫令牌</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210307124248556.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>其实我们在日常的信息收集时，可以多点使用<code>vmic</code>这个命令，因为这个命令在往后的横向渗透中会经常使用，所以推荐优先使用这个命令。</p>
+]]></content>
+      <categories>
+        <category>内网渗透</category>
+      </categories>
+      <tags>
+        <tag>红队对抗</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Redis未授权访问漏洞</title>
+    <url>/2021/02/24/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/</url>
+    <content><![CDATA[<h2 id="攻击思路"><a href="#攻击思路" class="headerlink" title="攻击思路"></a>攻击思路</h2><p>Redis是一种使用ANSIC语言编写的开源Key-Value型数据库。Redis为了保证效率，将数据缓存在内存中，周期性地把更新的数据写入磁盘或者把修改操作写入追加的记录文件中，在此基础上实现了master-slave(主从)同步。</p>
+<p>对Redis配置不当将会导致未授权访问漏洞，从而被攻击者恶意利用。如果Redis以root身份运行，攻击者可以用root权限写入SSH公钥文件，通过SSH登录目标服务器，进而导致服务器权限被获取、泄露或发生加密勒索事件，为正常服务带来严重危害。</p>
+<span id="more"></span>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p><strong>漏洞利用的方式有很多，这里我们介绍其中的一种——<code>利用公私钥认证获取ROOT权限</code></strong><br>首先我们先在靶机上以root身份启动redis服务，命令为<code>redis-server /etc/redis.conf</code>，安装redis请读者上网查阅资料，这里只讲述攻击方法<br><img src="https://img-blog.csdnimg.cn/20210214204941377.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><!--more--><br>然后我们在kali上生成一个ssh空密钥<br><img src="https://img-blog.csdnimg.cn/2021021420510262.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>进入/root/.ssh目录下查看生成结果，并将公钥导入到txt文件中<br><img src="https://img-blog.csdnimg.cn/20210214205318550.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>将txt文件中的公钥导入Redis缓存中<br><img src="https://img-blog.csdnimg.cn/20210214205411588.png" alt="在这里插入图片描述"><br>连接目标主机，更改配置文件路径为/root/.ssh，设定文件名称为authorized-keys<br><img src="https://img-blog.csdnimg.cn/2021021420553631.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>通过SSH协议连接到远程目标主机<br><img src="https://img-blog.csdnimg.cn/20210214205628977.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="检测方法"><a href="#检测方法" class="headerlink" title="检测方法"></a>检测方法</h2><p>先编写程序的起始部分</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#程序起始部分</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        start(sys.argv[<span class="number">1</span>:])</span><br><span class="line">    <span class="keyword">except</span> KeyboardInterrupt:</span><br><span class="line">        print(<span class="string">&quot;interrupted by user, killing all threads...&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>然后编写命令行参数处理功能，<code>opts</code>为一个两元组列表，如果没有附加参数则为空串</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#编写命令行参数处理功能</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">start</span>(<span class="params">argv</span>):</span></span><br><span class="line">    <span class="built_in">dict</span> = &#123;&#125;</span><br><span class="line">    url = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="built_in">type</span> = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(sys.argv) &lt; <span class="number">2</span>:</span><br><span class="line">        print(<span class="string">&quot;-h 帮助信息; \n&quot;</span>)</span><br><span class="line">        sys.exit()</span><br><span class="line">    <span class="comment">#定义异常处理</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        banner()</span><br><span class="line">        opts,args = getopt.getopt(argv, <span class="string">&quot;-u:-p:-s:-h&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> getopt.GetoptError:</span><br><span class="line">        print(<span class="string">&#x27;Error an argument!&#x27;</span>)</span><br><span class="line">        sys.exit()</span><br><span class="line">    <span class="keyword">for</span> opt,arg <span class="keyword">in</span> opts:</span><br><span class="line">        <span class="keyword">if</span> opt == <span class="string">&quot;-u&quot;</span>:</span><br><span class="line">            url = arg</span><br><span class="line">        <span class="keyword">elif</span> opt == <span class="string">&quot;-s&quot;</span>:</span><br><span class="line">            <span class="built_in">type</span> = arg</span><br><span class="line">        <span class="keyword">elif</span> opt == <span class="string">&quot;-p&quot;</span>:</span><br><span class="line">            port = arg</span><br><span class="line">        <span class="keyword">elif</span> opt == <span class="string">&quot;-h&quot;</span>:</span><br><span class="line">            print(usage())</span><br><span class="line">    launcher(url,<span class="built_in">type</span>,port)</span><br></pre></td></tr></table></figure>
+<p>编写帮助信息</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#banner信息</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">banner</span>():</span></span><br><span class="line">    print(<span class="string">&#x27;\033[1;34m########################################################################################\033[0m\n&#x27;</span></span><br><span class="line">          <span class="string">&#x27;\033[1;34m######################################\033[1;32mRedis未授权访问漏洞\033[1;34m####################################\033[0m\n&#x27;</span></span><br><span class="line">          <span class="string">&#x27;\033[1;34m########################################################################################\033[0m\n&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>接下来是Redis漏洞检测的核心代码，此处通过<code>socket函数</code>尝试连接远程主机的IP及端口号，发送payload字符串。利用<code>recvdata函数</code>接收目标主机返回的数据</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#未授权函数检测</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">redis_unauthored</span>(<span class="params">url,port</span>):</span></span><br><span class="line">    result = []</span><br><span class="line">    s = socket.socket()</span><br><span class="line">    payload = <span class="string">&quot;\x2a\x31\x0d\x0a\x24\x34\x0d\x0a\x69\x6e\x66\x6f\x0d\x0a&quot;</span></span><br><span class="line">    socket.setdefaulttimeout(<span class="number">10</span>)</span><br><span class="line">    <span class="keyword">for</span> ip <span class="keyword">in</span> url:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            s.connect((ip, <span class="built_in">int</span>(port)))</span><br><span class="line">            s.sendall(payload.encode())</span><br><span class="line">            recvdata = s.recv(<span class="number">1024</span>).decode()</span><br><span class="line">            <span class="keyword">if</span> recvdata <span class="keyword">and</span> <span class="string">&#x27;redis_version&#x27;</span> <span class="keyword">in</span> recvdata:</span><br><span class="line">                result.append(<span class="built_in">str</span>(ip)+<span class="string">&#x27;:&#x27;</span>+<span class="built_in">str</span>(port)+<span class="string">&#x27;:&#x27;</span>+<span class="string">&#x27;\033[1;32;34msuccess\033[0m&#x27;</span>)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">            result.append(<span class="built_in">str</span>(ip) + <span class="string">&#x27;:&#x27;</span> + <span class="built_in">str</span>(port) + <span class="string">&#x27;:&#x27;</span> + <span class="string">&#x27;\033[1:31;34mfailed \033[0m&#x27;</span>)</span><br><span class="line">        s.close()</span><br><span class="line">    <span class="keyword">return</span>(result)</span><br></pre></td></tr></table></figure>
+<p>然后针对该IP段进行网络主机检测。该部分代码主要以特殊字符”-“为目标进行分隔，将分隔后的字符进行for循环存入列表中，以便被<code>函数redis_unauthored</code>调用</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#执行URL</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">url_exec</span>(<span class="params">url</span>):</span></span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    zi = []</span><br><span class="line">    group = []</span><br><span class="line">    group1 = []</span><br><span class="line">    group2 = []</span><br><span class="line">    li = url.split(<span class="string">&quot;.&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span>(url.find(<span class="string">&#x27;-&#x27;</span>)==-<span class="number">1</span>):</span><br><span class="line">        group.append(url)</span><br><span class="line">        zi = group</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> s <span class="keyword">in</span> li:</span><br><span class="line">            a = s.find(<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> a != -<span class="number">1</span>:</span><br><span class="line">                i = i+<span class="number">1</span></span><br><span class="line">        zi = url_list(li)</span><br><span class="line">        <span class="keyword">if</span> i &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">for</span> li <span class="keyword">in</span> zi:</span><br><span class="line">                zz = url_list(li.split(<span class="string">&quot;.&quot;</span>))</span><br><span class="line">                <span class="keyword">for</span> ki <span class="keyword">in</span> zz:</span><br><span class="line">                    group.append(ki)</span><br><span class="line">            zi = group</span><br><span class="line">            i = i-<span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> i &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">for</span> li <span class="keyword">in</span> zi:</span><br><span class="line">                zzz = url_list(li.split(<span class="string">&quot;.&quot;</span>))</span><br><span class="line">                <span class="keyword">for</span> ki <span class="keyword">in</span> zzz:</span><br><span class="line">                    group1.append(ki)</span><br><span class="line">            zi = group1</span><br><span class="line">            i = i-<span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> i &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">for</span> li <span class="keyword">in</span> zi:</span><br><span class="line">                zzzz = url_list(li.split(<span class="string">&quot;.&quot;</span>))</span><br><span class="line">                <span class="keyword">for</span> ki <span class="keyword">in</span> zzzz:</span><br><span class="line">                    group2.append(ki)</span><br><span class="line">            zi = group2</span><br><span class="line">    <span class="keyword">return</span> zi</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">url_list</span>(<span class="params">li</span>):</span></span><br><span class="line">    ss = []</span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    zi = []</span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> li:</span><br><span class="line">        a = s.find(<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">        i = i + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> a != -<span class="number">1</span>:</span><br><span class="line">            ss = s.rsplit(<span class="string">&quot;-&quot;</span>)</span><br><span class="line">            j = i</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(ss[<span class="number">0</span>]), <span class="built_in">int</span>(ss[<span class="number">1</span>]) + <span class="number">1</span>):</span><br><span class="line">        li[j - <span class="number">1</span>] = <span class="built_in">str</span>(s)</span><br><span class="line">        aa = <span class="string">&quot;.&quot;</span>.join(li)</span><br><span class="line">        zi.append(aa)</span><br><span class="line">    <span class="keyword">return</span> zi</span><br></pre></td></tr></table></figure>
+<p>最后是添加一些帮助信息和结果格式</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#使用规则</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">usage</span>():</span></span><br><span class="line">    print(<span class="string">&#x27;-h: --help 帮助;&#x27;</span>)</span><br><span class="line">    print(<span class="string">&#x27;-p: --port 端口;&#x27;</span>)</span><br><span class="line">    print(<span class="string">&#x27;-u: --url 域名;&#x27;</span>)</span><br><span class="line">    print(<span class="string">&#x27;-s: --type Redis&#x27;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment">#输出结果格式设计</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">output_exec</span>(<span class="params">output,<span class="built_in">type</span></span>):</span></span><br><span class="line">    print(<span class="string">&quot;\033[1;32;40m&quot;</span>+<span class="built_in">type</span>+<span class="string">&quot;......\033[0m&quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;++++++++++++++++++++++++++++++++++++++++++++++++&quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;|         ip         |    port   |     status  |&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> li <span class="keyword">in</span> output:</span><br><span class="line">        print(<span class="string">&quot;+-----------------+-----------+--------------+&quot;</span>)</span><br><span class="line">        print(<span class="string">&quot;|   &quot;</span>+li.replace(<span class="string">&quot;:&quot;</span>,<span class="string">&quot;   |    &quot;</span>)+<span class="string">&quot;  | &quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;+----------------+------------+---------------+\n&quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;[*] shutting down....&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>最后设置一个漏洞回调函数</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#漏洞回调函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">launcher</span>(<span class="params">url,<span class="built_in">type</span>,port</span>):</span></span><br><span class="line">    <span class="comment">#未授权访问类型</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">type</span> == <span class="string">&quot;Redis&quot;</span>:</span><br><span class="line">        output=redis_unauthored(url_exec(url),port)</span><br><span class="line">        output_exec(output,<span class="built_in">type</span>)</span><br></pre></td></tr></table></figure>
+<p>附上完整代码以免疏漏</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> getopt</span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line"><span class="comment">#编写命令行参数处理功能</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">start</span>(<span class="params">argv</span>):</span></span><br><span class="line">    <span class="built_in">dict</span> = &#123;&#125;</span><br><span class="line">    url = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="built_in">type</span> = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(sys.argv) &lt; <span class="number">2</span>:</span><br><span class="line">        print(<span class="string">&quot;-h 帮助信息; \n&quot;</span>)</span><br><span class="line">        sys.exit()</span><br><span class="line">    <span class="comment">#定义异常处理</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        banner()</span><br><span class="line">        opts,args = getopt.getopt(argv, <span class="string">&quot;-u:-p:-s:-h&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> getopt.GetoptError:</span><br><span class="line">        print(<span class="string">&#x27;Error an argument!&#x27;</span>)</span><br><span class="line">        sys.exit()</span><br><span class="line">    <span class="keyword">for</span> opt,arg <span class="keyword">in</span> opts:</span><br><span class="line">        <span class="keyword">if</span> opt == <span class="string">&quot;-u&quot;</span>:</span><br><span class="line">            url = arg</span><br><span class="line">        <span class="keyword">elif</span> opt == <span class="string">&quot;-s&quot;</span>:</span><br><span class="line">            <span class="built_in">type</span> = arg</span><br><span class="line">        <span class="keyword">elif</span> opt == <span class="string">&quot;-p&quot;</span>:</span><br><span class="line">            port = arg</span><br><span class="line">        <span class="keyword">elif</span> opt == <span class="string">&quot;-h&quot;</span>:</span><br><span class="line">            print(usage())</span><br><span class="line">    launcher(url,<span class="built_in">type</span>,port)</span><br><span class="line"></span><br><span class="line"><span class="comment">#banner信息</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">banner</span>():</span></span><br><span class="line">    print(<span class="string">&#x27;\033[1;34m########################################################################################\033[0m\n&#x27;</span></span><br><span class="line">          <span class="string">&#x27;\033[1;34m######################################\033[1;32mRedis未授权访问漏洞\033[1;34m####################################\033[0m\n&#x27;</span></span><br><span class="line">          <span class="string">&#x27;\033[1;34m########################################################################################\033[0m\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#使用规则</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">usage</span>():</span></span><br><span class="line">    print(<span class="string">&#x27;-h: --help 帮助;&#x27;</span>)</span><br><span class="line">    print(<span class="string">&#x27;-p: --port 端口;&#x27;</span>)</span><br><span class="line">    print(<span class="string">&#x27;-u: --url 域名;&#x27;</span>)</span><br><span class="line">    print(<span class="string">&#x27;-s: --type Redis&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#未授权函数检测</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">redis_unauthored</span>(<span class="params">url,port</span>):</span></span><br><span class="line">    result = []</span><br><span class="line">    s = socket.socket()</span><br><span class="line">    payload = <span class="string">&quot;\x2a\x31\x0d\x0a\x24\x34\x0d\x0a\x69\x6e\x66\x6f\x0d\x0a&quot;</span></span><br><span class="line">    socket.setdefaulttimeout(<span class="number">10</span>)</span><br><span class="line">    <span class="keyword">for</span> ip <span class="keyword">in</span> url:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            s.connect((ip, <span class="built_in">int</span>(port)))</span><br><span class="line">            s.sendall(payload.encode())</span><br><span class="line">            recvdata = s.recv(<span class="number">1024</span>).decode()</span><br><span class="line">            <span class="keyword">if</span> recvdata <span class="keyword">and</span> <span class="string">&#x27;redis_version&#x27;</span> <span class="keyword">in</span> recvdata:</span><br><span class="line">                result.append(<span class="built_in">str</span>(ip)+<span class="string">&#x27;:&#x27;</span>+<span class="built_in">str</span>(port)+<span class="string">&#x27;:&#x27;</span>+<span class="string">&#x27;\033[1;32;34msuccess\033[0m&#x27;</span>)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">            result.append(<span class="built_in">str</span>(ip) + <span class="string">&#x27;:&#x27;</span> + <span class="built_in">str</span>(port) + <span class="string">&#x27;:&#x27;</span> + <span class="string">&#x27;\033[1:31;34mfailed \033[0m&#x27;</span>)</span><br><span class="line">        s.close()</span><br><span class="line">    <span class="keyword">return</span>(result)</span><br><span class="line"></span><br><span class="line"><span class="comment">#执行URL</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">url_exec</span>(<span class="params">url</span>):</span></span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    zi = []</span><br><span class="line">    group = []</span><br><span class="line">    group1 = []</span><br><span class="line">    group2 = []</span><br><span class="line">    li = url.split(<span class="string">&quot;.&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span>(url.find(<span class="string">&#x27;-&#x27;</span>)==-<span class="number">1</span>):</span><br><span class="line">        group.append(url)</span><br><span class="line">        zi = group</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> s <span class="keyword">in</span> li:</span><br><span class="line">            a = s.find(<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> a != -<span class="number">1</span>:</span><br><span class="line">                i = i+<span class="number">1</span></span><br><span class="line">        zi = url_list(li)</span><br><span class="line">        <span class="keyword">if</span> i &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">for</span> li <span class="keyword">in</span> zi:</span><br><span class="line">                zz = url_list(li.split(<span class="string">&quot;.&quot;</span>))</span><br><span class="line">                <span class="keyword">for</span> ki <span class="keyword">in</span> zz:</span><br><span class="line">                    group.append(ki)</span><br><span class="line">            zi = group</span><br><span class="line">            i = i-<span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> i &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">for</span> li <span class="keyword">in</span> zi:</span><br><span class="line">                zzz = url_list(li.split(<span class="string">&quot;.&quot;</span>))</span><br><span class="line">                <span class="keyword">for</span> ki <span class="keyword">in</span> zzz:</span><br><span class="line">                    group1.append(ki)</span><br><span class="line">            zi = group1</span><br><span class="line">            i = i-<span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> i &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">for</span> li <span class="keyword">in</span> zi:</span><br><span class="line">                zzzz = url_list(li.split(<span class="string">&quot;.&quot;</span>))</span><br><span class="line">                <span class="keyword">for</span> ki <span class="keyword">in</span> zzzz:</span><br><span class="line">                    group2.append(ki)</span><br><span class="line">            zi = group2</span><br><span class="line">    <span class="keyword">return</span> zi</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">url_list</span>(<span class="params">li</span>):</span></span><br><span class="line">    ss = []</span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    zi = []</span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> li:</span><br><span class="line">        a = s.find(<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">        i = i + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> a != -<span class="number">1</span>:</span><br><span class="line">            ss = s.rsplit(<span class="string">&quot;-&quot;</span>)</span><br><span class="line">            j = i</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(ss[<span class="number">0</span>]), <span class="built_in">int</span>(ss[<span class="number">1</span>]) + <span class="number">1</span>):</span><br><span class="line">        li[j - <span class="number">1</span>] = <span class="built_in">str</span>(s)</span><br><span class="line">        aa = <span class="string">&quot;.&quot;</span>.join(li)</span><br><span class="line">        zi.append(aa)</span><br><span class="line">    <span class="keyword">return</span> zi</span><br><span class="line"></span><br><span class="line"><span class="comment">#输出结果格式设计</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">output_exec</span>(<span class="params">output,<span class="built_in">type</span></span>):</span></span><br><span class="line">    print(<span class="string">&quot;\033[1;32;40m&quot;</span>+<span class="built_in">type</span>+<span class="string">&quot;......\033[0m&quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;++++++++++++++++++++++++++++++++++++++++++++++++&quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;|         ip         |    port   |     status  |&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> li <span class="keyword">in</span> output:</span><br><span class="line">        print(<span class="string">&quot;+-----------------+-----------+--------------+&quot;</span>)</span><br><span class="line">        print(<span class="string">&quot;|   &quot;</span>+li.replace(<span class="string">&quot;:&quot;</span>,<span class="string">&quot;   |    &quot;</span>)+<span class="string">&quot;  | &quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;+----------------+------------+---------------+\n&quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;[*] shutting down....&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#漏洞回调函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">launcher</span>(<span class="params">url,<span class="built_in">type</span>,port</span>):</span></span><br><span class="line">    <span class="comment">#未授权访问类型</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">type</span> == <span class="string">&quot;Redis&quot;</span>:</span><br><span class="line">        output=redis_unauthored(url_exec(url),port)</span><br><span class="line">        output_exec(output,<span class="built_in">type</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#程序起始部分</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        start(sys.argv[<span class="number">1</span>:])</span><br><span class="line">    <span class="keyword">except</span> KeyboardInterrupt:</span><br><span class="line">        print(<span class="string">&quot;interrupted by user, killing all threads...&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>实现效果如下图所示<br><img src="https://img-blog.csdnimg.cn/20210214220350642.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="防御策略"><a href="#防御策略" class="headerlink" title="防御策略"></a>防御策略</h2><ul>
+<li><strong>禁止远程使用高危命令</strong></li>
+<li><strong>低权限运行Redis服务</strong></li>
+<li><strong>禁止外网访问Redis</strong></li>
+<li><strong>阻止其他用户添加新的公钥，将authorized_keys的权限设置为对拥有者只读</strong></li>
+</ul>
+]]></content>
+      <categories>
+        <category>python安全攻防</category>
+      </categories>
+      <tags>
+        <tag>漏洞检测与防御</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基因突变的模糊测试(GET参数)</title>
+    <url>/2021/03/04/%E5%9F%BA%E5%9B%A0%E7%AA%81%E5%8F%98%E7%9A%84%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95(GET%E5%8F%82%E6%95%B0)/</url>
+    <content><![CDATA[<h2 id="基础要求"><a href="#基础要求" class="headerlink" title="基础要求"></a>基础要求</h2><p>首先我们得具备最基础的SQL注入和XSS漏洞的基本知识，不懂的读者可以自行百度先学习，然后我们再学习下面的内容。下面我们将使用C#这门编程语言编写模糊测试工具测试是否存在漏洞。</p>
+<h2 id="代码展示"><a href="#代码展示" class="headerlink" title="代码展示"></a>代码展示</h2><blockquote>
+<p><strong>一个小的分解给定URL中的查询字符串参数Main()方法</strong></p>
+</blockquote>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.IO;</span><br><span class="line"><span class="keyword">using</span> System.Net;</span><br><span class="line"></span><br><span class="line">namespace 突变模糊测试</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title">Program</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="built_in">string</span> url = args[<span class="number">0</span>];</span><br><span class="line">            <span class="comment">//确定第一个问号的位置，标志URL已经结束，后面是我们要查询的参数</span></span><br><span class="line">            <span class="built_in">int</span> index = url.IndexOf(<span class="string">&quot;?&quot;</span>);</span><br><span class="line">            <span class="comment">// 返回一个仅包含URL参数的字符串</span></span><br><span class="line">            <span class="built_in">string</span>[] parms = url.Remove(<span class="number">0</span>, index + <span class="number">1</span>).Split(<span class="string">&#x27;&amp;&#x27;</span>);</span><br><span class="line">            <span class="keyword">foreach</span> (<span class="built_in">string</span> parm <span class="keyword">in</span> parms)</span><br><span class="line">            &#123;</span><br><span class="line">                Console.WriteLine(parm);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<blockquote>
+<p><strong>污染参数和测试漏洞</strong></p>
+</blockquote>
+<p>如果服务器不容易受到XSS或SQL注入的攻击，那么服务器会恰当地检查这些数据。向污染数据添加<code>&lt;xss&gt;</code>，并且测试SQL注入的数据将具有单引号。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">foreach</span> (<span class="built_in">string</span> parm <span class="keyword">in</span> parms)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">string</span> xssUrl = url.Replace(parm, parm + <span class="string">&quot;fd&lt;xss&gt;sa&quot;</span>);</span><br><span class="line">	<span class="built_in">string</span> sqlUrl = url.Replace(parm, parm + <span class="string">&quot;fd&#x27;sa&quot;</span>);</span><br><span class="line">	Console.WriteLine(xssUrl);</span><br><span class="line">	Console.WriteLine(sqlUrl);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>构造HTTP请求</strong></p>
+</blockquote>
+<p>接下来，使用HttpWebRequest类编程构建HTTP请求，然后我们使用带有污染HTTP参数发起HTTP请求，看看是否有任何错误返回。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">foreach</span> (<span class="built_in">string</span> parm <span class="keyword">in</span> parms)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//使用污染的数据替换掉旧的参数</span></span><br><span class="line">                <span class="built_in">string</span> xssUrl = url.Replace(parm, parm + <span class="string">&quot;fd&lt;xss&gt;sa&quot;</span>);</span><br><span class="line">                <span class="built_in">string</span> sqlUrl = url.Replace(parm, parm + <span class="string">&quot;fd&#x27;sa&quot;</span>);</span><br><span class="line">                <span class="comment">//静态Create()方法基于传递的URL使用工厂模式来创建新的对象</span></span><br><span class="line">                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(sqlUrl);</span><br><span class="line">                request.Method = <span class="string">&quot;GET&quot;</span>;</span><br><span class="line"></span><br><span class="line">                <span class="built_in">string</span> sqlresp = <span class="built_in">string</span>.Empty;</span><br><span class="line">                <span class="keyword">using</span> (StreamReader rdr = <span class="keyword">new</span></span><br><span class="line">                    StreamReader(request.GetResponse().GetResponseStream()))</span><br><span class="line">                sqlresp = rdr.ReadToEnd();</span><br><span class="line">                request = (HttpWebRequest)WebRequest.Create(xssUrl);</span><br><span class="line">                request.Method = <span class="string">&quot;GET&quot;</span>;</span><br><span class="line">                <span class="built_in">string</span> xssresp = <span class="built_in">string</span>.Empty;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">using</span> (StreamReader rdr = <span class="keyword">new</span></span><br><span class="line">                    StreamReader(request.GetResponse().GetResponseStream()))</span><br><span class="line">                    xssresp = rdr.ReadToEnd();</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (xssresp.Contains(<span class="string">&quot;&lt;xss&gt;&quot;</span>))</span><br><span class="line">                    Console.WriteLine(<span class="string">&quot;Possible XSS point found in parameter: &quot;</span> + parm);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (sqlresp.Contains(<span class="string">&quot;error in your SQL syntax&quot;</span>))</span><br><span class="line">                    Console.WriteLine(<span class="string">&quot;SQL injection point found in parameter: &quot;</span> + parm);</span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>测试模糊测试的代码</strong></p>
+</blockquote>
+<p>tips：这里先要安装badstore环境才能进行测试，这是一个具有漏洞的靶机环境。<br><img src="https://img-blog.csdnimg.cn/20210304114933562.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>演示效果如下<br><img src="https://img-blog.csdnimg.cn/20210304114955435.png" alt="在这里插入图片描述"></p>
+]]></content>
+      <categories>
+        <category>C#灰帽子</category>
+      </categories>
+      <tags>
+        <tag>模糊测试</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>汇编基本语句总结</title>
     <url>/2021/03/08/%E6%B1%87%E7%BC%96%E5%9F%BA%E6%9C%AC%E8%AF%AD%E5%8F%A5%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<h1 id="汇编基本语句总结"><a href="#汇编基本语句总结" class="headerlink" title="汇编基本语句总结"></a>汇编基本语句总结</h1><p>[toc]</p>
@@ -161,235 +393,193 @@
       </tags>
   </entry>
   <entry>
-    <title>工作组信息收集</title>
-    <url>/2021/03/07/%E5%B7%A5%E4%BD%9C%E7%BB%84%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</url>
-    <content><![CDATA[<h2 id="收集本机信息"><a href="#收集本机信息" class="headerlink" title="收集本机信息"></a>收集本机信息</h2><p>不管是在外网还是内网中，信息收集都是重要的第一步。收集信息的方式又分为手动信息收集和自动信息收集。这里我们就先讲述怎样通过cmd命令手动收集内网中的主机信息。</p>
-<h2 id="命令及演示效果"><a href="#命令及演示效果" class="headerlink" title="命令及演示效果"></a>命令及演示效果</h2><blockquote>
-<p><strong>systeminfo | findstr /B /C:”OS 名称” /C:”OS 版本”</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210307114353404.png" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>wmic product get name,version：利用wmic命令，将结果输出到文本文件中</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210307121744649.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<span id="more"></span>
-
-<blockquote>
-<p><strong>wmic process list brief：查看进程信息</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210307121856592.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>query user || qwinsta：查看当前在线用户</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210307122040536.png" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>wmic qfe get Caption,Description,HotFixID,InstalledOn：查看补丁的名称、描述、ID、安装时间等信息</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210307122228363.png" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>wmic share get name,path,status：查找共享列表</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210307122530905.png" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>netsh advfirewall set allprofiles state off：关闭防火墙，2003之后的版本使用</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210307122932307.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210307122950503.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210307123003264.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>reg query “HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStation\RDP-Tcp” /V PortNumber：连接的端口是0xd3d，转换后为3389</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210307123456171.png" alt="在这里插入图片描述"></p>
-<blockquote>
-<p>wmic /namespace:\root\cimv2\terminalservices path win32_terminalservicesetting where (__CLASS !=””) call setallowtsconnections 1：开启3389端口</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210307123806716.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210307123840191.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210307123852661.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p>whoami /all：查询域信息及域SID，SID是指域内用户的唯一身份，也叫令牌</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210307124248556.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>其实我们在日常的信息收集时，可以多点使用<code>vmic</code>这个命令，因为这个命令在往后的横向渗透中会经常使用，所以推荐优先使用这个命令。</p>
-]]></content>
-      <categories>
-        <category>内网渗透</category>
-      </categories>
-      <tags>
-        <tag>红队对抗</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Powershell收集域内信息</title>
-    <url>/2021/03/06/Powershell%E6%94%B6%E9%9B%86%E5%9F%9F%E5%86%85%E4%BF%A1%E6%81%AF/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Powershell作为微软官方推出的脚本语言，在Windows操作系统中的强大功能总所周知：系统管理员可以利用它提高Windows管理工作的自动化程度；渗透测试人员可以利用它更好地进行系统安全测试。因为powershell命令比较安全，减少了触发IDS或IPS的风险，因此大多数的作用是用于绕过策略。</p>
-<blockquote>
-<p><strong>Powershell的常用执行权限共有四种</strong></p>
-</blockquote>
+    <title>汇编基本语句总结</title>
+    <url>/2021/03/08/%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h2 id="进制的定义"><a href="#进制的定义" class="headerlink" title="进制的定义"></a>进制的定义</h2><p>进制是由符号组成，可以自己定义，进位是指向后数一位。</p>
+<p>二进制：由两个符号组成，分别是0 、1 逢二进一</p>
+<p>八进制：由八个符号组成，分别是0、1、2、3、4、5、6、7 、逢八进一</p>
+<p>十进制：由十个符号组成，分别是0、1、2、3、4、5、6、7、8、9、逢十进一</p>
+<p>十六进制：由十六个符号组成，分别是0、1、2、3、4、5、6、7、8、9、A、B、C、D、E、F、逢十六进一</p>
+<p>当然，除了常规的，还有3进制、4进制….n进制，进制的符号不一定是常规的123顺序排列的。</p>
+<p>主要作用可以用于加密。进制运算结果本质是通过查表得到的。</p>
+<p>16位汇编：实模式，16位处理器内的内部，最多可以处理存储的长度为16位。</p>
+<p>32位汇编：保护模式，32位处理器内的内部，最多可以处理存储的长度为32位。</p>
+<p>64位汇编：保护模式，64位处理器的内部，最多可以处理存储的长度位64位。</p>
 <table>
 <thead>
 <tr>
-<th>参数</th>
-<th>描述</th>
+<th>位数</th>
+<th>通用寄存器</th>
+<th>扩展</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>Restricted</td>
-<td>默认设置，不允许执行任何脚本</td>
+<td>16位通用寄存器</td>
+<td>AX、BX、 CX、 DX、 SI、 DI、 BP、 SP</td>
+<td>R8W、R9W、R10W、R11W、R12W、 R13W、R14W、R15W</td>
 </tr>
 <tr>
-<td>Allsigned</td>
-<td>只能运行经过证书验证的脚本</td>
+<td>32位通用寄存器</td>
+<td>EAX、EBX、ECX、EDX、ESI、EDI、EBP、ESP</td>
+<td>R8D、R9D、R10D、R11D、R12D、 R13D、R14D、R15D</td>
 </tr>
 <tr>
-<td>Unrestricted</td>
-<td>权限最高，可以执行任意脚本</td>
-</tr>
-<tr>
-<td>RemoteSigned</td>
-<td>对本地脚本不进行限制；对来自网络的脚本必须验证其签名</td>
+<td>64位通用寄存器</td>
+<td>RAX、RBX、RCX、RDX、RSI、RDI、RBP、RSP</td>
+<td>R8、R9、R10、R11、R12、 R13、R14、R15</td>
 </tr>
 </tbody></table>
-<span id="more"></span>
-<h2 id="各脚本命令展示"><a href="#各脚本命令展示" class="headerlink" title="各脚本命令展示"></a>各脚本命令展示</h2><p>这里我们将策略设置为Unrestricted，能运行所有的脚本权限<br><img src="https://img-blog.csdnimg.cn/20210306133134774.png" alt="在这里插入图片描述"><br>然后我们进入PowerSploit的Recon文件夹将PowerView.ps1这个脚本导入进去(只有导入这个脚本才能执行以下命令)，这个是PowerSploit的下载地址</p>
-<p><a href="https://github.com/PowerShellMafia/PowerSploit">https://github.com/PowerShellMafia/PowerSploit</a><br><img src="https://img-blog.csdnimg.cn/20210306133704948.png" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>Get-NetDomain：获取当前用户所在域的名称</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210306133824783.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>Get-NetUser：获取所有用户的详细信息</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210306134143467.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>Get-NetDomainController：获取所有域控制器的信息</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210306134253861.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>Get-NetComputer：获取域内所有机器的详细信息</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/2021030613443370.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>Get-NetOU：获取域中的OU信息</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210306134535643.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2021030613454718.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>Get-NetGroup：获取所有域内组和组成员的信息</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/2021030613464591.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>Get-NetShare：获取当前域内所有的网络共享信息</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210306134857127.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>Get-NetSession：获取指定服务器的对话</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210306135028467.png" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>Get-NetRDPSession：获取指定服务器的远程连接</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210306135144213.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>Get-NetProcess：获取远程主机的进程</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210306135251953.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>Get-UserEvent：获取指定用户的日志</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210306135349272.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>Get-ADObject：获取活动目录的对象</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/2021030613552975.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>Get-NetGPO：获取域内所有的组策略对象</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210306135710375.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>Get-DomainPolicy：获取域默认策略或域控制器策略</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210306135819950.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>Invoke-UserHunter：获取域用户登录的计算机信息及该用户是否有本地管理员权限</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210306140014762.png" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>Invoke-ProcessHunter：通过查询域内所有的机器进程找到特定用户</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/2021030614015675.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="Powershell脚本绕过策略实例"><a href="#Powershell脚本绕过策略实例" class="headerlink" title="Powershell脚本绕过策略实例"></a>Powershell脚本绕过策略实例</h2><p>首先我们先将策略更改为Restricted，默认不能执行任何脚本<br><img src="https://img-blog.csdnimg.cn/20210306140851647.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>执行绕过后，命令成功执行，<code>powershell -exec bypass &quot;import-module&quot; 脚本路径；执行的命令</code><br><img src="https://img-blog.csdnimg.cn/20210306140929449.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-]]></content>
-      <categories>
-        <category>内网渗透</category>
-      </categories>
-      <tags>
-        <tag>红队对抗</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基因突变的模糊测试(GET参数)</title>
-    <url>/2021/03/04/%E5%9F%BA%E5%9B%A0%E7%AA%81%E5%8F%98%E7%9A%84%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95(GET%E5%8F%82%E6%95%B0)/</url>
-    <content><![CDATA[<h2 id="基础要求"><a href="#基础要求" class="headerlink" title="基础要求"></a>基础要求</h2><p>首先我们得具备最基础的SQL注入和XSS漏洞的基本知识，不懂的读者可以自行百度先学习，然后我们再学习下面的内容。下面我们将使用C#这门编程语言编写模糊测试工具测试是否存在漏洞。</p>
-<h2 id="代码展示"><a href="#代码展示" class="headerlink" title="代码展示"></a>代码展示</h2><blockquote>
-<p><strong>一个小的分解给定URL中的查询字符串参数Main()方法</strong></p>
-</blockquote>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.IO;</span><br><span class="line"><span class="keyword">using</span> System.Net;</span><br><span class="line"></span><br><span class="line">namespace 突变模糊测试</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title">Program</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="built_in">string</span> url = args[<span class="number">0</span>];</span><br><span class="line">            <span class="comment">//确定第一个问号的位置，标志URL已经结束，后面是我们要查询的参数</span></span><br><span class="line">            <span class="built_in">int</span> index = url.IndexOf(<span class="string">&quot;?&quot;</span>);</span><br><span class="line">            <span class="comment">// 返回一个仅包含URL参数的字符串</span></span><br><span class="line">            <span class="built_in">string</span>[] parms = url.Remove(<span class="number">0</span>, index + <span class="number">1</span>).Split(<span class="string">&#x27;&amp;&#x27;</span>);</span><br><span class="line">            <span class="keyword">foreach</span> (<span class="built_in">string</span> parm <span class="keyword">in</span> parms)</span><br><span class="line">            &#123;</span><br><span class="line">                Console.WriteLine(parm);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<blockquote>
-<p><strong>污染参数和测试漏洞</strong></p>
-</blockquote>
-<p>如果服务器不容易受到XSS或SQL注入的攻击，那么服务器会恰当地检查这些数据。向污染数据添加<code>&lt;xss&gt;</code>，并且测试SQL注入的数据将具有单引号。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">foreach</span> (<span class="built_in">string</span> parm <span class="keyword">in</span> parms)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">string</span> xssUrl = url.Replace(parm, parm + <span class="string">&quot;fd&lt;xss&gt;sa&quot;</span>);</span><br><span class="line">	<span class="built_in">string</span> sqlUrl = url.Replace(parm, parm + <span class="string">&quot;fd&#x27;sa&quot;</span>);</span><br><span class="line">	Console.WriteLine(xssUrl);</span><br><span class="line">	Console.WriteLine(sqlUrl);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>构造HTTP请求</strong></p>
-</blockquote>
-<p>接下来，使用HttpWebRequest类编程构建HTTP请求，然后我们使用带有污染HTTP参数发起HTTP请求，看看是否有任何错误返回。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">foreach</span> (<span class="built_in">string</span> parm <span class="keyword">in</span> parms)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//使用污染的数据替换掉旧的参数</span></span><br><span class="line">                <span class="built_in">string</span> xssUrl = url.Replace(parm, parm + <span class="string">&quot;fd&lt;xss&gt;sa&quot;</span>);</span><br><span class="line">                <span class="built_in">string</span> sqlUrl = url.Replace(parm, parm + <span class="string">&quot;fd&#x27;sa&quot;</span>);</span><br><span class="line">                <span class="comment">//静态Create()方法基于传递的URL使用工厂模式来创建新的对象</span></span><br><span class="line">                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(sqlUrl);</span><br><span class="line">                request.Method = <span class="string">&quot;GET&quot;</span>;</span><br><span class="line"></span><br><span class="line">                <span class="built_in">string</span> sqlresp = <span class="built_in">string</span>.Empty;</span><br><span class="line">                <span class="keyword">using</span> (StreamReader rdr = <span class="keyword">new</span></span><br><span class="line">                    StreamReader(request.GetResponse().GetResponseStream()))</span><br><span class="line">                sqlresp = rdr.ReadToEnd();</span><br><span class="line">                request = (HttpWebRequest)WebRequest.Create(xssUrl);</span><br><span class="line">                request.Method = <span class="string">&quot;GET&quot;</span>;</span><br><span class="line">                <span class="built_in">string</span> xssresp = <span class="built_in">string</span>.Empty;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">using</span> (StreamReader rdr = <span class="keyword">new</span></span><br><span class="line">                    StreamReader(request.GetResponse().GetResponseStream()))</span><br><span class="line">                    xssresp = rdr.ReadToEnd();</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (xssresp.Contains(<span class="string">&quot;&lt;xss&gt;&quot;</span>))</span><br><span class="line">                    Console.WriteLine(<span class="string">&quot;Possible XSS point found in parameter: &quot;</span> + parm);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (sqlresp.Contains(<span class="string">&quot;error in your SQL syntax&quot;</span>))</span><br><span class="line">                    Console.WriteLine(<span class="string">&quot;SQL injection point found in parameter: &quot;</span> + parm);</span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure>
+<p>基本执行环境</p>
+<p>32位 ：8个32位通用寄存器，标志寄存器EFLAGS ，指令指针寄存器EIP</p>
+<p>64位：16个64位通用寄存器，标志寄存器RFLAGS，指令指针寄存器RIP</p>
+<h2 id="常用寄存器结构"><a href="#常用寄存器结构" class="headerlink" title="常用寄存器结构"></a>常用寄存器结构</h2><p>eax : 累加器，操作数和结果数据累加器，返回值运算结果一般都存储在这里</p>
+<p>ebx : 基地址，DS段的数据指针，在内存寻址的时候存放基地址</p>
+<p>ecx : 计数器，字符串和循环操作的计数器</p>
+<p>edx : 用于存储部分乘法结果和部分除法被除数</p>
+<p>ebp : 基址指针，SS段的数据指针</p>
+<p>esp : 栈帧指针，一般指向栈顶，所以也被称为栈顶指针</p>
+<p>edi : 字符串操作的目标指针，ES段的数据指针</p>
+<p>esi ：字符串操作的源指针，SS段的数据指针</p>
+<p>EFLAGS寄存：包含了独立的二进制位，用于控制CPU操作，或是反应一些CPU操作的结果。有些指令可以测试和控制这些单独的处理器标识位。</p>
+<p>EFLAGS寄存器的状态标志(0、2、4、6、7以及11位)指示算术指令（如ADD, SUB, MUL以及DIV指令）的结果，这些状态标志的作用如下：</p>
+<p><strong>CF(bit 0) [Carry flag]</strong>   若算术操作产生的结果在最高有效位(most-significant bit)发生进位或借位则将其置1，反之清零。这个标志指示无符号整型运算的溢出状态，这个标志同样在多倍精度运算(multiple-precision arithmetic)中使用。<br>**PF(bit 2) [Parity flag]**：   如果结果的最低有效字节(least-significant byte)包含偶数个1位则该位置1，否则清零。<br>**AF(bit 4) [Adjust flag]**：   如果算术操作在结果的第3位发生进位或借位则将该标志置1，否则清零。这个标志在BCD(binary-code decimal)算术运算中被使用。<br>**ZF(bit 6) [Zero flag]**：   若结果为0则将其置1，反之清零。<br>**SF(bit 7) [Sign flag]**：   该标志被设置为有符号整型的最高有效位。(0指示结果为正，反之则为负)<br>**OF(bit 11) [Overflow flag]**：   如果整型结果是较大的正数或较小的负数，并且无法匹配目的操作数时将该位置1，反之清零。这个标志为带符号整型运算指示溢出状态。<br>在这些状态标志中，只有CF标志能够通过使用STC, CLC以及CMC指令被直接修改，或者通过位指令(BT, BTS, BTR以及BTC)将指定的位拷贝至CF标志中。<br>**DF标志(DF flag)**：这个方向标志(位于EFLAGS寄存器的第10位)控制串指令(MOVS, CMPS, SCAS, LODS以及STOS)。设置DF标志使得串指令自动递减（从高地址向低地址方向处理字符串），清除该标志则使得串指令自动递增。STD以及CLD指令分别用于设置以及清除DF标志。</p>
+<p>MMX寄存器：在实现高级多媒体和通信应用时，MMX技术提高了Intel处理器的性能。8个64位MMX寄存器支持成为SIMD的特殊指令。顾名思义，MMX指令对MMX寄存器中的数据值直接进行并行操作。虽然它们看上去是独立的寄存器。但是MMX寄存器实际上是浮点单元中使用的同样寄存器的别名。</p>
+<h2 id="visual-studio-2015编写汇编"><a href="#visual-studio-2015编写汇编" class="headerlink" title="visual studio 2015编写汇编"></a>visual studio 2015编写汇编</h2><p>1.建立一个空项目</p>
+<p>2.选中项目右键 ”生成自定义“，选择MASM生成规则</p>
+<p>3.新建一个.asm后缀的文件</p>
+<p>4.选中项目右键 - &gt; 属性 - &gt; 链接器 - &gt; 系统 - &gt; 子系统选&lt;控制台(SUBSYSTEM:CONSOLE)&gt;</p>
+<p>5.选中项目右键- &gt; 属性 - &gt; 链接器 - &gt; 高级 - &gt; 入口点填 “main”</p>
+<h2 id="加法"><a href="#加法" class="headerlink" title="加法"></a>加法</h2><p>加法指令ADD(Addition)</p>
+<p>格式：ADD OPRD1,OPRD2</p>
+<p>功能：两数相加</p>
+<p>加法指令运算的结果对CF、SF、OF、PF、ZF、AF都会有影响</p>
+<p>不允许OPRD1与OPRD2同时为存储器</p>
+<p>带进位加法指令ADC(Addition Carry)</p>
+<p>格式：ADC OPRD1,OPRD2</p>
+<p>功能：OPRD1 = OPRD1 + OPRD2 + CF</p>
+<h2 id="减法"><a href="#减法" class="headerlink" title="减法"></a>减法</h2><p>减法指令SUB(SUBtract)<br>格式：SUB OPRD1,OPRD2</p>
+<p>功能：两个操作数的相减，即从OPRD1减去OPRD2，其结果放在OPRD1中，指令的类型及标识位的影响与ADD指令相同，注意立即数不能用于目的操作数，两个存储器操作数之间不能直接相减，操作数可为8位或16位的无符号数或符号数</p>
+<p> 带错位减法指令SBB(SuBtract with Forrow)</p>
+<p>格式：SBB OPRD1,OPRD2</p>
+<p>功能：进行两个操作数的相减再减去CF进位标志位，即从OPRD1 = OPRD1 - OPRD2  - CF,其结果放在OPRD1中</p>
+<h2 id="乘法"><a href="#乘法" class="headerlink" title="乘法"></a>乘法</h2><p>无符号数指令MUL(MULtiply)</p>
+<p>格式：MUL OPRD</p>
+<p>带符号数指令IMUL(Integer MULtiply)</p>
+<p>功能：乘法操作</p>
+<p>OPRD为通用寄存器或存储器操作数</p>
+<p>本指令会影响标志位CF及OF</p>
+<h2 id="除法"><a href="#除法" class="headerlink" title="除法"></a>除法</h2><p>无符号数除法指令DIV(DIVision)</p>
+<p>格式：DIV OPRD</p>
+<p>功能：实现两个无符号二进制数除法运算</p>
+<p>带符号数除法指令IDIV(Integer DIVision)</p>
+<p>格式：IDIV OPRD</p>
+<p>功能：实现两个带符号数的二进制除法运算</p>
+<p>比如16bit 的被除数，分别存在2个8bit寄存器AH：AL，商放在AL,余数在AH</p>
+<p>比如32bit 的被除数，分别存在16个8bit寄存器DX：AX，商放在AX,余数在DX</p>
+<p>比如64bit 的被除数，分别存在32个8bit寄存器EDX：EAX，商放在RAX,余数在EDX</p>
+<p>比如128bit 的被除数，分别存在64个8bit寄存器RDX：RAX，商放在RAX,余数在RDX</p>
+<h2 id="自增"><a href="#自增" class="headerlink" title="自增"></a>自增</h2><p>加1指令INC(INCrement by 1)</p>
+<p>格式：INC OPRD</p>
+<p>功能：OPRD = OPRD + 1</p>
+<h2 id="自减"><a href="#自减" class="headerlink" title="自减"></a>自减</h2><p>减一指令DEC(Decrement by 1)</p>
+<p>格式：DEC OPRD</p>
+<p>功能：OPRD = OPRD -1</p>
+<h2 id="loop指令"><a href="#loop指令" class="headerlink" title="loop指令"></a>loop指令</h2><p>循环控制指令LOOP</p>
+<p>格式：loop 标号</p>
+<p>功能：(CX)&lt;—(CX)-1,(CX)&lt;&gt;0,则转移至标号处循环执行，直至(CX)=0,继续执行后指令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.586</span><br><span class="line">.MODEL flat,stdcall</span><br><span class="line">.code</span><br><span class="line">main proc</span><br><span class="line">	mov eax,1</span><br><span class="line">	mov ebx,1</span><br><span class="line">	mov ecx,10</span><br><span class="line">s:</span><br><span class="line">	add eax,ebx</span><br><span class="line">	loop s</span><br><span class="line">	mov eax,eax</span><br><span class="line">main ENDP</span><br><span class="line">END main</span><br><span class="line">	</span><br><span class="line">	&#x2F;&#x2F;1+2+3 +....+1000</span><br><span class="line">	.586</span><br><span class="line">.MODEL flat,stdcall</span><br><span class="line">.code</span><br><span class="line">main proc</span><br><span class="line">	move eax,0</span><br><span class="line">	move ecx,100</span><br><span class="line">s:</span><br><span class="line">	add eax,ecx</span><br><span class="line">	loop s</span><br><span class="line">	move eax,eax</span><br><span class="line">main ENDP</span><br><span class="line">END main</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p><strong>测试模糊测试的代码</strong></p>
-</blockquote>
-<p>tips：这里先要安装badstore环境才能进行测试，这是一个具有漏洞的靶机环境。<br><img src="https://img-blog.csdnimg.cn/20210304114933562.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>演示效果如下<br><img src="https://img-blog.csdnimg.cn/20210304114955435.png" alt="在这里插入图片描述"></p>
+<h2 id="什么是堆栈"><a href="#什么是堆栈" class="headerlink" title="什么是堆栈"></a>什么是堆栈</h2><ol>
+<li>栈是一个后进先出的存储区域，位于堆栈段中，SS段寄存器描述的就是堆栈段的段地址</li>
+<li>栈的数据出口位于栈顶，也就是esp寄存器所指向的位置</li>
+<li>栈顶x低位，也就是地址较小的一侧，由ebp寄存器指向的栈低，并不会改变</li>
+</ol>
+<h2 id="栈操作指令"><a href="#栈操作指令" class="headerlink" title="栈操作指令"></a>栈操作指令</h2><p>PUSH：压栈指令，32位汇编首先ESP-4，留出一个空间，然后把要压入栈中的内容压入</p>
+<p>POP：出栈指令，32位汇编首先将栈顶的数据弹出给指定的目标，然后ESP+4,清掉空间</p>
+<h2 id="MOV指令"><a href="#MOV指令" class="headerlink" title="MOV指令"></a>MOV指令</h2><p>数据传送指令 MOV</p>
+<p>格式：MOV OPRD1,OPRD2</p>
+<p>功能：将一个源操作数送到目的操作数中，即OPRD1&lt;–OPRD2</p>
+<p>说明：</p>
+<p>OPRD1为目的操作数，可以说寄存器、存储器、累加器</p>
+<p>OPRD2为源操作数，可以数寄存器、存储器、累加器和立即数。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.586</span><br><span class="line">.MODEL flat,stdcall</span><br><span class="line">.code</span><br><span class="line">main proc</span><br><span class="line">	mov eax,ebx</span><br><span class="line">	mov	eax,ecx</span><br><span class="line">	mov ecx,0</span><br><span class="line">	mov eax,eax</span><br><span class="line">main ENDP</span><br><span class="line">END main</span><br></pre></td></tr></table></figure>
+<h2 id="LEA"><a href="#LEA" class="headerlink" title="LEA"></a>LEA</h2><p>有效地址传送指令</p>
+<p>格式：LEA OPRD1,OPRD2</p>
+<p>功能：将源操作数给出的有效地址传送到指定的寄存器中</p>
+<p>OPRD1必须是寄存器</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.586</span><br><span class="line">.MODEL flat,stdcall</span><br><span class="line">.code</span><br><span class="line">main proc</span><br><span class="line">	lea eax,dword ptr ss:[esp-4]</span><br><span class="line">	mov eax,eax</span><br><span class="line">main ENDP</span><br><span class="line">END main</span><br></pre></td></tr></table></figure>
+
+<h2 id="XCHG"><a href="#XCHG" class="headerlink" title="XCHG"></a>XCHG</h2><p>数据交换指令</p>
+<p>格式：XCHG OPRD1,OPRD2，其中OPRD1为目的操作数，OPRD2为源操作数</p>
+<p>功能：将两个操作数相互交换位置，该指令把源操作数OPRD2与目的操作数OPRD1交换</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.586</span><br><span class="line">.MODEL flat,stdcall</span><br><span class="line">.code</span><br><span class="line">main proc</span><br><span class="line">	xchg eax,dword ptr ss:[esp-4]</span><br><span class="line">	mov eax,eax</span><br><span class="line">main ENDP</span><br><span class="line">END main</span><br></pre></td></tr></table></figure>
+
+<h2 id="CMP指令"><a href="#CMP指令" class="headerlink" title="CMP指令"></a>CMP指令</h2><p>比较指令CMP(ComPare)</p>
+<p>格式：CMP OPRD1,OPRD2</p>
+<p>功能：对两数进行相减，进行比较</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.586</span><br><span class="line">.MODEL flat,stdcall</span><br><span class="line">.code</span><br><span class="line">main proc</span><br><span class="line">	mov eax,5</span><br><span class="line">	mov ebx,4</span><br><span class="line">	cmp eax,ebx</span><br><span class="line">	cmp eax,4</span><br><span class="line">	mov eax,eax</span><br><span class="line">main ENDP</span><br><span class="line">END main</span><br></pre></td></tr></table></figure>
+
+<h2 id="TEST"><a href="#TEST" class="headerlink" title="TEST"></a>TEST</h2><p>测试指令</p>
+<p>格式：TEST OPRD1,OPRD2</p>
+<p>功能：其中OPRD1、OPRD2的含义同AND指令一样，也是对两个操作数进行按位的‘与‘运算，—-唯一不同之处是不讲’与‘的结果送目的操作数，即本指令对两个操作数的内容均不进行修改，仅数载逻辑与操作后，对标志位重新置位</p>
+<h2 id="常用的JCC指令"><a href="#常用的JCC指令" class="headerlink" title="常用的JCC指令"></a>常用的JCC指令</h2><p>JMP：无条件跳转</p>
+<p>JZ/JE：ZF = 1等于0或相等调整</p>
+<p>JNZ/JNE：ZF = 0 不等于0或者不相等跳转</p>
+<p>JBE/JNA：CF = 1/ZF = 1 低于等于或者不高于跳转</p>
+<p>JNBE/JA：CF = 0 / ZF = 0 不低于等于/高于跳转</p>
+<p>JL/JNGE：SF != OF 小于/不大于等于跳转</p>
+<p>JNL/JGE：SF = OF 不小于/大于等于跳转</p>
+<h2 id="MOVS指令"><a href="#MOVS指令" class="headerlink" title="MOVS指令"></a>MOVS指令</h2><p>字符串传送指令MOVS</p>
+<p>格式：MOVS OPRD1，OPRD2</p>
+<p>—MOVSB</p>
+<p>​    MOVSW</p>
+<p>功能：OPRD1&lt;—OPRD2</p>
+<p>说明：</p>
+<ol>
+<li>其中OPRD2为源串符号地址</li>
+<li>OPRD1为目的串符号地址</li>
+</ol>
+<h2 id="STOS指令"><a href="#STOS指令" class="headerlink" title="STOS指令"></a>STOS指令</h2><p>字符串存储指令</p>
+<p>格式：STOS OPRD</p>
+<p>功能：把AL(字节)或AX(字)中的数据存储到DI为目的串地址指针所寻址的存储器单元中去指针DI将根据DF的值进行自动调整</p>
+<h2 id="REP指令"><a href="#REP指令" class="headerlink" title="REP指令"></a>REP指令</h2><p>重复前缀的说明</p>
+<p>格式：REP                 ；CX&lt;&gt;0重复执行字符串指令</p>
+<p>​            REPZ/REPE    ；CX&lt;&gt;0且ZF = 1重复执行字符串指令</p>
+<p>​            REPNZ/RPNE ; CX&lt;&gt;0且ZF = 1重复执行字符串指令</p>
+<p>功能：在串操作指令前加上重复前缀，可以对字符串进行重复处理，由于加上重复前缀后，对应的指令代码是不同的，所以指令的功能便具有重复处理的功能，重复的次数存放在CX寄存器中</p>
+<h2 id="CALL指令"><a href="#CALL指令" class="headerlink" title="CALL指令"></a>CALL指令</h2><p>过程调用指令</p>
+<p>格式：CALL OPRD</p>
+<p>功能：过程调用指令</p>
+<p>相当于：</p>
+<p>​            push eip</p>
+<p>​            amp OPRD</p>
+<h2 id="RETN指令"><a href="#RETN指令" class="headerlink" title="RETN指令"></a>RETN指令</h2><p>返回指令，相当于：</p>
+<p>​            pop eip</p>
+<p>​            jmp eip</p>
+<h2 id="过程调用-函数"><a href="#过程调用-函数" class="headerlink" title="过程调用-函数"></a>过程调用-函数</h2><p>过程调用的方式：</p>
+<p>​        function proc</p>
+<p>​            code</p>
+<p>​        function endp</p>
+<p>参数传递方式：</p>
+<ol>
+<li>寄存器传参</li>
+<li>堆栈传参</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.586</span><br><span class="line">.MODEL flat,stdcall</span><br><span class="line">.code</span><br><span class="line"></span><br><span class="line">addx proc</span><br><span class="line">		add eax,ebx</span><br><span class="line">addx endp</span><br><span class="line"></span><br><span class="line">main proc</span><br><span class="line">		mov eax,1</span><br><span class="line">		mov ebx,2</span><br><span class="line">		call addx</span><br><span class="line">		mov eax,eax</span><br><span class="line">main ENDP</span><br><span class="line">END main</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.586</span><br><span class="line">.MODEL flat,stdcall</span><br><span class="line">.code</span><br><span class="line">addx proc</span><br><span class="line">		mov eax,[esp + 4]</span><br><span class="line">		mov ebx,[esp + 8]</span><br><span class="line">		add eax,ebx</span><br><span class="line">		ret</span><br><span class="line">addx endp</span><br><span class="line"></span><br><span class="line">main proc</span><br><span class="line">		push 1</span><br><span class="line">		push 2</span><br><span class="line">		call addx</span><br><span class="line">		mov eax,eax</span><br><span class="line">main ENDP</span><br><span class="line">END main</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Win32 第一个hello word程序</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.586</span><br><span class="line">.MODEL flat,stdcall</span><br><span class="line">includelib user32.lib</span><br><span class="line">includelib kernel32.lib</span><br><span class="line"></span><br><span class="line">ExitProcess PROTO,dwExitCode:DWORD</span><br><span class="line">MessageBoxA PROTO hWnd:DWORD,IpText:BYTE,IpCaption:BYTE,uType:DWORD</span><br><span class="line"></span><br><span class="line">.data</span><br><span class="line">string db &quot;hello word！&quot;,0</span><br><span class="line">.code</span><br><span class="line"></span><br><span class="line">main proc</span><br><span class="line">	push 0</span><br><span class="line">	lea eax,string</span><br><span class="line">	push eax</span><br><span class="line">	push eax</span><br><span class="line">	push 0</span><br><span class="line">	call MessageBoxA</span><br><span class="line">	add esp,16	;堆栈平衡,push一个dword4个字节，一共push了4个，共16个字节</span><br><span class="line">	call ExitProcess</span><br><span class="line">main ENDP</span><br><span class="line">END main</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
-        <category>C#灰帽子</category>
+        <category>汇编语言</category>
       </categories>
       <tags>
-        <tag>模糊测试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis未授权访问漏洞</title>
-    <url>/2021/02/24/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/</url>
-    <content><![CDATA[<h2 id="攻击思路"><a href="#攻击思路" class="headerlink" title="攻击思路"></a>攻击思路</h2><p>Redis是一种使用ANSIC语言编写的开源Key-Value型数据库。Redis为了保证效率，将数据缓存在内存中，周期性地把更新的数据写入磁盘或者把修改操作写入追加的记录文件中，在此基础上实现了master-slave(主从)同步。</p>
-<p>对Redis配置不当将会导致未授权访问漏洞，从而被攻击者恶意利用。如果Redis以root身份运行，攻击者可以用root权限写入SSH公钥文件，通过SSH登录目标服务器，进而导致服务器权限被获取、泄露或发生加密勒索事件，为正常服务带来严重危害。</p>
-<span id="more"></span>
-<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p><strong>漏洞利用的方式有很多，这里我们介绍其中的一种——<code>利用公私钥认证获取ROOT权限</code></strong><br>首先我们先在靶机上以root身份启动redis服务，命令为<code>redis-server /etc/redis.conf</code>，安装redis请读者上网查阅资料，这里只讲述攻击方法<br><img src="https://img-blog.csdnimg.cn/20210214204941377.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><!--more--><br>然后我们在kali上生成一个ssh空密钥<br><img src="https://img-blog.csdnimg.cn/2021021420510262.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>进入/root/.ssh目录下查看生成结果，并将公钥导入到txt文件中<br><img src="https://img-blog.csdnimg.cn/20210214205318550.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>将txt文件中的公钥导入Redis缓存中<br><img src="https://img-blog.csdnimg.cn/20210214205411588.png" alt="在这里插入图片描述"><br>连接目标主机，更改配置文件路径为/root/.ssh，设定文件名称为authorized-keys<br><img src="https://img-blog.csdnimg.cn/2021021420553631.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>通过SSH协议连接到远程目标主机<br><img src="https://img-blog.csdnimg.cn/20210214205628977.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="检测方法"><a href="#检测方法" class="headerlink" title="检测方法"></a>检测方法</h2><p>先编写程序的起始部分</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#程序起始部分</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        start(sys.argv[<span class="number">1</span>:])</span><br><span class="line">    <span class="keyword">except</span> KeyboardInterrupt:</span><br><span class="line">        print(<span class="string">&quot;interrupted by user, killing all threads...&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p>然后编写命令行参数处理功能，<code>opts</code>为一个两元组列表，如果没有附加参数则为空串</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#编写命令行参数处理功能</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">start</span>(<span class="params">argv</span>):</span></span><br><span class="line">    <span class="built_in">dict</span> = &#123;&#125;</span><br><span class="line">    url = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="built_in">type</span> = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(sys.argv) &lt; <span class="number">2</span>:</span><br><span class="line">        print(<span class="string">&quot;-h 帮助信息; \n&quot;</span>)</span><br><span class="line">        sys.exit()</span><br><span class="line">    <span class="comment">#定义异常处理</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        banner()</span><br><span class="line">        opts,args = getopt.getopt(argv, <span class="string">&quot;-u:-p:-s:-h&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> getopt.GetoptError:</span><br><span class="line">        print(<span class="string">&#x27;Error an argument!&#x27;</span>)</span><br><span class="line">        sys.exit()</span><br><span class="line">    <span class="keyword">for</span> opt,arg <span class="keyword">in</span> opts:</span><br><span class="line">        <span class="keyword">if</span> opt == <span class="string">&quot;-u&quot;</span>:</span><br><span class="line">            url = arg</span><br><span class="line">        <span class="keyword">elif</span> opt == <span class="string">&quot;-s&quot;</span>:</span><br><span class="line">            <span class="built_in">type</span> = arg</span><br><span class="line">        <span class="keyword">elif</span> opt == <span class="string">&quot;-p&quot;</span>:</span><br><span class="line">            port = arg</span><br><span class="line">        <span class="keyword">elif</span> opt == <span class="string">&quot;-h&quot;</span>:</span><br><span class="line">            print(usage())</span><br><span class="line">    launcher(url,<span class="built_in">type</span>,port)</span><br></pre></td></tr></table></figure>
-<p>编写帮助信息</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#banner信息</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">banner</span>():</span></span><br><span class="line">    print(<span class="string">&#x27;\033[1;34m########################################################################################\033[0m\n&#x27;</span></span><br><span class="line">          <span class="string">&#x27;\033[1;34m######################################\033[1;32mRedis未授权访问漏洞\033[1;34m####################################\033[0m\n&#x27;</span></span><br><span class="line">          <span class="string">&#x27;\033[1;34m########################################################################################\033[0m\n&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>接下来是Redis漏洞检测的核心代码，此处通过<code>socket函数</code>尝试连接远程主机的IP及端口号，发送payload字符串。利用<code>recvdata函数</code>接收目标主机返回的数据</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#未授权函数检测</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">redis_unauthored</span>(<span class="params">url,port</span>):</span></span><br><span class="line">    result = []</span><br><span class="line">    s = socket.socket()</span><br><span class="line">    payload = <span class="string">&quot;\x2a\x31\x0d\x0a\x24\x34\x0d\x0a\x69\x6e\x66\x6f\x0d\x0a&quot;</span></span><br><span class="line">    socket.setdefaulttimeout(<span class="number">10</span>)</span><br><span class="line">    <span class="keyword">for</span> ip <span class="keyword">in</span> url:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            s.connect((ip, <span class="built_in">int</span>(port)))</span><br><span class="line">            s.sendall(payload.encode())</span><br><span class="line">            recvdata = s.recv(<span class="number">1024</span>).decode()</span><br><span class="line">            <span class="keyword">if</span> recvdata <span class="keyword">and</span> <span class="string">&#x27;redis_version&#x27;</span> <span class="keyword">in</span> recvdata:</span><br><span class="line">                result.append(<span class="built_in">str</span>(ip)+<span class="string">&#x27;:&#x27;</span>+<span class="built_in">str</span>(port)+<span class="string">&#x27;:&#x27;</span>+<span class="string">&#x27;\033[1;32;34msuccess\033[0m&#x27;</span>)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">            result.append(<span class="built_in">str</span>(ip) + <span class="string">&#x27;:&#x27;</span> + <span class="built_in">str</span>(port) + <span class="string">&#x27;:&#x27;</span> + <span class="string">&#x27;\033[1:31;34mfailed \033[0m&#x27;</span>)</span><br><span class="line">        s.close()</span><br><span class="line">    <span class="keyword">return</span>(result)</span><br></pre></td></tr></table></figure>
-<p>然后针对该IP段进行网络主机检测。该部分代码主要以特殊字符”-“为目标进行分隔，将分隔后的字符进行for循环存入列表中，以便被<code>函数redis_unauthored</code>调用</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#执行URL</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">url_exec</span>(<span class="params">url</span>):</span></span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    zi = []</span><br><span class="line">    group = []</span><br><span class="line">    group1 = []</span><br><span class="line">    group2 = []</span><br><span class="line">    li = url.split(<span class="string">&quot;.&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span>(url.find(<span class="string">&#x27;-&#x27;</span>)==-<span class="number">1</span>):</span><br><span class="line">        group.append(url)</span><br><span class="line">        zi = group</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> s <span class="keyword">in</span> li:</span><br><span class="line">            a = s.find(<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> a != -<span class="number">1</span>:</span><br><span class="line">                i = i+<span class="number">1</span></span><br><span class="line">        zi = url_list(li)</span><br><span class="line">        <span class="keyword">if</span> i &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">for</span> li <span class="keyword">in</span> zi:</span><br><span class="line">                zz = url_list(li.split(<span class="string">&quot;.&quot;</span>))</span><br><span class="line">                <span class="keyword">for</span> ki <span class="keyword">in</span> zz:</span><br><span class="line">                    group.append(ki)</span><br><span class="line">            zi = group</span><br><span class="line">            i = i-<span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> i &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">for</span> li <span class="keyword">in</span> zi:</span><br><span class="line">                zzz = url_list(li.split(<span class="string">&quot;.&quot;</span>))</span><br><span class="line">                <span class="keyword">for</span> ki <span class="keyword">in</span> zzz:</span><br><span class="line">                    group1.append(ki)</span><br><span class="line">            zi = group1</span><br><span class="line">            i = i-<span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> i &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">for</span> li <span class="keyword">in</span> zi:</span><br><span class="line">                zzzz = url_list(li.split(<span class="string">&quot;.&quot;</span>))</span><br><span class="line">                <span class="keyword">for</span> ki <span class="keyword">in</span> zzzz:</span><br><span class="line">                    group2.append(ki)</span><br><span class="line">            zi = group2</span><br><span class="line">    <span class="keyword">return</span> zi</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">url_list</span>(<span class="params">li</span>):</span></span><br><span class="line">    ss = []</span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    zi = []</span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> li:</span><br><span class="line">        a = s.find(<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">        i = i + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> a != -<span class="number">1</span>:</span><br><span class="line">            ss = s.rsplit(<span class="string">&quot;-&quot;</span>)</span><br><span class="line">            j = i</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(ss[<span class="number">0</span>]), <span class="built_in">int</span>(ss[<span class="number">1</span>]) + <span class="number">1</span>):</span><br><span class="line">        li[j - <span class="number">1</span>] = <span class="built_in">str</span>(s)</span><br><span class="line">        aa = <span class="string">&quot;.&quot;</span>.join(li)</span><br><span class="line">        zi.append(aa)</span><br><span class="line">    <span class="keyword">return</span> zi</span><br></pre></td></tr></table></figure>
-<p>最后是添加一些帮助信息和结果格式</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#使用规则</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">usage</span>():</span></span><br><span class="line">    print(<span class="string">&#x27;-h: --help 帮助;&#x27;</span>)</span><br><span class="line">    print(<span class="string">&#x27;-p: --port 端口;&#x27;</span>)</span><br><span class="line">    print(<span class="string">&#x27;-u: --url 域名;&#x27;</span>)</span><br><span class="line">    print(<span class="string">&#x27;-s: --type Redis&#x27;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment">#输出结果格式设计</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">output_exec</span>(<span class="params">output,<span class="built_in">type</span></span>):</span></span><br><span class="line">    print(<span class="string">&quot;\033[1;32;40m&quot;</span>+<span class="built_in">type</span>+<span class="string">&quot;......\033[0m&quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;++++++++++++++++++++++++++++++++++++++++++++++++&quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;|         ip         |    port   |     status  |&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> li <span class="keyword">in</span> output:</span><br><span class="line">        print(<span class="string">&quot;+-----------------+-----------+--------------+&quot;</span>)</span><br><span class="line">        print(<span class="string">&quot;|   &quot;</span>+li.replace(<span class="string">&quot;:&quot;</span>,<span class="string">&quot;   |    &quot;</span>)+<span class="string">&quot;  | &quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;+----------------+------------+---------------+\n&quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;[*] shutting down....&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p>最后设置一个漏洞回调函数</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#漏洞回调函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">launcher</span>(<span class="params">url,<span class="built_in">type</span>,port</span>):</span></span><br><span class="line">    <span class="comment">#未授权访问类型</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">type</span> == <span class="string">&quot;Redis&quot;</span>:</span><br><span class="line">        output=redis_unauthored(url_exec(url),port)</span><br><span class="line">        output_exec(output,<span class="built_in">type</span>)</span><br></pre></td></tr></table></figure>
-<p>附上完整代码以免疏漏</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> getopt</span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line"><span class="comment">#编写命令行参数处理功能</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">start</span>(<span class="params">argv</span>):</span></span><br><span class="line">    <span class="built_in">dict</span> = &#123;&#125;</span><br><span class="line">    url = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="built_in">type</span> = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(sys.argv) &lt; <span class="number">2</span>:</span><br><span class="line">        print(<span class="string">&quot;-h 帮助信息; \n&quot;</span>)</span><br><span class="line">        sys.exit()</span><br><span class="line">    <span class="comment">#定义异常处理</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        banner()</span><br><span class="line">        opts,args = getopt.getopt(argv, <span class="string">&quot;-u:-p:-s:-h&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> getopt.GetoptError:</span><br><span class="line">        print(<span class="string">&#x27;Error an argument!&#x27;</span>)</span><br><span class="line">        sys.exit()</span><br><span class="line">    <span class="keyword">for</span> opt,arg <span class="keyword">in</span> opts:</span><br><span class="line">        <span class="keyword">if</span> opt == <span class="string">&quot;-u&quot;</span>:</span><br><span class="line">            url = arg</span><br><span class="line">        <span class="keyword">elif</span> opt == <span class="string">&quot;-s&quot;</span>:</span><br><span class="line">            <span class="built_in">type</span> = arg</span><br><span class="line">        <span class="keyword">elif</span> opt == <span class="string">&quot;-p&quot;</span>:</span><br><span class="line">            port = arg</span><br><span class="line">        <span class="keyword">elif</span> opt == <span class="string">&quot;-h&quot;</span>:</span><br><span class="line">            print(usage())</span><br><span class="line">    launcher(url,<span class="built_in">type</span>,port)</span><br><span class="line"></span><br><span class="line"><span class="comment">#banner信息</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">banner</span>():</span></span><br><span class="line">    print(<span class="string">&#x27;\033[1;34m########################################################################################\033[0m\n&#x27;</span></span><br><span class="line">          <span class="string">&#x27;\033[1;34m######################################\033[1;32mRedis未授权访问漏洞\033[1;34m####################################\033[0m\n&#x27;</span></span><br><span class="line">          <span class="string">&#x27;\033[1;34m########################################################################################\033[0m\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#使用规则</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">usage</span>():</span></span><br><span class="line">    print(<span class="string">&#x27;-h: --help 帮助;&#x27;</span>)</span><br><span class="line">    print(<span class="string">&#x27;-p: --port 端口;&#x27;</span>)</span><br><span class="line">    print(<span class="string">&#x27;-u: --url 域名;&#x27;</span>)</span><br><span class="line">    print(<span class="string">&#x27;-s: --type Redis&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#未授权函数检测</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">redis_unauthored</span>(<span class="params">url,port</span>):</span></span><br><span class="line">    result = []</span><br><span class="line">    s = socket.socket()</span><br><span class="line">    payload = <span class="string">&quot;\x2a\x31\x0d\x0a\x24\x34\x0d\x0a\x69\x6e\x66\x6f\x0d\x0a&quot;</span></span><br><span class="line">    socket.setdefaulttimeout(<span class="number">10</span>)</span><br><span class="line">    <span class="keyword">for</span> ip <span class="keyword">in</span> url:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            s.connect((ip, <span class="built_in">int</span>(port)))</span><br><span class="line">            s.sendall(payload.encode())</span><br><span class="line">            recvdata = s.recv(<span class="number">1024</span>).decode()</span><br><span class="line">            <span class="keyword">if</span> recvdata <span class="keyword">and</span> <span class="string">&#x27;redis_version&#x27;</span> <span class="keyword">in</span> recvdata:</span><br><span class="line">                result.append(<span class="built_in">str</span>(ip)+<span class="string">&#x27;:&#x27;</span>+<span class="built_in">str</span>(port)+<span class="string">&#x27;:&#x27;</span>+<span class="string">&#x27;\033[1;32;34msuccess\033[0m&#x27;</span>)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">            result.append(<span class="built_in">str</span>(ip) + <span class="string">&#x27;:&#x27;</span> + <span class="built_in">str</span>(port) + <span class="string">&#x27;:&#x27;</span> + <span class="string">&#x27;\033[1:31;34mfailed \033[0m&#x27;</span>)</span><br><span class="line">        s.close()</span><br><span class="line">    <span class="keyword">return</span>(result)</span><br><span class="line"></span><br><span class="line"><span class="comment">#执行URL</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">url_exec</span>(<span class="params">url</span>):</span></span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    zi = []</span><br><span class="line">    group = []</span><br><span class="line">    group1 = []</span><br><span class="line">    group2 = []</span><br><span class="line">    li = url.split(<span class="string">&quot;.&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span>(url.find(<span class="string">&#x27;-&#x27;</span>)==-<span class="number">1</span>):</span><br><span class="line">        group.append(url)</span><br><span class="line">        zi = group</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> s <span class="keyword">in</span> li:</span><br><span class="line">            a = s.find(<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> a != -<span class="number">1</span>:</span><br><span class="line">                i = i+<span class="number">1</span></span><br><span class="line">        zi = url_list(li)</span><br><span class="line">        <span class="keyword">if</span> i &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">for</span> li <span class="keyword">in</span> zi:</span><br><span class="line">                zz = url_list(li.split(<span class="string">&quot;.&quot;</span>))</span><br><span class="line">                <span class="keyword">for</span> ki <span class="keyword">in</span> zz:</span><br><span class="line">                    group.append(ki)</span><br><span class="line">            zi = group</span><br><span class="line">            i = i-<span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> i &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">for</span> li <span class="keyword">in</span> zi:</span><br><span class="line">                zzz = url_list(li.split(<span class="string">&quot;.&quot;</span>))</span><br><span class="line">                <span class="keyword">for</span> ki <span class="keyword">in</span> zzz:</span><br><span class="line">                    group1.append(ki)</span><br><span class="line">            zi = group1</span><br><span class="line">            i = i-<span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> i &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">for</span> li <span class="keyword">in</span> zi:</span><br><span class="line">                zzzz = url_list(li.split(<span class="string">&quot;.&quot;</span>))</span><br><span class="line">                <span class="keyword">for</span> ki <span class="keyword">in</span> zzzz:</span><br><span class="line">                    group2.append(ki)</span><br><span class="line">            zi = group2</span><br><span class="line">    <span class="keyword">return</span> zi</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">url_list</span>(<span class="params">li</span>):</span></span><br><span class="line">    ss = []</span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    zi = []</span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> li:</span><br><span class="line">        a = s.find(<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">        i = i + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> a != -<span class="number">1</span>:</span><br><span class="line">            ss = s.rsplit(<span class="string">&quot;-&quot;</span>)</span><br><span class="line">            j = i</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(ss[<span class="number">0</span>]), <span class="built_in">int</span>(ss[<span class="number">1</span>]) + <span class="number">1</span>):</span><br><span class="line">        li[j - <span class="number">1</span>] = <span class="built_in">str</span>(s)</span><br><span class="line">        aa = <span class="string">&quot;.&quot;</span>.join(li)</span><br><span class="line">        zi.append(aa)</span><br><span class="line">    <span class="keyword">return</span> zi</span><br><span class="line"></span><br><span class="line"><span class="comment">#输出结果格式设计</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">output_exec</span>(<span class="params">output,<span class="built_in">type</span></span>):</span></span><br><span class="line">    print(<span class="string">&quot;\033[1;32;40m&quot;</span>+<span class="built_in">type</span>+<span class="string">&quot;......\033[0m&quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;++++++++++++++++++++++++++++++++++++++++++++++++&quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;|         ip         |    port   |     status  |&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> li <span class="keyword">in</span> output:</span><br><span class="line">        print(<span class="string">&quot;+-----------------+-----------+--------------+&quot;</span>)</span><br><span class="line">        print(<span class="string">&quot;|   &quot;</span>+li.replace(<span class="string">&quot;:&quot;</span>,<span class="string">&quot;   |    &quot;</span>)+<span class="string">&quot;  | &quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;+----------------+------------+---------------+\n&quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;[*] shutting down....&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#漏洞回调函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">launcher</span>(<span class="params">url,<span class="built_in">type</span>,port</span>):</span></span><br><span class="line">    <span class="comment">#未授权访问类型</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">type</span> == <span class="string">&quot;Redis&quot;</span>:</span><br><span class="line">        output=redis_unauthored(url_exec(url),port)</span><br><span class="line">        output_exec(output,<span class="built_in">type</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#程序起始部分</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        start(sys.argv[<span class="number">1</span>:])</span><br><span class="line">    <span class="keyword">except</span> KeyboardInterrupt:</span><br><span class="line">        print(<span class="string">&quot;interrupted by user, killing all threads...&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p>实现效果如下图所示<br><img src="https://img-blog.csdnimg.cn/20210214220350642.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="防御策略"><a href="#防御策略" class="headerlink" title="防御策略"></a>防御策略</h2><ul>
-<li><strong>禁止远程使用高危命令</strong></li>
-<li><strong>低权限运行Redis服务</strong></li>
-<li><strong>禁止外网访问Redis</strong></li>
-<li><strong>阻止其他用户添加新的公钥，将authorized_keys的权限设置为对拥有者只读</strong></li>
-</ul>
-]]></content>
-      <categories>
-        <category>python安全攻防</category>
-      </categories>
-      <tags>
-        <tag>漏洞检测与防御</tag>
+        <tag>汇编语言</tag>
       </tags>
   </entry>
 </search>
