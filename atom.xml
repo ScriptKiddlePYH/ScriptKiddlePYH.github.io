@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2021-03-07T13:44:18.917Z</updated>
+  <updated>2021-03-08T11:53:29.250Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>汇编基本语句总结</title>
+    <link href="https://pyhsecurity.cn/2021/03/08/%E6%B1%87%E7%BC%96%E5%9F%BA%E6%9C%AC%E8%AF%AD%E5%8F%A5%E6%80%BB%E7%BB%93/"/>
+    <id>https://pyhsecurity.cn/2021/03/08/%E6%B1%87%E7%BC%96%E5%9F%BA%E6%9C%AC%E8%AF%AD%E5%8F%A5%E6%80%BB%E7%BB%93/</id>
+    <published>2021-03-08T11:52:42.304Z</published>
+    <updated>2021-03-08T11:53:29.250Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;汇编基本语句总结&quot;&gt;&lt;a href=&quot;#汇编基本语句总结&quot; class=&quot;headerlink&quot; title=&quot;汇编基本语句总结&quot;&gt;&lt;/a&gt;汇编基本语句总结&lt;/h1&gt;&lt;p&gt;[toc]&lt;/p&gt;
+&lt;p&gt; （目的寄存器：保存结果的寄存器）&lt;/p&gt;
+&lt;h2 id=&quot;一、-基本框架&quot;&gt;&lt;a href=&quot;#一、-基本框架&quot; class=&quot;headerlink&quot; title=&quot;一、 基本框架&quot;&gt;&lt;/a&gt;一、 基本框架&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;.586&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;.MODEL flat, stdcall&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;.code&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;main proc&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	mov eax, 1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	mov ebx, 2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;main ENDP&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;END main&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+
+
+&lt;h2 id=&quot;二、基本运算&quot;&gt;&lt;a href=&quot;#二、基本运算&quot; class=&quot;headerlink&quot; title=&quot;二、基本运算&quot;&gt;&lt;/a&gt;二、基本运算&lt;/h2&gt;&lt;h3 id=&quot;1-加&quot;&gt;&lt;a href=&quot;#1-加&quot; class=&quot;headerlink&quot; title=&quot;1. 加&quot;&gt;&lt;/a&gt;1. 加&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;自增用法：&lt;code&gt;INC  寄存器名（incrementing）&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;加法用法：&lt;code&gt;ADD 目的寄存器,  寄存器名或数值（addition）&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;2-减法&quot;&gt;&lt;a href=&quot;#2-减法&quot; class=&quot;headerlink&quot; title=&quot;2. 减法&quot;&gt;&lt;/a&gt;2. 减法&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;自减用法：&lt;code&gt;DEC 寄存器名（decrementing）&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;减法用法：&lt;code&gt;SUB 目的寄存器，寄存器名或数值（subtraction）&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="汇编语言" scheme="https://pyhsecurity.cn/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/"/>
+    
+    
+    <category term="汇编语言" scheme="https://pyhsecurity.cn/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/"/>
+    
+  </entry>
   
   <entry>
     <title>Powershell收集域内信息</title>
