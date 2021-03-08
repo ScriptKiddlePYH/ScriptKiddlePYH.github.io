@@ -289,7 +289,7 @@ follow_me:
 # Dependencies: https://github.com/tea3/hexo-related-popular-posts
 related_posts:
   enable: true
-  title: ��������Ƽ�
+  title: recommended article
   display_in_home: false
   params:
     maxCount: 5
@@ -1016,3 +1016,17 @@ typing_effect:
 diy_time:
   runtime: true 
   clock: true # 粒子时钟
+
+#主页每页显示文章数
+index_generator:
+    per_page: 5
+#archive分页每页显示文章数
+archive_generator:
+    per_page: 5
+#tag分页每页显示文章数
+tag_generator:
+    per_page: 10
+#category分页每页显示文章数
+category_generator: 
+    per_page: 10
+
