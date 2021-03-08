@@ -1019,7 +1019,7 @@ diy_time:
 
 #主页每页显示文章数
 index_generator:
-    per_page: 5
+    per_page: 4
 #archive分页每页显示文章数
 archive_generator:
     per_page: 5
