@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2021-03-08T13:04:49.767Z</updated>
+  <updated>2021-03-09T09:53:10.707Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -17,11 +17,43 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>域内信息收集</title>
+    <link href="https://pyhsecurity.cn/2021/03/09/%E5%9F%9F%E5%86%85%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
+    <id>https://pyhsecurity.cn/2021/03/09/%E5%9F%9F%E5%86%85%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</id>
+    <published>2021-03-09T09:52:17.854Z</published>
+    <updated>2021-03-09T09:53:10.707Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在内网渗透中，我们必须要快速地对内网信息进行多方面的信息收集，因此我们需要用到一些常用的命令或者是工具对内网域控制器或者管理员进行快速地定位&lt;/p&gt;
+&lt;h2 id=&quot;工具的使用&quot;&gt;&lt;a href=&quot;#工具的使用&quot; class=&quot;headerlink&quot; title=&quot;工具的使用&quot;&gt;&lt;/a&gt;工具的使用&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;net config workstation：查询当前登录域及登录用户信息&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;“登录域”用于表示当前登录的用户是域用户还是本地用户&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210309171809630.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;net time /domain：判断主域(域服务器通常会同时作为时间服务器使用)&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;执行命令后有三种情况，因为条件原因我这里只显示一种情况&lt;/p&gt;
+&lt;p&gt;存在域，但当前用户不是域用户&lt;br&gt;存在域，且当前用户是域用户&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210309172224207.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;当前网络环境为工作组，不存在域&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;for /L %I in (3,1,254) DO @ping -w 1 -n 1 192.168.3.%I | findstr “TTL=”：利用ICMP协议快速探测内网&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="内网渗透" scheme="https://pyhsecurity.cn/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
+    
+    
+    <category term="红队对抗" scheme="https://pyhsecurity.cn/tags/%E7%BA%A2%E9%98%9F%E5%AF%B9%E6%8A%97/"/>
+    
+  </entry>
+  
+  <entry>
     <title>汇编基本语句总结</title>
     <link href="https://pyhsecurity.cn/2021/03/08/%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80/"/>
     <id>https://pyhsecurity.cn/2021/03/08/%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80/</id>
     <published>2021-03-08T13:04:13.883Z</published>
-    <updated>2021-03-08T13:04:49.767Z</updated>
+    <updated>2021-03-09T09:55:16.730Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;进制的定义&quot;&gt;&lt;a href=&quot;#进制的定义&quot; class=&quot;headerlink&quot; title=&quot;进制的定义&quot;&gt;&lt;/a&gt;进制的定义&lt;/h2&gt;&lt;p&gt;进制是由符号组成，可以自己定义，进位是指向后数一位。&lt;/p&gt;
@@ -39,7 +71,7 @@
     <category term="汇编语言" scheme="https://pyhsecurity.cn/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/"/>
     
     
-    <category term="汇编语言" scheme="https://pyhsecurity.cn/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/"/>
+    <category term="二进制逆向" scheme="https://pyhsecurity.cn/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E9%80%86%E5%90%91/"/>
     
   </entry>
   
@@ -48,7 +80,7 @@
     <link href="https://pyhsecurity.cn/2021/03/08/%E6%B1%87%E7%BC%96%E5%9F%BA%E6%9C%AC%E8%AF%AD%E5%8F%A5%E6%80%BB%E7%BB%93/"/>
     <id>https://pyhsecurity.cn/2021/03/08/%E6%B1%87%E7%BC%96%E5%9F%BA%E6%9C%AC%E8%AF%AD%E5%8F%A5%E6%80%BB%E7%BB%93/</id>
     <published>2021-03-08T11:52:42.304Z</published>
-    <updated>2021-03-08T11:53:29.250Z</updated>
+    <updated>2021-03-09T09:55:16.728Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;汇编基本语句总结&quot;&gt;&lt;a href=&quot;#汇编基本语句总结&quot; class=&quot;headerlink&quot; title=&quot;汇编基本语句总结&quot;&gt;&lt;/a&gt;汇编基本语句总结&lt;/h1&gt;&lt;p&gt;[toc]&lt;/p&gt;
@@ -71,7 +103,7 @@
     <category term="汇编语言" scheme="https://pyhsecurity.cn/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/"/>
     
     
-    <category term="汇编语言" scheme="https://pyhsecurity.cn/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/"/>
+    <category term="二进制逆向" scheme="https://pyhsecurity.cn/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E9%80%86%E5%90%91/"/>
     
   </entry>
   
