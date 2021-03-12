@@ -158,6 +158,48 @@ const ap = new APlayer({
         artist: '陈奕迅',
         url: 'http://music.163.com/song/media/outer/url?id=64833.mp3',
         cover: 'https://p2.music.126.net/RmdCYKF2ZQiAlgFmcsIOeQ==/18958878997954526.jpg?',
+	  },
+	  {
+	  	name: "Big Big World",
+        artist: 'Emilia',
+        url: 'http://music.163.com/song/media/outer/url?id=2534006.mp3',
+        cover: 'https://p2.music.126.net/qDJqpZitW_70wIfeWTwcQQ==/109951163071995459.jpg?',
+	  },
+	  {
+		name: "Free Loop",
+        artist: 'Daniel Powter',
+        url: 'http://music.163.com/song/media/outer/url?id=5253801.mp3',
+        cover: 'https://p1.music.126.net/grGdswi38xUoYcDBISdKcg==/92358976750445.jpg?',
+	  },
+	  {
+		name: "Something Just Like This",
+        artist: 'The Chainsmokers / Coldplay',
+        url: 'http://music.163.com/song/media/outer/url?id=461347998.mp3',
+        cover: 'https://p1.music.126.net/ggnyubDdMxrhpqYvpZbhEQ==/3302932937412681.jpg?',
+	  },
+	  {
+		name: "You Are Beautiful",
+        artist: 'James Blunt',
+        url: 'http://music.163.com/song/media/outer/url?id=431853388.mp3',
+        cover: 'https://p2.music.126.net/iL6iMr3BZgc7wgAp4hNsxA==/3412884123590807.jpg?',
+	  },
+	  {
+		name: "Valder Fields",
+        artist: 'Tamas Wells',
+        url: 'http://music.163.com/song/media/outer/url?id=2001320.mp3',
+        cover: 'https://p1.music.126.net/irlK0xcRGW8jw3wq165onw==/109951165361156638.jpg?',
+	  },
+	  {
+		name: "Memories",
+        artist: 'Maroon 5',
+        url: 'http://music.163.com/song/media/outer/url?id=1392089153.mp3',
+        cover: 'https://p2.music.126.net/ff8QRXiKefz7qUj6VeFHHg==/109951164375334868.jpg?',
+	  },
+	  {
+		name: "That Girl",
+        artist: 'Olly Murs',
+        url: 'http://music.163.com/song/media/outer/url?id=440208476.mp3',
+        cover: 'https://p1.music.126.net/5HEwV-KwHoazXJ2CAHy1XA==/18259589602949147.jpg?',
 	  }
     ]
 });
