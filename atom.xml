@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2021-03-09T09:53:10.707Z</updated>
+  <updated>2021-03-12T16:59:06.917Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://pyhsecurity.cn/2021/03/09/%E5%9F%9F%E5%86%85%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
     <id>https://pyhsecurity.cn/2021/03/09/%E5%9F%9F%E5%86%85%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</id>
     <published>2021-03-09T09:52:17.854Z</published>
-    <updated>2021-03-09T09:53:10.707Z</updated>
+    <updated>2021-03-12T16:59:06.917Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在内网渗透中，我们必须要快速地对内网信息进行多方面的信息收集，因此我们需要用到一些常用的命令或者是工具对内网域控制器或者管理员进行快速地定位&lt;/p&gt;
@@ -44,7 +44,7 @@
     <category term="内网渗透" scheme="https://pyhsecurity.cn/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
     
     
-    <category term="红队对抗" scheme="https://pyhsecurity.cn/tags/%E7%BA%A2%E9%98%9F%E5%AF%B9%E6%8A%97/"/>
+    <category term="红蓝对抗" scheme="https://pyhsecurity.cn/tags/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/"/>
     
   </entry>
   
@@ -112,7 +112,7 @@
     <link href="https://pyhsecurity.cn/2021/03/07/%E6%9F%A5%E6%89%BE%E5%9F%9F%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B/"/>
     <id>https://pyhsecurity.cn/2021/03/07/%E6%9F%A5%E6%89%BE%E5%9F%9F%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B/</id>
     <published>2021-03-07T13:39:14.825Z</published>
-    <updated>2021-03-07T13:44:18.917Z</updated>
+    <updated>2021-03-12T16:59:06.916Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在渗透测试中，一个典型的域权限提升过程，通常围绕着收集明文凭据或通过mimikatz提权等方法，在获取了管理员权限的系统中寻找域管理员登录进程，进而收集域管理员的凭据。如果内网环境非常复杂，渗透测试人员无法立即在拥有权限的系统中获得域管理员进程，那么通常采用的方法是：在跳板机之间跳转，直至获得域管理员权限，同时进行一些分析工作，进而找到渗透测试的路径。&lt;/p&gt;
@@ -135,7 +135,7 @@
     <category term="内网渗透" scheme="https://pyhsecurity.cn/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
     
     
-    <category term="红队对抗" scheme="https://pyhsecurity.cn/tags/%E7%BA%A2%E9%98%9F%E5%AF%B9%E6%8A%97/"/>
+    <category term="红蓝对抗" scheme="https://pyhsecurity.cn/tags/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/"/>
     
   </entry>
   
@@ -144,7 +144,7 @@
     <link href="https://pyhsecurity.cn/2021/03/07/%E5%B7%A5%E4%BD%9C%E7%BB%84%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
     <id>https://pyhsecurity.cn/2021/03/07/%E5%B7%A5%E4%BD%9C%E7%BB%84%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</id>
     <published>2021-03-07T04:44:26.040Z</published>
-    <updated>2021-03-07T13:44:18.918Z</updated>
+    <updated>2021-03-12T16:59:06.916Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;收集本机信息&quot;&gt;&lt;a href=&quot;#收集本机信息&quot; class=&quot;headerlink&quot; title=&quot;收集本机信息&quot;&gt;&lt;/a&gt;收集本机信息&lt;/h2&gt;&lt;p&gt;不管是在外网还是内网中，信息收集都是重要的第一步。收集信息的方式又分为手动信息收集和自动信息收集。这里我们就先讲述怎样通过cmd命令手动收集内网中的主机信息。&lt;/p&gt;
@@ -168,7 +168,7 @@
     <category term="内网渗透" scheme="https://pyhsecurity.cn/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
     
     
-    <category term="红队对抗" scheme="https://pyhsecurity.cn/tags/%E7%BA%A2%E9%98%9F%E5%AF%B9%E6%8A%97/"/>
+    <category term="红蓝对抗" scheme="https://pyhsecurity.cn/tags/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/"/>
     
   </entry>
   
@@ -177,7 +177,7 @@
     <link href="https://pyhsecurity.cn/2021/03/06/Powershell%E6%94%B6%E9%9B%86%E5%9F%9F%E5%86%85%E4%BF%A1%E6%81%AF/"/>
     <id>https://pyhsecurity.cn/2021/03/06/Powershell%E6%94%B6%E9%9B%86%E5%9F%9F%E5%86%85%E4%BF%A1%E6%81%AF/</id>
     <published>2021-03-06T06:10:26.889Z</published>
-    <updated>2021-03-07T13:44:18.917Z</updated>
+    <updated>2021-03-12T16:59:06.915Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;Powershell作为微软官方推出的脚本语言，在Windows操作系统中的强大功能总所周知：系统管理员可以利用它提高Windows管理工作的自动化程度；渗透测试人员可以利用它更好地进行系统安全测试。因为powershell命令比较安全，减少了触发IDS或IPS的风险，因此大多数的作用是用于绕过策略。&lt;/p&gt;
@@ -221,7 +221,7 @@
     <category term="内网渗透" scheme="https://pyhsecurity.cn/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
     
     
-    <category term="红队对抗" scheme="https://pyhsecurity.cn/tags/%E7%BA%A2%E9%98%9F%E5%AF%B9%E6%8A%97/"/>
+    <category term="红蓝对抗" scheme="https://pyhsecurity.cn/tags/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/"/>
     
   </entry>
   
