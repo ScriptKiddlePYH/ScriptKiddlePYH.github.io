@@ -281,9 +281,9 @@ reward:
 follow_me:
   #Twitter: https://twitter.com/username || fab fa-twitter
   #Telegram: https://t.me/channel_name || fab fa-telegram
-  WeChat: /images/wechat.jpg || fa fa-weixin
+  #WeChat: /images/wechat.jpg || fa fa-weixin
   RSS: /atom.xml || fa fa-rss
-  QQ: /images/QQ.jpg || fa fa-qq
+  #QQ: /images/QQ.jpg || fa fa-qq
 
 # Related popular posts
 # Dependencies: https://github.com/tea3/hexo-related-popular-posts
@@ -1017,16 +1017,16 @@ diy_time:
   runtime: true 
   clock: true # 粒子时钟
 
-#主页每页显示文章数
+#主页每页显示文章�?
 index_generator:
     per_page: 4
-#archive分页每页显示文章数
+#archive分页每页显示文章�?
 archive_generator:
     per_page: 5
-#tag分页每页显示文章数
+#tag分页每页显示文章�?
 tag_generator:
     per_page: 10
-#category分页每页显示文章数
+#category分页每页显示文章�?
 category_generator: 
     per_page: 10
 
