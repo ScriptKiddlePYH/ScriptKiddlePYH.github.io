@@ -125,6 +125,7 @@ menu:
   sitemap: /sitemap.xml || fa fa-sitemap
   #commonweal: /404/ || fa fa-heartbeat
   links: /links || fa fa-link
+  books: /books/ || book
 
 # Enable / Disable menu icons / item badges.
 menu_settings:
@@ -179,8 +180,7 @@ site_state: true
 # Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.
 social:
   GitHub: https://github.com/ScriptKiddlePYH || fab fa-github
-  #E-Mail: mailto:1246578220@qq.com || fa fa-envelope
-  Coding: https://scriptkiddlepyh.coding.net/user/projects || fa fa-git
+  E-Mail: mailto:1246578220@qq.com || fa fa-envelope
   CSDN: https://blog.csdn.net/weixin_45007073 || fa fa-code
   RSS: /atom.xml || fa fa-rss
   #Weibo: https://weibo.com/yourname || fab fa-weibo
@@ -1030,4 +1030,5 @@ tag_generator:
 #category分页每页显示文章�?
 category_generator: 
     per_page: 10
+
 

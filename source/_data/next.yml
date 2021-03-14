@@ -125,6 +125,7 @@ menu:
   sitemap: /sitemap.xml || fa fa-sitemap
   #commonweal: /404/ || fa fa-heartbeat
   links: /links || fa fa-link
+  books: /books/ || fa fa-book
 
 # Enable / Disable menu icons / item badges.
 menu_settings:
@@ -1029,4 +1030,5 @@ tag_generator:
 #category分页每页显示文章�?
 category_generator: 
     per_page: 10
+
 
