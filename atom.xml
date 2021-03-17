@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2021-03-17T07:53:05.720Z</updated>
+  <updated>2021-03-17T07:41:03.161Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -15,140 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>WEB安全漏洞入门</title>
-    <link href="https://pyhsecurity.cn/2021/03/17/WEB%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%85%A5%E9%97%A8/"/>
-    <id>https://pyhsecurity.cn/2021/03/17/WEB%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%85%A5%E9%97%A8/</id>
-    <published>2021-03-17T07:44:05.595Z</published>
-    <updated>2021-03-17T07:53:05.720Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;WEB安全漏洞入门&quot;&gt;&lt;a href=&quot;#WEB安全漏洞入门&quot; class=&quot;headerlink&quot; title=&quot;WEB安全漏洞入门&quot;&gt;&lt;/a&gt;WEB安全漏洞入门&lt;/h1&gt;&lt;h2 id=&quot;SQL注入&quot;&gt;&lt;a href=&quot;#SQL注入&quot; class=&quot;headerlink&quot; title=&quot;SQL注入&quot;&gt;&lt;/a&gt;SQL注入&lt;/h2&gt;&lt;h3 id=&quot;漏洞成因&quot;&gt;&lt;a href=&quot;#漏洞成因&quot; class=&quot;headerlink&quot; title=&quot;漏洞成因&quot;&gt;&lt;/a&gt;漏洞成因&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;由于开发者在程序编写过程中，对传入用户数据的过滤不严格，将可能存在的攻击载荷拼接到SQL查询语句中，再将其传递给后端数据库执行造成的数据泄露。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;SQL注入基础&quot;&gt;&lt;a href=&quot;#SQL注入基础&quot; class=&quot;headerlink&quot; title=&quot;SQL注入基础&quot;&gt;&lt;/a&gt;SQL注入基础&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;数字型和UNION注入&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;数字型&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;表现为输入点”$_GET[‘id’]”，会对数值计算进行运算&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;UNION型&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;通常配合id=-1或很大的值，让前面的语句查询失败，然后嵌入union语句将后半句SQL查询语句显示的结果查询出来&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;字符型注入和布尔盲注&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;字符型&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;在MYSQL中，等号两边如果类型不一致，则会发生强制转换。当数字与字符串数据比较时，字符串将被转换为数字，再进行比较。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;布尔盲注&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;虽然我们看不到直接的数据，但是可以通过注入推断出数据，通常配合sunstring()、mid()、substr()这三个函数使用，比较费时。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;报错注入&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;有时为了方便开发者调试，有的网站会开启错误调试信息，只要触发SQL语句的错误，即可在页面上看到错误信息。updatexml在执行时，第二个参数应该为合法的XPATH路径，否则会引发报错的同时将传入的参数进行输出。&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;h3 id=&quot;注入点&quot;&gt;&lt;a href=&quot;#注入点&quot; class=&quot;headerlink&quot; title=&quot;注入点&quot;&gt;&lt;/a&gt;注入点&lt;/h3&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;SELECT注入&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;select_expr&lt;/li&gt;
-&lt;li&gt;table_reference&lt;/li&gt;
-&lt;li&gt;WHERE或HAVING后&lt;/li&gt;
-&lt;li&gt;GROUP BY或ORDER BY后&lt;/li&gt;
-&lt;li&gt;LIMIT后&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;INSERT注入&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;tbl_name&lt;/li&gt;
-&lt;li&gt;VALUES&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;UPDATE注入&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;DELETE注入&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;注入与防御&quot;&gt;&lt;a href=&quot;#注入与防御&quot; class=&quot;headerlink&quot; title=&quot;注入与防御&quot;&gt;&lt;/a&gt;注入与防御&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;字符替换&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;只过滤了空格&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;空白符有%0a，%0b，%0c，%0d，%09，%a0，%a0在特定字符集才使用和/**/、括号等&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;将SELECT替换成空&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;即在WAF中过滤了SELECT这个关键字&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;大小写匹配&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;即使用大小写混合如sEleCT绕过WAF&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;正则匹配&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;用关键字”\bselect\b”或内联注入干扰”/&lt;em&gt;5000select&lt;/em&gt;/“&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;替换了单引号或双引号&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;忘记了反斜杠，其实就是最后一个单引号逃逸，使用转义字符先将前面一个单引号转义&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;逃逸引号&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;编码解码&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;其实就是逃逸addslashes这个函数，这个函数会对单引号进行转义，我们若先将数据加密，然后传到后端解密并执行就可造成SQL注入&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;粗心大意的输入点&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;如httpheader、$_SERVER[‘PHP_SELF’]这些变量通常会被开发者遗忘&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;二次注入&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;二次注入的根源在于，开发者信任数据库中取出的数据是无害的，注入是发生在数据被取出数据库并进行查询时发生&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;注入功效&quot;&gt;&lt;a href=&quot;#注入功效&quot; class=&quot;headerlink&quot; title=&quot;注入功效&quot;&gt;&lt;/a&gt;注入功效&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;在有写文件权限时，直接用INTO OUTFILE或者DUMPFILE向Web目录写文件，或者写文件后结合文件包含漏洞达到代码执行的效果&lt;/li&gt;
-&lt;li&gt;在有读文件权限时，用load_file()函数读取网站源码和配置信息，获取敏感数据&lt;/li&gt;
-&lt;li&gt;提升权限，获得更高的用户权限或者管理员权限，绕过登录，添加用户，调整用户权限等&lt;/li&gt;
-&lt;li&gt;通过注入控制数据库查询出来的数据，控制如模板、缓存等文件的内容来获取权限，或者删除、读取某些关键文件&lt;/li&gt;
-&lt;li&gt;在执行多语句情况下，控制整个数据库，包括控制任意数据、任意字段长度&lt;/li&gt;
-&lt;li&gt;直接执行系统命令&lt;/li&gt;
-&lt;/ul&gt;</summary>
-    
-    
-    
-    <category term="Web安全打点" scheme="https://pyhsecurity.cn/categories/Web%E5%AE%89%E5%85%A8%E6%89%93%E7%82%B9/"/>
-    
-    
-    <category term="红蓝对抗" scheme="https://pyhsecurity.cn/tags/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/"/>
-    
-  </entry>
   
   <entry>
     <title>内网信息收集</title>
