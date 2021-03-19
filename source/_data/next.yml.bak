@@ -48,7 +48,7 @@ favicon:
   #ms_browserconfig: /images/browserconfig.xml
 
 # Show multilingual switcher in footer.
-language_switcher: false
+language_switcher: true
 
 footer:
   # Specify the date when the site was setup. If not defined, current year will be used.
@@ -71,14 +71,14 @@ footer:
 
   # Beian ICP and gongan information for Chinese users. See: https://beian.miit.gov.cn, http://www.beian.gov.cn
   beian:
-    enable: false
-    icp:
+    enable: true
+    icp: 粤ICP备2021026183号-1
     # The digit in the num of gongan beian.
-    gongan_id:
+    gongan_id: 44060502002507
     # The full num of gongan beian.
-    gongan_num:
+    gongan_num: 粤公网安备44060502002507
     # The icon for gongan beian. See: http://www.beian.gov.cn/portal/download
-    gongan_icon_url:
+    gongan_icon_url: /images/beian.png
 
 # Creative Commons 4.0 International License.
 # See: https://creativecommons.org/share-your-work/licensing-types-examples
@@ -125,7 +125,7 @@ menu:
   sitemap: /sitemap.xml || fa fa-sitemap
   #commonweal: /404/ || fa fa-heartbeat
   links: /links || fa fa-link
-  books: /books/ || book
+  books: /books/ || fa fa-book
 
 # Enable / Disable menu icons / item badges.
 menu_settings:
@@ -1003,31 +1003,31 @@ css: css
 js: js
 images: images
 
-# 鼠标点击特效
+# 榧犳爣鐐瑰嚮鐗规晥
 # mouse click effect: fireworks | explosion | love | text
 cursor_effect: fireworks
 
-# 打字特效
+# 鎵撳瓧鐗规晥
 # typing effect
 typing_effect:
-  colorful: true  # 礼花特效
-  shake: false    # 震动特效
+  colorful: true  # 绀艰姳鐗规晥
+  shake: false    # 闇囧姩鐗规晥
 
-# 侧栏粒子时钟
+# 渚ф爮绮掑瓙鏃堕挓
 diy_time:
   runtime: true 
-  clock: true # 粒子时钟
+  clock: true # 绮掑瓙鏃堕挓
 
-#主页每页显示文章�?
+#涓婚〉姣忛〉鏄剧ず鏂囩珷鏁?
 index_generator:
     per_page: 4
-#archive分页每页显示文章�?
+#archive鍒嗛〉姣忛〉鏄剧ず鏂囩珷鏁?
 archive_generator:
     per_page: 5
-#tag分页每页显示文章�?
+#tag鍒嗛〉姣忛〉鏄剧ず鏂囩珷鏁?
 tag_generator:
     per_page: 10
-#category分页每页显示文章�?
+#category鍒嗛〉姣忛〉鏄剧ず鏂囩珷鏁?
 category_generator: 
     per_page: 10
 
