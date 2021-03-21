@@ -132,6 +132,7 @@ depth: 10
 excerpt_excludes: []
 more_excludes: []
 hideWholePostExcerpts: true
+length: 150
 
 #rss订阅
 feed:

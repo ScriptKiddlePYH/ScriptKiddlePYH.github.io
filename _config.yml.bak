@@ -7,7 +7,7 @@ title: Security's Blog
 subtitle: 越努力，越幸运
 description: 成就更好的自己
 keywords:
-author: PYH
+author: 不忘初心
 language: zh-CN
 timezone: 'Asia/Shanghai'
 
@@ -210,4 +210,5 @@ baidu_url_submit:
   host: pyhsecurity.cn	     ## 百度站长平台中注册的域名
   token: 2465a4f91fbee23fe96d109f8700e262	 ## 准入秘钥
   path: baidu_urls.txt ## 文本文档的地址， 新链接会保存在此文本文档里
+
 
