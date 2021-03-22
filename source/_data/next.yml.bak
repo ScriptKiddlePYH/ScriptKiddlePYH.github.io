@@ -125,7 +125,6 @@ menu:
   sitemap: /sitemap.xml || fa fa-sitemap
   #commonweal: /404/ || fa fa-heartbeat
   links: /links || fa fa-link
-  books: /books/ || fa fa-book
 
 # Enable / Disable menu icons / item badges.
 menu_settings:
@@ -1003,32 +1002,36 @@ css: css
 js: js
 images: images
 
-# 榧犳爣鐐瑰嚮鐗规晥
+
 # mouse click effect: fireworks | explosion | love | text
 cursor_effect: fireworks
 
-# 鎵撳瓧鐗规晥
+
 # typing effect
 typing_effect:
-  colorful: true  # 绀艰姳鐗规晥
-  shake: false    # 闇囧姩鐗规晥
+  colorful: true
+  shake: false
 
-# 渚ф爮绮掑瓙鏃堕挓
+
 diy_time:
   runtime: true 
-  clock: true # 绮掑瓙鏃堕挓
+  clock: true
 
-#涓婚〉姣忛〉鏄剧ず鏂囩珷鏁?
+
 index_generator:
     per_page: 4
-#archive鍒嗛〉姣忛〉鏄剧ず鏂囩珷鏁?
+
 archive_generator:
     per_page: 5
-#tag鍒嗛〉姣忛〉鏄剧ず鏂囩珷鏁?
+
 tag_generator:
     per_page: 10
-#category鍒嗛〉姣忛〉鏄剧ず鏂囩珷鏁?
+
 category_generator: 
     per_page: 10
+
+recent_posts_title: 近期文章
+recent_posts_layout: block
+recent_posts: true
 
 
