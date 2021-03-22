@@ -160,6 +160,24 @@ const ap = new APlayer({
         cover: 'https://p2.music.126.net/RmdCYKF2ZQiAlgFmcsIOeQ==/18958878997954526.jpg?',
 	  },
 	  {
+		name: "可不可以",
+        artist: '张紫豪',
+        url: 'http://music.163.com/song/media/outer/url?id=553755659.mp3',
+        cover: 'https://p2.music.126.net/WafK2OQfEtqXitdDXJ772Q==/109951163252847249.jpg?',
+	  },
+	  {
+		name: "My Soul",
+        artist: 'July',
+        url: 'http://music.163.com/song/media/outer/url?id=5308028.mp3',
+        cover: 'https://p2.music.126.net/NFl1s5Hl3E37dCaFIDHfNw==/727876697598920.jpg?',
+	  },
+	  {
+		name: "Love Paradise",
+        artist: '陈慧琳',
+        url: 'http://music.163.com/song/media/outer/url?id=213737.mp3',
+        cover: 'https://p1.music.126.net/ANNiPNIW5BlCbHA-hpKyhg==/106652627906419.jpg?',
+	  },
+	  {
 	  	name: "Big Big World",
         artist: 'Emilia',
         url: 'http://music.163.com/song/media/outer/url?id=2534006.mp3',
