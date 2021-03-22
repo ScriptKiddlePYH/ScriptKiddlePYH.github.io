@@ -1,5 +1,5 @@
 ---
-title: 高级运算符
+title: Google高级运算符
 tags: Google hacking
 categories: Google
 top: 12
