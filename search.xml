@@ -290,7 +290,7 @@
   <entry>
     <title>SQL报错注入实战</title>
     <url>/2021/03/25/%E4%B8%80%E6%AC%A1SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%AE%9E%E6%88%98/</url>
-    <content><![CDATA[<h2 id="漏洞利用过程"><a href="#漏洞利用过程" class="headerlink" title="漏洞利用过程"></a>漏洞利用过程</h2><ol>
+    <content><![CDATA[<h2 id="手工注入过程"><a href="#手工注入过程" class="headerlink" title="手工注入过程"></a>手工注入过程</h2><ol>
 <li>首先我们拿到一个靶机网站，随便输入一个密码，无任何回显，然后我们进行抓包判断，查看源代码发现加入tips参数能出报错提示<br><img src="https://img-blog.csdnimg.cn/20210325162455485.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210325162503191.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
 <li>可初步判断可以使用SQL报错注入进行注入攻击，然后我们对name变量进行插入恶意语句<br><img src="https://img-blog.csdnimg.cn/20210325162519249.png" alt="在这里插入图片描述"><span id="more"></span></li>
 <li>发现我们的select关键词被WAF过滤了<br><img src="https://img-blog.csdnimg.cn/20210325162548472.png" alt="在这里插入图片描述"></li>
