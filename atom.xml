@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2021-03-25T03:23:22.924Z</updated>
+  <updated>2021-03-25T06:27:06.269Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>真实的内网环境搭建</title>
+    <link href="https://pyhsecurity.cn/2021/03/25/%E7%9C%9F%E5%AE%9E%E7%9A%84%E5%86%85%E7%BD%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <id>https://pyhsecurity.cn/2021/03/25/%E7%9C%9F%E5%AE%9E%E7%9A%84%E5%86%85%E7%BD%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</id>
+    <published>2021-03-25T06:24:59.915Z</published>
+    <updated>2021-03-25T06:27:06.269Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;网络拓扑图及通信原理&quot;&gt;&lt;a href=&quot;#网络拓扑图及通信原理&quot; class=&quot;headerlink&quot; title=&quot;网络拓扑图及通信原理&quot;&gt;&lt;/a&gt;网络拓扑图及通信原理&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210320230449202.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;假如我们的笔记本代表我们的宿主机Kali，旁边的是我们自己公司的防火墙，云代表互联网，对面的是对面公司的防火墙和内网服务器，分别是win7和Windows Server2003。&lt;/p&gt;
+&lt;p&gt;现在我们要对其内网进行渗透攻击，那么我们就必须要获得对面主机反弹回来的meterpreter shell，我们有两种方式，一种是通过VPS代理的方式接收反弹回来的shell；另一种是通过设置防火墙的NAT映射，将IP地址进行映射从而接收反弹的shell连接。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="内网渗透" scheme="https://pyhsecurity.cn/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
+    
+    
+    <category term="红蓝对抗" scheme="https://pyhsecurity.cn/tags/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/"/>
+    
+  </entry>
   
   <entry>
     <title>proxychains代理扫描并获取内网服务器权限</title>
