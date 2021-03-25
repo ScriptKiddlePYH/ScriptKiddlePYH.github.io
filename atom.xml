@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2021-03-25T06:27:06.269Z</updated>
+  <updated>2021-03-25T08:36:23.958Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SQL报错注入实战</title>
+    <link href="https://pyhsecurity.cn/2021/03/25/%E4%B8%80%E6%AC%A1SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%AE%9E%E6%88%98/"/>
+    <id>https://pyhsecurity.cn/2021/03/25/%E4%B8%80%E6%AC%A1SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%AE%9E%E6%88%98/</id>
+    <published>2021-03-25T08:31:52.721Z</published>
+    <updated>2021-03-25T08:36:23.958Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;漏洞利用过程&quot;&gt;&lt;a href=&quot;#漏洞利用过程&quot; class=&quot;headerlink&quot; title=&quot;漏洞利用过程&quot;&gt;&lt;/a&gt;漏洞利用过程&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;首先我们拿到一个靶机网站，随便输入一个密码，无任何回显，然后我们进行抓包判断，查看源代码发现加入tips参数能出报错提示&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210325162455485.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210325162503191.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/li&gt;
+&lt;li&gt;可初步判断可以使用SQL报错注入进行注入攻击，然后我们对name变量进行插入恶意语句&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210325162519249.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;</summary>
+    
+    
+    
+    <category term="CTF比赛" scheme="https://pyhsecurity.cn/categories/CTF%E6%AF%94%E8%B5%9B/"/>
+    
+    
+    <category term="Web漏洞攻击" scheme="https://pyhsecurity.cn/tags/Web%E6%BC%8F%E6%B4%9E%E6%94%BB%E5%87%BB/"/>
+    
+  </entry>
   
   <entry>
     <title>真实的内网环境搭建</title>
@@ -137,12 +158,13 @@
     <updated>2021-03-17T07:41:03.161Z</updated>
     
     
-    <summary type="html">&lt;h1 id=&quot;内网信息收集&quot;&gt;&lt;a href=&quot;#内网信息收集&quot; class=&quot;headerlink&quot; title=&quot;内网信息收集&quot;&gt;&lt;/a&gt;内网信息收集&lt;/h1&gt;&lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h2&gt;&lt;h3 id=&quot;对当前机器角色判断&quot;&gt;&lt;a href=&quot;#对当前机器角色判断&quot; class=&quot;headerlink&quot; title=&quot;对当前机器角色判断&quot;&gt;&lt;/a&gt;对当前机器角色判断&lt;/h3&gt;&lt;h3 id=&quot;对当前机器所处网络环境的拓扑结构进行分析和判断&quot;&gt;&lt;a href=&quot;#对当前机器所处网络环境的拓扑结构进行分析和判断&quot; class=&quot;headerlink&quot; title=&quot;对当前机器所处网络环境的拓扑结构进行分析和判断&quot;&gt;&lt;/a&gt;对当前机器所处网络环境的拓扑结构进行分析和判断&lt;/h3&gt;&lt;h3 id=&quot;对当前机器所处区域的判断&quot;&gt;&lt;a href=&quot;#对当前机器所处区域的判断&quot; class=&quot;headerlink&quot; title=&quot;对当前机器所处区域的判断&quot;&gt;&lt;/a&gt;对当前机器所处区域的判断&lt;/h3&gt;&lt;h2 id=&quot;收集本机信息&quot;&gt;&lt;a href=&quot;#收集本机信息&quot; class=&quot;headerlink&quot; title=&quot;收集本机信息&quot;&gt;&lt;/a&gt;收集本机信息&lt;/h2&gt;&lt;h3 id=&quot;手动收集信息&quot;&gt;&lt;a href=&quot;#手动收集信息&quot; class=&quot;headerlink&quot; title=&quot;手动收集信息&quot;&gt;&lt;/a&gt;手动收集信息&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;进一步了解整个域的操作系统版本、软件及补丁安装情况、用户命名方式等&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;自动收集信息&quot;&gt;&lt;a href=&quot;#自动收集信息&quot; class=&quot;headerlink&quot; title=&quot;自动收集信息&quot;&gt;&lt;/a&gt;自动收集信息&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;通过WMIC命令行工具收集目标机器信息，通过导入ps1脚本&lt;/li&gt;
-&lt;/ul&gt;</summary>
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;内网信息收集&quot;&gt;&lt;a href=&quot;#内网信息收集&quot; class=&quot;headerlink&quot; title=&quot;内网信息收集&quot;&gt;&lt;/a&gt;内网信息收集&lt;/h1&gt;&lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot;</summary>
+        
+      
     
     
     
@@ -161,20 +183,13 @@
     <updated>2021-03-12T16:59:06.917Z</updated>
     
     
-    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在内网渗透中，我们必须要快速地对内网信息进行多方面的信息收集，因此我们需要用到一些常用的命令或者是工具对内网域控制器或者管理员进行快速地定位&lt;/p&gt;
-&lt;h2 id=&quot;工具的使用&quot;&gt;&lt;a href=&quot;#工具的使用&quot; class=&quot;headerlink&quot; title=&quot;工具的使用&quot;&gt;&lt;/a&gt;工具的使用&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;net config workstation：查询当前登录域及登录用户信息&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;“登录域”用于表示当前登录的用户是域用户还是本地用户&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210309171809630.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;net time /domain：判断主域(域服务器通常会同时作为时间服务器使用)&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;执行命令后有三种情况，因为条件原因我这里只显示一种情况&lt;/p&gt;
-&lt;p&gt;存在域，但当前用户不是域用户&lt;br&gt;存在域，且当前用户是域用户&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210309172224207.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;当前网络环境为工作组，不存在域&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;for /L %I in (3,1,254) DO @ping -w 1 -n 1 192.168.3.%I | findstr “TTL=”：利用ICMP协议快速探测内网&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;</summary>
+        
+      
     
     
     
@@ -193,15 +208,14 @@
     <updated>2021-03-09T09:55:16.730Z</updated>
     
     
+      
+      
+        
+        
     <summary type="html">&lt;h2 id=&quot;进制的定义&quot;&gt;&lt;a href=&quot;#进制的定义&quot; class=&quot;headerlink&quot; title=&quot;进制的定义&quot;&gt;&lt;/a&gt;进制的定义&lt;/h2&gt;&lt;p&gt;进制是由符号组成，可以自己定义，进位是指向后数一位。&lt;/p&gt;
-&lt;p&gt;二进制：由两个符号组成，分别是0 、1 逢二进一&lt;/p&gt;
-&lt;p&gt;八进制：由八个符号组成，分别是0、1、2、3、4、5、6、7 、逢八进一&lt;/p&gt;
-&lt;p&gt;十进制：由十个符号组成，分别是0、1、2、3、4、5、6、7、8、9、逢十进一&lt;/p&gt;
-&lt;p&gt;十六进制：由十六个符号组成，分别是0、1、2、3、4、5、6、7、8、9、A、B、C、D、E、F、逢十六进一&lt;/p&gt;
-&lt;p&gt;当然，除了常规的，还有3进制、4进制….n进制，进制的符号不一定是常规的123顺序排列的。&lt;/p&gt;
-&lt;p&gt;主要作用可以用于加密。进制运算结果本质是通过查表得到的。&lt;/p&gt;
-&lt;p&gt;16位汇编：实模式，16位处理器内的内部，最多可以处理存储的长度为16位。&lt;/p&gt;
-&lt;p&gt;32位汇编：保护模式，32位处理器内的内部，最多可以处理存储的长度为32位。&lt;/p&gt;</summary>
+&lt;p&gt;二进制：由两个符号组成，分别是0 、1</summary>
+        
+      
     
     
     
@@ -220,20 +234,15 @@
     <updated>2021-03-09T09:55:16.728Z</updated>
     
     
+      
+      
+        
+        
     <summary type="html">&lt;h1 id=&quot;汇编基本语句总结&quot;&gt;&lt;a href=&quot;#汇编基本语句总结&quot; class=&quot;headerlink&quot; title=&quot;汇编基本语句总结&quot;&gt;&lt;/a&gt;汇编基本语句总结&lt;/h1&gt;&lt;p&gt;[toc]&lt;/p&gt;
 &lt;p&gt; （目的寄存器：保存结果的寄存器）&lt;/p&gt;
-&lt;h2 id=&quot;一、-基本框架&quot;&gt;&lt;a href=&quot;#一、-基本框架&quot; class=&quot;headerlink&quot; title=&quot;一、 基本框架&quot;&gt;&lt;/a&gt;一、 基本框架&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;.586&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;.MODEL flat, stdcall&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;.code&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;main proc&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	mov eax, 1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	mov ebx, 2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;main ENDP&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;END main&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-
-
-&lt;h2 id=&quot;二、基本运算&quot;&gt;&lt;a href=&quot;#二、基本运算&quot; class=&quot;headerlink&quot; title=&quot;二、基本运算&quot;&gt;&lt;/a&gt;二、基本运算&lt;/h2&gt;&lt;h3 id=&quot;1-加&quot;&gt;&lt;a href=&quot;#1-加&quot; class=&quot;headerlink&quot; title=&quot;1. 加&quot;&gt;&lt;/a&gt;1. 加&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;自增用法：&lt;code&gt;INC  寄存器名（incrementing）&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;加法用法：&lt;code&gt;ADD 目的寄存器,  寄存器名或数值（addition）&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;2-减法&quot;&gt;&lt;a href=&quot;#2-减法&quot; class=&quot;headerlink&quot; title=&quot;2. 减法&quot;&gt;&lt;/a&gt;2. 减法&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;自减用法：&lt;code&gt;DEC 寄存器名（decrementing）&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;减法用法：&lt;code&gt;SUB 目的寄存器，寄存器名或数值（subtraction）&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary>
+&lt;h2</summary>
+        
+      
     
     
     
@@ -253,19 +262,7 @@
     
     
     <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在渗透测试中，一个典型的域权限提升过程，通常围绕着收集明文凭据或通过mimikatz提权等方法，在获取了管理员权限的系统中寻找域管理员登录进程，进而收集域管理员的凭据。如果内网环境非常复杂，渗透测试人员无法立即在拥有权限的系统中获得域管理员进程，那么通常采用的方法是：在跳板机之间跳转，直至获得域管理员权限，同时进行一些分析工作，进而找到渗透测试的路径。&lt;/p&gt;
-&lt;p&gt;现在我们来假设一种情况：渗透测试人员在某个内网环境中获得一个域普通用户的权限，首先通过各种方法获得当前服务器的本地管理员权限，然后分析当前服务器的用户登录列表及会话信息，知道哪些用户登录了这台服务器。如果渗透测试人员通过分析发现，可以获取权限的登录用户都不是域管理员账户，同时没有域管理员组中的用户登录这台服务器，就可以使用另一个账户并寻找账户在内网的哪台机器上具有管理权限，再枚举这台机器上的用户，然后继续进行渗透测试，直至找到一个可以获取域管理员权限的有效路径为止。&lt;/p&gt;
-&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;h2 id=&quot;思路&quot;&gt;&lt;a href=&quot;#思路&quot; class=&quot;headerlink&quot; title=&quot;思路&quot;&gt;&lt;/a&gt;思路&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;net group “Domain Admins” /domain：获取域管理员列表&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210307211234765.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;tasklist /v：列出本机的所有进程及进程用户&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210307211423315.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;从这里可以看到域管理员都有哪些进程，如果能找到，这将对后面窃取令牌有很大的帮助。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;net group “Domain Controllers” /domain：查询域控制器列表&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
+&lt;p&gt;现在我们来假设一种情况：渗透测试人员在某个内网环境中获得一个域普通用户的权限，首先通过各种方法获得当前服务器的本地管理员权限，然后分析当前服务器的用户登录列表及会话信息，知道哪些用户登录了这台服务器。如果渗透测试人员通过分析发现，可以获取权限的登录用户都不是域管理员账户，同时没有域管理员组中的用户登录这台服务器，就可以使用另一个账户并寻找账户在内网的哪台机器上具有管理权限，再枚举这台机器上的用户，然后继续进行渗透测试，直至找到一个可以获取域管理员权限的有效路径为止。&lt;/p&gt;</summary>
     
     
     
@@ -292,13 +289,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;wmic product get name,version：利用wmic命令，将结果输出到文本文件中&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210307121744649.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
-&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;wmic process list brief：查看进程信息&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210307121856592.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
+&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210307121744649.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
     
     
     
@@ -344,14 +335,7 @@
 &lt;td&gt;RemoteSigned&lt;/td&gt;
 &lt;td&gt;对本地脚本不进行限制；对来自网络的脚本必须验证其签名&lt;/td&gt;
 &lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;h2 id=&quot;各脚本命令展示&quot;&gt;&lt;a href=&quot;#各脚本命令展示&quot; class=&quot;headerlink&quot; title=&quot;各脚本命令展示&quot;&gt;&lt;/a&gt;各脚本命令展示&lt;/h2&gt;&lt;p&gt;这里我们将策略设置为Unrestricted，能运行所有的脚本权限&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210306133134774.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;然后我们进入PowerSploit的Recon文件夹将PowerView.ps1这个脚本导入进去(只有导入这个脚本才能执行以下命令)，这个是PowerSploit的下载地址&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/PowerShellMafia/PowerSploit&quot;&gt;https://github.com/PowerShellMafia/PowerSploit&lt;/a&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210306133704948.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Get-NetDomain：获取当前用户所在域的名称&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210306133824783.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
+&lt;/tbody&gt;&lt;/table&gt;</summary>
     
     
     
