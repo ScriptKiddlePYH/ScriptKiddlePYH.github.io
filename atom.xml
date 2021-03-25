@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2021-03-22T13:26:17.169Z</updated>
+  <updated>2021-03-25T03:23:22.924Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>proxychains代理扫描并获取内网服务器权限</title>
+    <link href="https://pyhsecurity.cn/2021/03/25/proxychains%E4%BB%A3%E7%90%86%E6%89%AB%E6%8F%8F%E5%B9%B6%E8%8E%B7%E5%8F%96%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9D%83%E9%99%90/"/>
+    <id>https://pyhsecurity.cn/2021/03/25/proxychains%E4%BB%A3%E7%90%86%E6%89%AB%E6%8F%8F%E5%B9%B6%E8%8E%B7%E5%8F%96%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9D%83%E9%99%90/</id>
+    <published>2021-03-25T03:18:20.232Z</published>
+    <updated>2021-03-25T03:23:22.924Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;Proxychains&quot;&gt;&lt;a href=&quot;#Proxychains&quot; class=&quot;headerlink&quot; title=&quot;Proxychains&quot;&gt;&lt;/a&gt;Proxychains&lt;/h2&gt;&lt;p&gt;Proxychains是为了GNU\Linux操作系统而开发的工具，任何TCP连接都可以通过TOR或者SOCKS4，SOCKS5，HTTP/HTTPS路由到目的地。在这个通道技术中可以使用多个代理服务器。除此之外提供匿名方式，诸如用于中转跳板的应用程序也可以用于对发现的新网络进行直接通信。&lt;/p&gt;
+&lt;h2 id=&quot;利用思路&quot;&gt;&lt;a href=&quot;#利用思路&quot; class=&quot;headerlink&quot; title=&quot;利用思路&quot;&gt;&lt;/a&gt;利用思路&lt;/h2&gt;&lt;p&gt;还是这个拓扑图，我们穿越了层层障碍，终于拿到了&lt;code&gt;192.168.103.101&lt;/code&gt;这台服务器的权限，接下来，我们以这台服务器为跳板机，去访问内网中的更多机器。而proxychains则是隐藏我们本机kali对目标服务器之间的流量，从而加大被溯源的成本。在真实的渗透中可能不止一台数据库机器，横向的时候可能会出现多台域主机。&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210325101439326.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;攻击过程&quot;&gt;&lt;a href=&quot;#攻击过程&quot; class=&quot;headerlink&quot; title=&quot;攻击过程&quot;&gt;&lt;/a&gt;攻击过程&lt;/h2&gt;&lt;p&gt;首先我们先拿下win7这台主机的权限，我们使用上次生成的木马进行连接shell&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="内网渗透" scheme="https://pyhsecurity.cn/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
+    
+    
+    <category term="红蓝对抗" scheme="https://pyhsecurity.cn/tags/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/"/>
+    
+  </entry>
   
   <entry>
     <title>Google高级运算符</title>
