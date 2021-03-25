@@ -136,6 +136,12 @@ const ap = new APlayer({
         cover: 'https://p2.music.126.net/PEQ69_EwVpuaBmmSkAY0SQ==/58274116284456.jpg?',
 	  },
 	  {
+		name: "起风了",
+        artist: '买辣椒也用券',
+        url: 'http://music.163.com/song/media/outer/url?id=1330348068.mp3',
+        cover: 'https://p2.music.126.net/diGAyEmpymX8G7JcnElncQ==/109951163699673355.jpg?',
+	  },
+	  {
 		name: "爱与痛的边缘",
         artist: '谭咏麟',
         url: 'http://music.163.com/song/media/outer/url?id=113031.mp3',
