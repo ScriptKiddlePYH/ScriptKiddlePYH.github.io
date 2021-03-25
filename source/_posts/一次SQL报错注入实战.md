@@ -4,7 +4,7 @@ tags: Web漏洞攻击
 categories: CTF比赛
 top: 16
 ---
-## 漏洞利用过程
+## 手工注入过程
  1. 首先我们拿到一个靶机网站，随便输入一个密码，无任何回显，然后我们进行抓包判断，查看源代码发现加入tips参数能出报错提示
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210325162455485.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210325162503191.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70)
