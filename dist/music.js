@@ -154,6 +154,24 @@ const ap = new APlayer({
         cover: 'https://p1.music.126.net/2JC8Nj7Ny859FwIFZzLX9w==/109951163180730054.jpg?',
 	  },
 	  {
+		name: "暧昧",
+        artist: '薛之谦',
+        url: 'http://music.163.com/song/media/outer/url?id=471385043.mp3',
+        cover: 'https://p1.music.126.net/fNbj5uDwltSDLbETdnEYYQ==/109951163069265719.jpg?',
+	  },
+	  {
+		name: "绅士",
+        artist: '薛之谦',
+        url: 'http://music.163.com/song/media/outer/url?id=32192436.mp3',
+        cover: 'https://p2.music.126.net/qpvBqYIqkRhO9Ry2qOCdJQ==/2942293117852634.jpg?',
+	  },
+	  {
+		name: "演员",
+        artist: '薛之谦',
+        url: 'http://music.163.com/song/media/outer/url?id=32507038.mp3',
+        cover: 'https://p1.music.126.net/qpvBqYIqkRhO9Ry2qOCdJQ==/2942293117852634.jpg?',
+	  },
+	  {
 		name: "罪人",
         artist: '李克勤',
         url: 'http://music.163.com/song/media/outer/url?id=111536.mp3',
