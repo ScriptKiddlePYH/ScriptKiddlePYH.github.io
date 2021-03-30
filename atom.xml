@@ -62,7 +62,7 @@
     <link href="https://pyhsecurity.cn/2021/03/25/%E7%9C%9F%E5%AE%9E%E7%9A%84%E5%86%85%E7%BD%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
     <id>https://pyhsecurity.cn/2021/03/25/%E7%9C%9F%E5%AE%9E%E7%9A%84%E5%86%85%E7%BD%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</id>
     <published>2021-03-25T06:24:59.915Z</published>
-    <updated>2021-03-25T06:27:06.269Z</updated>
+    <updated>2021-03-30T12:58:27.923Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;网络拓扑图及通信原理&quot;&gt;&lt;a href=&quot;#网络拓扑图及通信原理&quot; class=&quot;headerlink&quot; title=&quot;网络拓扑图及通信原理&quot;&gt;&lt;/a&gt;网络拓扑图及通信原理&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210320230449202.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;假如我们的笔记本代表我们的宿主机Kali，旁边的是我们自己公司的防火墙，云代表互联网，对面的是对面公司的防火墙和内网服务器，分别是win7和Windows Server2003。&lt;/p&gt;
