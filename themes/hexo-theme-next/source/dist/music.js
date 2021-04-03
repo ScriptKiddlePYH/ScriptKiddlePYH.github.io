@@ -148,6 +148,30 @@ const ap = new APlayer({
         cover: 'https://p1.music.126.net/LBWEQ6ib0qah58bm0OMMFA==/109951163416481965.jpg?',
 	  },
 	  {
+		name: "玻璃之情",
+        artist: '张国荣',
+        url: 'http://music.163.com/song/media/outer/url?id=186436.mp3',
+        cover: 'https://p2.music.126.net/2YIpNoCzXfYgz4zIw3s0Vg==/73667279073787.jpg?',
+	  },
+	  {
+		name: "春夏秋冬",
+        artist: '张国荣',
+        url: 'http://music.163.com/song/media/outer/url?id=186453.mp3',
+        cover: 'https://p2.music.126.net/2YIpNoCzXfYgz4zIw3s0Vg==/73667279073787.jpg?',
+	  },
+	  {
+		name: "有心人",
+        artist: '张国荣',
+        url: 'http://music.163.com/song/media/outer/url?id=29343372.mp3',
+        cover: 'https://p1.music.126.net/gtyZ755eumOgcu-2RjrqnA==/109951165851926372.jpg?',
+	  },
+	  {
+		name: "左右手",
+        artist: '张国荣',
+        url: 'http://music.163.com/song/media/outer/url?id=187564.mp3',
+        cover: 'https://p1.music.126.net/hoUqQMY1FSeVprC1iP4Mxw==/109951165341229007.jpg?',
+	  },
+	  {
 		name: "认错",
         artist: '许嵩',
         url: 'http://music.163.com/song/media/outer/url?id=167888.mp3',
