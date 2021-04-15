@@ -82,12 +82,6 @@ const ap = new APlayer({
         cover: 'https://p2.music.126.net/x-OMZS1xidJkNHEDE_qG4g==/19054536509481786.jpg?',
 	  },
 	  {
-		name: "莫扎特：土耳其进行曲",
-        artist: '群星',
-        url: 'http://music.163.com/song/media/outer/url?id=27511298.mp3',
-        cover: 'https://p2.music.126.net/CzXg1dOY-aGb5ZV6IvN_BA==/109951164077784060.jpg?',
-	  },
-	  {
 		name: "城南花已开",
         artist: '三亩地',
         url: 'http://music.163.com/song/media/outer/url?id=468176711.mp3',
