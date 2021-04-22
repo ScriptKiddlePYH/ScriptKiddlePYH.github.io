@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2021-04-22T08:00:57.017Z</updated>
+  <updated>2021-04-22T08:06:43.402Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -17,15 +17,14 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
+    <title>设备告警日志分析及处理</title>
     <link href="https://pyhsecurity.cn/2021/04/22/%E8%AE%BE%E5%A4%87%E5%91%8A%E8%AD%A6%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E5%8F%8A%E5%A4%84%E7%90%86/"/>
     <id>https://pyhsecurity.cn/2021/04/22/%E8%AE%BE%E5%A4%87%E5%91%8A%E8%AD%A6%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E5%8F%8A%E5%A4%84%E7%90%86/</id>
     <published>2021-04-22T07:58:18.159Z</published>
-    <updated>2021-04-22T08:00:57.017Z</updated>
+    <updated>2021-04-22T08:06:43.402Z</updated>
     
     
-    <summary type="html">&lt;p&gt;title: 设备告警日志分析及处理&lt;br&gt;tags: 红蓝对抗&lt;br&gt;categories: 蓝队防守&lt;/p&gt;
-&lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h2&gt;&lt;p&gt;在整个攻防演练的过程中，我们主要要注意安全监控与分析、安全策略优化、安全设备的自身加固。这三部分都是保障网络安全的重要手段。一旦边界设备被入侵，那么就意味着全部都将失守。&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210422113854988.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70#pic_center&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+    <summary type="html">&lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h2&gt;&lt;p&gt;在整个攻防演练的过程中，我们主要要注意安全监控与分析、安全策略优化、安全设备的自身加固。这三部分都是保障网络安全的重要手段。一旦边界设备被入侵，那么就意味着全部都将失守。&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210422113854988.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70#pic_center&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
 &lt;h2 id=&quot;安全设备分类&quot;&gt;&lt;a href=&quot;#安全设备分类&quot; class=&quot;headerlink&quot; title=&quot;安全设备分类&quot;&gt;&lt;/a&gt;安全设备分类&lt;/h2&gt;&lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -84,10 +83,15 @@
 &lt;/tbody&gt;&lt;/table&gt;
 &lt;h2 id=&quot;防火墙&quot;&gt;&lt;a href=&quot;#防火墙&quot; class=&quot;headerlink&quot; title=&quot;防火墙&quot;&gt;&lt;/a&gt;防火墙&lt;/h2&gt;&lt;p&gt;根据百度百科的描述，防火墙技术是通过有机结合各类用于安全管理与筛选的软件和硬件设备，帮助计算机网络于其内、外网之间构建一道相对隔绝的保护屏障，以保护用户资料与信息安全性的一种技术。&lt;/p&gt;
 &lt;p&gt;在红蓝对抗中，防火墙一般部署在网络边界和区域边界。前期准备主要是梳理防火墙的访问控制规则和对一些源IP进行处理。&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210422110208882.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;防火墙部署模式&quot;&gt;&lt;a href=&quot;#防火墙部署模式&quot; class=&quot;headerlink&quot; title=&quot;防火墙部署模式&quot;&gt;&lt;/a&gt;防火墙部署模式&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210422120457876.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
+&lt;h2 id=&quot;防火墙部署模式&quot;&gt;&lt;a href=&quot;#防火墙部署模式&quot; class=&quot;headerlink&quot; title=&quot;防火墙部署模式&quot;&gt;&lt;/a&gt;防火墙部署模式&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210422120457876.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;IDS设备&quot;&gt;&lt;a href=&quot;#IDS设备&quot; class=&quot;headerlink&quot; title=&quot;IDS设备&quot;&gt;&lt;/a&gt;IDS设备&lt;/h1&gt;</summary>
     
     
     
+    <category term="蓝队防守" scheme="https://pyhsecurity.cn/categories/%E8%93%9D%E9%98%9F%E9%98%B2%E5%AE%88/"/>
+    
+    
+    <category term="红蓝对抗" scheme="https://pyhsecurity.cn/tags/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/"/>
     
   </entry>
   
