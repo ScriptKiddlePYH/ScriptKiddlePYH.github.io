@@ -190,6 +190,18 @@ const ap = new APlayer({
         cover: 'https://p1.music.126.net/qpvBqYIqkRhO9Ry2qOCdJQ==/2942293117852634.jpg?',
 	  },
 	  {
+		name: "千千万万",
+        artist: '深海鱼子酱',
+        url: 'http://music.163.com/song/media/outer/url?id=1811459887.mp3',
+        cover: 'https://p2.music.126.net/xdegZlt9xmez_MxuH_PzXA==/109951165623999837.jpg?',
+	  },
+	  {
+		name: "你的答案",
+        artist: '阿冗',
+        url: 'http://music.163.com/song/media/outer/url?id=1400256289.mp3',
+        cover: 'https://p1.music.126.net/OlX-4S4L0Hdkyy_DQ27zag==/109951164459621658.jpg?',  
+	  },
+	  {
 		name: "罪人",
         artist: '李克勤',
         url: 'http://music.163.com/song/media/outer/url?id=111536.mp3',
