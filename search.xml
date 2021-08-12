@@ -1,100 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>六级听力技巧</title>
-    <url>/2021/04/10/%E5%85%AD%E7%BA%A7%E5%90%AC%E5%8A%9B%E6%8A%80%E5%B7%A7/</url>
-    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>因为六级在听力和阅读方面都所占比重较高，因此我们可以先来总结一下关于六级听力的一些解题技巧，小编现在也在奋战在六级的考试备战中，希望这些技巧也能助读者一臂之力，迈向六级考试的巅峰。</p>
-<h2 id="结构法则"><a href="#结构法则" class="headerlink" title="结构法则"></a>结构法则</h2><table>
-<thead>
-<tr>
-<th>选项结构</th>
-<th>考查类型</th>
-<th>听音重点</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>动词原形</td>
-<td>计划或建议</td>
-<td>建议处、计划处、时间处、问答处、结尾处</td>
-</tr>
-<tr>
-<td>动词不定式</td>
-<td>原因或目的</td>
-<td>因果处、情态动词处</td>
-</tr>
-<tr>
-<td>名词</td>
-<td>主旨或细节</td>
-<td>开头结尾处、比较处、举例处、并列处、转折处、相关细节处</td>
-</tr>
-<tr>
-<td>形容词</td>
-<td>态度或评价</td>
-<td>形容词处</td>
-</tr>
-<tr>
-<td>完整的句子</td>
-<td>某事的原因或综合理解</td>
-<td>因果处、转折处、比较处、引言处</td>
-</tr>
-<tr>
-<td>地点场景</td>
-<td>方位或地点</td>
-<td>表地点场景的关键词</td>
-</tr>
-<tr>
-<td>角色关系</td>
-<td>角色或关系</td>
-<td>表人物身份的关键词</td>
-</tr>
-<tr>
-<td>时间、数字信息</td>
-<td>时间、数字的辨别或计算</td>
-<td>时间处、数字处</td>
-</tr>
-</tbody></table>
-<h2 id="人称法则"><a href="#人称法则" class="headerlink" title="人称法则"></a>人称法则</h2><p>人称法则主要运用在对话题型中。如果答案以she开头，那么问题多半包含the woman，反之，一般是针对男士的提问，如果选项中既有she也有the woman的话，那一般不是针对个人，而是像”What do we learn from the conversation?”这类的问题。</p>
-<span id="more"></span>
-<h2 id="干扰法则"><a href="#干扰法则" class="headerlink" title="干扰法则"></a>干扰法则</h2><table>
-<thead>
-<tr>
-<th>法则种类</th>
-<th>概述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>求同原则</td>
-<td>如果有一个答案和其余三个答案处于不同范畴，那么这个往往是干扰项</td>
-</tr>
-<tr>
-<td>相关法则</td>
-<td>当有两个选项是为同一个意思但其余两个选项与此毫无关联的时候，有可能答案就在这两个选项中</td>
-</tr>
-<tr>
-<td>相反法则</td>
-<td>当两个选项意思相反时，答案往往在这两个选项中</td>
-</tr>
-<tr>
-<td>包含原则</td>
-<td>当一个选项中的意思包含其余选项时，我们就遵循”包含取大原则”</td>
-</tr>
-<tr>
-<td>常识原则</td>
-<td>不符合常识或符合常识的一般都不是为正确答案</td>
-</tr>
-</tbody></table>
-<!--more-->
-
-
-]]></content>
-      <categories>
-        <category>六级考试</category>
-      </categories>
-      <tags>
-        <tag>六级听力</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>多层跳板攻击</title>
     <url>/2021/03/27/%E5%A4%9A%E5%B1%82%E8%B7%B3%E6%9D%BF%E6%94%BB%E5%87%BB/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>首先，我们在上一章的基础上，即在Windows Server2003的主机上又发现了另一层的网络，所以我们就必须在以win2003为跳板机，再去访问下一个网段的主机，即多层跳板攻击。<br><img src="https://img-blog.csdnimg.cn/20210327210912305.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
@@ -994,6 +900,26 @@
       <tags>
         <tag>漏洞检测与防御</tag>
       </tags>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2021/08/12/%E7%A9%BA%E9%97%B4%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%EF%BC%9ACensys/</url>
+    <content><![CDATA[<h1 id="空间搜索引擎：Censys"><a href="#空间搜索引擎：Censys" class="headerlink" title="空间搜索引擎：Censys"></a>空间搜索引擎：Censys</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>如果有小伙伴用过shodan，那么都清楚shodan是一个基于全网扫描的搜索引擎，它区别于其他搜索引擎。shodan它能搜索到基于隐私的数据，如摄像头，堡垒机等的弱口令。而我们今天要说的是Censys这款搜索引擎，Censys是一个巨大的数据库，里面存储着每个暴露在互联网上的设备信息。</p>
+<h2 id="搜索语法"><a href="#搜索语法" class="headerlink" title="搜索语法"></a>搜索语法</h2><h3 id="查询和180-76-76-0-8-or-14-215-177-0-24中的主机"><a href="#查询和180-76-76-0-8-or-14-215-177-0-24中的主机" class="headerlink" title="查询和180.76.76.0/8 or 14.215.177.0/24中的主机"></a>查询和180.76.76.0/8 or 14.215.177.0/24中的主机</h3><p>首先我们先使用dig命令将百度对应的网段进行查询</p>
+<p><img src="C:\Users\12465\AppData\Roaming\Typora\typora-user-images\image-20210812095010607.png" alt="image-20210812095010607"></p>
+<p>然后在Censys搜索引擎上进行对应的IPv4地址的搜索，查询语法是</p>
+<p><img src="C:\Users\12465\AppData\Roaming\Typora\typora-user-images\image-20210812095133038.png" alt="image-20210812095133038"></p>
+<p><img src="C:\Users\12465\AppData\Roaming\Typora\typora-user-images\image-20210812095148352.png" alt="image-20210812095148352"></p>
+<p>查询位于美国的主机</p>
+<p><img src="C:\Users\12465\AppData\Roaming\Typora\typora-user-images\image-20210812095641082.png" alt="image-20210812095641082"></p>
+<p><img src="C:\Users\12465\AppData\Roaming\Typora\typora-user-images\image-20210812095654659.png" alt="image-20210812095654659"></p>
+<p>查询没有安装受信任证书的流行网站</p>
+<p><img src="C:\Users\12465\AppData\Roaming\Typora\typora-user-images\image-20210812095818926.png" alt="image-20210812095818926"></p>
+<p><img src="C:\Users\12465\AppData\Roaming\Typora\typora-user-images\image-20210812095832864.png" alt="image-20210812095832864"></p>
+<p>Github.com的受信任证书</p>
+<p><img src="C:\Users\12465\AppData\Roaming\Typora\typora-user-images\image-20210812100115827.png" alt="image-20210812100115827"></p>
+<p><img src="C:\Users\12465\AppData\Roaming\Typora\typora-user-images\image-20210812100124763.png" alt="image-20210812100124763"></p>
+]]></content>
   </entry>
   <entry>
     <title>设备告警日志分析及处理</title>

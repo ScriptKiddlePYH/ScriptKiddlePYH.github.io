@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2021-04-22T08:06:43.402Z</updated>
+  <updated>2021-08-12T02:03:02.448Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="https://pyhsecurity.cn/2021/08/12/%E7%A9%BA%E9%97%B4%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%EF%BC%9ACensys/"/>
+    <id>https://pyhsecurity.cn/2021/08/12/%E7%A9%BA%E9%97%B4%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%EF%BC%9ACensys/</id>
+    <published>2021-08-12T02:03:02.274Z</published>
+    <updated>2021-08-12T02:03:02.448Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;空间搜索引擎：Censys&quot;&gt;&lt;a href=&quot;#空间搜索引擎：Censys&quot; class=&quot;headerlink&quot; title=&quot;空间搜索引擎：Censys&quot;&gt;&lt;/a&gt;空间搜索引擎：Censys&lt;/h1&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;如果有小伙伴用过shodan，那么都清楚shodan是一个基于全网扫描的搜索引擎，它区别于其他搜索引擎。shodan它能搜索到基于隐私的数据，如摄像头，堡垒机等的弱口令。而我们今天要说的是Censys这款搜索引擎，Censys是一个巨大的数据库，里面存储着每个暴露在互联网上的设备信息。&lt;/p&gt;
+&lt;h2 id=&quot;搜索语法&quot;&gt;&lt;a href=&quot;#搜索语法&quot; class=&quot;headerlink&quot; title=&quot;搜索语法&quot;&gt;&lt;/a&gt;搜索语法&lt;/h2&gt;&lt;h3 id=&quot;查询和180-76-76-0-8-or-14-215-177-0-24中的主机&quot;&gt;&lt;a href=&quot;#查询和180-76-76-0-8-or-14-215-177-0-24中的主机&quot; class=&quot;headerlink&quot; title=&quot;查询和180.76.76.0/8 or 14.215.177.0/24中的主机&quot;&gt;&lt;/a&gt;查询和180.76.76.0/8 or 14.215.177.0/24中的主机&lt;/h3&gt;&lt;p&gt;首先我们先使用dig命令将百度对应的网段进行查询&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;C:\Users\12465\AppData\Roaming\Typora\typora-user-images\image-20210812095010607.png&quot; alt=&quot;image-20210812095010607&quot;&gt;&lt;/p&gt;
+&lt;p&gt;然后在Censys搜索引擎上进行对应的IPv4地址的搜索，查询语法是&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;C:\Users\12465\AppData\Roaming\Typora\typora-user-images\image-20210812095133038.png&quot; alt=&quot;image-20210812095133038&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;C:\Users\12465\AppData\Roaming\Typora\typora-user-images\image-20210812095148352.png&quot; alt=&quot;image-20210812095148352&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>设备告警日志分析及处理</title>
@@ -92,75 +112,6 @@
     
     
     <category term="红蓝对抗" scheme="https://pyhsecurity.cn/tags/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>六级听力技巧</title>
-    <link href="https://pyhsecurity.cn/2021/04/10/%E5%85%AD%E7%BA%A7%E5%90%AC%E5%8A%9B%E6%8A%80%E5%B7%A7/"/>
-    <id>https://pyhsecurity.cn/2021/04/10/%E5%85%AD%E7%BA%A7%E5%90%AC%E5%8A%9B%E6%8A%80%E5%B7%A7/</id>
-    <published>2021-04-10T12:30:26.662Z</published>
-    <updated>2021-04-10T12:35:00.716Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h2&gt;&lt;p&gt;因为六级在听力和阅读方面都所占比重较高，因此我们可以先来总结一下关于六级听力的一些解题技巧，小编现在也在奋战在六级的考试备战中，希望这些技巧也能助读者一臂之力，迈向六级考试的巅峰。&lt;/p&gt;
-&lt;h2 id=&quot;结构法则&quot;&gt;&lt;a href=&quot;#结构法则&quot; class=&quot;headerlink&quot; title=&quot;结构法则&quot;&gt;&lt;/a&gt;结构法则&lt;/h2&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;选项结构&lt;/th&gt;
-&lt;th&gt;考查类型&lt;/th&gt;
-&lt;th&gt;听音重点&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;动词原形&lt;/td&gt;
-&lt;td&gt;计划或建议&lt;/td&gt;
-&lt;td&gt;建议处、计划处、时间处、问答处、结尾处&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;动词不定式&lt;/td&gt;
-&lt;td&gt;原因或目的&lt;/td&gt;
-&lt;td&gt;因果处、情态动词处&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;名词&lt;/td&gt;
-&lt;td&gt;主旨或细节&lt;/td&gt;
-&lt;td&gt;开头结尾处、比较处、举例处、并列处、转折处、相关细节处&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;形容词&lt;/td&gt;
-&lt;td&gt;态度或评价&lt;/td&gt;
-&lt;td&gt;形容词处&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;完整的句子&lt;/td&gt;
-&lt;td&gt;某事的原因或综合理解&lt;/td&gt;
-&lt;td&gt;因果处、转折处、比较处、引言处&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;地点场景&lt;/td&gt;
-&lt;td&gt;方位或地点&lt;/td&gt;
-&lt;td&gt;表地点场景的关键词&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;角色关系&lt;/td&gt;
-&lt;td&gt;角色或关系&lt;/td&gt;
-&lt;td&gt;表人物身份的关键词&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;时间、数字信息&lt;/td&gt;
-&lt;td&gt;时间、数字的辨别或计算&lt;/td&gt;
-&lt;td&gt;时间处、数字处&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-&lt;h2 id=&quot;人称法则&quot;&gt;&lt;a href=&quot;#人称法则&quot; class=&quot;headerlink&quot; title=&quot;人称法则&quot;&gt;&lt;/a&gt;人称法则&lt;/h2&gt;&lt;p&gt;人称法则主要运用在对话题型中。如果答案以she开头，那么问题多半包含the woman，反之，一般是针对男士的提问，如果选项中既有she也有the woman的话，那一般不是针对个人，而是像”What do we learn from the conversation?”这类的问题。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="六级考试" scheme="https://pyhsecurity.cn/categories/%E5%85%AD%E7%BA%A7%E8%80%83%E8%AF%95/"/>
-    
-    
-    <category term="六级听力" scheme="https://pyhsecurity.cn/tags/%E5%85%AD%E7%BA%A7%E5%90%AC%E5%8A%9B/"/>
     
   </entry>
   
