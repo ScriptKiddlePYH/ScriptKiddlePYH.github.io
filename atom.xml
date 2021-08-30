@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2021-08-30T14:59:12.403Z</updated>
+  <updated>2021-08-30T16:18:47.870Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -17,11 +17,44 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>李白诗句精选</title>
+    <link href="https://pyhsecurity.cn/2021/08/31/%E6%9D%8E%E7%99%BD%E8%AF%97%E5%8F%A5%E7%B2%BE%E9%80%89/"/>
+    <id>https://pyhsecurity.cn/2021/08/31/%E6%9D%8E%E7%99%BD%E8%AF%97%E5%8F%A5%E7%B2%BE%E9%80%89/</id>
+    <published>2021-08-30T16:18:27.244Z</published>
+    <updated>2021-08-30T16:18:47.870Z</updated>
+    
+    
+    <summary type="html">&lt;ol&gt;
+&lt;li&gt;夫天地者万物之逆旅也；光阴者百代之过客也。而浮生若梦，为欢几何？古人秉烛夜游，良有以也。————《春夜宴从弟桃花园序》&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol start=&quot;2&quot;&gt;
+&lt;li&gt;白发三千丈，缘愁似个长。不知明镜里，何处得秋霜。————《秋浦歌十七首》&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol start=&quot;3&quot;&gt;
+&lt;li&gt;白酒新熟山中归，黄鸡啄黍秋正肥。呼童烹鸡酌白酒，儿女嬉笑牵人衣。高歌取醉欲自慰，起舞落日争光辉。游说万乘苦不早，著鞭跨马涉远道。会稽愚妇轻买臣，余亦辞家西入秦。仰天大笑出门去，我辈岂是蓬蒿人。————《南陵别儿童入京》&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol start=&quot;4&quot;&gt;
+&lt;li&gt;大鹏一日同风起，扶摇直上九万里。假令风歇时下来，犹能簸却沧溟水。时人见我恒殊调，闻余大言皆冷笑。宣父犹能畏后生，丈夫未可轻年少。————《上李邕》&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol start=&quot;5&quot;&gt;
+&lt;li&gt;金樽清酒斗十千，玉盘珍羞直万钱。停杯投箸不能食，拔剑四顾心茫然。欲渡黄河冰塞川，将登太行雪满山。闲来垂钓碧溪上，忽复乘舟梦日边。行路难，行路难，多歧路，今安在？长风破浪会有时，直挂云帆济沧海。————《行路难》&lt;/li&gt;
+&lt;/ol&gt;</summary>
+    
+    
+    
+    <category term="古代文学" scheme="https://pyhsecurity.cn/categories/%E5%8F%A4%E4%BB%A3%E6%96%87%E5%AD%A6/"/>
+    
+    
+    <category term="诗仙精华" scheme="https://pyhsecurity.cn/tags/%E8%AF%97%E4%BB%99%E7%B2%BE%E5%8D%8E/"/>
+    
+  </entry>
+  
+  <entry>
     <title>围城经典语录</title>
     <link href="https://pyhsecurity.cn/2021/08/30/%E5%9B%B4%E5%9F%8E%E7%BB%8F%E5%85%B8%E8%AF%AD%E5%BD%95/"/>
     <id>https://pyhsecurity.cn/2021/08/30/%E5%9B%B4%E5%9F%8E%E7%BB%8F%E5%85%B8%E8%AF%AD%E5%BD%95/</id>
     <published>2021-08-30T14:28:53.641Z</published>
-    <updated>2021-08-30T14:59:12.403Z</updated>
+    <updated>2021-08-30T15:42:36.918Z</updated>
     
     
     <summary type="html">&lt;ol&gt;
@@ -49,26 +82,6 @@
     
     
     <category term="围城" scheme="https://pyhsecurity.cn/tags/%E5%9B%B4%E5%9F%8E/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Redis未授权访问漏洞</title>
-    <link href="https://pyhsecurity.cn/2021/02/24/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/"/>
-    <id>https://pyhsecurity.cn/2021/02/24/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/</id>
-    <published>2021-02-24T06:58:54.496Z</published>
-    <updated>2021-03-05T04:18:44.076Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;攻击思路&quot;&gt;&lt;a href=&quot;#攻击思路&quot; class=&quot;headerlink&quot; title=&quot;攻击思路&quot;&gt;&lt;/a&gt;攻击思路&lt;/h2&gt;&lt;p&gt;Redis是一种使用ANSIC语言编写的开源Key-Value型数据库。Redis为了保证效率，将数据缓存在内存中，周期性地把更新的数据写入磁盘或者把修改操作写入追加的记录文件中，在此基础上实现了master-slave(主从)同步。&lt;/p&gt;
-&lt;p&gt;对Redis配置不当将会导致未授权访问漏洞，从而被攻击者恶意利用。如果Redis以root身份运行，攻击者可以用root权限写入SSH公钥文件，通过SSH登录目标服务器，进而导致服务器权限被获取、泄露或发生加密勒索事件，为正常服务带来严重危害。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="python安全攻防" scheme="https://pyhsecurity.cn/categories/python%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2/"/>
-    
-    
-    <category term="漏洞检测与防御" scheme="https://pyhsecurity.cn/tags/%E6%BC%8F%E6%B4%9E%E6%A3%80%E6%B5%8B%E4%B8%8E%E9%98%B2%E5%BE%A1/"/>
     
   </entry>
   
