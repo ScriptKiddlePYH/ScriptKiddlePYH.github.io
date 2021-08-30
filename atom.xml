@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2021-08-12T02:03:02.448Z</updated>
+  <updated>2021-08-30T14:54:53.297Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -17,488 +17,50 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="https://pyhsecurity.cn/2021/08/12/%E7%A9%BA%E9%97%B4%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%EF%BC%9ACensys/"/>
-    <id>https://pyhsecurity.cn/2021/08/12/%E7%A9%BA%E9%97%B4%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%EF%BC%9ACensys/</id>
-    <published>2021-08-12T02:03:02.274Z</published>
-    <updated>2021-08-12T02:03:02.448Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;空间搜索引擎：Censys&quot;&gt;&lt;a href=&quot;#空间搜索引擎：Censys&quot; class=&quot;headerlink&quot; title=&quot;空间搜索引擎：Censys&quot;&gt;&lt;/a&gt;空间搜索引擎：Censys&lt;/h1&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;如果有小伙伴用过shodan，那么都清楚shodan是一个基于全网扫描的搜索引擎，它区别于其他搜索引擎。shodan它能搜索到基于隐私的数据，如摄像头，堡垒机等的弱口令。而我们今天要说的是Censys这款搜索引擎，Censys是一个巨大的数据库，里面存储着每个暴露在互联网上的设备信息。&lt;/p&gt;
-&lt;h2 id=&quot;搜索语法&quot;&gt;&lt;a href=&quot;#搜索语法&quot; class=&quot;headerlink&quot; title=&quot;搜索语法&quot;&gt;&lt;/a&gt;搜索语法&lt;/h2&gt;&lt;h3 id=&quot;查询和180-76-76-0-8-or-14-215-177-0-24中的主机&quot;&gt;&lt;a href=&quot;#查询和180-76-76-0-8-or-14-215-177-0-24中的主机&quot; class=&quot;headerlink&quot; title=&quot;查询和180.76.76.0/8 or 14.215.177.0/24中的主机&quot;&gt;&lt;/a&gt;查询和180.76.76.0/8 or 14.215.177.0/24中的主机&lt;/h3&gt;&lt;p&gt;首先我们先使用dig命令将百度对应的网段进行查询&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;C:\Users\12465\AppData\Roaming\Typora\typora-user-images\image-20210812095010607.png&quot; alt=&quot;image-20210812095010607&quot;&gt;&lt;/p&gt;
-&lt;p&gt;然后在Censys搜索引擎上进行对应的IPv4地址的搜索，查询语法是&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;C:\Users\12465\AppData\Roaming\Typora\typora-user-images\image-20210812095133038.png&quot; alt=&quot;image-20210812095133038&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;C:\Users\12465\AppData\Roaming\Typora\typora-user-images\image-20210812095148352.png&quot; alt=&quot;image-20210812095148352&quot;&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>设备告警日志分析及处理</title>
-    <link href="https://pyhsecurity.cn/2021/04/22/%E8%AE%BE%E5%A4%87%E5%91%8A%E8%AD%A6%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E5%8F%8A%E5%A4%84%E7%90%86/"/>
-    <id>https://pyhsecurity.cn/2021/04/22/%E8%AE%BE%E5%A4%87%E5%91%8A%E8%AD%A6%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E5%8F%8A%E5%A4%84%E7%90%86/</id>
-    <published>2021-04-22T07:58:18.159Z</published>
-    <updated>2021-04-22T08:06:43.402Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h2&gt;&lt;p&gt;在整个攻防演练的过程中，我们主要要注意安全监控与分析、安全策略优化、安全设备的自身加固。这三部分都是保障网络安全的重要手段。一旦边界设备被入侵，那么就意味着全部都将失守。&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210422113854988.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70#pic_center&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;安全设备分类&quot;&gt;&lt;a href=&quot;#安全设备分类&quot; class=&quot;headerlink&quot; title=&quot;安全设备分类&quot;&gt;&lt;/a&gt;安全设备分类&lt;/h2&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;类别&lt;/th&gt;
-&lt;th&gt;产品&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;安全防护类&lt;/td&gt;
-&lt;td&gt;下一代防火墙、防病毒网关、应用安全网关、下一代网闸、单/双向网闸、网络安全准入、抗DDOS&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;安全检查&lt;/td&gt;
-&lt;td&gt;IDS/IPS、资产发现、网络扫描、网络行为审计、流量复制聚合、APT监控平台&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;端点安全&lt;/td&gt;
-&lt;td&gt;EDR、主机卫士、桌面虚拟化、安全虚拟手机&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;应用安全&lt;/td&gt;
-&lt;td&gt;WAF、网页防篡改、WEB扫描、系统监控、负载均衡、上网行为管理、邮件网关&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;数据安全&lt;/td&gt;
-&lt;td&gt;数据防泄漏、数据库防火墙、数据库审计、数据脱敏、数据安全交换、文档管理系统、备份一体机、大数据安全网关&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;身份认证与访问&lt;/td&gt;
-&lt;td&gt;运维安全审计、VPN、安全网关&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;云计算&lt;/td&gt;
-&lt;td&gt;虚拟化防火墙(云防)、负载均衡、云安全审计、超融合&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;移动安全&lt;/td&gt;
-&lt;td&gt;APP扫描加固(服务居多)、企业信息管理(软件居多)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;物联网安全&lt;/td&gt;
-&lt;td&gt;接入网关、安全网关、无人机安全、数据防护、安全审计&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;安全管理&lt;/td&gt;
-&lt;td&gt;态势感知、基线检查包、脆弱性检查包、日志收集与分析、策略集中管理&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;无线安全&lt;/td&gt;
-&lt;td&gt;无线安全网关、无线安全审计、无线安全服务&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;工控安全&lt;/td&gt;
-&lt;td&gt;工控防火墙、工控网闸、工控审计、工控扫描、主机卫士&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-&lt;h2 id=&quot;防火墙&quot;&gt;&lt;a href=&quot;#防火墙&quot; class=&quot;headerlink&quot; title=&quot;防火墙&quot;&gt;&lt;/a&gt;防火墙&lt;/h2&gt;&lt;p&gt;根据百度百科的描述，防火墙技术是通过有机结合各类用于安全管理与筛选的软件和硬件设备，帮助计算机网络于其内、外网之间构建一道相对隔绝的保护屏障，以保护用户资料与信息安全性的一种技术。&lt;/p&gt;
-&lt;p&gt;在红蓝对抗中，防火墙一般部署在网络边界和区域边界。前期准备主要是梳理防火墙的访问控制规则和对一些源IP进行处理。&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210422110208882.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;防火墙部署模式&quot;&gt;&lt;a href=&quot;#防火墙部署模式&quot; class=&quot;headerlink&quot; title=&quot;防火墙部署模式&quot;&gt;&lt;/a&gt;防火墙部署模式&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210422120457876.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
-&lt;h1 id=&quot;IDS设备&quot;&gt;&lt;a href=&quot;#IDS设备&quot; class=&quot;headerlink&quot; title=&quot;IDS设备&quot;&gt;&lt;/a&gt;IDS设备&lt;/h1&gt;</summary>
-    
-    
-    
-    <category term="蓝队防守" scheme="https://pyhsecurity.cn/categories/%E8%93%9D%E9%98%9F%E9%98%B2%E5%AE%88/"/>
-    
-    
-    <category term="红蓝对抗" scheme="https://pyhsecurity.cn/tags/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>多层跳板攻击</title>
-    <link href="https://pyhsecurity.cn/2021/03/27/%E5%A4%9A%E5%B1%82%E8%B7%B3%E6%9D%BF%E6%94%BB%E5%87%BB/"/>
-    <id>https://pyhsecurity.cn/2021/03/27/%E5%A4%9A%E5%B1%82%E8%B7%B3%E6%9D%BF%E6%94%BB%E5%87%BB/</id>
-    <published>2021-03-27T14:14:21.826Z</published>
-    <updated>2021-03-27T14:18:30.629Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;首先，我们在上一章的基础上，即在Windows Server2003的主机上又发现了另一层的网络，所以我们就必须在以win2003为跳板机，再去访问下一个网段的主机，即多层跳板攻击。&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210327210912305.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;攻击过程&quot;&gt;&lt;a href=&quot;#攻击过程&quot; class=&quot;headerlink&quot; title=&quot;攻击过程&quot;&gt;&lt;/a&gt;攻击过程&lt;/h2&gt;&lt;p&gt;我们这里使用一台Linux主机为另一个服务器，并设置一个新的网段来进行隔离，原理和上一章的差不多&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210327205851533.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="内网渗透" scheme="https://pyhsecurity.cn/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
-    
-    
-    <category term="红蓝对抗" scheme="https://pyhsecurity.cn/tags/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SQL报错注入实战</title>
-    <link href="https://pyhsecurity.cn/2021/03/25/%E4%B8%80%E6%AC%A1SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%AE%9E%E6%88%98/"/>
-    <id>https://pyhsecurity.cn/2021/03/25/%E4%B8%80%E6%AC%A1SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%AE%9E%E6%88%98/</id>
-    <published>2021-03-25T08:31:52.721Z</published>
-    <updated>2021-03-27T14:15:28.591Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;手工注入过程&quot;&gt;&lt;a href=&quot;#手工注入过程&quot; class=&quot;headerlink&quot; title=&quot;手工注入过程&quot;&gt;&lt;/a&gt;手工注入过程&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;首先我们拿到一个靶机网站，随便输入一个密码，无任何回显，然后我们进行抓包判断，查看源代码发现加入tips参数能出报错提示&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210325162455485.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210325162503191.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/li&gt;
-&lt;li&gt;可初步判断可以使用SQL报错注入进行注入攻击，然后我们对name变量进行插入恶意语句&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210325162519249.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;</summary>
-    
-    
-    
-    <category term="CTF比赛" scheme="https://pyhsecurity.cn/categories/CTF%E6%AF%94%E8%B5%9B/"/>
-    
-    
-    <category term="Web漏洞攻击" scheme="https://pyhsecurity.cn/tags/Web%E6%BC%8F%E6%B4%9E%E6%94%BB%E5%87%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>真实的内网环境搭建</title>
-    <link href="https://pyhsecurity.cn/2021/03/25/%E7%9C%9F%E5%AE%9E%E7%9A%84%E5%86%85%E7%BD%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
-    <id>https://pyhsecurity.cn/2021/03/25/%E7%9C%9F%E5%AE%9E%E7%9A%84%E5%86%85%E7%BD%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</id>
-    <published>2021-03-25T06:24:59.915Z</published>
-    <updated>2021-03-30T12:58:27.923Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;网络拓扑图及通信原理&quot;&gt;&lt;a href=&quot;#网络拓扑图及通信原理&quot; class=&quot;headerlink&quot; title=&quot;网络拓扑图及通信原理&quot;&gt;&lt;/a&gt;网络拓扑图及通信原理&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210320230449202.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;假如我们的笔记本代表我们的宿主机Kali，旁边的是我们自己公司的防火墙，云代表互联网，对面的是对面公司的防火墙和内网服务器，分别是win7和Windows Server2003。&lt;/p&gt;
-&lt;p&gt;现在我们要对其内网进行渗透攻击，那么我们就必须要获得对面主机反弹回来的meterpreter shell，我们有两种方式，一种是通过VPS代理的方式接收反弹回来的shell；另一种是通过设置防火墙的NAT映射，将IP地址进行映射从而接收反弹的shell连接。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="内网渗透" scheme="https://pyhsecurity.cn/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
-    
-    
-    <category term="红蓝对抗" scheme="https://pyhsecurity.cn/tags/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>proxychains代理扫描并获取内网服务器权限</title>
-    <link href="https://pyhsecurity.cn/2021/03/25/proxychains%E4%BB%A3%E7%90%86%E6%89%AB%E6%8F%8F%E5%B9%B6%E8%8E%B7%E5%8F%96%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9D%83%E9%99%90/"/>
-    <id>https://pyhsecurity.cn/2021/03/25/proxychains%E4%BB%A3%E7%90%86%E6%89%AB%E6%8F%8F%E5%B9%B6%E8%8E%B7%E5%8F%96%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9D%83%E9%99%90/</id>
-    <published>2021-03-25T03:18:20.232Z</published>
-    <updated>2021-03-25T03:23:22.924Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;Proxychains&quot;&gt;&lt;a href=&quot;#Proxychains&quot; class=&quot;headerlink&quot; title=&quot;Proxychains&quot;&gt;&lt;/a&gt;Proxychains&lt;/h2&gt;&lt;p&gt;Proxychains是为了GNU\Linux操作系统而开发的工具，任何TCP连接都可以通过TOR或者SOCKS4，SOCKS5，HTTP/HTTPS路由到目的地。在这个通道技术中可以使用多个代理服务器。除此之外提供匿名方式，诸如用于中转跳板的应用程序也可以用于对发现的新网络进行直接通信。&lt;/p&gt;
-&lt;h2 id=&quot;利用思路&quot;&gt;&lt;a href=&quot;#利用思路&quot; class=&quot;headerlink&quot; title=&quot;利用思路&quot;&gt;&lt;/a&gt;利用思路&lt;/h2&gt;&lt;p&gt;还是这个拓扑图，我们穿越了层层障碍，终于拿到了&lt;code&gt;192.168.103.101&lt;/code&gt;这台服务器的权限，接下来，我们以这台服务器为跳板机，去访问内网中的更多机器。而proxychains则是隐藏我们本机kali对目标服务器之间的流量，从而加大被溯源的成本。在真实的渗透中可能不止一台数据库机器，横向的时候可能会出现多台域主机。&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210325101439326.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;攻击过程&quot;&gt;&lt;a href=&quot;#攻击过程&quot; class=&quot;headerlink&quot; title=&quot;攻击过程&quot;&gt;&lt;/a&gt;攻击过程&lt;/h2&gt;&lt;p&gt;首先我们先拿下win7这台主机的权限，我们使用上次生成的木马进行连接shell&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="内网渗透" scheme="https://pyhsecurity.cn/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
-    
-    
-    <category term="红蓝对抗" scheme="https://pyhsecurity.cn/tags/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Google高级运算符</title>
-    <link href="https://pyhsecurity.cn/2021/03/21/Google%E9%AB%98%E7%BA%A7%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
-    <id>https://pyhsecurity.cn/2021/03/21/Google%E9%AB%98%E7%BA%A7%E8%BF%90%E7%AE%97%E7%AC%A6/</id>
-    <published>2021-03-21T09:19:02.433Z</published>
-    <updated>2021-03-22T13:26:17.169Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;高级运算符&quot;&gt;&lt;a href=&quot;#高级运算符&quot; class=&quot;headerlink&quot; title=&quot;高级运算符&quot;&gt;&lt;/a&gt;高级运算符&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;intitle后面的单词或短语被认为是搜索项&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210319235150904.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Google" scheme="https://pyhsecurity.cn/categories/Google/"/>
-    
-    
-    <category term="Google hacking" scheme="https://pyhsecurity.cn/tags/Google-hacking/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>令牌假冒</title>
-    <link href="https://pyhsecurity.cn/2021/03/21/%E4%BB%A4%E7%89%8C%E5%81%87%E5%86%92/"/>
-    <id>https://pyhsecurity.cn/2021/03/21/%E4%BB%A4%E7%89%8C%E5%81%87%E5%86%92/</id>
-    <published>2021-03-21T06:16:57.208Z</published>
-    <updated>2021-03-21T06:18:48.775Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;原理&quot;&gt;&lt;a href=&quot;#原理&quot; class=&quot;headerlink&quot; title=&quot;原理&quot;&gt;&lt;/a&gt;原理&lt;/h2&gt;&lt;p&gt;假冒令牌可以假冒一个网络中的另一个用户进行各种操作。令牌包括登录会话的安全信息，如用户身份识别、用户组合用户权限。当一个用户登录Windows系统时，它被给定一个访问令牌作为它认证会话的一部分。例如，一个入侵用户可能需要以域管理员处理一个特定任务，当它使用令牌便可假冒域管理员进行工作。&lt;/p&gt;
-&lt;h2 id=&quot;Windows安全相关概念&quot;&gt;&lt;a href=&quot;#Windows安全相关概念&quot; class=&quot;headerlink&quot; title=&quot;Windows安全相关概念&quot;&gt;&lt;/a&gt;Windows安全相关概念&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;Session&lt;/li&gt;
-&lt;li&gt;Windows Station&lt;/li&gt;
-&lt;li&gt;Desktop&lt;/li&gt;
-&lt;li&gt;Login Session：不同账号登录产生不同的登录Session，代表不同的账号权限&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;Tokens&quot;&gt;&lt;a href=&quot;#Tokens&quot; class=&quot;headerlink&quot; title=&quot;Tokens&quot;&gt;&lt;/a&gt;Tokens&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;Tokens与进程相关联，进程创建时根据Login Session分配对应Token，含有该进程用户账号、组信息、权限信息等。&lt;/li&gt;
-&lt;li&gt;用户每次登录，产生Login Session分配对应Token&lt;/li&gt;
-&lt;li&gt;访问资源时提交Token进行身份验证，类似于Web Cookie&lt;/li&gt;
-&lt;li&gt;Delegate Token：交互登录会话&lt;/li&gt;
-&lt;li&gt;Impersonate Token：非交互登录会话</summary>
-    
-    
-    
-    <category term="内网渗透" scheme="https://pyhsecurity.cn/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
-    
-    
-    <category term="红蓝对抗" scheme="https://pyhsecurity.cn/tags/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Pivoting跳板攻击与自动路由</title>
-    <link href="https://pyhsecurity.cn/2021/03/21/Pivoting%E8%B7%B3%E6%9D%BF%E6%94%BB%E5%87%BB%E4%B8%8E%E8%87%AA%E5%8A%A8%E8%B7%AF%E7%94%B1/"/>
-    <id>https://pyhsecurity.cn/2021/03/21/Pivoting%E8%B7%B3%E6%9D%BF%E6%94%BB%E5%87%BB%E4%B8%8E%E8%87%AA%E5%8A%A8%E8%B7%AF%E7%94%B1/</id>
-    <published>2021-03-21T04:38:38.128Z</published>
-    <updated>2021-03-21T06:15:42.184Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;网络拓扑图及通信原理&quot;&gt;&lt;a href=&quot;#网络拓扑图及通信原理&quot; class=&quot;headerlink&quot; title=&quot;网络拓扑图及通信原理&quot;&gt;&lt;/a&gt;网络拓扑图及通信原理&lt;/h2&gt;&lt;p&gt;我们现在假若得到了&lt;code&gt;192.168.103.101&lt;/code&gt;的主机权限，但是我们经过收集信息发现只有该win7主机是出网的，里面还有一个网段的主机不出网，那么这时我们就要使用跳板攻击的方式访问到不出网的主机。这里我们假设出网的网段为&lt;code&gt;192.168.103.0/24&lt;/code&gt;，不出网的数据库主机所处网段为&lt;code&gt;192.168.104.0/24&lt;/code&gt;，我们在vmware上分别设置好这两个网段。&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210321120638928.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;vmnet2之前上一章已经配置完成，vmnet3设置DHCP配置&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210321121040583.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="内网渗透" scheme="https://pyhsecurity.cn/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
-    
-    
-    <category term="红蓝对抗" scheme="https://pyhsecurity.cn/tags/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>内网信息收集</title>
-    <link href="https://pyhsecurity.cn/2021/03/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
-    <id>https://pyhsecurity.cn/2021/03/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</id>
-    <published>2021-03-17T07:39:28.839Z</published>
-    <updated>2021-03-17T07:41:03.161Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;内网信息收集&quot;&gt;&lt;a href=&quot;#内网信息收集&quot; class=&quot;headerlink&quot; title=&quot;内网信息收集&quot;&gt;&lt;/a&gt;内网信息收集&lt;/h1&gt;&lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h2&gt;&lt;h3 id=&quot;对当前机器角色判断&quot;&gt;&lt;a href=&quot;#对当前机器角色判断&quot; class=&quot;headerlink&quot; title=&quot;对当前机器角色判断&quot;&gt;&lt;/a&gt;对当前机器角色判断&lt;/h3&gt;&lt;h3 id=&quot;对当前机器所处网络环境的拓扑结构进行分析和判断&quot;&gt;&lt;a href=&quot;#对当前机器所处网络环境的拓扑结构进行分析和判断&quot; class=&quot;headerlink&quot; title=&quot;对当前机器所处网络环境的拓扑结构进行分析和判断&quot;&gt;&lt;/a&gt;对当前机器所处网络环境的拓扑结构进行分析和判断&lt;/h3&gt;&lt;h3 id=&quot;对当前机器所处区域的判断&quot;&gt;&lt;a href=&quot;#对当前机器所处区域的判断&quot; class=&quot;headerlink&quot; title=&quot;对当前机器所处区域的判断&quot;&gt;&lt;/a&gt;对当前机器所处区域的判断&lt;/h3&gt;&lt;h2 id=&quot;收集本机信息&quot;&gt;&lt;a href=&quot;#收集本机信息&quot; class=&quot;headerlink&quot; title=&quot;收集本机信息&quot;&gt;&lt;/a&gt;收集本机信息&lt;/h2&gt;&lt;h3 id=&quot;手动收集信息&quot;&gt;&lt;a href=&quot;#手动收集信息&quot; class=&quot;headerlink&quot; title=&quot;手动收集信息&quot;&gt;&lt;/a&gt;手动收集信息&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;进一步了解整个域的操作系统版本、软件及补丁安装情况、用户命名方式等&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;自动收集信息&quot;&gt;&lt;a href=&quot;#自动收集信息&quot; class=&quot;headerlink&quot; title=&quot;自动收集信息&quot;&gt;&lt;/a&gt;自动收集信息&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;通过WMIC命令行工具收集目标机器信息，通过导入ps1脚本&lt;/li&gt;
-&lt;/ul&gt;</summary>
-    
-    
-    
-    <category term="内网渗透" scheme="https://pyhsecurity.cn/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
-    
-    
-    <category term="红蓝对抗" scheme="https://pyhsecurity.cn/tags/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>域内信息收集</title>
-    <link href="https://pyhsecurity.cn/2021/03/09/%E5%9F%9F%E5%86%85%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
-    <id>https://pyhsecurity.cn/2021/03/09/%E5%9F%9F%E5%86%85%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</id>
-    <published>2021-03-09T09:52:17.854Z</published>
-    <updated>2021-03-12T16:59:06.917Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在内网渗透中，我们必须要快速地对内网信息进行多方面的信息收集，因此我们需要用到一些常用的命令或者是工具对内网域控制器或者管理员进行快速地定位&lt;/p&gt;
-&lt;h2 id=&quot;工具的使用&quot;&gt;&lt;a href=&quot;#工具的使用&quot; class=&quot;headerlink&quot; title=&quot;工具的使用&quot;&gt;&lt;/a&gt;工具的使用&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;net config workstation：查询当前登录域及登录用户信息&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;“登录域”用于表示当前登录的用户是域用户还是本地用户&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210309171809630.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;net time /domain：判断主域(域服务器通常会同时作为时间服务器使用)&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;执行命令后有三种情况，因为条件原因我这里只显示一种情况&lt;/p&gt;
-&lt;p&gt;存在域，但当前用户不是域用户&lt;br&gt;存在域，且当前用户是域用户&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210309172224207.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;当前网络环境为工作组，不存在域&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;for /L %I in (3,1,254) DO @ping -w 1 -n 1 192.168.3.%I | findstr “TTL=”：利用ICMP协议快速探测内网&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="内网渗透" scheme="https://pyhsecurity.cn/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
-    
-    
-    <category term="红蓝对抗" scheme="https://pyhsecurity.cn/tags/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>汇编基本语句总结</title>
-    <link href="https://pyhsecurity.cn/2021/03/08/%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80/"/>
-    <id>https://pyhsecurity.cn/2021/03/08/%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80/</id>
-    <published>2021-03-08T13:04:13.883Z</published>
-    <updated>2021-03-09T09:55:16.730Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;进制的定义&quot;&gt;&lt;a href=&quot;#进制的定义&quot; class=&quot;headerlink&quot; title=&quot;进制的定义&quot;&gt;&lt;/a&gt;进制的定义&lt;/h2&gt;&lt;p&gt;进制是由符号组成，可以自己定义，进位是指向后数一位。&lt;/p&gt;
-&lt;p&gt;二进制：由两个符号组成，分别是0 、1 逢二进一&lt;/p&gt;
-&lt;p&gt;八进制：由八个符号组成，分别是0、1、2、3、4、5、6、7 、逢八进一&lt;/p&gt;
-&lt;p&gt;十进制：由十个符号组成，分别是0、1、2、3、4、5、6、7、8、9、逢十进一&lt;/p&gt;
-&lt;p&gt;十六进制：由十六个符号组成，分别是0、1、2、3、4、5、6、7、8、9、A、B、C、D、E、F、逢十六进一&lt;/p&gt;
-&lt;p&gt;当然，除了常规的，还有3进制、4进制….n进制，进制的符号不一定是常规的123顺序排列的。&lt;/p&gt;
-&lt;p&gt;主要作用可以用于加密。进制运算结果本质是通过查表得到的。&lt;/p&gt;
-&lt;p&gt;16位汇编：实模式，16位处理器内的内部，最多可以处理存储的长度为16位。&lt;/p&gt;
-&lt;p&gt;32位汇编：保护模式，32位处理器内的内部，最多可以处理存储的长度为32位。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="汇编语言" scheme="https://pyhsecurity.cn/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/"/>
-    
-    
-    <category term="二进制逆向" scheme="https://pyhsecurity.cn/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E9%80%86%E5%90%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>汇编基本语句总结</title>
-    <link href="https://pyhsecurity.cn/2021/03/08/%E6%B1%87%E7%BC%96%E5%9F%BA%E6%9C%AC%E8%AF%AD%E5%8F%A5%E6%80%BB%E7%BB%93/"/>
-    <id>https://pyhsecurity.cn/2021/03/08/%E6%B1%87%E7%BC%96%E5%9F%BA%E6%9C%AC%E8%AF%AD%E5%8F%A5%E6%80%BB%E7%BB%93/</id>
-    <published>2021-03-08T11:52:42.304Z</published>
-    <updated>2021-03-09T09:55:16.728Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;汇编基本语句总结&quot;&gt;&lt;a href=&quot;#汇编基本语句总结&quot; class=&quot;headerlink&quot; title=&quot;汇编基本语句总结&quot;&gt;&lt;/a&gt;汇编基本语句总结&lt;/h1&gt;&lt;p&gt;[toc]&lt;/p&gt;
-&lt;p&gt; （目的寄存器：保存结果的寄存器）&lt;/p&gt;
-&lt;h2 id=&quot;一、-基本框架&quot;&gt;&lt;a href=&quot;#一、-基本框架&quot; class=&quot;headerlink&quot; title=&quot;一、 基本框架&quot;&gt;&lt;/a&gt;一、 基本框架&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;.586&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;.MODEL flat, stdcall&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;.code&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;main proc&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	mov eax, 1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	mov ebx, 2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;main ENDP&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;END main&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-
-
-&lt;h2 id=&quot;二、基本运算&quot;&gt;&lt;a href=&quot;#二、基本运算&quot; class=&quot;headerlink&quot; title=&quot;二、基本运算&quot;&gt;&lt;/a&gt;二、基本运算&lt;/h2&gt;&lt;h3 id=&quot;1-加&quot;&gt;&lt;a href=&quot;#1-加&quot; class=&quot;headerlink&quot; title=&quot;1. 加&quot;&gt;&lt;/a&gt;1. 加&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;自增用法：&lt;code&gt;INC  寄存器名（incrementing）&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;加法用法：&lt;code&gt;ADD 目的寄存器,  寄存器名或数值（addition）&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;2-减法&quot;&gt;&lt;a href=&quot;#2-减法&quot; class=&quot;headerlink&quot; title=&quot;2. 减法&quot;&gt;&lt;/a&gt;2. 减法&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;自减用法：&lt;code&gt;DEC 寄存器名（decrementing）&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;减法用法：&lt;code&gt;SUB 目的寄存器，寄存器名或数值（subtraction）&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary>
-    
-    
-    
-    <category term="汇编语言" scheme="https://pyhsecurity.cn/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/"/>
-    
-    
-    <category term="二进制逆向" scheme="https://pyhsecurity.cn/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E9%80%86%E5%90%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Powershell收集域内信息</title>
-    <link href="https://pyhsecurity.cn/2021/03/07/%E6%9F%A5%E6%89%BE%E5%9F%9F%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B/"/>
-    <id>https://pyhsecurity.cn/2021/03/07/%E6%9F%A5%E6%89%BE%E5%9F%9F%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B/</id>
-    <published>2021-03-07T13:39:14.825Z</published>
-    <updated>2021-03-12T16:59:06.916Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在渗透测试中，一个典型的域权限提升过程，通常围绕着收集明文凭据或通过mimikatz提权等方法，在获取了管理员权限的系统中寻找域管理员登录进程，进而收集域管理员的凭据。如果内网环境非常复杂，渗透测试人员无法立即在拥有权限的系统中获得域管理员进程，那么通常采用的方法是：在跳板机之间跳转，直至获得域管理员权限，同时进行一些分析工作，进而找到渗透测试的路径。&lt;/p&gt;
-&lt;p&gt;现在我们来假设一种情况：渗透测试人员在某个内网环境中获得一个域普通用户的权限，首先通过各种方法获得当前服务器的本地管理员权限，然后分析当前服务器的用户登录列表及会话信息，知道哪些用户登录了这台服务器。如果渗透测试人员通过分析发现，可以获取权限的登录用户都不是域管理员账户，同时没有域管理员组中的用户登录这台服务器，就可以使用另一个账户并寻找账户在内网的哪台机器上具有管理权限，再枚举这台机器上的用户，然后继续进行渗透测试，直至找到一个可以获取域管理员权限的有效路径为止。&lt;/p&gt;
-&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;h2 id=&quot;思路&quot;&gt;&lt;a href=&quot;#思路&quot; class=&quot;headerlink&quot; title=&quot;思路&quot;&gt;&lt;/a&gt;思路&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;net group “Domain Admins” /domain：获取域管理员列表&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210307211234765.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;tasklist /v：列出本机的所有进程及进程用户&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210307211423315.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;从这里可以看到域管理员都有哪些进程，如果能找到，这将对后面窃取令牌有很大的帮助。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;net group “Domain Controllers” /domain：查询域控制器列表&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="内网渗透" scheme="https://pyhsecurity.cn/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
-    
-    
-    <category term="红蓝对抗" scheme="https://pyhsecurity.cn/tags/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>工作组信息收集</title>
-    <link href="https://pyhsecurity.cn/2021/03/07/%E5%B7%A5%E4%BD%9C%E7%BB%84%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
-    <id>https://pyhsecurity.cn/2021/03/07/%E5%B7%A5%E4%BD%9C%E7%BB%84%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</id>
-    <published>2021-03-07T04:44:26.040Z</published>
-    <updated>2021-03-12T16:59:06.916Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;收集本机信息&quot;&gt;&lt;a href=&quot;#收集本机信息&quot; class=&quot;headerlink&quot; title=&quot;收集本机信息&quot;&gt;&lt;/a&gt;收集本机信息&lt;/h2&gt;&lt;p&gt;不管是在外网还是内网中，信息收集都是重要的第一步。收集信息的方式又分为手动信息收集和自动信息收集。这里我们就先讲述怎样通过cmd命令手动收集内网中的主机信息。&lt;/p&gt;
-&lt;h2 id=&quot;命令及演示效果&quot;&gt;&lt;a href=&quot;#命令及演示效果&quot; class=&quot;headerlink&quot; title=&quot;命令及演示效果&quot;&gt;&lt;/a&gt;命令及演示效果&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;systeminfo | findstr /B /C:”OS 名称” /C:”OS 版本”&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210307114353404.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;wmic product get name,version：利用wmic命令，将结果输出到文本文件中&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210307121744649.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
-&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;wmic process list brief：查看进程信息&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210307121856592.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="内网渗透" scheme="https://pyhsecurity.cn/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
-    
-    
-    <category term="红蓝对抗" scheme="https://pyhsecurity.cn/tags/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Powershell收集域内信息</title>
-    <link href="https://pyhsecurity.cn/2021/03/06/Powershell%E6%94%B6%E9%9B%86%E5%9F%9F%E5%86%85%E4%BF%A1%E6%81%AF/"/>
-    <id>https://pyhsecurity.cn/2021/03/06/Powershell%E6%94%B6%E9%9B%86%E5%9F%9F%E5%86%85%E4%BF%A1%E6%81%AF/</id>
-    <published>2021-03-06T06:10:26.889Z</published>
-    <updated>2021-03-12T16:59:06.915Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;Powershell作为微软官方推出的脚本语言，在Windows操作系统中的强大功能总所周知：系统管理员可以利用它提高Windows管理工作的自动化程度；渗透测试人员可以利用它更好地进行系统安全测试。因为powershell命令比较安全，减少了触发IDS或IPS的风险，因此大多数的作用是用于绕过策略。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Powershell的常用执行权限共有四种&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;参数&lt;/th&gt;
-&lt;th&gt;描述&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;Restricted&lt;/td&gt;
-&lt;td&gt;默认设置，不允许执行任何脚本&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Allsigned&lt;/td&gt;
-&lt;td&gt;只能运行经过证书验证的脚本&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Unrestricted&lt;/td&gt;
-&lt;td&gt;权限最高，可以执行任意脚本&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;RemoteSigned&lt;/td&gt;
-&lt;td&gt;对本地脚本不进行限制；对来自网络的脚本必须验证其签名&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;h2 id=&quot;各脚本命令展示&quot;&gt;&lt;a href=&quot;#各脚本命令展示&quot; class=&quot;headerlink&quot; title=&quot;各脚本命令展示&quot;&gt;&lt;/a&gt;各脚本命令展示&lt;/h2&gt;&lt;p&gt;这里我们将策略设置为Unrestricted，能运行所有的脚本权限&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210306133134774.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;然后我们进入PowerSploit的Recon文件夹将PowerView.ps1这个脚本导入进去(只有导入这个脚本才能执行以下命令)，这个是PowerSploit的下载地址&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/PowerShellMafia/PowerSploit&quot;&gt;https://github.com/PowerShellMafia/PowerSploit&lt;/a&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210306133704948.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Get-NetDomain：获取当前用户所在域的名称&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210306133824783.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTAwNzA3Mw==,size_16,color_FFFFFF,t_70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="内网渗透" scheme="https://pyhsecurity.cn/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
-    
-    
-    <category term="红蓝对抗" scheme="https://pyhsecurity.cn/tags/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/"/>
+    <title>围城经典语录</title>
+    <link href="https://pyhsecurity.cn/2021/08/30/%E5%9B%B4%E5%9F%8E%E7%BB%8F%E5%85%B8%E8%AF%AD%E5%BD%95/"/>
+    <id>https://pyhsecurity.cn/2021/08/30/%E5%9B%B4%E5%9F%8E%E7%BB%8F%E5%85%B8%E8%AF%AD%E5%BD%95/</id>
+    <published>2021-08-30T14:28:53.641Z</published>
+    <updated>2021-08-30T14:54:53.297Z</updated>
+    
+    
+    <summary type="html">&lt;ol&gt;
+&lt;li&gt;流言这东西，比流感蔓延的速度更快，比流星所蕴含的能量更巨大，比流氓更具有恶意，比流产更能让人心力憔悴。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol start=&quot;2&quot;&gt;
+&lt;li&gt;我爱的人，我要能够占领他整个生命，他在碰见我之前，没有过去，留着空白等待我。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol start=&quot;3&quot;&gt;
+&lt;li&gt;婚姻是一座围城，城外的人想进去，城里的人想出来。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol start=&quot;4&quot;&gt;
+&lt;li&gt;爱情多半是不成功的，要么苦于终成眷属的厌倦，要么苦于未能终成眷属的悲哀。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol start=&quot;5&quot;&gt;
+&lt;li&gt;要人知道自己有个秘密，而不让人知道是个什么秘密，等他们问，要他们猜，这是人性的虚荣。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol start=&quot;6&quot;&gt;
+&lt;li&gt;忠厚老实人的恶毒，像饭里的沙砾或者出骨鱼片里未淨的刺，会给人一种不期待的伤痛。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol start=&quot;7&quot;&gt;
+&lt;li&gt;旅行是最劳顿，最麻烦，叫人本相必现的时候。经过长期苦旅行而彼此不讨厌的人，才可以结交作朋友。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol start=&quot;8&quot;&gt;
+&lt;li&gt;上帝会懊悔没在人身上添一条能摇的狗尾巴，因此减低了不知多少表情的效果。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol start=&quot;9&quot;&gt;
+&lt;li&gt;同行最不宜结婚，因为彼此是行家，谁也哄不倒谁，丈夫不会莫测高深地崇拜太太，太太也不会盲目地崇拜丈夫，婚姻的基础就不牢固。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol start=&quot;10&quot;&gt;
+&lt;li&gt;烤山薯这东西，本来像中国谚语里的私情男女，“偷着不如偷不着，”香味比滋味好；你闻的时候，觉得非吃不可，真到嘴也不过尔尔。&lt;/li&gt;
+&lt;/ol&gt;</summary>
+    
+    
+    
+    <category term="近代文学" scheme="https://pyhsecurity.cn/categories/%E8%BF%91%E4%BB%A3%E6%96%87%E5%AD%A6/"/>
+    
+    
+    <category term="围城" scheme="https://pyhsecurity.cn/tags/%E5%9B%B4%E5%9F%8E/"/>
     
   </entry>
   
