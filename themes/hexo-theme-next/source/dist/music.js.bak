@@ -82,12 +82,6 @@ const ap = new APlayer({
         cover: 'https://p2.music.126.net/x-OMZS1xidJkNHEDE_qG4g==/19054536509481786.jpg?',
 	  },
 	  {
-		name: "莫扎特：土耳其进行曲",
-        artist: '群星',
-        url: 'http://music.163.com/song/media/outer/url?id=27511298.mp3',
-        cover: 'https://p2.music.126.net/CzXg1dOY-aGb5ZV6IvN_BA==/109951164077784060.jpg?',
-	  },
-	  {
 		name: "城南花已开",
         artist: '三亩地',
         url: 'http://music.163.com/song/media/outer/url?id=468176711.mp3',
@@ -136,10 +130,40 @@ const ap = new APlayer({
         cover: 'https://p2.music.126.net/PEQ69_EwVpuaBmmSkAY0SQ==/58274116284456.jpg?',
 	  },
 	  {
+		name: "起风了",
+        artist: '买辣椒也用券',
+        url: 'http://music.163.com/song/media/outer/url?id=1330348068.mp3',
+        cover: 'https://p2.music.126.net/diGAyEmpymX8G7JcnElncQ==/109951163699673355.jpg?',
+	  },
+	  {
 		name: "爱与痛的边缘",
         artist: '谭咏麟',
         url: 'http://music.163.com/song/media/outer/url?id=113031.mp3',
         cover: 'https://p1.music.126.net/LBWEQ6ib0qah58bm0OMMFA==/109951163416481965.jpg?',
+	  },
+	  {
+		name: "玻璃之情",
+        artist: '张国荣',
+        url: 'http://music.163.com/song/media/outer/url?id=186436.mp3',
+        cover: 'https://p2.music.126.net/2YIpNoCzXfYgz4zIw3s0Vg==/73667279073787.jpg?',
+	  },
+	  {
+		name: "春夏秋冬",
+        artist: '张国荣',
+        url: 'http://music.163.com/song/media/outer/url?id=186453.mp3',
+        cover: 'https://p2.music.126.net/2YIpNoCzXfYgz4zIw3s0Vg==/73667279073787.jpg?',
+	  },
+	  {
+		name: "有心人",
+        artist: '张国荣',
+        url: 'http://music.163.com/song/media/outer/url?id=29343372.mp3',
+        cover: 'https://p1.music.126.net/gtyZ755eumOgcu-2RjrqnA==/109951165851926372.jpg?',
+	  },
+	  {
+		name: "左右手",
+        artist: '张国荣',
+        url: 'http://music.163.com/song/media/outer/url?id=187564.mp3',
+        cover: 'https://p1.music.126.net/hoUqQMY1FSeVprC1iP4Mxw==/109951165341229007.jpg?',
 	  },
 	  {
 		name: "认错",
@@ -148,10 +172,106 @@ const ap = new APlayer({
         cover: 'https://p1.music.126.net/2JC8Nj7Ny859FwIFZzLX9w==/109951163180730054.jpg?',
 	  },
 	  {
+		name: "暧昧",
+        artist: '薛之谦',
+        url: 'http://music.163.com/song/media/outer/url?id=471385043.mp3',
+        cover: 'https://p1.music.126.net/fNbj5uDwltSDLbETdnEYYQ==/109951163069265719.jpg?',
+	  },
+	  {
+		name: "绅士",
+        artist: '薛之谦',
+        url: 'http://music.163.com/song/media/outer/url?id=32192436.mp3',
+        cover: 'https://p2.music.126.net/qpvBqYIqkRhO9Ry2qOCdJQ==/2942293117852634.jpg?',
+	  },
+	  {
+		name: "演员",
+        artist: '薛之谦',
+        url: 'http://music.163.com/song/media/outer/url?id=32507038.mp3',
+        cover: 'https://p1.music.126.net/qpvBqYIqkRhO9Ry2qOCdJQ==/2942293117852634.jpg?',
+	  },
+	  {
+		name: "千千万万",
+        artist: '深海鱼子酱',
+        url: 'http://music.163.com/song/media/outer/url?id=1811459887.mp3',
+        cover: 'https://p2.music.126.net/xdegZlt9xmez_MxuH_PzXA==/109951165623999837.jpg?',
+	  },
+	  {
+		name: "你的答案",
+        artist: '阿冗',
+        url: 'http://music.163.com/song/media/outer/url?id=1400256289.mp3',
+        cover: 'https://p1.music.126.net/OlX-4S4L0Hdkyy_DQ27zag==/109951164459621658.jpg?',  
+	  },
+	  {
 		name: "罪人",
         artist: '李克勤',
         url: 'http://music.163.com/song/media/outer/url?id=111536.mp3',
         cover: 'https://p1.music.126.net/LevsHSmG6l6N6uYL3KcI-w==/46179488371973.jpg?',
+	  },
+	  {
+		name: "沙龙",
+        artist: '陈奕迅',
+        url: 'http://music.163.com/song/media/outer/url?id=64833.mp3',
+        cover: 'https://p2.music.126.net/RmdCYKF2ZQiAlgFmcsIOeQ==/18958878997954526.jpg?',
+	  },
+	  {
+		name: "可不可以",
+        artist: '张紫豪',
+        url: 'http://music.163.com/song/media/outer/url?id=553755659.mp3',
+        cover: 'https://p2.music.126.net/WafK2OQfEtqXitdDXJ772Q==/109951163252847249.jpg?',
+	  },
+	  {
+		name: "My Soul",
+        artist: 'July',
+        url: 'http://music.163.com/song/media/outer/url?id=5308028.mp3',
+        cover: 'https://p2.music.126.net/NFl1s5Hl3E37dCaFIDHfNw==/727876697598920.jpg?',
+	  },
+	  {
+		name: "Love Paradise",
+        artist: '陈慧琳',
+        url: 'http://music.163.com/song/media/outer/url?id=213737.mp3',
+        cover: 'https://p1.music.126.net/ANNiPNIW5BlCbHA-hpKyhg==/106652627906419.jpg?',
+	  },
+	  {
+	  	name: "Big Big World",
+        artist: 'Emilia',
+        url: 'http://music.163.com/song/media/outer/url?id=2534006.mp3',
+        cover: 'https://p2.music.126.net/qDJqpZitW_70wIfeWTwcQQ==/109951163071995459.jpg?',
+	  },
+	  {
+		name: "Free Loop",
+        artist: 'Daniel Powter',
+        url: 'http://music.163.com/song/media/outer/url?id=5253801.mp3',
+        cover: 'https://p1.music.126.net/grGdswi38xUoYcDBISdKcg==/92358976750445.jpg?',
+	  },
+	  {
+		name: "Something Just Like This",
+        artist: 'The Chainsmokers / Coldplay',
+        url: 'http://music.163.com/song/media/outer/url?id=461347998.mp3',
+        cover: 'https://p1.music.126.net/ggnyubDdMxrhpqYvpZbhEQ==/3302932937412681.jpg?',
+	  },
+	  {
+		name: "You Are Beautiful",
+        artist: 'James Blunt',
+        url: 'http://music.163.com/song/media/outer/url?id=431853388.mp3',
+        cover: 'https://p2.music.126.net/iL6iMr3BZgc7wgAp4hNsxA==/3412884123590807.jpg?',
+	  },
+	  {
+		name: "Valder Fields",
+        artist: 'Tamas Wells',
+        url: 'http://music.163.com/song/media/outer/url?id=2001320.mp3',
+        cover: 'https://p1.music.126.net/irlK0xcRGW8jw3wq165onw==/109951165361156638.jpg?',
+	  },
+	  {
+		name: "Memories",
+        artist: 'Maroon 5',
+        url: 'http://music.163.com/song/media/outer/url?id=1392089153.mp3',
+        cover: 'https://p2.music.126.net/ff8QRXiKefz7qUj6VeFHHg==/109951164375334868.jpg?',
+	  },
+	  {
+		name: "That Girl",
+        artist: 'Olly Murs',
+        url: 'http://music.163.com/song/media/outer/url?id=440208476.mp3',
+        cover: 'https://p1.music.126.net/5HEwV-KwHoazXJ2CAHy1XA==/18259589602949147.jpg?',
 	  }
     ]
 });
