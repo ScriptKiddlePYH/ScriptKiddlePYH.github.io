@@ -2,7 +2,7 @@
 title: Jerry
 date: 2021-12-24 11:29:39
 tags: Hack The Box
-categoreies: 中间件
+categories: 中间件
 ---
 
 ## 靶机信息

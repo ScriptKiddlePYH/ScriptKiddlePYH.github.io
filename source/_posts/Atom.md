@@ -2,7 +2,7 @@
 title: Atom
 date: 2021-12-24 11:26:50
 tags: Hack The Box
-categoreies: SMB
+categories: SMB
 ---
 
 ## 靶机信息

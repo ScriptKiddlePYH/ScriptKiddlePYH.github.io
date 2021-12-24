@@ -2,7 +2,7 @@
 title: Valentine
 date: 2021-12-24 11:35:06
 tags: Hack The Box
-categoreies: 心脏滴血
+categories: 心脏滴血
 ---
 
 ## 靶机信息

@@ -2,7 +2,7 @@
 title: Active
 date: 2021-12-24 11:20:45
 tags: Hack The Box
-categoreies: 内网
+categories: 内网
 ---
 
 ## 靶机信息
