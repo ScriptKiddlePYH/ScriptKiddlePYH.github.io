@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2021-09-11T07:40:54.341Z</updated>
+  <updated>2021-12-24T03:36:04.056Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -17,337 +17,113 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>英文美文(一)</title>
-    <link href="https://pyhsecurity.cn/2021/09/11/%E8%8B%B1%E6%96%87%E7%BE%8E%E6%96%87(%E4%B8%80)/"/>
-    <id>https://pyhsecurity.cn/2021/09/11/%E8%8B%B1%E6%96%87%E7%BE%8E%E6%96%87(%E4%B8%80)/</id>
-    <published>2021-09-11T07:40:54.341Z</published>
-    <updated>2021-09-11T07:40:54.341Z</updated>
+    <title>Valentine</title>
+    <link href="https://pyhsecurity.cn/2021/12/24/Valentine/"/>
+    <id>https://pyhsecurity.cn/2021/12/24/Valentine/</id>
+    <published>2021-12-24T03:35:06.000Z</published>
+    <updated>2021-12-24T03:36:04.056Z</updated>
     
     
-    <summary type="html">&lt;h1 id=&quot;把握今天，活在当前&quot;&gt;&lt;a href=&quot;#把握今天，活在当前&quot; class=&quot;headerlink&quot; title=&quot;把握今天，活在当前&quot;&gt;&lt;/a&gt;&lt;strong&gt;把握今天，活在当前&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;​    Are you someone who says the following phrases a lot? “In a minute”, “I will do it later” or “I’ll do it tomorrow”.&lt;/p&gt;
-&lt;p&gt;​    If you are, please remove them from your vocabulary immediately and seize the day! Why?duanwenw.com Because we never know how much time we have left —and it’s important we use every single bit of it!&lt;/p&gt;
-&lt;p&gt;​    Your children are only babies and young for one moment! Take pictures! Make videos! Get on the ground and play with them! Avoid saying, “No”, “As soon as I’m done” or any other delays.&lt;/p&gt;
-&lt;p&gt;​    Be a good friend! Make visits! Make calls! Send cards! Offer help! And be sure you let your friends know how much they mean to you!&lt;/p&gt;
-&lt;p&gt;​</summary>
+    <summary type="html">&lt;h2 id=&quot;靶机信息&quot;&gt;&lt;a href=&quot;#靶机信息&quot; class=&quot;headerlink&quot; title=&quot;靶机信息&quot;&gt;&lt;/a&gt;靶机信息&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/48b5e5c02ff845d5b280499511915293.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;可以看到主机开放了web服务和ssh服务，这里发现了&lt;code&gt;valentine.htb&lt;/code&gt;这个子域，我们可以将它对应的解析地址添加到hosts文件中去&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/a1a3512aec184664808f7b0dfdab121b.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;访问其web服务的时候，就只有一张图片，查看代码源码啥的都没有，但是这张图片的心脏在滴血，我们不难猜到是心脏滴血漏洞吧&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/d9abb29e5cc84619b8c2c6942db20ce4.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;那么我们想用脚本检测一下是否存在心脏滴血漏洞，这里有两种方法检测这个漏洞，一种是使用&lt;code&gt;heartbleed.py&lt;/code&gt;这个python脚本，另一种是使用nmap自带的nse脚本检测&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/59444c0ee5d544d298302502fd349bb4.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/49fbb69ace90495f904853d28bb58c96.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我们发现了一段base64的加密信息&lt;code&gt;$text=aGVhcnRibGVlZGJlbGlldmV0aGVoeXBlCg==&lt;/code&gt;，解码发现明文是&lt;code&gt;heartbleedbelievethehype&lt;/code&gt;，不知道是什么，先留着或许后面有用。&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/c2499b79b1d24bf5b41b4827e80eab52.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;目前来说没啥可利用的信息了，我们进行扫一波目录吧。发现了三个可访问的目录&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/921fb947413e49f9835045472777f608.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;dev目录下，我们发现了一个&lt;code&gt;hype_key&lt;/code&gt;和&lt;code&gt;notes.txt&lt;/code&gt;这两个文件&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/aca3b9d5338b426880717055af939c05.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_18,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;打开hype_key发现是一堆十六进制的字符，我们解码之后发现是一个私钥&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/ca8014a8611e4285a8dcc55497aee1f6.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;漏洞利用&quot;&gt;&lt;a href=&quot;#漏洞利用&quot; class=&quot;headerlink&quot; title=&quot;漏洞利用&quot;&gt;&lt;/a&gt;漏洞利用&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/b2d08002b1724754a58cebb6117ef1b6.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;然后我们发现之前不是有一个类似密码的字符串的吗。我们尝试登陆，并且成功了，我们可以查看到user.txt文件内容&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/2e18c2941c3045edaccc7ebcbcdc2db3.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/afb0ff3e8d0145d9bf0d2a26c4608e2b.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;提权&quot;&gt;&lt;a href=&quot;#提权&quot; class=&quot;headerlink&quot; title=&quot;提权&quot;&gt;&lt;/a&gt;提权&lt;/h2&gt;&lt;p&gt;这里我们开启一个服务器，上传&lt;code&gt;linpeas.sh&lt;/code&gt;这个脚本到目标机器上，这个脚本功能非常强大，是专门针对Linux提权的一个脚本工具。它是由Carlos P创建的，目的是列举在Linux系统上提升特权的所有可能方法。&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/d6d15cb2cccf4a7fa46092fd5a3db58e.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/06085062db3d40459a5ecef0a53d7a13.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;赋予执行权限并运行这个脚本，这里有两种提权的方法，一种是脏牛提权，这个简单快捷；另一种利用&lt;code&gt;tmux&lt;/code&gt;这个应用程序来实施提权。&lt;/p&gt;
+&lt;h3 id=&quot;脏牛提权&quot;&gt;&lt;a href=&quot;#脏牛提权&quot; class=&quot;headerlink&quot; title=&quot;脏牛提权&quot;&gt;&lt;/a&gt;脏牛提权&lt;/h3&gt;&lt;p&gt;这里我们发现这个Linux版本较低，那么我们可以使用脏牛进行提权&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/d06348beabfc4b279891a1cfc60a32a1.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;在&lt;code&gt;exploit-db&lt;/code&gt;上可以发现利用的脚本&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/4e45a7c7bc434452b0dbe78a15ff87c1.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;这是整个脚本的内容&lt;/p&gt;</summary>
     
     
     
-    <category term="英文鸡汤" scheme="https://pyhsecurity.cn/categories/%E8%8B%B1%E6%96%87%E9%B8%A1%E6%B1%A4/"/>
     
-    
-    <category term="英文文章" scheme="https://pyhsecurity.cn/tags/%E8%8B%B1%E6%96%87%E6%96%87%E7%AB%A0/"/>
+    <category term="Hack The Box" scheme="https://pyhsecurity.cn/tags/Hack-The-Box/"/>
     
   </entry>
   
   <entry>
-    <title>百年孤独经典语录</title>
-    <link href="https://pyhsecurity.cn/2021/09/11/%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC%E7%BB%8F%E5%85%B8%E8%AF%AD%E5%BD%95/"/>
-    <id>https://pyhsecurity.cn/2021/09/11/%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC%E7%BB%8F%E5%85%B8%E8%AF%AD%E5%BD%95/</id>
-    <published>2021-09-11T07:18:23.904Z</published>
-    <updated>2021-09-11T07:18:47.926Z</updated>
+    <title>Reel</title>
+    <link href="https://pyhsecurity.cn/2021/12/24/Reel/"/>
+    <id>https://pyhsecurity.cn/2021/12/24/Reel/</id>
+    <published>2021-12-24T03:32:51.000Z</published>
+    <updated>2021-12-24T03:34:30.773Z</updated>
     
     
-    <summary type="html">&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;The secret of a happy old age is nothing else but a decent agreement with loneliness.&lt;/p&gt;
-&lt;p&gt;一个幸福的晚年的秘诀不是别的，而是与孤寂签订一个体面的协定。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Only when the mist on my heart is washed away with water will glory illuminate the original dream.&lt;/p&gt;
-&lt;p&gt;只有用水将心上的雾气淘洗干净，荣光才会照亮最初的梦想。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;All the splendor that once experienced in life must be paid back with loneliness.&lt;/p&gt;
-&lt;p&gt;生命中曾经经历过的所有绚烂，终究都要用寂寞来偿还。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;The original time will also be wrong and unexpected, and thus burst, leaving an eternal fragment in a room.&lt;/p&gt;
-&lt;p&gt;原来时间也会失误和出现意外，并因此迸裂，在某个房间里留下永恒的片段。&lt;/p&gt;</summary>
+    <summary type="html">&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;40&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;41&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;42&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;43&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;44&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;45&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;46&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Host discovery disabled (-Pn). All addresses will be marked &lt;span class=&quot;string&quot;&gt;&amp;#x27;up&amp;#x27;&lt;/span&gt; and scan &lt;span class=&quot;built_in&quot;&gt;times&lt;/span&gt; will be slower.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-14 05:18 EST&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Nmap scan report &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; 10.10.10.77&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Host is up (0.30s latency).&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Not shown: 9997 filtered ports&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;PORT   STATE SERVICE VERSION&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21/tcp open  ftp     Microsoft ftpd&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;| ftp-syst: &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|_  SYST: Windows_NT&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22/tcp open  ssh     OpenSSH 7.6 (protocol 2.0)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;| ssh-hostkey: &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|   2048 82:20:c3:bd:16:cb:a2:9c:88:87:1d:6c:15:59:ed:ed (RSA)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|   256 23:2b:b8:0a:8c:1c:f4:4d:8d:7e:5e:64:58:80:33:45 (ECDSA)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|_  256 ac:8b:de:25:1d:b7:d8:38:38:9b:9c:16:bf:f6:3f:ed (ED25519)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25/tcp open  smtp?&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;| fingerprint-strings: &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|   Hello: &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|     220 Mail Service ready&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|     EHLO Invalid domain address.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|   Help: &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|     220 Mail Service ready&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|     DATA HELO EHLO MAIL NOOP QUIT RCPT RSET SAML TURN VRFY&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|   NULL: &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|_    220 Mail Service ready&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;| smtp-commands: REEL, SIZE 20480000, AUTH LOGIN PLAIN, HELP, &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|_ 211 DATA HELO EHLO MAIL NOOP QUIT RCPT RSET SAML TURN VRFY &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;SF-Port25-TCP:V=7.91%I=7%D=11/14%Time=6190E2F5%P=x86_64-pc-linux-gnu%r(NUL&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;SF:L,18,&lt;span class=&quot;string&quot;&gt;&amp;quot;220\x20Mail\x20Service\x20ready\r\n&amp;quot;&lt;/span&gt;)%r(Hello,3A,&lt;span class=&quot;string&quot;&gt;&amp;quot;220\x20Mail\x20&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;SF:Service\x20ready\r\n501\x20EHLO\x20Invalid\x20domain\x20address\.\r\n&amp;quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;SF:%r(Help,54,&lt;span class=&quot;string&quot;&gt;&amp;quot;220\x20Mail\x20Service\x20ready\r\n211\x20DATA\x20HELO\x20E&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;SF:HLO\x20MAIL\x20NOOP\x20QUIT\x20RCPT\x20RSET\x20SAML\x20TURN\x20VRFY\r\n&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;SF:&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;OS fingerprint not ideal because: Missing a closed TCP port so results incomplete&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;No OS matches &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; host&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Network Distance: 2 hops&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;TRACEROUTE (using port 22/tcp)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;HOP RTT       ADDRESS&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;1   301.22 ms 10.10.14.1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2   301.21 ms 10.10.10.77&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Nmap &lt;span class=&quot;keyword&quot;&gt;done&lt;/span&gt;: 1 IP address (1 host up) scanned &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; 185.69 seconds&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
     
     
     
-    <category term="外国文学" scheme="https://pyhsecurity.cn/categories/%E5%A4%96%E5%9B%BD%E6%96%87%E5%AD%A6/"/>
     
-    
-    <category term="马尔克斯" scheme="https://pyhsecurity.cn/tags/%E9%A9%AC%E5%B0%94%E5%85%8B%E6%96%AF/"/>
+    <category term="Hack The Box" scheme="https://pyhsecurity.cn/tags/Hack-The-Box/"/>
     
   </entry>
   
   <entry>
-    <title>东野圭吾经典语录</title>
-    <link href="https://pyhsecurity.cn/2021/08/31/%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE%E7%BB%8F%E5%85%B8%E8%AF%AD%E5%BD%95/"/>
-    <id>https://pyhsecurity.cn/2021/08/31/%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE%E7%BB%8F%E5%85%B8%E8%AF%AD%E5%BD%95/</id>
-    <published>2021-08-31T06:18:17.321Z</published>
-    <updated>2021-08-31T10:57:16.829Z</updated>
+    <title>Postman(Redis未授权访问)</title>
+    <link href="https://pyhsecurity.cn/2021/12/24/Postman/"/>
+    <id>https://pyhsecurity.cn/2021/12/24/Postman/</id>
+    <published>2021-12-24T03:31:17.000Z</published>
+    <updated>2021-12-24T03:32:33.572Z</updated>
     
     
-    <summary type="html">&lt;ol&gt;
-&lt;li&gt;没有歧视和偏见的世界，那只是想象中的产物。人类就是需要跟那样的东西相伴的生物。 ——《信》&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;2&quot;&gt;
-&lt;li&gt;我们只能走在幻夜的路上，即使四周明亮如白昼，那也仅是假象。就算与你共度的每个夜晚都是幻夜，我也愿为你化身为影，至死不渝！ ——《幻夜》&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;3&quot;&gt;
-&lt;li&gt;&lt;p&gt;“你的任务，就是珍惜你自己的人生。而且还要比之前更加珍惜。” ——《盛夏的方程式》&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;情不知所起，一往而深，是最美的爱情。 恨不知所起，深入骨髓，是最冷的人性。 原罪被放大，总有一角照出自己。 —— 《恶意》&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;5&quot;&gt;
-&lt;li&gt;究竟爱一个人，可以到什么程度？ 究竟什么样的邂逅，可以舍命不悔？ 逻辑的尽头不是理性和秩序的理想国，而是我用生命奉献的爱情！ ——《嫌疑人X的献身》&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;6&quot;&gt;
-&lt;li&gt;即使是善良的人，也不能什么时候，向谁都显示出来善良。得到那个，就得不到这个。都是这样的事儿。要选择这个就要舍弃那个，如此反复，这就是人生。——《信》&lt;/li&gt;
-&lt;/ol&gt;</summary>
+    <summary type="html">&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;发现目标开放了22、80、6379等常见端口&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;root💀kali)-[~/Desktop/Scan-Scripts]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;└─&lt;span class=&quot;comment&quot;&gt;# ./nmap.sh 10.10.10.160&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-30 07:32 EST&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Nmap scan report &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; 10.10.10.160&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Host is up (0.30s latency).&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;PORT      STATE SERVICE VERSION&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22/tcp    open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;| ssh-hostkey: &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|   2048 46:83:4f:f1:38:61:c0:1c:74:cb:b5:d1:4a:68:4d:77 (RSA)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|   256 2d:8d:27:d2:df:15:1a:31:53:05:fb:ff:f0:62:26:89 (ECDSA)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|_  256 ca:7c:82:aa:5a:d3:72:ca:8b:8a:38:3a:80:41:a0:45 (ED25519)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;80/tcp    open  http    Apache httpd 2.4.29 ((Ubuntu))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|_http-server-header: Apache/2.4.29 (Ubuntu)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|_http-title: The Cyber Geek&lt;span class=&quot;string&quot;&gt;&amp;#x27;s Personal Website&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;6379/tcp  open  redis   Redis key-value store 4.0.9&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;10000/tcp open  http    MiniServ 1.910 (Webmin httpd)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;|_http-title: Site doesn&amp;#x27;&lt;/span&gt;t have a title (text/html; Charset=iso-8859-1).&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Nmap &lt;span class=&quot;keyword&quot;&gt;done&lt;/span&gt;: 1 IP address (1 host up) scanned &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; 42.85 seconds&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
     
     
     
-    <category term="现代文学" scheme="https://pyhsecurity.cn/categories/%E7%8E%B0%E4%BB%A3%E6%96%87%E5%AD%A6/"/>
     
-    
-    <category term="东野圭吾" scheme="https://pyhsecurity.cn/tags/%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/"/>
+    <category term="Hack The Box" scheme="https://pyhsecurity.cn/tags/Hack-The-Box/"/>
     
   </entry>
   
   <entry>
-    <title>余华经典语录</title>
-    <link href="https://pyhsecurity.cn/2021/08/31/%E4%BD%99%E5%8D%8E%E7%BB%8F%E5%85%B8%E8%AF%AD%E5%BD%95/"/>
-    <id>https://pyhsecurity.cn/2021/08/31/%E4%BD%99%E5%8D%8E%E7%BB%8F%E5%85%B8%E8%AF%AD%E5%BD%95/</id>
-    <published>2021-08-31T06:03:12.488Z</published>
-    <updated>2021-08-31T10:58:31.623Z</updated>
+    <title>Jerry</title>
+    <link href="https://pyhsecurity.cn/2021/12/24/Jerry/"/>
+    <id>https://pyhsecurity.cn/2021/12/24/Jerry/</id>
+    <published>2021-12-24T03:29:39.000Z</published>
+    <updated>2021-12-24T03:30:45.528Z</updated>
     
     
-    <summary type="html">&lt;ol&gt;
-&lt;li&gt;没有什么比时间更具有说服力了，因为时间无需通知我们就可以改变一切。 ——《活着》&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;2&quot;&gt;
-&lt;li&gt;死亡不是失去生命，而是走出了时间。以笑的方式哭，在死亡的伴随下活着。 ——《活着》&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;3&quot;&gt;
-&lt;li&gt;我走遍这个城市的所有角落，眼睛里挤满老人们的身影，唯独没有父亲的脸庞 。——《第七天》&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;4&quot;&gt;
-&lt;li&gt;事情都是被逼出来的，人只有被逼上绝路了，才会有办法，没上绝路以前，不是没想到办法，就是想到了也不知道该不该去做 。——《许三观卖血记》&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;5&quot;&gt;
-&lt;li&gt;这里所说的高尚不是那种单纯的美好，而是对一切事物理解之后的超然，对善与恶一视同仁，用同情的目光看待世界。—— 《活着》&lt;/li&gt;
-&lt;/ol&gt;</summary>
+    <summary type="html">&lt;h2 id=&quot;靶机信息&quot;&gt;&lt;a href=&quot;#靶机信息&quot; class=&quot;headerlink&quot; title=&quot;靶机信息&quot;&gt;&lt;/a&gt;靶机信息&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/d5f1dc82530e485e91e914d59c62f9ff.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;我们可以看到，目标主机只开放了8080端口，而且版本还是&lt;code&gt;7.0.88&lt;/code&gt;的&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/12b2a2ded3544b248ce0ae24e4c30139.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
     
     
     
-    <category term="现代文学" scheme="https://pyhsecurity.cn/categories/%E7%8E%B0%E4%BB%A3%E6%96%87%E5%AD%A6/"/>
     
-    
-    <category term="余华" scheme="https://pyhsecurity.cn/tags/%E4%BD%99%E5%8D%8E/"/>
+    <category term="Hack The Box" scheme="https://pyhsecurity.cn/tags/Hack-The-Box/"/>
     
   </entry>
   
   <entry>
-    <title>林清玄经典语录</title>
-    <link href="https://pyhsecurity.cn/2021/08/31/%E6%9E%97%E6%B8%85%E7%8E%84%E7%BB%8F%E5%85%B8%E8%AF%AD%E5%BD%95/"/>
-    <id>https://pyhsecurity.cn/2021/08/31/%E6%9E%97%E6%B8%85%E7%8E%84%E7%BB%8F%E5%85%B8%E8%AF%AD%E5%BD%95/</id>
-    <published>2021-08-31T05:37:23.087Z</published>
-    <updated>2021-08-31T10:58:06.212Z</updated>
+    <title>Atom</title>
+    <link href="https://pyhsecurity.cn/2021/12/24/Atom/"/>
+    <id>https://pyhsecurity.cn/2021/12/24/Atom/</id>
+    <published>2021-12-24T03:26:50.000Z</published>
+    <updated>2021-12-24T03:29:01.057Z</updated>
     
     
-    <summary type="html">&lt;ol&gt;
-&lt;li&gt;生死之间这么脆弱，就像一个玻璃瓶子一般，一掉地就碎了，可是就有人用力的把瓶子往地上砸。——《情深，万象皆深》&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;2&quot;&gt;
-&lt;li&gt;对生命的恒常有祝福之念，对生命的变化有宽容之心。——《可以预约的雪》&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;3&quot;&gt;
-&lt;li&gt;在穿过林间的时候，我觉得麻雀的死亡给我一些启示，我们虽然在尘网中生活，但永远不要失去想飞的心，不要忘记飞翔的姿势。——《在云上》&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;4&quot;&gt;
-&lt;li&gt;最好看的电影，结局总是悲哀的，但那悲哀不是流泪或者嚎啕，只是无奈，加上一些些茫然。——《河的感觉》&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;5&quot;&gt;
-&lt;li&gt;爱的开始是一个眼色，爱的最后是无尽的苍穹。——《不知多少秋声》&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;6&quot;&gt;
-&lt;li&gt;浪漫，就是浪费时间慢慢吃饭，浪费时间慢慢喝茶，浪费时间慢慢走，浪费时间慢慢变老。——《人间有味是清欢》&lt;/li&gt;
-&lt;/ol&gt;</summary>
+    <summary type="html">&lt;h2 id=&quot;靶机信息&quot;&gt;&lt;a href=&quot;#靶机信息&quot; class=&quot;headerlink&quot; title=&quot;靶机信息&quot;&gt;&lt;/a&gt;靶机信息&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/d7ff3a26ad1b4b0680f0d4283d757a77.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;可以看到靶机开放了80端口，那证明就存在web服务。&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/71d80ba7cc3748c4a4f0402a9793083a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/458004df73e046d6ac29665f942ae2a1.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
     
     
     
-    <category term="现代文学" scheme="https://pyhsecurity.cn/categories/%E7%8E%B0%E4%BB%A3%E6%96%87%E5%AD%A6/"/>
     
-    
-    <category term="林清玄" scheme="https://pyhsecurity.cn/tags/%E6%9E%97%E6%B8%85%E7%8E%84/"/>
+    <category term="Hack The Box" scheme="https://pyhsecurity.cn/tags/Hack-The-Box/"/>
     
   </entry>
   
   <entry>
-    <title>村上春树经典语录</title>
-    <link href="https://pyhsecurity.cn/2021/08/31/%E6%9D%91%E4%B8%8A%E6%98%A5%E6%A0%91%E7%BB%8F%E5%85%B8%E8%AF%AD%E5%BD%95/"/>
-    <id>https://pyhsecurity.cn/2021/08/31/%E6%9D%91%E4%B8%8A%E6%98%A5%E6%A0%91%E7%BB%8F%E5%85%B8%E8%AF%AD%E5%BD%95/</id>
-    <published>2021-08-31T05:29:24.604Z</published>
-    <updated>2021-08-31T10:56:44.688Z</updated>
+    <title>Active</title>
+    <link href="https://pyhsecurity.cn/2021/12/24/Active/"/>
+    <id>https://pyhsecurity.cn/2021/12/24/Active/</id>
+    <published>2021-12-24T03:20:45.000Z</published>
+    <updated>2021-12-24T03:28:25.721Z</updated>
     
     
-    <summary type="html">&lt;ol&gt;
-&lt;li&gt;再也无须前思后想，一切岂非已然过往。——《且听风吟》&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;2&quot;&gt;
-&lt;li&gt;看海看久了想见人，见人见多了想看海。——《且听风吟》&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;3&quot;&gt;
-&lt;li&gt;时间这东西拥有强大的力量，足以一一消除人为的变更。——《1Q84》&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;4&quot;&gt;
-&lt;li&gt;平庸这东西犹如白衬衣上的污痕，一旦染上便永远洗不掉，无可挽回。——《舞！舞！舞！》&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;5&quot;&gt;
-&lt;li&gt;希望你能记住我，记住我曾这样存在过。——《挪威的森林》&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;6&quot;&gt;
-&lt;li&gt;我的人生是我的，你的人生是你的。只要你清楚自己在寻求什么，那就尽管按自己的意愿去生活。别人怎么说与你无关。——《舞！舞！舞！》&lt;/li&gt;
-&lt;/ol&gt;</summary>
+    <summary type="html">&lt;h2 id=&quot;靶机信息&quot;&gt;&lt;a href=&quot;#靶机信息&quot; class=&quot;headerlink&quot; title=&quot;靶机信息&quot;&gt;&lt;/a&gt;靶机信息&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/eda8a039099d4943bbdadeca0b30a10a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;可以看到主机开放了135,445,88这些常见的端口&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/5cf14b42521c4a969e73a389b2407517.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;p&gt;可以匿名登录smb服务&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/e3d0be21298842868f97f94a04e6481e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
     
     
     
-    <category term="现代文学" scheme="https://pyhsecurity.cn/categories/%E7%8E%B0%E4%BB%A3%E6%96%87%E5%AD%A6/"/>
     
-    
-    <category term="村上春树" scheme="https://pyhsecurity.cn/tags/%E6%9D%91%E4%B8%8A%E6%98%A5%E6%A0%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>张爱玲语录</title>
-    <link href="https://pyhsecurity.cn/2021/08/31/%E5%BC%A0%E7%88%B1%E7%8E%B2%E8%AF%AD%E5%BD%95/"/>
-    <id>https://pyhsecurity.cn/2021/08/31/%E5%BC%A0%E7%88%B1%E7%8E%B2%E8%AF%AD%E5%BD%95/</id>
-    <published>2021-08-31T05:02:54.353Z</published>
-    <updated>2021-08-31T10:59:20.420Z</updated>
-    
-    
-    <summary type="html">&lt;ol&gt;
-&lt;li&gt;你如果认识从前的我，也许你会原谅现在的我。——《倾城之恋》&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;2&quot;&gt;
-&lt;li&gt;感情原来是这么脆弱的。经得起风雨，却经不起平凡。——《一别一辈子》&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;3&quot;&gt;
-&lt;li&gt;雨声潺潺，像住在溪边，宁愿天天下雨，以为你是因为下雨不来。——《小团圆》&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;4&quot;&gt;
-&lt;li&gt;不管你的条件有多差 总会有个人在爱你。不管你的条件有多好 也总有个人不爱你。——《半生缘》&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;5&quot;&gt;
-&lt;li&gt;有些傻话，不但是要背着人说，还得背着自己。让自己听见了也怪难为情的。譬如说，我爱你，我一辈子都爱你。——《倾城之恋》&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;6&quot;&gt;
-&lt;li&gt;我要你知道,在这个世界上总有一个人是等着你的,不管在什么时候,不管在什么地方,反正你知道,总有这么个人。——《半生缘》&lt;/li&gt;
-&lt;/ol&gt;</summary>
-    
-    
-    
-    <category term="爱情文学" scheme="https://pyhsecurity.cn/categories/%E7%88%B1%E6%83%85%E6%96%87%E5%AD%A6/"/>
-    
-    
-    <category term="张爱玲" scheme="https://pyhsecurity.cn/tags/%E5%BC%A0%E7%88%B1%E7%8E%B2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>从你的全世界路过经典语录</title>
-    <link href="https://pyhsecurity.cn/2021/08/31/%E4%BB%8E%E4%BD%A0%E7%9A%84%E5%85%A8%E4%B8%96%E7%95%8C%E8%B7%AF%E8%BF%87/"/>
-    <id>https://pyhsecurity.cn/2021/08/31/%E4%BB%8E%E4%BD%A0%E7%9A%84%E5%85%A8%E4%B8%96%E7%95%8C%E8%B7%AF%E8%BF%87/</id>
-    <published>2021-08-31T03:40:27.381Z</published>
-    <updated>2021-08-31T04:50:05.964Z</updated>
-    
-    
-    <summary type="html">&lt;ol&gt;
-&lt;li&gt;我希望有个如你一般的人。 如这山间清晨一般明亮清爽的人， 如奔赴古城道路上阳光一般的人， 温暖而不炙热，覆盖我所有肌肤。 由起点到夜晚，由山野到书房， 一切问题的答案都很简单。 我希望有个如你一般的人，贯彻未来，数遍生命的公路牌。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;2&quot;&gt;
-&lt;li&gt;故事的开头总是这样，适逢其会，猝不及防。故事的结局总是这样，花开两朵，天各一方。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;3&quot;&gt;
-&lt;li&gt;在青春的列车上，如果你要提前下车，请别推醒装睡的我，这样我可以沉睡到终点，假装不知道你已经离开。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;4&quot;&gt;
-&lt;li&gt;我们在同一个时区，却有一辈子的时差。时时在一起，时不时怀疑。最后相聚只能一时，分开已经多时。你走的太匆忙，打翻了我手里所有的时间，它们零散地去了角落。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;5&quot;&gt;
-&lt;li&gt;我觉得这个世界美好无比。晴时满树花开，雨天一湖涟漪，阳光席卷城市，微风穿越指间，入夜每个电台播放的情歌，沿途每条山路铺开的影子，全部是你不经意写的一字一句，留我年复一年朗读。这世界是你的遗嘱，而我是唯一的遗物。&lt;/li&gt;
-&lt;/ol&gt;</summary>
-    
-    
-    
-    <category term="爱情文学" scheme="https://pyhsecurity.cn/categories/%E7%88%B1%E6%83%85%E6%96%87%E5%AD%A6/"/>
-    
-    
-    <category term="张嘉佳" scheme="https://pyhsecurity.cn/tags/%E5%BC%A0%E5%98%89%E4%BD%B3/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>李白诗句精选</title>
-    <link href="https://pyhsecurity.cn/2021/08/31/%E6%9D%8E%E7%99%BD%E8%AF%97%E5%8F%A5%E7%B2%BE%E9%80%89/"/>
-    <id>https://pyhsecurity.cn/2021/08/31/%E6%9D%8E%E7%99%BD%E8%AF%97%E5%8F%A5%E7%B2%BE%E9%80%89/</id>
-    <published>2021-08-30T16:18:27.244Z</published>
-    <updated>2021-08-31T10:57:42.487Z</updated>
-    
-    
-    <summary type="html">&lt;ol&gt;
-&lt;li&gt;夫天地者万物之逆旅也；光阴者百代之过客也。而浮生若梦，为欢几何？古人秉烛夜游，良有以也。——《春夜宴从弟桃花园序》&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;2&quot;&gt;
-&lt;li&gt;白发三千丈，缘愁似个长。不知明镜里，何处得秋霜。——《秋浦歌十七首》&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;3&quot;&gt;
-&lt;li&gt;白酒新熟山中归，黄鸡啄黍秋正肥。呼童烹鸡酌白酒，儿女嬉笑牵人衣。高歌取醉欲自慰，起舞落日争光辉。游说万乘苦不早，著鞭跨马涉远道。会稽愚妇轻买臣，余亦辞家西入秦。仰天大笑出门去，我辈岂是蓬蒿人。——《南陵别儿童入京》&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;4&quot;&gt;
-&lt;li&gt;大鹏一日同风起，扶摇直上九万里。假令风歇时下来，犹能簸却沧溟水。时人见我恒殊调，闻余大言皆冷笑。宣父犹能畏后生，丈夫未可轻年少。——《上李邕》&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;5&quot;&gt;
-&lt;li&gt;金樽清酒斗十千，玉盘珍羞直万钱。停杯投箸不能食，拔剑四顾心茫然。欲渡黄河冰塞川，将登太行雪满山。闲来垂钓碧溪上，忽复乘舟梦日边。行路难，行路难，多歧路，今安在？长风破浪会有时，直挂云帆济沧海。——《行路难》&lt;/li&gt;
-&lt;/ol&gt;</summary>
-    
-    
-    
-    <category term="古代文学" scheme="https://pyhsecurity.cn/categories/%E5%8F%A4%E4%BB%A3%E6%96%87%E5%AD%A6/"/>
-    
-    
-    <category term="诗仙精华" scheme="https://pyhsecurity.cn/tags/%E8%AF%97%E4%BB%99%E7%B2%BE%E5%8D%8E/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>围城经典语录</title>
-    <link href="https://pyhsecurity.cn/2021/08/30/%E5%9B%B4%E5%9F%8E%E7%BB%8F%E5%85%B8%E8%AF%AD%E5%BD%95/"/>
-    <id>https://pyhsecurity.cn/2021/08/30/%E5%9B%B4%E5%9F%8E%E7%BB%8F%E5%85%B8%E8%AF%AD%E5%BD%95/</id>
-    <published>2021-08-30T14:28:53.641Z</published>
-    <updated>2021-08-30T16:25:57.928Z</updated>
-    
-    
-    <summary type="html">&lt;ol&gt;
-&lt;li&gt;流言这东西，比流感蔓延的速度更快，比流星所蕴含的能量更巨大，比流氓更具有恶意，比流产更能让人心力憔悴。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;2&quot;&gt;
-&lt;li&gt;我爱的人，我要能够占领他整个生命，他在碰见我之前，没有过去，留着空白等待我。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;3&quot;&gt;
-&lt;li&gt;婚姻是一座围城，城外的人想进去，城里的人想出来。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;4&quot;&gt;
-&lt;li&gt;爱情多半是不成功的，要么苦于终成眷属的厌倦，要么苦于未能终成眷属的悲哀。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;5&quot;&gt;
-&lt;li&gt;要人知道自己有个秘密，而不让人知道是个什么秘密，等他们问，要他们猜，这是人性的虚荣。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;6&quot;&gt;
-&lt;li&gt;忠厚老实人的恶毒，像饭里的沙砾或者出骨鱼片里未淨的刺，会给人一种不期待的伤痛。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start=&quot;7&quot;&gt;
-&lt;li&gt;旅行是最劳顿，最麻烦，叫人本相必现的时候。经过长期苦旅行而彼此不讨厌的人，才可以结交作朋友。&lt;/li&gt;
-&lt;/ol&gt;</summary>
-    
-    
-    
-    <category term="近代文学" scheme="https://pyhsecurity.cn/categories/%E8%BF%91%E4%BB%A3%E6%96%87%E5%AD%A6/"/>
-    
-    
-    <category term="围城" scheme="https://pyhsecurity.cn/tags/%E5%9B%B4%E5%9F%8E/"/>
+    <category term="Hack The Box" scheme="https://pyhsecurity.cn/tags/Hack-The-Box/"/>
     
   </entry>
   
