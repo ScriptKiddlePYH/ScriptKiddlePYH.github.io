@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2021-12-24T03:42:21.585Z</updated>
+  <updated>2021-12-24T05:50:01.009Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -21,13 +21,15 @@
     <link href="https://pyhsecurity.cn/2021/12/24/Valentine/"/>
     <id>https://pyhsecurity.cn/2021/12/24/Valentine/</id>
     <published>2021-12-24T03:35:06.000Z</published>
-    <updated>2021-12-24T03:42:21.585Z</updated>
+    <updated>2021-12-24T05:50:01.009Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;靶机信息&quot;&gt;&lt;a href=&quot;#靶机信息&quot; class=&quot;headerlink&quot; title=&quot;靶机信息&quot;&gt;&lt;/a&gt;靶机信息&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/48b5e5c02ff845d5b280499511915293.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
 &lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;可以看到主机开放了web服务和ssh服务，这里发现了&lt;code&gt;valentine.htb&lt;/code&gt;这个子域，我们可以将它对应的解析地址添加到hosts文件中去&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/a1a3512aec184664808f7b0dfdab121b.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
     
     
+    
+    <category term="心脏滴血" scheme="https://pyhsecurity.cn/categories/%E5%BF%83%E8%84%8F%E6%BB%B4%E8%A1%80/"/>
     
     
     <category term="Hack The Box" scheme="https://pyhsecurity.cn/tags/Hack-The-Box/"/>
@@ -39,12 +41,14 @@
     <link href="https://pyhsecurity.cn/2021/12/24/Reel/"/>
     <id>https://pyhsecurity.cn/2021/12/24/Reel/</id>
     <published>2021-12-24T03:32:51.000Z</published>
-    <updated>2021-12-24T03:42:54.378Z</updated>
+    <updated>2021-12-24T05:49:57.344Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;40&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;41&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;42&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;43&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;44&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;45&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;46&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Host discovery disabled (-Pn). All addresses will be marked &lt;span class=&quot;string&quot;&gt;&amp;#x27;up&amp;#x27;&lt;/span&gt; and scan &lt;span class=&quot;built_in&quot;&gt;times&lt;/span&gt; will be slower.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-14 05:18 EST&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Nmap scan report &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; 10.10.10.77&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Host is up (0.30s latency).&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Not shown: 9997 filtered ports&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;PORT   STATE SERVICE VERSION&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21/tcp open  ftp     Microsoft ftpd&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;| ftp-syst: &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|_  SYST: Windows_NT&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22/tcp open  ssh     OpenSSH 7.6 (protocol 2.0)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;| ssh-hostkey: &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|   2048 82:20:c3:bd:16:cb:a2:9c:88:87:1d:6c:15:59:ed:ed (RSA)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|   256 23:2b:b8:0a:8c:1c:f4:4d:8d:7e:5e:64:58:80:33:45 (ECDSA)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|_  256 ac:8b:de:25:1d:b7:d8:38:38:9b:9c:16:bf:f6:3f:ed (ED25519)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25/tcp open  smtp?&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;| fingerprint-strings: &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|   Hello: &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|     220 Mail Service ready&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|     EHLO Invalid domain address.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|   Help: &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|     220 Mail Service ready&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|     DATA HELO EHLO MAIL NOOP QUIT RCPT RSET SAML TURN VRFY&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|   NULL: &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|_    220 Mail Service ready&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;| smtp-commands: REEL, SIZE 20480000, AUTH LOGIN PLAIN, HELP, &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|_ 211 DATA HELO EHLO MAIL NOOP QUIT RCPT RSET SAML TURN VRFY &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;SF-Port25-TCP:V=7.91%I=7%D=11/14%Time=6190E2F5%P=x86_64-pc-linux-gnu%r(NUL&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;SF:L,18,&lt;span class=&quot;string&quot;&gt;&amp;quot;220\x20Mail\x20Service\x20ready\r\n&amp;quot;&lt;/span&gt;)%r(Hello,3A,&lt;span class=&quot;string&quot;&gt;&amp;quot;220\x20Mail\x20&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;SF:Service\x20ready\r\n501\x20EHLO\x20Invalid\x20domain\x20address\.\r\n&amp;quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;SF:%r(Help,54,&lt;span class=&quot;string&quot;&gt;&amp;quot;220\x20Mail\x20Service\x20ready\r\n211\x20DATA\x20HELO\x20E&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;SF:HLO\x20MAIL\x20NOOP\x20QUIT\x20RCPT\x20RSET\x20SAML\x20TURN\x20VRFY\r\n&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;SF:&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;OS fingerprint not ideal because: Missing a closed TCP port so results incomplete&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;No OS matches &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; host&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Network Distance: 2 hops&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;TRACEROUTE (using port 22/tcp)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;HOP RTT       ADDRESS&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;1   301.22 ms 10.10.14.1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2   301.21 ms 10.10.10.77&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Nmap &lt;span class=&quot;keyword&quot;&gt;done&lt;/span&gt;: 1 IP address (1 host up) scanned &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; 185.69 seconds&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
     
     
+    
+    <category term="邮箱钓鱼" scheme="https://pyhsecurity.cn/categories/%E9%82%AE%E7%AE%B1%E9%92%93%E9%B1%BC/"/>
     
     
     <category term="Hack The Box" scheme="https://pyhsecurity.cn/tags/Hack-The-Box/"/>
@@ -56,13 +60,15 @@
     <link href="https://pyhsecurity.cn/2021/12/24/Postman/"/>
     <id>https://pyhsecurity.cn/2021/12/24/Postman/</id>
     <published>2021-12-24T03:31:17.000Z</published>
-    <updated>2021-12-24T03:42:37.818Z</updated>
+    <updated>2021-12-24T05:49:53.887Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;发现目标开放了22、80、6379等常见端口&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;root💀kali)-[~/Desktop/Scan-Scripts]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;└─&lt;span class=&quot;comment&quot;&gt;# ./nmap.sh 10.10.10.160&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-30 07:32 EST&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Nmap scan report &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; 10.10.10.160&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Host is up (0.30s latency).&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;PORT      STATE SERVICE VERSION&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22/tcp    open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;| ssh-hostkey: &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|   2048 46:83:4f:f1:38:61:c0:1c:74:cb:b5:d1:4a:68:4d:77 (RSA)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|   256 2d:8d:27:d2:df:15:1a:31:53:05:fb:ff:f0:62:26:89 (ECDSA)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|_  256 ca:7c:82:aa:5a:d3:72:ca:8b:8a:38:3a:80:41:a0:45 (ED25519)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;80/tcp    open  http    Apache httpd 2.4.29 ((Ubuntu))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|_http-server-header: Apache/2.4.29 (Ubuntu)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|_http-title: The Cyber Geek&lt;span class=&quot;string&quot;&gt;&amp;#x27;s Personal Website&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;6379/tcp  open  redis   Redis key-value store 4.0.9&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;10000/tcp open  http    MiniServ 1.910 (Webmin httpd)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;|_http-title: Site doesn&amp;#x27;&lt;/span&gt;t have a title (text/html; Charset=iso-8859-1).&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Nmap &lt;span class=&quot;keyword&quot;&gt;done&lt;/span&gt;: 1 IP address (1 host up) scanned &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; 42.85 seconds&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
     
     
+    
+    <category term="未授权访问漏洞" scheme="https://pyhsecurity.cn/categories/%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/"/>
     
     
     <category term="Hack The Box" scheme="https://pyhsecurity.cn/tags/Hack-The-Box/"/>
@@ -74,13 +80,15 @@
     <link href="https://pyhsecurity.cn/2021/12/24/Jerry/"/>
     <id>https://pyhsecurity.cn/2021/12/24/Jerry/</id>
     <published>2021-12-24T03:29:39.000Z</published>
-    <updated>2021-12-24T03:30:45.528Z</updated>
+    <updated>2021-12-24T05:49:44.608Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;靶机信息&quot;&gt;&lt;a href=&quot;#靶机信息&quot; class=&quot;headerlink&quot; title=&quot;靶机信息&quot;&gt;&lt;/a&gt;靶机信息&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/d5f1dc82530e485e91e914d59c62f9ff.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
 &lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;我们可以看到，目标主机只开放了8080端口，而且版本还是&lt;code&gt;7.0.88&lt;/code&gt;的&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/12b2a2ded3544b248ce0ae24e4c30139.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
     
     
+    
+    <category term="中间件" scheme="https://pyhsecurity.cn/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
     
     
     <category term="Hack The Box" scheme="https://pyhsecurity.cn/tags/Hack-The-Box/"/>
@@ -92,13 +100,15 @@
     <link href="https://pyhsecurity.cn/2021/12/24/Atom/"/>
     <id>https://pyhsecurity.cn/2021/12/24/Atom/</id>
     <published>2021-12-24T03:26:50.000Z</published>
-    <updated>2021-12-24T03:29:01.057Z</updated>
+    <updated>2021-12-24T05:49:38.368Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;靶机信息&quot;&gt;&lt;a href=&quot;#靶机信息&quot; class=&quot;headerlink&quot; title=&quot;靶机信息&quot;&gt;&lt;/a&gt;靶机信息&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/d7ff3a26ad1b4b0680f0d4283d757a77.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
 &lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;可以看到靶机开放了80端口，那证明就存在web服务。&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/71d80ba7cc3748c4a4f0402a9793083a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/458004df73e046d6ac29665f942ae2a1.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
     
     
+    
+    <category term="SMB" scheme="https://pyhsecurity.cn/categories/SMB/"/>
     
     
     <category term="Hack The Box" scheme="https://pyhsecurity.cn/tags/Hack-The-Box/"/>
@@ -110,7 +120,7 @@
     <link href="https://pyhsecurity.cn/2021/12/24/Active/"/>
     <id>https://pyhsecurity.cn/2021/12/24/Active/</id>
     <published>2021-12-24T03:20:45.000Z</published>
-    <updated>2021-12-24T03:28:25.721Z</updated>
+    <updated>2021-12-24T05:49:32.268Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;靶机信息&quot;&gt;&lt;a href=&quot;#靶机信息&quot; class=&quot;headerlink&quot; title=&quot;靶机信息&quot;&gt;&lt;/a&gt;靶机信息&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/eda8a039099d4943bbdadeca0b30a10a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
@@ -118,6 +128,8 @@
 &lt;p&gt;可以匿名登录smb服务&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/e3d0be21298842868f97f94a04e6481e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
     
     
+    
+    <category term="内网" scheme="https://pyhsecurity.cn/categories/%E5%86%85%E7%BD%91/"/>
     
     
     <category term="Hack The Box" scheme="https://pyhsecurity.cn/tags/Hack-The-Box/"/>
