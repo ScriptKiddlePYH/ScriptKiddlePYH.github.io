@@ -70,6 +70,12 @@ const ap = new APlayer({
         cover: 'https://p2.music.126.net/NFl1s5Hl3E37dCaFIDHfNw==/727876697598920.jpg?',
 	  },
 	  {
+		name: "所念皆星河",
+        artist: 'CMJ',
+        url: 'http://music.163.com/song/media/outer/url?id=1384026889.mp3',
+        cover: 'http://p2.music.126.net/M34HFzLO2xhDLuX_zEALKA==/109951164291347934.jpg?',
+	  },
+	  {
 		name: "【钢琴】What are words",
         artist: '昼夜',
         url: 'http://music.163.com/song/media/outer/url?id=466652781.mp3',
