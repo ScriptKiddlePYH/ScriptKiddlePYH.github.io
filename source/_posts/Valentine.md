@@ -13,11 +13,17 @@ categoreies: 心脏滴血
 
 可以看到主机开放了web服务和ssh服务，这里发现了`valentine.htb`这个子域，我们可以将它对应的解析地址添加到hosts文件中去
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/a1a3512aec184664808f7b0dfdab121b.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
+
+<!--more-->
+
 访问其web服务的时候，就只有一张图片，查看代码源码啥的都没有，但是这张图片的心脏在滴血，我们不难猜到是心脏滴血漏洞吧
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/d9abb29e5cc84619b8c2c6942db20ce4.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
 那么我们想用脚本检测一下是否存在心脏滴血漏洞，这里有两种方法检测这个漏洞，一种是使用`heartbleed.py`这个python脚本，另一种是使用nmap自带的nse脚本检测
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/59444c0ee5d544d298302502fd349bb4.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/49fbb69ace90495f904853d28bb58c96.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
+
+<!--more-->
+
 我们发现了一段base64的加密信息`$text=aGVhcnRibGVlZGJlbGlldmV0aGVoeXBlCg==`，解码发现明文是`heartbleedbelievethehype`，不知道是什么，先留着或许后面有用。
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/c2499b79b1d24bf5b41b4827e80eab52.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
 目前来说没啥可利用的信息了，我们进行扫一波目录吧。发现了三个可访问的目录
