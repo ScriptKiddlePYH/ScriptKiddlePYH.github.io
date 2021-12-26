@@ -10,6 +10,9 @@ categories: 文件包含漏洞
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/b2f1b07f20b74e8cbbf09d8aceb93286.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
 我们尝试是否可以匿名登录ftp，未果
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/074a7cd93bf64ed3aa33a1e7ba57281e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
+
+<!--more-->
+
 我们访问web服务，发现是一个番茄图片，查看源码也没什么发现
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/6fbb54145b634516a076f26d15d098ad.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
 我们fuzz一下路径，发现了存在一个antibot_image路径
@@ -18,12 +21,16 @@ categories: 文件包含漏洞
 dirsearch -u "http://192.168.101.197/" -e * -x404,500,403 -w /usr/share/seclists/Discovery/Web-Content/common.txt
 ```
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/fa0487042a3d48909ab79d96a12532a8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
+
+<!--more-->
+
 我们发现存在一个info.php文件
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/a59aa7bf23b2400cb4fd41b01cea33d7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
 文件的源码提示我们存在文件包含漏洞
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/39d170ef77ee482988bbfd4d37ecc20b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
 我们验证漏洞确实是真实存在的
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/b6bee6c21fc2499999963c8682e6f3cf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
+
 ## 漏洞利用
 我们尝试将一句话写进日志文件中，日志文件的路径为`/var/log/auth.log`，发现已被写入日志并成功执行我们的命令
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/8fc98d199a4845c1a5e8d72245c7b934.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
