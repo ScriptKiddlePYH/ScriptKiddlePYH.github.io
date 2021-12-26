@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2021-12-26T04:33:55.088Z</updated>
+  <updated>2021-12-26T08:03:24.341Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Healthcare</title>
+    <link href="https://pyhsecurity.cn/2021/12/26/Healthcare/"/>
+    <id>https://pyhsecurity.cn/2021/12/26/Healthcare/</id>
+    <published>2021-12-26T08:02:24.000Z</published>
+    <updated>2021-12-26T08:03:24.341Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;发现目标主机开放了ftp和web服务，并且扫描出了不允许访问的几个目录&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/5dbfa03fea4c49f1a2b08c27a605fbcc.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我们分别访问这几个目录，发现只有一个目录可以正常访问，其他目录都显示404状态码&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/856663a863cd441ca9ca6d8e62e83129.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/d0a8cae2057141059254c7688269f92c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我们没发现任何有价值的信息，那么就fuzz一下路径吧，发现存在一个openemr路径，进入后发现是后台登录页面&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;gobuster dir -u &amp;quot;http:&amp;#x2F;&amp;#x2F;192.168.101.200&amp;quot; -w &amp;#x2F;usr&amp;#x2F;share&amp;#x2F;seclists&amp;#x2F;Discovery&amp;#x2F;Web-Content&amp;#x2F;directory-list-2.3-big.txt -e 404,403,500&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/62eb523aa913490cb9772221e6da1687.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/ffb2f3248388447cbbbb28ff1fe1f4fc.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;看到post表单，条件反射验证是够存在SQL注入漏洞，使用burpsuite抓包并使用sqlmap进行注入&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/9fc387f225fb434d9189cf499ec9fd96.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我们对数据库进行注入&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/b71794267f1340b2bd79b21e04a19913.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;查看存在users表&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/786a517b4ae94a70998658329530e0ad.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_19,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;发现users表里存在username和password两个字段&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/3ad57acd36ea44a6965f90f1200a4b83.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_19,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;注入发现了两个用户名和密码，我们分别尝试登录ftp，发现使用medical账号可以登录成功&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/5f4e0f07bb7540f4b112b1c1d3b46062.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/d996972aacfe4e6f8988bca089b13a40.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我们将payload上传到&lt;code&gt;/var/www/html/openemr&lt;/code&gt;目录中，并进行访问&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/8b9e1beafa41414a8d24428ffd10e758.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我们切换到medical用户上，并查找可以执行的二进制文件&lt;code&gt;find / -perm -4000 2&amp;gt;/dev/null&lt;/code&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/38be5967b2204505b7abd5d0fbb30704.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我们发现&lt;code&gt;/usr/bin/healthcheck&lt;/code&gt;文件是比较容易受到攻击的程序，它只是运行了一堆标准的linux程序，比较明显的是&lt;code&gt;fdisk -l&lt;/code&gt;这个程序&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/53728f3d36a841d1a02a990f9a6c58c8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我们输入以下常见的提权操作，先将/bin/bash命令写入到fdisk程序中，并将其导入到medical用户的执行路径中，添加执行权限并拿取root权限&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;echo &amp;quot;&amp;#x2F;bin&amp;#x2F;bash&amp;quot; &amp;gt; fdisk&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;chmod +x fdisk&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;export PATH&amp;#x3D;&amp;#x2F;home&amp;#x2F;medical:$PATH&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;echo $PATH&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#x2F;usr&amp;#x2F;bin&amp;#x2F;healthcheck&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/cda20fb3c5914ceaa4d13a6d3a7adf62.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+</summary>
+    
+    
+    
+    <category term="SQL注入漏洞" scheme="https://pyhsecurity.cn/categories/SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/"/>
+    
+    
+    <category term="Vulnhub" scheme="https://pyhsecurity.cn/tags/Vulnhub/"/>
+    
+  </entry>
   
   <entry>
     <title>Tomato</title>
