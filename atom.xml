@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2021-12-26T08:05:18.661Z</updated>
+  <updated>2021-12-26T08:07:59.357Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -21,10 +21,12 @@
     <link href="https://pyhsecurity.cn/2021/12/26/Healthcare/"/>
     <id>https://pyhsecurity.cn/2021/12/26/Healthcare/</id>
     <published>2021-12-26T08:02:24.000Z</published>
-    <updated>2021-12-26T08:05:18.661Z</updated>
+    <updated>2021-12-26T08:07:59.357Z</updated>
     
     
-    <summary type="html">&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;发现目标主机开放了ftp和web服务，并且扫描出了不允许访问的几个目录&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/5dbfa03fea4c49f1a2b08c27a605fbcc.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我们分别访问这几个目录，发现只有一个目录可以正常访问，其他目录都显示404状态码&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/856663a863cd441ca9ca6d8e62e83129.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/d0a8cae2057141059254c7688269f92c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
+    <summary type="html">&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;发现目标主机开放了ftp和web服务，并且扫描出了不允许访问的几个目录&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/5dbfa03fea4c49f1a2b08c27a605fbcc.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我们分别访问这几个目录，发现只有一个目录可以正常访问，其他目录都显示404状态码&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/856663a863cd441ca9ca6d8e62e83129.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/d0a8cae2057141059254c7688269f92c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我们没发现任何有价值的信息，那么就fuzz一下路径吧，发现存在一个openemr路径，进入后发现是后台登录页面&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;gobuster dir -u &amp;quot;http:&amp;#x2F;&amp;#x2F;192.168.101.200&amp;quot; -w &amp;#x2F;usr&amp;#x2F;share&amp;#x2F;seclists&amp;#x2F;Discovery&amp;#x2F;Web-Content&amp;#x2F;directory-list-2.3-big.txt -e 404,403,500&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/62eb523aa913490cb9772221e6da1687.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/ffb2f3248388447cbbbb28ff1fe1f4fc.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
     
     
     
