@@ -13,13 +13,13 @@ categories: SQL注入漏洞
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/d0a8cae2057141059254c7688269f92c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
 我们没发现任何有价值的信息，那么就fuzz一下路径吧，发现存在一个openemr路径，进入后发现是后台登录页面
 
+<!--more-->
+
 ```
 gobuster dir -u "http://192.168.101.200" -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-big.txt -e 404,403,500
 ```
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/62eb523aa913490cb9772221e6da1687.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/ffb2f3248388447cbbbb28ff1fe1f4fc.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
-
-<!--more-->
 
 ## 漏洞利用
 
