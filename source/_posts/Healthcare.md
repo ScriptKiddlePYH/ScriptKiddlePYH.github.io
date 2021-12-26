@@ -11,6 +11,9 @@ categories: SQL注入漏洞
 我们分别访问这几个目录，发现只有一个目录可以正常访问，其他目录都显示404状态码
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/856663a863cd441ca9ca6d8e62e83129.png)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/d0a8cae2057141059254c7688269f92c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
+
+<!--more-->
+
 我们没发现任何有价值的信息，那么就fuzz一下路径吧，发现存在一个openemr路径，进入后发现是后台登录页面
 
 ```
@@ -18,6 +21,9 @@ gobuster dir -u "http://192.168.101.200" -w /usr/share/seclists/Discovery/Web-Co
 ```
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/62eb523aa913490cb9772221e6da1687.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/ffb2f3248388447cbbbb28ff1fe1f4fc.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
+
+<!--more-->
+
 看到post表单，条件反射验证是够存在SQL注入漏洞，使用burpsuite抓包并使用sqlmap进行注入
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/9fc387f225fb434d9189cf499ec9fd96.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
 我们对数据库进行注入
