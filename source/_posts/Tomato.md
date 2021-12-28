@@ -15,14 +15,15 @@ categories: 文件包含漏洞
 
 我们访问web服务，发现是一个番茄图片，查看源码也没什么发现
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/6fbb54145b634516a076f26d15d098ad.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
+
+<!--more-->
+
 我们fuzz一下路径，发现了存在一个antibot_image路径
 
 ```bash
 dirsearch -u "http://192.168.101.197/" -e * -x404,500,403 -w /usr/share/seclists/Discovery/Web-Content/common.txt
 ```
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/fa0487042a3d48909ab79d96a12532a8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
-
-<!--more-->
 
 我们发现存在一个info.php文件
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/a59aa7bf23b2400cb4fd41b01cea33d7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
