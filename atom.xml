@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Literature&#39;s Blog</title>
+  <title>PYHSecurity&#39;s Blog</title>
   <icon>https://pyhsecurity.cn/icon.png</icon>
-  <subtitle>文学能够净化人心</subtitle>
+  <subtitle>没有绝对安全的系统</subtitle>
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
@@ -10,7 +10,7 @@
   <id>https://pyhsecurity.cn/</id>
   
   <author>
-    <name>筑梦者</name>
+    <name>FuukHacking</name>
     
   </author>
   
