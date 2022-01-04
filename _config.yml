@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Literature's Blog
-subtitle: 文学能够净化人心
-description: 阅读是一个人一生的习惯
+title: PYHSecurity's Blog
+subtitle: 没有绝对安全的系统
+description: 活到老，奋斗到老
 keywords:
-author: 筑梦者
+author: FuukHacking
 language: zh-CN
 timezone: 'Asia/Shanghai'
 
