@@ -160,13 +160,6 @@
   </url>
   
   <url>
-    <loc>https://pyhsecurity.cn/categories/Windows-Print-Spooler/</loc>
-    <lastmod>2022-01-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://pyhsecurity.cn/categories/SMB/</loc>
     <lastmod>2022-01-09</lastmod>
     <changefreq>daily</changefreq>
@@ -175,6 +168,13 @@
   
   <url>
     <loc>https://pyhsecurity.cn/categories/LFI/</loc>
+    <lastmod>2022-01-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://pyhsecurity.cn/categories/Windows-Print-Spooler/</loc>
     <lastmod>2022-01-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
