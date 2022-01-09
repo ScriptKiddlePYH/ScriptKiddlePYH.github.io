@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2022-01-04T13:47:32.658Z</updated>
+  <updated>2022-01-09T10:12:33.630Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="https://pyhsecurity.cn/2022/01/09/tmux%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+    <id>https://pyhsecurity.cn/2022/01/09/tmux%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</id>
+    <published>2022-01-09T10:12:33.630Z</published>
+    <updated>2022-01-09T10:12:33.630Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;tmux常用快捷键&quot;&gt;&lt;a href=&quot;#tmux常用快捷键&quot; class=&quot;headerlink&quot; title=&quot;tmux常用快捷键&quot;&gt;&lt;/a&gt;tmux常用快捷键&lt;/h1&gt;&lt;h2 id=&quot;Ctrl-B-：垂直切割&quot;&gt;&lt;a href=&quot;#Ctrl-B-：垂直切割&quot; class=&quot;headerlink&quot; title=&quot;Ctrl+B+% ：垂直切割&quot;&gt;&lt;/a&gt;Ctrl+B+% ：垂直切割&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/9a0a7180dae946beab3aad3276c1d766.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;Ctrl-B-”-：水平切割&quot;&gt;&lt;a href=&quot;#Ctrl-B-”-：水平切割&quot; class=&quot;headerlink&quot; title=&quot;Ctrl+B+” ：水平切割&quot;&gt;&lt;/a&gt;Ctrl+B+” ：水平切割&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/70ecdf4c06bf460890a2cbde51f25770.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;Ctrl-B-o-：切换窗口&quot;&gt;&lt;a href=&quot;#Ctrl-B-o-：切换窗口&quot; class=&quot;headerlink&quot; title=&quot;Ctrl+B+o ：切换窗口&quot;&gt;&lt;/a&gt;Ctrl+B+o ：切换窗口&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/9938e474239449b4ae08d755416f0067.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;Ctrl-B-：滑动滚轮查看，按Ctrl-：取消当前状态&quot;&gt;&lt;a href=&quot;#Ctrl-B-：滑动滚轮查看，按Ctrl-：取消当前状态&quot; class=&quot;headerlink&quot; title=&quot;Ctrl+B+[ ：滑动滚轮查看，按Ctrl+[ ：取消当前状态&quot;&gt;&lt;/a&gt;Ctrl+B+[ ：滑动滚轮查看，按Ctrl+[ ：取消当前状态&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/53014b87bb444b46804a88388407213a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;Ctrl-B-z：对当前窗口进行全屏显示，再按Ctrl-z取消当前状态&quot;&gt;&lt;a href=&quot;#Ctrl-B-z：对当前窗口进行全屏显示，再按Ctrl-z取消当前状态&quot; class=&quot;headerlink&quot; title=&quot;Ctrl+B+z：对当前窗口进行全屏显示，再按Ctrl+z取消当前状态&quot;&gt;&lt;/a&gt;Ctrl+B+z：对当前窗口进行全屏显示，再按Ctrl+z取消当前状态&lt;/h2&gt;</summary>
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Backdoor</title>
