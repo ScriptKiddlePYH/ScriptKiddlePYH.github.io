@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2022-01-09T12:40:09.418Z</updated>
+  <updated>2022-01-09T12:36:31.758Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -15,26 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>tmux常用快键键</title>
-    <link href="https://pyhsecurity.cn/2022/01/09/tmux%E5%B8%B8%E7%94%A8%E5%BF%AB%E9%94%AE%E9%94%AE/"/>
-    <id>https://pyhsecurity.cn/2022/01/09/tmux%E5%B8%B8%E7%94%A8%E5%BF%AB%E9%94%AE%E9%94%AE/</id>
-    <published>2022-01-09T12:38:58.000Z</published>
-    <updated>2022-01-09T12:40:09.418Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;tmux常用快捷键&quot;&gt;&lt;a href=&quot;#tmux常用快捷键&quot; class=&quot;headerlink&quot; title=&quot;tmux常用快捷键&quot;&gt;&lt;/a&gt;tmux常用快捷键&lt;/h1&gt;&lt;h2 id=&quot;Ctrl-B-：垂直切割&quot;&gt;&lt;a href=&quot;#Ctrl-B-：垂直切割&quot; class=&quot;headerlink&quot; title=&quot;Ctrl+B+% ：垂直切割&quot;&gt;&lt;/a&gt;Ctrl+B+% ：垂直切割&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/9a0a7180dae946beab3aad3276c1d766.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;Ctrl-B-”-：水平切割&quot;&gt;&lt;a href=&quot;#Ctrl-B-”-：水平切割&quot; class=&quot;headerlink&quot; title=&quot;Ctrl+B+” ：水平切割&quot;&gt;&lt;/a&gt;Ctrl+B+” ：水平切割&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/70ecdf4c06bf460890a2cbde51f25770.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="备忘录" scheme="https://pyhsecurity.cn/categories/%E5%A4%87%E5%BF%98%E5%BD%95/"/>
-    
-    
-    <category term="渗透技能" scheme="https://pyhsecurity.cn/tags/%E6%B8%97%E9%80%8F%E6%8A%80%E8%83%BD/"/>
-    
-  </entry>
   
   <entry>
     <title>Horizontall</title>
