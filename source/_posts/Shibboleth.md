@@ -11,6 +11,9 @@ categories: 中间件安全
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/19faecaea42a449ba7cf1bc2244db896.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
 fuzz了一下路径，并没有发现任何有价值的路径信息
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/7d1c7ad510a74a089d925f6c3b674ead.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
+
+<!--more-->
+
 我们将思路转换到子域名挖掘上，发现了三个子域，我们将它们逐一访问的时候发现都同时指向同一个登录页面
 
 ```bash
@@ -21,6 +24,9 @@ wfuzz -c -u "http://shibboleth.htb" -w /usr/share/seclists/Discovery/DNS/subdoma
 ## 漏洞利用
 我们对这个表单进行SQL注入漏洞的检测时，并没有发现存在注入，也没有发现对应的中间件漏洞，到这里我的思路断了。我在反思它是个靶场肯定是有漏洞点的，可能是我信息收集那块做得不够细致。因此我对靶场进行UDP端口的扫描，查看是否存在漏扫的地方。扫描时发现开放了623端口的asf-rmcp服务
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/8d6296236bc149bb9e96a7c0219733f9.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
+
+<!--more-->
+
 在搜索引擎上搜索时，发现了对应的漏洞利用复现。漏洞利用的方式是使用MSF框架的对应模块进行漏洞的检测
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/c1bceb8bee654c4d82f8bd3ecd59c2a9.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/53abaaec2bdc4593a1cc5de0b865f47e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
