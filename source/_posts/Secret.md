@@ -1,7 +1,7 @@
 ---
 title: Secret
 date: 2022-01-18 14:07:16
-tags: Hack the box
+tags: Hack The box
 categories: 代码审计
 ---
 
