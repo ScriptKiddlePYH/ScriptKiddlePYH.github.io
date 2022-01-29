@@ -2,7 +2,7 @@
 title: Shibboleth
 date: 2022-01-13 17:37:59
 tags: Hack the box
-categories: 中间件安全
+categories: 中间件
 ---
 
 ## 信息收集
