@@ -259,7 +259,7 @@
     <link href="https://pyhsecurity.cn/2021/12/24/Postman/"/>
     <id>https://pyhsecurity.cn/2021/12/24/Postman/</id>
     <published>2021-12-24T03:31:17.000Z</published>
-    <updated>2022-01-20T06:23:32.370Z</updated>
+    <updated>2022-01-29T04:59:27.889Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;发现目标开放了22、80、6379等常见端口&lt;/p&gt;
@@ -270,7 +270,7 @@
     <category term="未授权访问漏洞" scheme="https://pyhsecurity.cn/categories/%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/"/>
     
     
-    <category term="Hack the Box" scheme="https://pyhsecurity.cn/tags/Hack-the-Box/"/>
+    <category term="Hack the box" scheme="https://pyhsecurity.cn/tags/Hack-the-box/"/>
     
   </entry>
   
