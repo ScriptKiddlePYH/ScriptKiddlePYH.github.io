@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2022-01-18T06:08:28.040Z</updated>
+  <updated>2022-01-29T04:54:57.404Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Pandora</title>
+    <link href="https://pyhsecurity.cn/2022/01/29/Pandora/"/>
+    <id>https://pyhsecurity.cn/2022/01/29/Pandora/</id>
+    <published>2022-01-29T04:52:11.000Z</published>
+    <updated>2022-01-29T04:54:57.404Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;使用nmap进行扫描，发现开放了ssh和web服务&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/48eada2d8ed648a595409ecb9caca3d0.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;访问web服务后，并且进行了目录扫描，并没有发现有价值的信息&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/fe6b324e74084ed0928913421517ca43.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="CMS" scheme="https://pyhsecurity.cn/categories/CMS/"/>
+    
+    
+    <category term="Hack The box" scheme="https://pyhsecurity.cn/tags/Hack-The-box/"/>
+    
+  </entry>
   
   <entry>
     <title>Secret</title>
@@ -40,14 +59,14 @@
     <link href="https://pyhsecurity.cn/2022/01/13/Shibboleth/"/>
     <id>https://pyhsecurity.cn/2022/01/13/Shibboleth/</id>
     <published>2022-01-13T09:37:59.000Z</published>
-    <updated>2022-01-20T06:20:36.476Z</updated>
+    <updated>2022-01-29T04:54:00.895Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;只做一个简单的扫描，发现只开放了web服务&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/97c60e806c6d413eb3524efdf5cbdb9c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/19faecaea42a449ba7cf1bc2244db896.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;fuzz了一下路径，并没有发现任何有价值的路径信息&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/7d1c7ad510a74a089d925f6c3b674ead.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
     
     
     
-    <category term="中间件安全" scheme="https://pyhsecurity.cn/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%AE%89%E5%85%A8/"/>
+    <category term="中间件" scheme="https://pyhsecurity.cn/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
     
     
     <category term="Hack the box" scheme="https://pyhsecurity.cn/tags/Hack-the-box/"/>
@@ -59,7 +78,7 @@
     <link href="https://pyhsecurity.cn/2022/01/09/Horizontall/"/>
     <id>https://pyhsecurity.cn/2022/01/09/Horizontall/</id>
     <published>2022-01-09T12:35:15.000Z</published>
-    <updated>2022-01-20T06:23:24.140Z</updated>
+    <updated>2022-01-29T04:53:26.381Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;目标主机只开放了ssh和web服务&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/c6ea98b32b994a8f8a0cf9c759db1cee.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我们直接访问web服务，发现是一个正常的网页，扫描目录也没有发现有价值的信息&lt;/p&gt;
@@ -68,7 +87,7 @@
     
     
     
-    <category term="中间件" scheme="https://pyhsecurity.cn/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
+    <category term="CMS" scheme="https://pyhsecurity.cn/categories/CMS/"/>
     
     
     <category term="Hack the Box" scheme="https://pyhsecurity.cn/tags/Hack-the-Box/"/>
