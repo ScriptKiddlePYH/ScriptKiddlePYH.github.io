@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2022-01-29T04:54:57.404Z</updated>
+  <updated>2022-01-31T15:11:14.163Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Devzat</title>
+    <link href="https://pyhsecurity.cn/2022/01/31/Devzat/"/>
+    <id>https://pyhsecurity.cn/2022/01/31/Devzat/</id>
+    <published>2022-01-31T15:10:17.000Z</published>
+    <updated>2022-01-31T15:11:14.163Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;目标主机开放了web服务、ssh服务和另外一个在8000端口开放的ssh服务&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/21b6d282e8da4c69b98366ce01e46824.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我们尝试连接8000端口的ssh服务，发现是一个聊天窗口&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/84313fe1057f44c28891d502ea10fcc5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="RCE" scheme="https://pyhsecurity.cn/categories/RCE/"/>
+    
+    
+    <category term="Hack The box" scheme="https://pyhsecurity.cn/tags/Hack-The-box/"/>
+    
+  </entry>
   
   <entry>
     <title>Pandora</title>
