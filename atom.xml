@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2022-02-06T13:13:58.962Z</updated>
+  <updated>2022-02-24T08:09:46.416Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Upload-labs</title>
+    <link href="https://pyhsecurity.cn/2022/02/24/Upload-labs/"/>
+    <id>https://pyhsecurity.cn/2022/02/24/Upload-labs/</id>
+    <published>2022-02-24T08:07:22.000Z</published>
+    <updated>2022-02-24T08:09:46.416Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;@&lt;a href=&quot;upload-labs%E9%80%9A%E5%85%B3&quot;&gt;toc&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;之所以写这篇文章，主要还是在现实的渗透测试中，我们还是很大几率能遇见文件上传漏洞的。遗憾的是很多时候我们即使遇到了上传点，但是因为一般的上传点多多少少都做了黑白名单的过滤，所以不是那么容易拿下shell的。因此这个靶场就是对文件上传漏洞的具体剖析。&lt;/p&gt;
+&lt;h2 id=&quot;PASS-01&quot;&gt;&lt;a href=&quot;#PASS-01&quot; class=&quot;headerlink&quot; title=&quot;PASS-01&quot;&gt;&lt;/a&gt;PASS-01&lt;/h2&gt;&lt;p&gt;首先我们必须进行目录扫描去发现上传的目录&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;dirsearch -u &lt;span class=&quot;string&quot;&gt;&amp;quot;http://192.168.101.208/upload-labs/&amp;quot;&lt;/span&gt; -x404,500,503 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-small.txt&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/3cd138741a4949c9a1c3017e98ba4ee1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="文件上传漏洞" scheme="https://pyhsecurity.cn/categories/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/"/>
+    
+    
+    <category term="Upload-labs" scheme="https://pyhsecurity.cn/tags/Upload-labs/"/>
+    
+  </entry>
   
   <entry>
     <title>Unicode</title>
