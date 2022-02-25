@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2022-02-24T08:13:13.051Z</updated>
+  <updated>2022-02-25T07:39:46.935Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Paper</title>
+    <link href="https://pyhsecurity.cn/2022/02/25/Paper/"/>
+    <id>https://pyhsecurity.cn/2022/02/25/Paper/</id>
+    <published>2022-02-25T07:35:53.000Z</published>
+    <updated>2022-02-25T07:39:46.935Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;可以看到目标端口只开放了ssh和web服务&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/8a3867d4a1e345a5a11c281ff39e1f29.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;当我们访问web服务时，发现只是一个普通的apache搭建的页面。进行目录扫描时，发现一个&lt;code&gt;manual&lt;/code&gt;页面，但是里面只有一些没价值的信息&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="路径穿越漏洞" scheme="https://pyhsecurity.cn/categories/%E8%B7%AF%E5%BE%84%E7%A9%BF%E8%B6%8A%E6%BC%8F%E6%B4%9E/"/>
+    
+    
+    <category term="Hack The box" scheme="https://pyhsecurity.cn/tags/Hack-The-box/"/>
+    
+  </entry>
   
   <entry>
     <title>Upload-labs</title>
