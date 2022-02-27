@@ -208,6 +208,12 @@ const ap = new APlayer({
         cover: 'https://p1.music.126.net/OlX-4S4L0Hdkyy_DQ27zag==/109951164459621658.jpg?',  
 	  },
 	  {
+		name: "虞兮叹",
+        artist: '闻人听書_',
+        url: 'http://music.163.com/song/media/outer/url?id=1479526505.mp3',
+        cover: 'http://p2.music.126.net/6gdwWjPXUkyTx4CuuSxkIg==/109951165319864977.jpg?',
+	  },
+	  {
 		name: "罪人",
         artist: '李克勤',
         url: 'http://music.163.com/song/media/outer/url?id=111536.mp3',

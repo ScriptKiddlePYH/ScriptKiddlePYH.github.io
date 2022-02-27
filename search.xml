@@ -499,7 +499,7 @@
 <h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>我们将linpeas.sh脚本上传到靶机上，并执行它<br><img src="https://img-blog.csdnimg.cn/23a8477f887a40c3b6df7f1df69d406b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>发现存在一个linux内核漏洞<br><img src="https://img-blog.csdnimg.cn/e962cb6858c242bea4f04c0d8d28b3b1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>我们发现这个内核漏洞对应的漏洞编号为<code>CVE-2017-6074</code>，我们将其编译变上传到靶机上，执行即root<br><img src="https://img-blog.csdnimg.cn/8d5db74c976140df8fd5b0d408768a02.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/335e4f13aa7e4d8c9ebaf95cb4c8749c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
 ]]></content>
       <categories>
-        <category>文件包含漏洞</category>
+        <category>LFI</category>
       </categories>
       <tags>
         <tag>Vulnhub</tag>

@@ -22,12 +22,6 @@ const ap = new APlayer({
         cover: 'https://p2.music.126.net/Ke4XI6gpF4CHkIJUaAKD2A==/109951163440006233.jpg?',
 	  },
 	  {
-		name: "贝多芬第8号钢琴奏鸣曲悲伤的第三乐章",
-        artist: 'Various Artists',
-        url: 'http://music.163.com/song/media/outer/url?id=27901400.mp3',
-        cover: 'https://p1.music.126.net/b81HRYiu6iei-K_mKqGp0Q==/3275445140634068.jpg?',
-	  },
-	  {
 		name: "对不起,我爱你(钢琴版)",
         artist: '陈冠宇',
         url: 'http://music.163.com/song/media/outer/url?id=68695.mp3',
