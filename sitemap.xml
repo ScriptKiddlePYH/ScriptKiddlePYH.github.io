@@ -216,13 +216,6 @@
   </url>
   
   <url>
-    <loc>https://pyhsecurity.cn/categories/SMB/</loc>
-    <lastmod>2022-02-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://pyhsecurity.cn/categories/LFI/</loc>
     <lastmod>2022-02-27</lastmod>
     <changefreq>daily</changefreq>
@@ -230,7 +223,21 @@
   </url>
   
   <url>
+    <loc>https://pyhsecurity.cn/categories/SMB/</loc>
+    <lastmod>2022-02-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://pyhsecurity.cn/categories/Windows-Print-Spooler/</loc>
+    <lastmod>2022-02-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://pyhsecurity.cn/categories/SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/</loc>
     <lastmod>2022-02-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -251,7 +258,7 @@
   </url>
   
   <url>
-    <loc>https://pyhsecurity.cn/categories/SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/</loc>
+    <loc>https://pyhsecurity.cn/categories/%E8%B7%AF%E5%BE%84%E7%A9%BF%E8%B6%8A%E6%BC%8F%E6%B4%9E/</loc>
     <lastmod>2022-02-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -259,13 +266,6 @@
   
   <url>
     <loc>https://pyhsecurity.cn/categories/%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/</loc>
-    <lastmod>2022-02-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://pyhsecurity.cn/categories/%E8%B7%AF%E5%BE%84%E7%A9%BF%E8%B6%8A%E6%BC%8F%E6%B4%9E/</loc>
     <lastmod>2022-02-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
