@@ -2,7 +2,7 @@
 title: Tomato
 date: 2021-12-24 20:35:20
 tags: Vulnhub
-categories: 文件包含漏洞
+categories: LFI
 ---
 
 ## 信息收集
