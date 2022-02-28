@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2022-02-25T07:39:46.935Z</updated>
+  <updated>2022-02-28T10:05:12.665Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Meta</title>
+    <link href="https://pyhsecurity.cn/2022/02/28/Meta/"/>
+    <id>https://pyhsecurity.cn/2022/02/28/Meta/</id>
+    <published>2022-02-28T10:03:59.000Z</published>
+    <updated>2022-02-28T10:05:12.665Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;发现目标主机只开放了ssh和web服务&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/e44de3ff9ec249158e313f30d95c73ee.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;当我们访问web主页时，发现只是一个很普通的apache搭建的页面&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/5faebd3ecae84cfcb3b00eacdf9fdfc5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="文件上传漏洞" scheme="https://pyhsecurity.cn/categories/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/"/>
+    
+    
+    <category term="Hack The box" scheme="https://pyhsecurity.cn/tags/Hack-The-box/"/>
+    
+  </entry>
   
   <entry>
     <title>Paper</title>
@@ -388,27 +407,6 @@
     
     
     <category term="SMB" scheme="https://pyhsecurity.cn/categories/SMB/"/>
-    
-    
-    <category term="Hack The box" scheme="https://pyhsecurity.cn/tags/Hack-The-box/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Active</title>
-    <link href="https://pyhsecurity.cn/2021/12/24/Active/"/>
-    <id>https://pyhsecurity.cn/2021/12/24/Active/</id>
-    <published>2021-12-24T03:20:45.000Z</published>
-    <updated>2022-01-29T04:56:48.004Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;靶机信息&quot;&gt;&lt;a href=&quot;#靶机信息&quot; class=&quot;headerlink&quot; title=&quot;靶机信息&quot;&gt;&lt;/a&gt;靶机信息&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/eda8a039099d4943bbdadeca0b30a10a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;可以看到主机开放了135,445,88这些常见的端口&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/5cf14b42521c4a969e73a389b2407517.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
-&lt;p&gt;可以匿名登录smb服务&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/e3d0be21298842868f97f94a04e6481e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="内网" scheme="https://pyhsecurity.cn/categories/%E5%86%85%E7%BD%91/"/>
     
     
     <category term="Hack The box" scheme="https://pyhsecurity.cn/tags/Hack-The-box/"/>
