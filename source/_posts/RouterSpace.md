@@ -10,8 +10,14 @@ categories: App渗透
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/5048fe7b19bb4f599fb152f151933e22.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
 但是我们访问web页面时，并没有发现存在新的突破口，也没有发现存在域名。可是我们发现了一个apk文件可下载，初步猜测这是一个有关app的测试了
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/6ed55fe40b034cc78f3bc0c8ce19c716.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
+
+<!--more-->
+
 因为我这边已经尝试过使用linux安装anbox，感觉不太成功，所以我这边直接使用了夜神模拟器配合burpsuite进行抓包分析，这个是参考文章[https://www.cnblogs.com/wjrblogs/p/13683812.html](https://www.cnblogs.com/wjrblogs/p/13683812.html)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/d165e27c0e2b4d74b2377be88ae16afd.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
+
+<!--more-->
+
 我们在那里发现了一个域名`routerspace.htb`，我们使用管理员权限将其写进到hosts文件中(这里建议使用cmd命令行打开后，再使用notepad程序对其进行修改)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/bd2d89a09f124018beb3c009659fa3c2.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
 
