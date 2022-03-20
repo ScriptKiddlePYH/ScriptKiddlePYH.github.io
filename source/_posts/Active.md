@@ -5,18 +5,22 @@ tags: Hack The box
 categories: 内网渗透
 ---
 
-@[toc](Active)
 ## 靶机信息
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/eda8a039099d4943bbdadeca0b30a10a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
 ## 信息收集
 可以看到主机开放了135,445,88这些常见的端口
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/5cf14b42521c4a969e73a389b2407517.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
 
+<!--more-->
+
 可以匿名登录smb服务
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/e3d0be21298842868f97f94a04e6481e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
 
 我们看到存在一个`Replication`的目录，我们尝试登录进这个目录看看。发现存在`active.htb`目录，并且该目录下有几个有价值的目录信息
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/5539c4e4a9ad4b5da24575f1cae90b36.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
+
+<!--more-->
+
 我经过细心查看后，只有在`\active.htb\Policies\{31B2F340-016D-11D2-945F-00C04FB984F9}\MACHINE\Preferences\Groups\`目录下找到一个`Groups.xml`文件，经过查看这是一个组策略文件，用于帐户管理的组策略存储在域控制器上的“Groups.xml”文件中，该文件隐藏在 SYSVOL 文件夹中。
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/3dfeaf7a43274b6db80c1986b56c764c.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16)
 因为这个文件使用了特殊的算法进行加密的，所以我们可以使用`gpp-decrypt.py`这个脚本进行解密，解密出来的结果如下图所示
