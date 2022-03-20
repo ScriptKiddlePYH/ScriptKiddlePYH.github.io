@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2022-02-28T10:05:12.665Z</updated>
+  <updated>2022-03-20T05:05:32.496Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RouterSpace</title>
+    <link href="https://pyhsecurity.cn/2022/03/20/RouterSpace/"/>
+    <id>https://pyhsecurity.cn/2022/03/20/RouterSpace/</id>
+    <published>2022-03-20T05:03:54.000Z</published>
+    <updated>2022-03-20T05:05:32.496Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;我们发现目标主机开放了ssh和web服务&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/5048fe7b19bb4f599fb152f151933e22.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;但是我们访问web页面时，并没有发现存在新的突破口，也没有发现存在域名。可是我们发现了一个apk文件可下载，初步猜测这是一个有关app的测试了&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="App渗透" scheme="https://pyhsecurity.cn/categories/App%E6%B8%97%E9%80%8F/"/>
+    
+    
+    <category term="Hack The box" scheme="https://pyhsecurity.cn/tags/Hack-The-box/"/>
+    
+  </entry>
   
   <entry>
     <title>Meta</title>
@@ -387,26 +406,6 @@
     
     
     <category term="中间件" scheme="https://pyhsecurity.cn/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
-    
-    
-    <category term="Hack The box" scheme="https://pyhsecurity.cn/tags/Hack-The-box/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Atom</title>
-    <link href="https://pyhsecurity.cn/2021/12/24/Atom/"/>
-    <id>https://pyhsecurity.cn/2021/12/24/Atom/</id>
-    <published>2021-12-24T03:26:50.000Z</published>
-    <updated>2022-01-29T04:56:56.586Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;靶机信息&quot;&gt;&lt;a href=&quot;#靶机信息&quot; class=&quot;headerlink&quot; title=&quot;靶机信息&quot;&gt;&lt;/a&gt;靶机信息&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/d7ff3a26ad1b4b0680f0d4283d757a77.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;可以看到靶机开放了80端口，那证明就存在web服务。&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/71d80ba7cc3748c4a4f0402a9793083a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/458004df73e046d6ac29665f942ae2a1.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="SMB" scheme="https://pyhsecurity.cn/categories/SMB/"/>
     
     
     <category term="Hack The box" scheme="https://pyhsecurity.cn/tags/Hack-The-box/"/>
