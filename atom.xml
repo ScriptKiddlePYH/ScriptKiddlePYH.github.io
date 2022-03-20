@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2022-03-20T05:05:32.496Z</updated>
+  <updated>2022-03-20T05:14:41.920Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -17,14 +17,46 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Active</title>
+    <link href="https://pyhsecurity.cn/2022/03/20/Active/"/>
+    <id>https://pyhsecurity.cn/2022/03/20/Active/</id>
+    <published>2022-03-20T05:13:07.000Z</published>
+    <updated>2022-03-20T05:14:41.920Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;@&lt;a href=&quot;Active&quot;&gt;toc&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;靶机信息&quot;&gt;&lt;a href=&quot;#靶机信息&quot; class=&quot;headerlink&quot; title=&quot;靶机信息&quot;&gt;&lt;/a&gt;靶机信息&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/eda8a039099d4943bbdadeca0b30a10a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;可以看到主机开放了135,445,88这些常见的端口&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/5cf14b42521c4a969e73a389b2407517.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;p&gt;可以匿名登录smb服务&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/e3d0be21298842868f97f94a04e6481e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;p&gt;我们看到存在一个&lt;code&gt;Replication&lt;/code&gt;的目录，我们尝试登录进这个目录看看。发现存在&lt;code&gt;active.htb&lt;/code&gt;目录，并且该目录下有几个有价值的目录信息&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/5539c4e4a9ad4b5da24575f1cae90b36.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我经过细心查看后，只有在&lt;code&gt;\active.htb\Policies\&amp;#123;31B2F340-016D-11D2-945F-00C04FB984F9&amp;#125;\MACHINE\Preferences\Groups\&lt;/code&gt;目录下找到一个&lt;code&gt;Groups.xml&lt;/code&gt;文件，经过查看这是一个组策略文件，用于帐户管理的组策略存储在域控制器上的“Groups.xml”文件中，该文件隐藏在 SYSVOL 文件夹中。&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/3dfeaf7a43274b6db80c1986b56c764c.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;因为这个文件使用了特殊的算法进行加密的，所以我们可以使用&lt;code&gt;gpp-decrypt.py&lt;/code&gt;这个脚本进行解密，解密出来的结果如下图所示&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/3b1d134c71474bf78e60b56c7094f613.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;p&gt;有了账户和密码后，我们登录SMB服务可以查看更多的共享&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/a0cabca528234f819d7f3fac04fd95c5.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我们使用账户密码访问Users共享&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/3d172d64bc1c426399eefb0f548f5fff.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;在桌面上找到第一个答案值&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/9465fa15bea246989886ef686a471ddc.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;提权&quot;&gt;&lt;a href=&quot;#提权&quot; class=&quot;headerlink&quot; title=&quot;提权&quot;&gt;&lt;/a&gt;提权&lt;/h2&gt;&lt;p&gt;我们使用&lt;code&gt;rpcclient&lt;/code&gt;枚举用户名和用户组&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/fe3c3ce5801a4fca8ff2eae28e6cc801.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我们使用&lt;code&gt;GetUserSPNs.py&lt;/code&gt;脚本获取与普通用户帐户关联的服务主体名称。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="内网渗透" scheme="https://pyhsecurity.cn/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
+    
+    
+    <category term="Hack The box" scheme="https://pyhsecurity.cn/tags/Hack-The-box/"/>
+    
+  </entry>
+  
+  <entry>
     <title>RouterSpace</title>
     <link href="https://pyhsecurity.cn/2022/03/20/RouterSpace/"/>
     <id>https://pyhsecurity.cn/2022/03/20/RouterSpace/</id>
-    <published>2022-03-20T05:03:54.000Z</published>
-    <updated>2022-03-20T05:05:32.496Z</updated>
+    <published>2022-03-20T05:09:54.000Z</published>
+    <updated>2022-03-20T05:11:16.961Z</updated>
     
     
-    <summary type="html">&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;我们发现目标主机开放了ssh和web服务&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/5048fe7b19bb4f599fb152f151933e22.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;但是我们访问web页面时，并没有发现存在新的突破口，也没有发现存在域名。可是我们发现了一个apk文件可下载，初步猜测这是一个有关app的测试了&lt;/p&gt;</summary>
+    <summary type="html">&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;我们发现目标主机开放了ssh和web服务&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/5048fe7b19bb4f599fb152f151933e22.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;但是我们访问web页面时，并没有发现存在新的突破口，也没有发现存在域名。可是我们发现了一个apk文件可下载，初步猜测这是一个有关app的测试了&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/6ed55fe40b034cc78f3bc0c8ce19c716.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;因为我这边已经尝试过使用linux安装anbox，感觉不太成功，所以我这边直接使用了夜神模拟器配合burpsuite进行抓包分析，这个是参考文章&lt;a href=&quot;https://www.cnblogs.com/wjrblogs/p/13683812.html&quot;&gt;https://www.cnblogs.com/wjrblogs/p/13683812.html&lt;/a&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/d165e27c0e2b4d74b2377be88ae16afd.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我们在那里发现了一个域名&lt;code&gt;routerspace.htb&lt;/code&gt;，我们使用管理员权限将其写进到hosts文件中(这里建议使用cmd命令行打开后，再使用notepad程序对其进行修改)&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/bd2d89a09f124018beb3c009659fa3c2.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;p&gt;我们尝试放一个包看看，返回的信息正常&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/fb97d042c99a4c2cbd5d137662724125.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;这种路由器式的，直觉告诉我可能存在RCE漏洞，我们尝试构造payload看看返回的结果。发现直接返回用户名称，那证明RCE漏洞是存在的。&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/70f7be924704490baff42b1df46f08ec.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;漏洞利用&quot;&gt;&lt;a href=&quot;#漏洞利用&quot; class=&quot;headerlink&quot; title=&quot;漏洞利用&quot;&gt;&lt;/a&gt;漏洞利用&lt;/h2&gt;&lt;p&gt;既然我们可以执行命令，那么我们可以尝试构造POC进行漏洞利用。首先我们先尝试是否可以写入文件，发现并没有数据包返回，那证明这个不行&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/529e423d54c14aca97c5a2da26972a9c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;那我们再试试能不能执行&lt;code&gt;/bin/bash&lt;/code&gt;的命令，发现好像也不行&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/40a5269c9148407dbd145fb7f943cdda.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;那我们试试&lt;code&gt;ls&lt;/code&gt;命令，发现可以成功执行命令，并且返回内容&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/45313dfdafa64ca5938a5aaf5ebe37f1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我们尝试&lt;code&gt;.ssh&lt;/code&gt;目录是否可以写入文件，答案是可以的&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/2262039e5fa24afe9d495f629d560c91.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;那我们就有一个思路了，就是我们可以自己生成一个ssh的key，然后写入到这个目录上，那么我们就可以登录到这台主机上了。首先我们在kali上生成一个id_rsa.pub文件，然后发送到.ssh目录上，并赋予700权限&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDA4G+qgL/420+qY3ylhOQOGU9/0AqjC1aodWwl+Gb3KoQGzkqMTsZ6ju64LkT2nguCeMB1NIQrUPoifSlPC/HjKD277s076eGSfuBkjTWy2EL3V6I71kXkblmeyHNFo7Vbpmbkk+NTC3Yn2gwi8uGAX10GsEzliu+dG8ldKXMNzrz9Vk2KUKJPIEuMVHlG6lMCY5s6zO1CXG5MZLoFO2S2j5MOUAhV6h1ziC6zGBwXbs1m+hJvVzPfRUFTxmbsGtQAqueWMsBBHOhss4FgNNJe4pgeNQfdkwNlrq65V7g/gyQODG/mhsd81HimqyZY90vSipxysEV/aNd39RaBSSm3o4mOuoIRsZnU1DlBOdPMLOQaw6ERc2mwQFAyZTMa6vVDi/seoltYHUDaojfuTdIkqSN65a2IZAOhm9QpXXBqBHkWRrx/B3htrQA/Pxfy4Gnvpy3wqli/BvlrzI/a9m3FaZNGilSo36lB2hOeS+dzUcilkXJqkCvOJa5r94M4+RM= root@kali&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/ff6804d51e9d4c69ad60f5bbba670bf6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/35e772f089064ac29dc72e9e7d9dac5e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;可以在kali上登录成功&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/7197de9bfd0642eea38a56b856055a36.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;提权到ROOT&quot;&gt;&lt;a href=&quot;#提权到ROOT&quot; class=&quot;headerlink&quot; title=&quot;提权到ROOT&quot;&gt;&lt;/a&gt;提权到ROOT&lt;/h2&gt;&lt;p&gt;首先我们先上传个linpeas.sh文件，看看有什么提权的点。我们从这里看到了sudo的版本是旧版的，而且提示说可能存在漏洞&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/a36a9401dcbc4010bb23df3661956258.png&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/f5c95d3627f04de3aef68e72d5a6bb85.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/21b844b3a03248268e09ed0b2359072d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我们在github上找到了对应的提权漏洞，编号为&lt;code&gt;CVE-2021-3156&lt;/code&gt;。因为不能wget，所以我把里面的内容都一一复制了出来，这是github的地址&lt;a href=&quot;https://github.com/mohinparamasivam/Sudo-1.8.31-Root-Exploit&quot;&gt;https://github.com/mohinparamasivam/Sudo-1.8.31-Root-Exploit&lt;/a&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/b59453abc5bc417aa4ac9b04aaa6f3b4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+</summary>
     
     
     
@@ -386,26 +418,6 @@
     
     
     <category term="未授权访问漏洞" scheme="https://pyhsecurity.cn/categories/%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/"/>
-    
-    
-    <category term="Hack The box" scheme="https://pyhsecurity.cn/tags/Hack-The-box/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Jerry</title>
-    <link href="https://pyhsecurity.cn/2021/12/24/Jerry/"/>
-    <id>https://pyhsecurity.cn/2021/12/24/Jerry/</id>
-    <published>2021-12-24T03:29:39.000Z</published>
-    <updated>2022-01-29T04:57:30.948Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;靶机信息&quot;&gt;&lt;a href=&quot;#靶机信息&quot; class=&quot;headerlink&quot; title=&quot;靶机信息&quot;&gt;&lt;/a&gt;靶机信息&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/d5f1dc82530e485e91e914d59c62f9ff.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;我们可以看到，目标主机只开放了8080端口，而且版本还是&lt;code&gt;7.0.88&lt;/code&gt;的&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/12b2a2ded3544b248ce0ae24e4c30139.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="中间件" scheme="https://pyhsecurity.cn/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
     
     
     <category term="Hack The box" scheme="https://pyhsecurity.cn/tags/Hack-The-box/"/>
