@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2022-03-26T04:32:34.358Z</updated>
+  <updated>2022-03-26T10:20:02.213Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Undetected</title>
+    <link href="https://pyhsecurity.cn/2022/03/26/Undetected/"/>
+    <id>https://pyhsecurity.cn/2022/03/26/Undetected/</id>
+    <published>2022-03-26T10:19:04.000Z</published>
+    <updated>2022-03-26T10:20:02.213Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;发现目标主机只开放了ssh和web服务&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/1095521bc7814ce2ade7ebb96d9fcfbf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;访问web页面时，并没有发现什么有价值的信息，但是点击VISIT STORE时跳转到域名&lt;code&gt;store.djewelry.htb&lt;/code&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/63ae917f77ff4bed8b75296f7ab41dae.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="逆向" scheme="https://pyhsecurity.cn/categories/%E9%80%86%E5%90%91/"/>
+    
+    
+    <category term="HackThebox" scheme="https://pyhsecurity.cn/tags/HackThebox/"/>
+    
+  </entry>
   
   <entry>
     <title>Active</title>
@@ -386,26 +405,6 @@
     
     
     <category term="邮箱钓鱼" scheme="https://pyhsecurity.cn/categories/%E9%82%AE%E7%AE%B1%E9%92%93%E9%B1%BC/"/>
-    
-    
-    <category term="HackThebox" scheme="https://pyhsecurity.cn/tags/HackThebox/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Postman(Redis未授权访问)</title>
-    <link href="https://pyhsecurity.cn/2021/12/24/Postman/"/>
-    <id>https://pyhsecurity.cn/2021/12/24/Postman/</id>
-    <published>2021-12-24T03:31:17.000Z</published>
-    <updated>2022-03-26T04:33:38.315Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;发现目标开放了22、80、6379等常见端口&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;root💀kali)-[~/Desktop/Scan-Scripts]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;└─&lt;span class=&quot;comment&quot;&gt;# ./nmap.sh 10.10.10.160&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-30 07:32 EST&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Nmap scan report &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; 10.10.10.160&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Host is up (0.30s latency).&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;PORT      STATE SERVICE VERSION&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22/tcp    open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;| ssh-hostkey: &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|   2048 46:83:4f:f1:38:61:c0:1c:74:cb:b5:d1:4a:68:4d:77 (RSA)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|   256 2d:8d:27:d2:df:15:1a:31:53:05:fb:ff:f0:62:26:89 (ECDSA)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|_  256 ca:7c:82:aa:5a:d3:72:ca:8b:8a:38:3a:80:41:a0:45 (ED25519)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;80/tcp    open  http    Apache httpd 2.4.29 ((Ubuntu))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|_http-server-header: Apache/2.4.29 (Ubuntu)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|_http-title: The Cyber Geek&lt;span class=&quot;string&quot;&gt;&amp;#x27;s Personal Website&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;6379/tcp  open  redis   Redis key-value store 4.0.9&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;10000/tcp open  http    MiniServ 1.910 (Webmin httpd)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;|_http-title: Site doesn&amp;#x27;&lt;/span&gt;t have a title (text/html; Charset=iso-8859-1).&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Nmap &lt;span class=&quot;keyword&quot;&gt;done&lt;/span&gt;: 1 IP address (1 host up) scanned &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; 42.85 seconds&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
-    
-    
-    
-    <category term="未授权访问漏洞" scheme="https://pyhsecurity.cn/categories/%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/"/>
     
     
     <category term="HackThebox" scheme="https://pyhsecurity.cn/tags/HackThebox/"/>
