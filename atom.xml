@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2022-03-26T10:20:02.213Z</updated>
+  <updated>2022-03-26T10:22:48.962Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://pyhsecurity.cn/2022/03/26/Undetected/"/>
     <id>https://pyhsecurity.cn/2022/03/26/Undetected/</id>
     <published>2022-03-26T10:19:04.000Z</published>
-    <updated>2022-03-26T10:20:02.213Z</updated>
+    <updated>2022-03-26T10:22:48.962Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;发现目标主机只开放了ssh和web服务&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/1095521bc7814ce2ade7ebb96d9fcfbf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;访问web页面时，并没有发现什么有价值的信息，但是点击VISIT STORE时跳转到域名&lt;code&gt;store.djewelry.htb&lt;/code&gt;&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/63ae917f77ff4bed8b75296f7ab41dae.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>

@@ -230,7 +230,7 @@
 
   
   <url>
-    <loc>https://pyhsecurity.cn/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/</loc>
+    <loc>https://pyhsecurity.cn/categories/LFI/</loc>
     <lastmod>2022-03-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -244,7 +244,14 @@
   </url>
   
   <url>
-    <loc>https://pyhsecurity.cn/categories/%E5%86%85%E7%BD%91/</loc>
+    <loc>https://pyhsecurity.cn/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/</loc>
+    <lastmod>2022-03-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://pyhsecurity.cn/categories/SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/</loc>
     <lastmod>2022-03-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -258,13 +265,6 @@
   </url>
   
   <url>
-    <loc>https://pyhsecurity.cn/categories/LFI/</loc>
-    <lastmod>2022-03-26</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://pyhsecurity.cn/categories/CMS/</loc>
     <lastmod>2022-03-26</lastmod>
     <changefreq>daily</changefreq>
@@ -272,14 +272,14 @@
   </url>
   
   <url>
-    <loc>https://pyhsecurity.cn/categories/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/</loc>
+    <loc>https://pyhsecurity.cn/categories/%E5%86%85%E7%BD%91/</loc>
     <lastmod>2022-03-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://pyhsecurity.cn/categories/SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/</loc>
+    <loc>https://pyhsecurity.cn/categories/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/</loc>
     <lastmod>2022-03-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -300,14 +300,14 @@
   </url>
   
   <url>
-    <loc>https://pyhsecurity.cn/categories/App%E6%B8%97%E9%80%8F/</loc>
+    <loc>https://pyhsecurity.cn/categories/%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/</loc>
     <lastmod>2022-03-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://pyhsecurity.cn/categories/%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/</loc>
+    <loc>https://pyhsecurity.cn/categories/App%E6%B8%97%E9%80%8F/</loc>
     <lastmod>2022-03-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
