@@ -1,7 +1,7 @@
 ---
 title: Atom
 date: 2021-12-24 11:26:50
-tags: Hack The box
+tags: HackThebox
 categories: SMB
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Devzat
 date: 2022-01-31 23:10:17
-tags: Hack The box
+tags: HackThebox
 categories: RCE
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Meta
 date: 2022-02-28 18:03:59
-tags: Hack The box
+tags: HackThebox
 categories: 文件上传漏洞
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Driver
 date: 2022-01-01 16:42:50
-tags: Hack The box
+tags: HackThebox
 categories: Windows Print Spooler
 ---
 

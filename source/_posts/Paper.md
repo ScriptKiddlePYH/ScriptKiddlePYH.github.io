@@ -1,7 +1,7 @@
 ---
 title: Paper
 date: 2022-02-25 15:35:53
-tags: Hack The box
+tags: HackThebox
 categories: 路径穿越漏洞
 ---
 
