@@ -2,7 +2,7 @@
 title: Sauna
 date: 2021-12-24 13:54:20
 tags: HackThebox
-categories: 内网
+categories: 内网渗透
 ---
 
 ## 靶机信息

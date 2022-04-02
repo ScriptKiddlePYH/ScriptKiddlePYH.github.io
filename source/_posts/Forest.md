@@ -2,7 +2,7 @@
 title: Forest
 date: 2021-12-24 13:52:39
 tags: HackThebox
-categories: 内网
+categories: 内网渗透
 ---
 
 ## 靶机信息
