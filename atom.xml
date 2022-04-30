@@ -41,7 +41,7 @@
     <link href="https://pyhsecurity.cn/2022/04/30/Catch/"/>
     <id>https://pyhsecurity.cn/2022/04/30/Catch/</id>
     <published>2022-04-30T04:14:27.000Z</published>
-    <updated>2022-04-30T04:21:12.132Z</updated>
+    <updated>2022-04-30T04:28:10.764Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;这是一台中等难度的靶机，靶机主要考察的是对安卓程序的逆向分析、SQL注入等知识。&lt;/p&gt;
@@ -49,7 +49,7 @@
     
     
     
-    <category term="逆向" scheme="https://pyhsecurity.cn/categories/%E9%80%86%E5%90%91/"/>
+    <category term="App渗透" scheme="https://pyhsecurity.cn/categories/App%E6%B8%97%E9%80%8F/"/>
     
     
     <category term="HackThebox" scheme="https://pyhsecurity.cn/tags/HackThebox/"/>
