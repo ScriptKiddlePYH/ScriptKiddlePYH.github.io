@@ -2,7 +2,7 @@
 title: Catch
 date: 2022-04-30 12:14:27
 tags: HackThebox
-categories: 逆向
+categories: App渗透
 ---
 
 # 前言
