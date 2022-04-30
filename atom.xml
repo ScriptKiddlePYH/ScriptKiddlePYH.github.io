@@ -6,7 +6,7 @@
   <link href="https://pyhsecurity.cn/atom.xml" rel="self"/>
   
   <link href="https://pyhsecurity.cn/"/>
-  <updated>2022-04-30T04:10:51.502Z</updated>
+  <updated>2022-04-30T04:24:21.730Z</updated>
   <id>https://pyhsecurity.cn/</id>
   
   <author>
@@ -15,6 +15,46 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Acute</title>
+    <link href="https://pyhsecurity.cn/2022/04/30/Acute/"/>
+    <id>https://pyhsecurity.cn/2022/04/30/Acute/</id>
+    <published>2022-04-30T04:23:23.000Z</published>
+    <updated>2022-04-30T04:24:21.730Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;这是一台纯Windows渗透的靶机，通过powershell的各种命令实现从一个低权限用户提权到一个高权限用户的过程。除此之外，这是一台很好的内网靶机，通过这台靶机可以学习到很多内网渗透的姿势。&lt;/p&gt;
+&lt;h1 id=&quot;解题思路&quot;&gt;&lt;a href=&quot;#解题思路&quot; class=&quot;headerlink&quot; title=&quot;解题思路&quot;&gt;&lt;/a&gt;解题思路&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://image.3001.net/images/20220428/1651109629_6269eefd781e30e454f31.png!small&quot; alt=&quot;image&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="powershell渗透" scheme="https://pyhsecurity.cn/categories/powershell%E6%B8%97%E9%80%8F/"/>
+    
+    
+    <category term="HackThebox" scheme="https://pyhsecurity.cn/tags/HackThebox/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Catch</title>
+    <link href="https://pyhsecurity.cn/2022/04/30/Catch/"/>
+    <id>https://pyhsecurity.cn/2022/04/30/Catch/</id>
+    <published>2022-04-30T04:14:27.000Z</published>
+    <updated>2022-04-30T04:21:12.132Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;这是一台中等难度的靶机，靶机主要考察的是对安卓程序的逆向分析、SQL注入等知识。&lt;/p&gt;
+&lt;h1 id=&quot;解题思路&quot;&gt;&lt;a href=&quot;#解题思路&quot; class=&quot;headerlink&quot; title=&quot;解题思路&quot;&gt;&lt;/a&gt;解题思路&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://image.3001.net/images/20220422/1650588362_6261faca7f826ac5b79fd.png!small&quot; alt=&quot;image&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="逆向" scheme="https://pyhsecurity.cn/categories/%E9%80%86%E5%90%91/"/>
+    
+    
+    <category term="HackThebox" scheme="https://pyhsecurity.cn/tags/HackThebox/"/>
+    
+  </entry>
   
   <entry>
     <title>Overflow</title>
@@ -367,46 +407,6 @@
     
     
     <category term="Vulnhub" scheme="https://pyhsecurity.cn/tags/Vulnhub/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Tomato</title>
-    <link href="https://pyhsecurity.cn/2021/12/24/Tomato/"/>
-    <id>https://pyhsecurity.cn/2021/12/24/Tomato/</id>
-    <published>2021-12-24T12:35:20.000Z</published>
-    <updated>2022-02-27T03:24:16.971Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;运行我们的bash脚本，发现目标系统开放了ftp和web服务&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/b2f1b07f20b74e8cbbf09d8aceb93286.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;br&gt;我们尝试是否可以匿名登录ftp，未果&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/074a7cd93bf64ed3aa33a1e7ba57281e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
-&lt;p&gt;我们访问web服务，发现是一个番茄图片，查看源码也没什么发现&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="LFI" scheme="https://pyhsecurity.cn/categories/LFI/"/>
-    
-    
-    <category term="Vulnhub" scheme="https://pyhsecurity.cn/tags/Vulnhub/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Sauna</title>
-    <link href="https://pyhsecurity.cn/2021/12/24/Sauna/"/>
-    <id>https://pyhsecurity.cn/2021/12/24/Sauna/</id>
-    <published>2021-12-24T05:54:20.000Z</published>
-    <updated>2022-04-02T12:25:31.557Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;靶机信息&quot;&gt;&lt;a href=&quot;#靶机信息&quot; class=&quot;headerlink&quot; title=&quot;靶机信息&quot;&gt;&lt;/a&gt;靶机信息&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/0c4f7155f0a144fca320112bb07de39c.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h2&gt;&lt;p&gt;发现开放了445，80，88，5985这些常见的可能存在漏洞的端口。因为存在ldap服务，可能考虑到存在内网&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/18c6ed7749514992adad88f2a6fa97f2.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bmz5Yeh55qE5a2m6ICF,size_20,color_FFFFFF,t_70,g_se,x_16&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="内网渗透" scheme="https://pyhsecurity.cn/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
-    
-    
-    <category term="HackThebox" scheme="https://pyhsecurity.cn/tags/HackThebox/"/>
     
   </entry>
   
